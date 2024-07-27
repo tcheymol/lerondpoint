@@ -25,9 +25,6 @@ class Collective
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?bool $enabled = null;
-
     /**
      * @var Collection<int, Action>
      */
@@ -49,18 +46,6 @@ class Collective
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function isEnabled(): ?bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): static
-    {
-        $this->enabled = $enabled;
-
-        return $this;
     }
 
     /**
