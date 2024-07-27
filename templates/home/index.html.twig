@@ -3,18 +3,38 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/thib/Dev/perso/gjaune/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/Users/thib/Dev/perso/gjaune/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+<body class="d-flex h-100 text-center text-white bg-dark"
+  style="background-image: url({{ asset('bg-3.png') }});
+      background-size: cover;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(12px) brightness(40%);
+  "
+>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
+  >
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">
+          <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
+          Cover
+        </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main class="px-3">
+      <h1>Cover your page.</h1>
+      <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+      </p>
+    </main>
+    <footer class="mt-auto text-white-50">
+      <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+    </footer>
+  </div>
+</body>
 {% endblock %}
