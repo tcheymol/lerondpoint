@@ -12,7 +12,13 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="d-flex justify-content-center h-100 text-center text-white bg-dark"
+          style="background-image: url({{ asset('bg-3.png') }});
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  backdrop-filter: blur(12px) brightness(40%);
+                  "
+    >
         {% block body %}{% endblock %}
     </body>
 </html>
