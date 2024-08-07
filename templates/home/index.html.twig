@@ -2,21 +2,7 @@
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
-{% block body %}
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-      <div>
-        <h3 class="float-md-start mb-0">
-          <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
-          {{ 'home_title'|trans }}
-        </h3>
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link active" aria-current="page" href="#">{{ 'home'|trans }}</a>
-          <a class="nav-link" href="#">{{ 'add_track'|trans }}</a>
-          <a class="nav-link" href="#">{{ 'register_collective'|trans }}</a>
-        </nav>
-      </div>
-    </header>
+{% block content %}
     <main class="px-3">
       <h1>{{ 'home_title'|trans }}</h1>
       <p class="lead">{{ 'home_subtitle'|trans }}</p>
@@ -24,8 +10,4 @@
         <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">{{ 'know_more'|trans }}</a>
       </p>
     </main>
-    <footer class="mt-auto text-white-50">
-      <p>{{ 'credits_to'|trans }} <a href="https://" class="text-white">????</a>, by <a href="https://" class="text-white">???</a>.</p>
-    </footer>
-  </div>
 {% endblock %}

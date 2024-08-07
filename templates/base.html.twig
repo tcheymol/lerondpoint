@@ -19,6 +19,10 @@
                   backdrop-filter: blur(12px) brightness(40%);
                   "
     >
-        {% block body %}{% endblock %}
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            {{ include('components/_header.html.twig') }}
+            {% block content %}{% endblock %}
+            {{ include('components/_footer.html.twig') }}
+        </div>
     </body>
 </html>

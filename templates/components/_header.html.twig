@@ -1,0 +1,19 @@
+<header class="mb-auto">
+    <div>
+        <h3 class="float-md-start mb-0">
+            <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
+            {{ 'home_title'|trans }}
+        </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link active" aria-current="page" href="#">{{ 'home'|trans }}</a>
+            <a class="nav-link" href="#">{{ 'add_track'|trans }}</a>
+            <a class="nav-link" href="#">{{ 'register_collective'|trans }}</a>
+
+            {% if app.user %}
+                <a class="nav-link" href="{{ path('app_logout') }}">{{ 'logout'|trans }}</a>
+            {% else %}
+                <a class="nav-link" href="{{ path('app_login') }}">{{ 'login'|trans }}</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
