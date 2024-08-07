@@ -8,16 +8,16 @@ set('repository', 'git@github.com:tcheymol/gjaune.git');
 set('flush_cache_file_name', 'flush-cache.php');
 set('flush_cache_file_path', '{{current_path}}/public/{{flush_cache_file_name}}');
 
-add('shared_files', ['.env', 'config/secrets/prod/prod.decrypt.private.php']);
+add('shared_files', ['.env', 'var/data.db', 'config/secrets/prod/prod.decrypt.private.php']);
 add('shared_dirs', [ 'var/log',  'var/sessions',  'vendor/',  'public/bundles/']);
 add('writable_dirs', []);
 
 // Hosts
-host('111.111.11.11')
+host('gjaune')
     ->set('branch', 'main')
     ->set('deploy_path', '~/www')
     ->set('http_user', 'www-data')
-    ->set('homepage_url', '111.111.11.11')
+    ->set('homepage_url', 'gjaune')
 ;
 
 // Tasks
