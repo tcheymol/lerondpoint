@@ -9,12 +9,19 @@ Collectives: Collectifs
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
 Created At: Créé le
+Credits_to: Par
 Dashboard: Accueil
 Disabled: Désactivé
 Email: Email
 Extension: Extension
+Home: Accueil
+HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
+HomeTitle: Bienvenue
 Kind: Type
 Kinds: Types
+KnowMore: En savoir plus
+Login: Connexion
+Logout: Déconnexion
 Misc: Divers
 Name: Nom
 Notes: Notes
@@ -22,6 +29,7 @@ Password: Mot de passe
 Path: Chemin
 Size: Taille
 Tags: Labels
+Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackKind: Type de trace
 TrackTag: Label trace
@@ -29,15 +37,3 @@ Tracks: Traces
 Updated At: Date de dernière mise à jour
 Users: Utilisateurs
 Validated: Validé
-add_track: Ajout traces
-credits_to: Par
-email: Email
-home: Accueil
-home_subtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
-home_title: Bienvenue
-know_more: En savoir plus
-login: Connexion
-logout: Déconnexion
-password: Mot de passe
-register_collective: Ajout collectif
-title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes

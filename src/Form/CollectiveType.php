@@ -11,17 +11,7 @@ class CollectiveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('enabled')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('disabled')
-            ->add('validated')
-        ;
+        $builder->add('name');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

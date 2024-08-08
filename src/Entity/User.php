@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Trait\DisableTrait;
 use App\Entity\Trait\ValidatedTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -36,6 +38,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     private ?string $plainPassword = null;
+
+    /**
+     * @var Collection<int, Collective>
+     */
+    #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
+    private Collection $collectives;
+
+    public function __construct()
+    {
+        $this->collectives = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -118,5 +131,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
          $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Collective>
+     */
+    public function getCollectives(): Collection
+    {
+        return $this->collectives;
+    }
+
+    public function addCollective(Collective $collective): static
+    {
+        if (!$this->collectives->contains($collective)) {
+            $this->collectives->add($collective);
+            $collective->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCollective(Collective $collective): static
+    {
+        if ($this->collectives->removeElement($collective)) {
+            // set the owning side to null (unless already changed)
+            if ($collective->getOwner() === $this) {
+                $collective->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

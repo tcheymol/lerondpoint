@@ -29,8 +29,12 @@ task('deploy:reset-opcache', function () {
     run('rm {{flush_cache_file_path}}');
 });
 
+task('deploy:set-prod-env', function () {
+    run('export APP_ENV=prod');
+});
+
 // Hooks
-before('deploy:info', 'deploy:test_connection');
+before('deploy:vendors', 'deploy:set-prod-env');
 before('deploy:symlink', 'deploy:reset-opcache');
 after('deploy:reset-opcache', 'database:migrate');
 after('deploy:failed', 'deploy:unlock');

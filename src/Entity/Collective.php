@@ -13,7 +13,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
-class Collective
+class Collective implements OwnableInterface
 {
     use TimestampableEntity;
     use Blameable;
@@ -36,6 +36,15 @@ class Collective
      */
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'collective')]
     private Collection $tracks;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'collectives')]
+    private ?User $owner = null;
+
+    #[ORM\Column]
+    private bool $enabled = false;
 
     public function __construct()
     {
@@ -104,6 +113,42 @@ class Collective
                 $track->setCollective(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): static
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

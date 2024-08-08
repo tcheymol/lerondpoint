@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collective{% endblock %}
+
+{% block content %}
+    <h1>Collective</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ collective.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ collective.createdAt ? collective.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ collective.updatedAt ? collective.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Disabled</th>
+                <td>{{ collective.disabled ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Validated</th>
+                <td>{{ collective.validated ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('collective_index') }}">back to list</a>
+
+    <a href="{{ path('collective_edit', {'id': collective.id}) }}">edit</a>
+
+    {{ include('collective/_delete_form.html.twig') }}
+{% endblock %}

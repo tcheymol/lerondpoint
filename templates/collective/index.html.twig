@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collective index{% endblock %}
+
+{% block content %}
+    <h1>Collective index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'Name'|trans }}</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Disabled</th>
+                <th>Validated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for collective in collectives %}
+            <tr>
+                <td>{{ collective.id }}</td>
+                <td>{{ collective.createdAt ? collective.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ collective.updatedAt ? collective.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ collective.disabled ? 'Yes' : 'No' }}</td>
+                <td>{{ collective.validated ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('collective_show', {'id': collective.id}) }}">show</a>
+                    <a href="{{ path('collective_edit', {'id': collective.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('collective_new') }}">Create new</a>
+{% endblock %}
