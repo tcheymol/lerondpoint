@@ -15,26 +15,21 @@ add('writable_dirs', []);
 // Hosts
 host('gjaune')
     ->set('branch', 'main')
-    ->set('deploy_path', '~/www')
+    ->set('deploy_path', '~/gjaune')
     ->set('http_user', 'www-data')
     ->set('homepage_url', 'gjaune')
 ;
-
-// Tasks
-task('deploy:reset-opcache', function () {
-    run('sleep 5');
-    run('echo "<?php opcache_reset(); ?>" >> {{flush_cache_file_path}}');
-    run('sleep 5');
-    run('wget "{{homepage_url}}/{{flush_cache_file_name}}" --spider --retry-connrefused -t 5');
-    run('rm {{flush_cache_file_path}}');
-});
 
 task('deploy:set-prod-env', function () {
     run('export APP_ENV=prod');
 });
 
+task('deploy:compile-asset-map', function () {
+    run('{{bin/console}} asset-map:compile');
+});
+
 // Hooks
 before('deploy:vendors', 'deploy:set-prod-env');
-before('deploy:symlink', 'deploy:reset-opcache');
-after('deploy:reset-opcache', 'database:migrate');
+before('deploy:symlink', 'database:migrate');
+before('deploy:publish', 'deploy:compile-asset-map');
 after('deploy:failed', 'deploy:unlock');
