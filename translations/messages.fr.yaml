@@ -4,14 +4,18 @@ ActionTag: Label action
 Actions: Actions
 Attachment: Document
 Attachments: Documents
+Back: Retour
 Collective: Collectif
 Collectives: Collectifs
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
+Create: Créer
+CreateTrack: Ajouter une trace
 Created At: Créé le
 Credits_to: Par
 Dashboard: Accueil
 Disabled: Désactivé
+Edit: Modifier
 Email: Email
 Extension: Extension
 Home: Accueil
@@ -24,9 +28,11 @@ Login: Connexion
 Logout: Déconnexion
 Misc: Divers
 Name: Nom
+NoTrack: Pas de trace
 Notes: Notes
 Password: Mot de passe
 Path: Chemin
+Show: Voir
 Size: Taille
 Tags: Labels
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
@@ -37,3 +43,5 @@ Tracks: Traces
 Updated At: Date de dernière mise à jour
 Users: Utilisateurs
 Validated: Validé
+Yes: Oui
+No: Non

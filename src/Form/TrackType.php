@@ -17,25 +17,20 @@ class TrackType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('disabled')
-            ->add('validated')
             ->add('collective', EntityType::class, [
                 'class' => Collective::class,
-                'choice_label' => 'id',
+                'attr' => ['data-controller' => 'tomselect'],
+                'choice_label' => 'name',
             ])
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,
-                'choice_label' => 'id',
+                'attr' => ['data-controller' => 'tomselect'],
+                'choice_label' => 'name',
             ])
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
-                'choice_label' => 'id',
+                'attr' => ['data-controller' => 'tomselect'],
+                'choice_label' => 'name',
                 'multiple' => true,
             ])
         ;

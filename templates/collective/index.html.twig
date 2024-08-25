@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>{{ 'Name'|trans }}</th>
-                <th>CreatedAt</th>
+                <th>{{ 'Created At'|trans }}</th>
                 <th>UpdatedAt</th>
                 <th>Disabled</th>
                 <th>Validated</th>
@@ -20,8 +20,8 @@
         {% for collective in collectives %}
             <tr>
                 <td>{{ collective.id }}</td>
-                <td>{{ collective.createdAt ? collective.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ collective.updatedAt ? collective.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ collective.createdAt ? collective.createdAt|date : '' }}</td>
+                <td>{{ collective.updatedAt ? collective.updatedAt|date : '' }}</td>
                 <td>{{ collective.disabled ? 'Yes' : 'No' }}</td>
                 <td>{{ collective.validated ? 'Yes' : 'No' }}</td>
                 <td>

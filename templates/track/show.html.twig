@@ -3,36 +3,32 @@
 {% block title %}Track{% endblock %}
 
 {% block content %}
-    <h1>Track</h1>
+    {{ include('components/_back.html.twig') }}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ track.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ track.name }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ track.createdAt ? track.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ track.updatedAt ? track.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Disabled</th>
-                <td>{{ track.disabled ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Validated</th>
-                <td>{{ track.validated ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="row">
+            <b class="col-6 text-start">{{ 'Track'|trans }} : </b>
+            <span class="col-6">{{ track.name }}</span>
+        </div>
+        <div class="row">
+            <b class="col-6 text-start">{{ 'Created At'|trans }} : </b>
+            <span class="col-6">{{ track.createdAt ? track.createdAt|date : '' }}</span>
+        </div>
+        <div class="row">
+            <b class="col-6 text-start">{{ 'Updated At'|trans }} : </b>
+            <span class="col-6">{{ track.updatedAt ? track.updatedAt|date : '' }}</span>
+        </div>
+        <div class="row">
+            <b class="col-6 text-start">{{ 'Disabled'|trans }} : </b>
+            <span class="col-6">
+                {{ include('components/_badge.html.twig', {value: track.disabled}) }}
+            </span>
+        </div>
+        <div class="row">
+            <b class="col-6 text-start">{{ 'Validated'|trans }} : </b>
+            <span class="col-6">
+                {{ include('components/_badge.html.twig', {value: track.validated}) }}
+            </span>
+        </div>
 
     <a href="{{ path('track_index') }}">back to list</a>
 

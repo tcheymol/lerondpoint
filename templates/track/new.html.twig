@@ -3,9 +3,8 @@
 {% block title %}New Track{% endblock %}
 
 {% block content %}
-    <h1>Create new Track</h1>
-
+    <h1>{{ 'CreateTrack'|trans }}</h1>
+    {{ include('components/_back.html.twig') }}
     {{ include('track/_form.html.twig') }}
 
-    <a href="{{ path('track_index') }}">back to list</a>
 {% endblock %}

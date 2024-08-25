@@ -12,12 +12,12 @@
                 <td>{{ collective.id }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
-                <td>{{ collective.createdAt ? collective.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>{{ 'Created At'|trans }}</th>
+                <td>{{ collective.createdAt ? collective.createdAt|date : '' }}</td>
             </tr>
             <tr>
                 <th>UpdatedAt</th>
-                <td>{{ collective.updatedAt ? collective.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ collective.updatedAt ? collective.updatedAt|date : '' }}</td>
             </tr>
             <tr>
                 <th>Disabled</th>
