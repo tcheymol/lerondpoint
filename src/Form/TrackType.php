@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class TrackType extends AbstractType
 {
@@ -33,6 +34,7 @@ class TrackType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
+            ->add('uploadedFile', DropzoneType::class)
         ;
     }
 

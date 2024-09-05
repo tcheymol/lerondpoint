@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\Blameable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
@@ -44,8 +45,10 @@ class Track
     /**
      * @var Collection<int, Attachment>
      */
-    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'track')]
+    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'track', cascade: ['persist'])]
     private Collection $attachments;
+
+    public ?UploadedFile $uploadedFile = null;
 
     public function __construct()
     {

@@ -35,6 +35,18 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
+    "reconnect/s3bundle": {
+        "version": "1.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "de320eec87a12822faca2d881e0aae50e6c9830f"
+        },
+        "files": [
+            "config/packages/reconnect_s3_bundle.yaml"
+        ]
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.12",
         "recipe": {
@@ -251,6 +263,9 @@
             "version": "7.0",
             "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
         }
+    },
+    "symfony/ux-dropzone": {
+        "version": "v2.19.3"
     },
     "symfony/ux-turbo": {
         "version": "v2.18.0"

@@ -1,22 +1,17 @@
-<header class="mb-auto">
-    <div>
-        <a href="{{ path('home') }}">
-            <h3 class="float-md-start mb-0 text-white">
-                <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
-                {{ 'HomeTitle'|trans }}
-            </h3>
-        </a>
-        {% set links = [
-            {route: 'home', label: 'Home'|trans},
-            {route: 'track_index', label: 'Tracks'|trans},
-            {route: 'collective_index', label: 'Collectives'|trans},
-            {route: app.user ? 'app_logout' : 'app_login', label: app.user ? 'Logout'|trans : 'Login'|trans},
-        ] %}
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-            {% for link in links %}
-                {% set isActive = app.current_route == link.route %}
-                <a class="nav-link {{ isActive ? 'active' : '' }}" href="{{ path(link.route) }}">{{ link.label }}</a>
-            {% endfor %}
-        </nav>
-    </div>
-</header>
+{% set links = [
+    {route: 'home', label: 'Home'|trans},
+    {route: 'track_index', label: 'Tracks'|trans},
+    {route: app.user ? 'app_logout' : 'app_login', label: app.user ? 'Logout'|trans : 'Login'|trans},
+] %}
+<nav class="navbar fixed-top navbar-light bg-warning opacity-50">
+    <a href="{{ path('home') }}">
+        <h3 class="float-md-start mb-0 text-black">
+            <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
+            {{ 'HomeTitle'|trans }}
+        </h3>
+    </a>
+    {% for link in links %}
+        {% set isActive = app.current_route == link.route %}
+        <a class="nav-link {{ isActive ? 'active' : '' }} text-black" href="{{ path(link.route) }}">{{ link.label }}</a>
+    {% endfor %}
+</nav>

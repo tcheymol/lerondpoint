@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/symfony.php';
 
 // Config
-set('repository', 'git@github.com:tcheymol/gjaune.git');
+set('repository', 'git@github.com:tcheymol/lerondpoint.git');
 set('flush_cache_file_name', 'flush-cache.php');
 set('flush_cache_file_path', '{{current_path}}/public/{{flush_cache_file_name}}');
 
@@ -13,11 +13,11 @@ add('shared_dirs', [ 'var/log',  'var/sessions',  'vendor/',  'public/bundles/']
 add('writable_dirs', []);
 
 // Hosts
-host('gjaune')
+host('rp')
     ->set('branch', 'main')
-    ->set('deploy_path', '~/gjaune')
+    ->set('deploy_path', '~/lerondpoint')
     ->set('http_user', 'www-data')
-    ->set('homepage_url', 'gjaune')
+    ->set('homepage_url', 'rp')
 ;
 
 task('deploy:set-prod-env', function () {

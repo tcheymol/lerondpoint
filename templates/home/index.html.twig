@@ -3,11 +3,34 @@
 {% block title %}{{ 'HomeTitle'|trans }}{% endblock %}
 
 {% block content %}
-    <main class="px-3">
-      <h1>{{ 'HomeTitle'|trans }}</h1>
-      <p class="lead">{{ 'HomeSubtitle'|trans }}</p>
-      <p class="lead">
-        <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">{{ 'KnowMore'|trans }}</a>
-      </p>
+    <main class="px-3 flex-grow-1 d-flex flex-column justify-content-around">
+        <h1>{{ 'HomeTitle'|trans }}</h1>
+        <div class="row justify-content-around">
+            <div class="col-12 col-sm-6 col-md-5">
+                <div class="card text-dark bg-warning mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Warning card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-5">
+                <div class="card text-light bg-secondary mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 offset-sm-3 offset-md-4">
+                <a class="btn btn-outline-danger btn-lg bg-light">
+                    {{ 'Contribute'|trans }}
+                </a>
+            </div>
+        </div>
     </main>
 {% endblock %}

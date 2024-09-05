@@ -39,6 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    public function __toString(): string
+    {
+        return $this->email;
+    }
+
     /**
      * @var Collection<int, Collective>
      */

@@ -17,22 +17,17 @@
             <b class="col-6 text-start">{{ 'Updated At'|trans }} : </b>
             <span class="col-6">{{ track.updatedAt ? track.updatedAt|date : '' }}</span>
         </div>
-        <div class="row">
-            <b class="col-6 text-start">{{ 'Disabled'|trans }} : </b>
-            <span class="col-6">
-                {{ include('components/_badge.html.twig', {value: track.disabled}) }}
-            </span>
+    {% for attachment in track.attachments %}
+        <img src="{{ attachment.url }}" alt="{{ 'Attachment'|trans }}"/>
+    {% endfor %}
+
+    <div class="row d-flex justify-content-between mt-3">
+        <div class="col text-start">
+            {{ include('track/_delete_form.html.twig') }}
         </div>
-        <div class="row">
-            <b class="col-6 text-start">{{ 'Validated'|trans }} : </b>
-            <span class="col-6">
-                {{ include('components/_badge.html.twig', {value: track.validated}) }}
-            </span>
+        <div class="col text-end">
+            <a class="btn btn-info" href="{{ path('track_edit', {'id': track.id}) }}">edit</a>
         </div>
+    </div>
 
-    <a href="{{ path('track_index') }}">back to list</a>
-
-    <a href="{{ path('track_edit', {'id': track.id}) }}">edit</a>
-
-    {{ include('track/_delete_form.html.twig') }}
 {% endblock %}

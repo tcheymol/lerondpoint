@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Track;
 use App\Form\TrackType;
+use App\Helper\AttachmentHelper;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,15 +24,16 @@ class TrackController extends AbstractController
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $em, AttachmentHelper $attachmentHelper): Response
     {
         $track = new Track();
         $form = $this->createForm(TrackType::class, $track);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($track);
-            $entityManager->flush();
+            $attachmentHelper->handleAttachment($track);
+            $em->persist($track);
+            $em->flush();
 
             return $this->redirectToRoute('track_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -43,10 +45,10 @@ class TrackController extends AbstractController
     }
 
     #[Route('/{id}', name: 'track_show', methods: ['GET'])]
-    public function show(Track $track): Response
+    public function show(Track $track, AttachmentHelper $helper): Response
     {
         return $this->render('track/show.html.twig', [
-            'track' => $track,
+            'track' => $helper->hydrateTrackWithUrl($track),
         ]);
     }
 
