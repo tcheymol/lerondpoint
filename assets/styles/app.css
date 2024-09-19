@@ -2,6 +2,11 @@
     --bs-warning: #1abc9c;
 }
 
+#map {
+    height: 180px;
+    width: 180px;
+}
+
 .cover-container {
     padding-top: 66px !important;
 }

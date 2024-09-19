@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -24,6 +25,8 @@ class TrackCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             BooleanField::new('disabled'),
+            NumberField::new('lat')->onlyOnForms(),
+            NumberField::new('lng')->onlyOnForms(),
             AssociationField::new('disabledBy')->hideOnForm(),
             DateField::new('createdAt')->hideOnForm(),
         ];
