@@ -1,22 +1,65 @@
 {% set links = [
-    {route: 'home', label: 'Home'|trans},
-    {route: 'track_index', label: 'Tracks'|trans},
-    {route: app.user ? 'app_logout' : 'app_login', label: app.user ? 'Logout'|trans : 'Login'|trans},
+    {
+        route: 'track_index',
+        label: 'Tracks'|trans,
+        pathKey: 'track',
+        color: 'secondary',
+
+    },
+    {
+        route: 'collective_index',
+        label: 'Collectives'|trans,
+        pathKey: 'collective',
+        color: 'primary',
+    },
+    {
+        route: 'track_new',
+        label: 'Contribute'|trans,
+    },
 ] %}
-{% if is_granted('ROLE_ADMIN') %}
-    {% set links = links|merge([
-        {route: 'admin', label: 'Admin'|trans},
-    ]) %}
+{% if app.user %}
+    {% set links = links|merge([{
+        route: 'app_logout',
+        icon: 'fa-right-from-bracket',
+        label: 'Logout'|trans,
+        iconColor: 'text-danger'
+    }]) %}
+{% else %}
+    {% set links = links|merge([{
+        route: 'app_login',
+        icon: 'fa-user',
+        label: 'Login'|trans}]) %}
 {% endif %}
-<nav class="navbar fixed-top navbar-light bg-warning opacity-50 px-4">
-    <a href="{{ path('home') }}">
-        <h3 class="float-md-start mb-0 text-black">
-            <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
+{% if is_granted('ROLE_ADMIN') %}
+    {% set links = links|merge([{route: 'admin', label: 'Admin'|trans, icon: 'fa-user-cog'}]) %}
+{% endif %}
+<nav class="navbar fixed-top navbar-light text-light p-0 align-items-stretch" style="height: 80px;">
+    <a href="{{ path('home') }}" class="d-flex align-items-center ps-3">
+        <h3 class="float-md-start mb-0 text-light">
+            <img src="{{ asset('rp.png') }}" class="img img-fluid" style="height: 50px" alt="logo">
             {{ 'HomeTitle'|trans }}
         </h3>
     </a>
-    {% for link in links %}
-        {% set isActive = app.current_route == link.route %}
-        <a class="nav-link {{ isActive ? 'active' : '' }} text-black" href="{{ path(link.route) }}">{{ link.label }}</a>
-    {% endfor %}
+    <div class="flex-grow-1"></div>
+    <div class="flex-grow-1 bg-dark opacity-50 text-light d-flex align-items-stretch fs-4 justify-content-between d-flex" style="border-radius: 0 0 0 10px">
+        {% for link in links %}
+            {% if link.pathKey is defined %}
+            {% endif %}
+            {% set isActive = link.pathKey is defined and link.pathKey in app.request.pathInfo %}
+            <a
+                class="flex-grow-1 nav-link {{ isActive ? 'active' : '' }} hoverable d-flex align-items-center justify-content-center
+                {% if link.color is defined and isActive%}
+                    bg-{{ link.color }}
+                {% endif %}
+                "
+                href="{{ path(link.route) }}"
+            >
+                {% if link.icon is defined %}
+                    <i class="fa {{ link.icon }} {{ link.iconColor is defined ? link.iconColor : '' }}"></i>
+                {% else %}
+                    {{ link.label }}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
 </nav>

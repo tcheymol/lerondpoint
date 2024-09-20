@@ -2,11 +2,13 @@ Action: Action
 ActionKind: Type d'action
 ActionTag: Label action
 Actions: Actions
+Admin: Admin
 Attachment: Document
 Attachments: Documents
 Back: Retour
 Collective: Collectif
-Collectives: Collectifs
+Collectives: Suites
+CollectivesSubtitles: Les collectifs mobilisés près de chez toi
 Contribute: Contribuer
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
@@ -21,7 +23,7 @@ Email: Email
 Extension: Extension
 Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
-HomeTitle: LE-RONDPOINT.ORG
+HomeTitle: Le-rondpoint.org
 Kind: Type
 Kinds: Types
 KnowMore: En savoir plus
@@ -29,6 +31,7 @@ Login: Connexion
 Logout: Déconnexion
 Misc: Divers
 Name: Nom
+No: Non
 NoTrack: Pas de trace
 Notes: Notes
 Password: Mot de passe
@@ -41,8 +44,8 @@ Track: Trace
 TrackKind: Type de trace
 TrackTag: Label trace
 Tracks: Traces
+TracksSubtitle: Mémoire vivante par les gilets jaunes
 Updated At: Date de dernière mise à jour
 Users: Utilisateurs
 Validated: Validé
 Yes: Oui
-No: Non
