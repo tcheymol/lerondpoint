@@ -11,8 +11,6 @@ class MaintenanceController extends AbstractController
     #[Route('/maintenance', name: 'maintenance')]
     public function index(): Response
     {
-        return $this->render('maintenance/index.html.twig', [
-            'controller_name' => 'MaintenanceCController',
-        ]);
+        return $this->render('maintenance/index.html.twig');
     }
 }
