@@ -3,7 +3,12 @@
     {route: 'track_index', label: 'Tracks'|trans},
     {route: app.user ? 'app_logout' : 'app_login', label: app.user ? 'Logout'|trans : 'Login'|trans},
 ] %}
-<nav class="navbar fixed-top navbar-light bg-warning opacity-50">
+{% if is_granted('ROLE_ADMIN') %}
+    {% set links = links|merge([
+        {route: 'admin', label: 'Admin'|trans},
+    ]) %}
+{% endif %}
+<nav class="navbar fixed-top navbar-light bg-warning opacity-50 px-4">
     <a href="{{ path('home') }}">
         <h3 class="float-md-start mb-0 text-black">
             <img src="{{ asset('favicon.png') }}" class="img img-fluid" style="height: 50px" alt="logo">

@@ -22,6 +22,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use SoftDeleteable;
     use DisableTrait;
     use ValidatedTrait;
+
+    const array ROLES = [
+        'ROLE_USER' => 'ROLE_USER',
+        'ROLE_VALIDATED_USER' => 'ROLE_VALIDATED_USER',
+        'ROLE_MODERATOR' => 'ROLE_MODERATOR',
+        'ROLE_ADMIN' => 'ROLE_ADMIN',
+        'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN',
+    ];
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
