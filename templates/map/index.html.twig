@@ -2,6 +2,8 @@
 
 {% block title %}Hello MapController!{% endblock %}
 
+{% block bodybg %}primary{% endblock %}
+
 {% block content %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -9,8 +11,6 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
     <div id="map" class="box-shadow-white" style="height: 500px; width: 100%" {{ stimulus_controller('map') }}>
     </div>
 </div>

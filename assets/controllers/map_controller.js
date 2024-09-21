@@ -11,12 +11,12 @@ export default class extends Controller {
     }
 
     initMap() {
-        const map = L.map('map').setView([51.505, -0.09], 13);
+        const map = L.map('map').setView([46.966409, 2.483529], 5.49);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var marker = L.marker([51.5, -0.09]).addTo(map);
+        // var marker = L.marker([51.5, -0.09]).addTo(map);
 
         // map.setView([46.9, 1.4519], 5);
         // // const greenIcon = L.icon({

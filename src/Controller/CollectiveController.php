@@ -15,11 +15,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class CollectiveController extends AbstractController
 {
     #[Route('', name: 'collective_index', methods: ['GET'])]
-    public function index(CollectiveRepository $collectiveRepository): Response
+    public function index(): Response
     {
-        return $this->render('collective/index.html.twig', [
-            'collectives' => $collectiveRepository->findAll(),
-        ]);
+        return $this->render('map/index.html.twig');
     }
 
     #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]

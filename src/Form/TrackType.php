@@ -34,7 +34,12 @@ class TrackType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
-            ->add('uploadedFile', DropzoneType::class)
+            ->add('uploadedFile', DropzoneType::class, [
+                'attr' => [
+                    'data-controller' => 'dropzone',
+                    'placeholder' => 'Recherchez ou déposez votre fichier ici',
+                ],
+            ])
         ;
     }
 

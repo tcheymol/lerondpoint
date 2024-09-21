@@ -20,6 +20,10 @@ class ActionKind
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    public function __construct(?string $name = null) {
+        $this->name = $name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -20,6 +20,20 @@ a.hoverable:hover {
     background-color: var(--bs-primary) !important;
 }
 
+div.dropzone-container {
+    border: 4px dashed var(--bs-danger);
+    background-color: var(--bs-light);
+    border-radius: 25px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--bs-danger);
+}
+
+div.dropzone-container .dropzone-placeholder {
+    color: var(--bs-danger);
+    font-size: 1.5rem;
+}
 /*body {*/
 /*    background: linear-gradient(-45deg, var(--bs-primary), var(--bs-secondary), var(--bs-info));*/
 /*    background-size: 400% 400%;*/

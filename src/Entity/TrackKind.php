@@ -28,8 +28,9 @@ class TrackKind
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'kind')]
     private Collection $tracks;
 
-    public function __construct()
+    public function __construct(?string $name = null)
     {
+        $this->name = $name;
         $this->tracks = new ArrayCollection();
     }
 

@@ -1,10 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Track{% endblock %}
+{% block title %}{{ 'CreateTrack'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'CreateTrack'|trans }}</h1>
-    {{ include('components/_back.html.twig') }}
     {{ include('track/_form.html.twig') }}
-
 {% endblock %}
