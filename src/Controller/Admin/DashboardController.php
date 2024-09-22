@@ -40,11 +40,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('Home', 'fas fa-house-user text-success', 'home')->setCssClass('text-success');
+        yield MenuItem::linkToDashboard('Admin', 'fa fa-gears');
+
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
+        yield MenuItem::section('Collectives');
+        yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
         yield MenuItem::section('Actions');
-        yield MenuItem::linkToCrud('Actions', 'fas fa-users', Action::class);
+        yield MenuItem::linkToCrud('FollowUps', 'fas fa-location-crosshairs', Action::class);
         yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', ActionKind::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', ActionTag::class);
         yield MenuItem::section('Tracks');
@@ -53,6 +57,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', TrackTag::class);
         yield MenuItem::section('Misc');
         yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
-        yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
     }
 }

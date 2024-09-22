@@ -5,6 +5,8 @@
     --bs-secondary-rgb: 141, 87, 153;
     --bs-info: #569681;
     --bs-info-rgb: 86, 150, 129;
+    --bs-danger: #ff7979;
+    --bs-danger-rgb: 255, 121, 121;
 }
 
 #map {
@@ -17,7 +19,23 @@
 }
 
 a.hoverable:hover {
+    background-color: var(--bs-light) !important;
+}
+
+a.hoverable-primary:hover {
     background-color: var(--bs-primary) !important;
+}
+
+a.hoverable-secondary:hover {
+    background-color: var(--bs-secondary) !important;
+}
+
+a.hoverable-danger:hover {
+    background-color: var(--bs-danger) !important;
+}
+
+a.hoverable-dark:hover {
+    background-color: var(--bs-dark) !important;
 }
 
 div.dropzone-container {

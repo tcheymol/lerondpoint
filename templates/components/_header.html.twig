@@ -1,38 +1,3 @@
-{% set links = [
-    {
-        route: 'track_index',
-        label: 'Tracks'|trans,
-        pathKey: 'track',
-        color: 'secondary',
-
-    },
-    {
-        route: 'collective_index',
-        label: 'Collectives'|trans,
-        pathKey: 'collective',
-        color: 'primary',
-    },
-    {
-        route: 'track_new',
-        label: 'Contribute'|trans,
-    },
-] %}
-{% if app.user %}
-    {% set links = links|merge([{
-        route: 'app_logout',
-        icon: 'fa-right-from-bracket',
-        label: 'Logout'|trans,
-        iconColor: 'text-danger'
-    }]) %}
-{% else %}
-    {% set links = links|merge([{
-        route: 'app_login',
-        icon: 'fa-user',
-        label: 'Login'|trans}]) %}
-{% endif %}
-{% if is_granted('ROLE_ADMIN') %}
-    {% set links = links|merge([{route: 'admin', label: 'Admin'|trans, icon: 'fa-user-cog'}]) %}
-{% endif %}
 <nav class="navbar fixed-top navbar-light text-light p-0 align-items-stretch" style="height: 80px;">
     <a href="{{ path('home') }}" class="d-flex align-items-center ps-3">
         <h3 class="float-md-start mb-0 text-light">
@@ -42,24 +7,27 @@
     </a>
     <div class="flex-grow-1"></div>
     <div class="flex-grow-1 bg-dark opacity-50 text-light d-flex align-items-stretch fs-4 justify-content-between d-flex" style="border-radius: 0 0 0 10px">
-        {% for link in links %}
-            {% if link.pathKey is defined %}
+        <a class="flex-grow-1 nav-link {{ 'track' in app.request.pathInfo ? 'active bg-secondary' : '' }} hoverable-secondary d-flex align-items-center justify-content-center"
+            href="{{ path('track_index') }}"
+        >{{ 'Tracks'|trans }}</a>
+        <a class="flex-grow-1 nav-link {{ 'collective' in app.request.pathInfo ? 'active bg-primary' : '' }} hoverable-primary d-flex align-items-center justify-content-center"
+            href="{{ path('collective_index') }}"
+        >{{ 'Collectives'|trans }}</a>
+        <a class="flex-grow-1 nav-link hoverable-danger d-flex align-items-center justify-content-center"
+            href="{{ path('track_new') }}"
+        >{{ 'Contribute'|trans }}</a>
+        {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+                href="{{ path('admin') }}"
+                ><i class="fa fa-user-cog text-info"></i></a>
             {% endif %}
-            {% set isActive = link.pathKey is defined and link.pathKey in app.request.pathInfo %}
-            <a
-                class="flex-grow-1 nav-link {{ isActive ? 'active' : '' }} hoverable d-flex align-items-center justify-content-center
-                {% if link.color is defined and isActive%}
-                    bg-{{ link.color }}
-                {% endif %}
-                "
-                href="{{ path(link.route) }}"
-            >
-                {% if link.icon is defined %}
-                    <i class="fa {{ link.icon }} {{ link.iconColor is defined ? link.iconColor : '' }}"></i>
-                {% else %}
-                    {{ link.label }}
-                {% endif %}
-            </a>
-        {% endfor %}
+            <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+                href="{{ path('app_logout') }}"><i class="fa fa-power-off text-danger"></i></a>
+        {% else %}
+            <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+             href="{{ path('app_login') }}"
+            ><i class="fa fa-user text-info"></i></a>
+        {% endif %}
     </div>
 </nav>
