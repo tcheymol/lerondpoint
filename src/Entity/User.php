@@ -52,14 +52,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    /**
-     * @var Collection<int, Collective>
-     */
+    /** @var Collection<int, Collective> */
     #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
     private Collection $collectives;
 
-    public function __construct()
+    public function __construct(?string $email)
     {
+        $this->email = $email;
         $this->collectives = new ArrayCollection();
     }
 
@@ -114,6 +113,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function addRole(string $role): static
+    {
+        if (!$this->hasRole($role)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function hasRole(string $string): bool
+    {
+        return in_array($string, $this->roles, true);
+    }
     /**
      * @see PasswordAuthenticatedUserInterface
      */
