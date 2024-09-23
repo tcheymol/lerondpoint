@@ -6,26 +6,30 @@
         </h3>
     </a>
     <div class="flex-grow-1"></div>
-    <div class="flex-grow-1 bg-dark opacity-50 text-light d-flex align-items-stretch fs-4 justify-content-between d-flex" style="border-radius: 0 0 0 10px">
+    <div class="flex-grow-1 bg-dark text-light d-flex align-items-stretch fs-4 justify-content-between d-flex position-relative" style="border-radius: 0 0 0 10px">
         <a class="flex-grow-1 nav-link {{ 'track' in app.request.pathInfo ? 'active bg-secondary' : '' }} hoverable-secondary d-flex align-items-center justify-content-center"
             href="{{ path('track_index') }}"
         >{{ 'Tracks'|trans }}</a>
         <a class="flex-grow-1 nav-link {{ 'collective' in app.request.pathInfo ? 'active bg-primary' : '' }} hoverable-primary d-flex align-items-center justify-content-center"
             href="{{ path('collective_index') }}"
         >{{ 'Collectives'|trans }}</a>
-        <a class="flex-grow-1 nav-link hoverable-danger d-flex align-items-center justify-content-center"
-            href="{{ path('track_new') }}"
-        >{{ 'Contribute'|trans }}</a>
+        <div id="contributeButton">
+            <a class="flex-grow-1 nav-link hoverable-info d-flex align-items-center justify-content-center h-100 w-100 px-3"
+                href="{{ path('track_new') }}"
+            >{{ 'Contribute'|trans }}
+            </a>
+                {{ include('components/_contribute_modal.html.twig') }}
+        </div>
         {% if app.user %}
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+                <a class="flex-grow-1 nav-link hoverable-light d-flex align-items-center justify-content-center"
                 href="{{ path('admin') }}"
                 ><i class="fa fa-user-cog text-info"></i></a>
             {% endif %}
-            <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+            <a class="flex-grow-1 nav-link hoverable-light d-flex align-items-center justify-content-center"
                 href="{{ path('app_logout') }}"><i class="fa fa-power-off text-danger"></i></a>
         {% else %}
-            <a class="flex-grow-1 nav-link hoverable d-flex align-items-center justify-content-center"
+            <a class="flex-grow-1 nav-link hoverable-light d-flex align-items-center justify-content-center"
              href="{{ path('app_login') }}"
             ><i class="fa fa-user text-info"></i></a>
         {% endif %}

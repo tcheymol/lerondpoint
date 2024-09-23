@@ -1,0 +1,68 @@
+/* Override some Bootstrap variables */
+$primary: #C2AA6E;
+$secondary: #8D5799;
+$info: #569681;
+$danger: #ff7979;
+$dark: #1e272e;
+
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';
+
+#map {
+    height: 180px;
+    width: 180px;
+}
+
+.cover-container {
+    padding-top: 66px !important;
+}
+
+@each $color, $value in $theme-colors {
+    a.hoverable-#{$color} {
+        &:hover {
+            background-color: $value !important;
+            color: white;
+        }
+    }
+
+    button.btn-#{$color}, a.btn-#{$color} {
+        color: white !important;
+        &:hover {
+            color: white !important;
+        }
+    }
+}
+
+div.dropzone-container {
+    border: 4px dashed $danger;
+    background-color: $light;
+    border-radius: 25px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: $danger;
+
+    .dropzone-placeholder {
+        color: $danger;
+        font-size: 1.5rem;
+    }
+}
+
+#contributeButton {
+    .contribute-modal{
+        visibility: hidden;
+        position: absolute;
+        cursor: auto;
+        top: 100%;
+        right: 50px;
+        width: calc(100vw - 100px);
+        min-height: calc(100vh - 100% - 50px);
+        z-index: 1;
+        border: 3px solid $info;
+    }
+
+    &:hover {
+        .contribute-modal{
+            visibility: visible;
+        }
+    }
+}
