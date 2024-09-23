@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Collective{% endblock %}
+{% block title %}{{ 'CreateCollective'|trans }}{% endblock %}
+{% block bodybg %}primary{% endblock %}
 
 {% block content %}
-    <h1>Create new Collective</h1>
-
-    {{ include('collective/_form.html.twig') }}
-
-    <a href="{{ path('collective_index') }}">back to list</a>
+    <div class="col-12 col-md-6 offset-md-3 ">
+        <div class="card p-4">
+            {{ include('components/_back.html.twig') }}
+            <br/>
+            {{ include('collective/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
