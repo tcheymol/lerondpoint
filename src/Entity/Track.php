@@ -2,25 +2,18 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
-use App\Entity\Trait\ValidatedTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\Blameable;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
 {
-    use TimestampableEntity;
-    use Blameable;
-    use SoftDeleteable;
-    use DisableTrait;
-    use ValidatedTrait;
+    use BlameableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

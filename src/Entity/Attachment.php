@@ -3,24 +3,16 @@
 namespace App\Entity;
 
 use AllowDynamicProperties;
-use App\Entity\Trait\DisableTrait;
-use App\Entity\Trait\ValidatedTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\Blameable;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Uid\Uuid;
 
 #[AllowDynamicProperties] #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
 class Attachment
 {
-    use TimestampableEntity;
-    use Blameable;
-    use SoftDeleteable;
-    use DisableTrait;
-    use ValidatedTrait;
+    use BlameableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

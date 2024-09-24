@@ -2,14 +2,11 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
-use App\Entity\Trait\ValidatedTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,10 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use TimestampableEntity;
-    use SoftDeleteable;
-    use DisableTrait;
-    use ValidatedTrait;
+    use BlameableTrait;
 
     const array ROLES = [
         'ROLE_USER' => 'ROLE_USER',
@@ -36,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private ?string $email;
 
     /** @var string[] */
     #[ORM\Column]

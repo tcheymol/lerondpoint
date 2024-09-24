@@ -2,31 +2,34 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackKindRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: TrackKindRepository::class)]
 class TrackKind
 {
-    use TimestampableEntity;
-    use DisableTrait;
+    use BlameableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $name;
 
     /**
      * @var Collection<int, Track>
      */
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'kind')]
     private Collection $tracks;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $fileTypes = null;
 
     public function __construct(?string $name = null)
     {
@@ -77,6 +80,18 @@ class TrackKind
                 $track->setKind(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFileTypes(): ?array
+    {
+        return $this->fileTypes;
+    }
+
+    public function setFileTypes(?array $fileTypes): static
+    {
+        $this->fileTypes = $fileTypes;
 
         return $this;
     }

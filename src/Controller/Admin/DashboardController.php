@@ -47,14 +47,17 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::section('Collectives');
         yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
+
         yield MenuItem::section('Actions');
-        yield MenuItem::linkToCrud('FollowUps', 'fas fa-location-crosshairs', Action::class);
+        yield MenuItem::linkToCrud('Actions', 'fas fa-location-crosshairs', Action::class);
         yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', ActionKind::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', ActionTag::class);
+
         yield MenuItem::section('Tracks');
         yield MenuItem::linkToCrud('Tracks', 'fas fa-clipboard', Track::class);
         yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', TrackKind::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', TrackTag::class);
+
         yield MenuItem::section('Misc');
         yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
     }

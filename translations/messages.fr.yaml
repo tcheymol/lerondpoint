@@ -19,11 +19,17 @@ CreateCollective: Ajoute ton collectif à la carte
 CreateTrack: Ajouter une trace
 CreateTrackAnonymous: Ajoute une trace sans connexion
 Created At: Créé le
+Created By: Créé par
 Credits_to: Par
 Dashboard: Accueil
+Deleted At: Supprimé le
+Deleted By: Supprimé par
+Disabled At: Désactivé le
+Disabled By: Désactivé par
 Disabled: Désactivé
 Edit: Modifier
 Email: Email
+Enabled: Activé
 Extension: Extension
 FollowUps: Suites
 Home: Accueil
@@ -39,6 +45,7 @@ Name: Nom
 No: Non
 NoTrack: Pas de trace
 Notes: Notes
+Owner: Propriétaire
 Password: Mot de passe
 Path: Chemin
 Show: Voir
@@ -50,7 +57,9 @@ TrackKind: Type de trace
 TrackTag: Label trace
 Tracks: Traces
 TracksSubtitle: Mémoire vivante par les gilets jaunes
-Updated At: Date de dernière mise à jour
+Updated At: MAJ le
+Updated By: MAJ par
 Users: Utilisateurs
+Validated By: Validé par
 Validated: Validé
 Yes: Oui

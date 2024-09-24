@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\ActionTagRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: ActionTagRepository::class)]
 class ActionTag
 {
-    use TimestampableEntity;
-    use DisableTrait;
+    use BlameableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

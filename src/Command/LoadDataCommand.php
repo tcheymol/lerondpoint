@@ -5,14 +5,10 @@ namespace App\Command;
 use App\Entity\ActionKind;
 use App\Entity\TrackKind;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:load-data',
@@ -29,40 +25,27 @@ class LoadDataCommand extends Command
     {
         $this->loadActionKinds();
         $this->loadTrackKinds();
-        $this->loadLabels();
-        $this->loadTracks();
 
         $this->em->flush();
 
         return Command::SUCCESS;
     }
 
-
-    public function loadLabels(): void
-    {
-
-    }
-
     public function loadTrackKinds(): void
     {
-        $trackKinds = [
-            "TEXTE / Appel",
-            "AUDIO / Chanson",
-            "PHOTO / T-Shirt",
-            "PHOTO / Banderole",
-            "TEXTE / Tract - Appel",
-            "VIDÉO / Documentaire",
+        $trackKindsByFileType = [
+            'audio' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
+            'text' => ['Film', 'Live', 'Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Cabane', 'Goodies', 'Gilet jaune', 'Banderole', 'Monument', 'Livre', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
+            'image' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Gilet jaune', 'Livre', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
+            'video' => ['Appel', 'Tract', 'Cabane', 'Goodies', 'Gilet jaune', 'Banderole', 'Monument', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
         ];
 
-        foreach ($trackKinds as $trackKind) {
-            $trackKindEntity = new TrackKind($trackKind);
-            $this->em->persist($trackKindEntity);
+        foreach ($trackKindsByFileType as $fileType => $trackKinds) {
+            foreach ($trackKinds as $trackKind) {
+                $trackKindEntity = (new TrackKind($trackKind))->setFileTypes([$fileType]);
+                $this->em->persist($trackKindEntity);
+            }
         }
-    }
-
-    public function loadTracks(): void
-    {
-
     }
 
     public function loadActionKinds(): void

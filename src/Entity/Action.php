@@ -2,25 +2,17 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
-use App\Entity\Trait\ValidatedTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\ActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\Blameable;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: ActionRepository::class)]
 class Action
 {
-    use TimestampableEntity;
-    use Blameable;
-    use SoftDeleteable;
-    use DisableTrait;
-    use ValidatedTrait;
+    use BlameableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -25,8 +25,6 @@ class TrackCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             BooleanField::new('disabled'),
-            NumberField::new('lat')->onlyOnForms(),
-            NumberField::new('lng')->onlyOnForms(),
             AssociationField::new('disabledBy')->hideOnForm(),
             DateField::new('createdAt')->hideOnForm(),
         ];

@@ -2,32 +2,23 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\DisableTrait;
-use App\Entity\Trait\ValidatedTrait;
+use App\Entity\Trait\BlameableTrait;
 use App\Repository\CollectiveRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\Blameable;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
 class Collective implements OwnableInterface
 {
-    use TimestampableEntity;
-    use Blameable;
-    use SoftDeleteable;
-    use DisableTrait;
-    use ValidatedTrait;
+    use BlameableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Action>
-     */
+    /** @var Collection<int, Action> */
     #[ORM\OneToMany(targetEntity: Action::class, mappedBy: 'collective')]
     private Collection $actions;
 
@@ -43,8 +34,11 @@ class Collective implements OwnableInterface
     #[ORM\ManyToOne(inversedBy: 'collectives')]
     private ?User $owner = null;
 
-    #[ORM\Column]
-    private bool $enabled = false;
+    #[ORM\Column(nullable: true)]
+    private ?float $lat = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $lng = null;
 
     public function __construct()
     {
@@ -57,9 +51,7 @@ class Collective implements OwnableInterface
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Action>
-     */
+    /** @return Collection<int, Action> */
     public function getActions(): Collection
     {
         return $this->actions;
@@ -87,9 +79,7 @@ class Collective implements OwnableInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Track>
-     */
+    /** @return Collection<int, Track> */
     public function getTracks(): Collection
     {
         return $this->tracks;
@@ -141,14 +131,26 @@ class Collective implements OwnableInterface
         return $this;
     }
 
-    public function isEnabled(): bool
+    public function getLat(): ?int
     {
-        return $this->enabled;
+        return $this->lat;
     }
 
-    public function setEnabled(bool $enabled): static
+    public function setLat(?int $lat): static
     {
-        $this->enabled = $enabled;
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): static
+    {
+        $this->lng = $lng;
 
         return $this;
     }
