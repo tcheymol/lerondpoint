@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Domain\Track\TrackFactory;
+use App\Domain\Track\TrackPersister;
 use App\Entity\Track;
 use App\Form\TrackType;
 use App\Helper\AttachmentHelper;
@@ -24,24 +26,18 @@ class TrackController extends AbstractController
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em, AttachmentHelper $attachmentHelper): Response
+    public function new(Request $request, TrackFactory $trackFactory, TrackPersister $trackPersister): Response
     {
-        $track = new Track();
-        $form = $this->createForm(TrackType::class, $track);
-        $form->handleRequest($request);
+        $track = $trackFactory->create();
+        $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $attachmentHelper->handleAttachment($track);
-            $em->persist($track);
-            $em->flush();
+            $trackPersister->persist($track);
 
             return $this->redirectToRoute('track_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('track/new.html.twig', [
-            'track' => $track,
-            'form' => $form,
-        ]);
+        return $this->render('track/new.html.twig', ['track' => $track, 'form' => $form ]);
     }
 
     #[Route('/{id}', name: 'track_show', methods: ['GET'])]
@@ -55,8 +51,7 @@ class TrackController extends AbstractController
     #[Route('/{id}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TrackType::class, $track);
-        $form->handleRequest($request);
+        $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();

@@ -3,7 +3,9 @@
         {{ form_widget(form.uploadedFile) }}
     </div>
     {{ form_row(form.name) }}
-    {{ form_row(form.collective) }}
+    {% if form.collective is defined %}
+        {{ form_row(form.collective) }}
+    {% endif %}
     {{ form_row(form.kind) }}
     {{ form_row(form.tags) }}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">

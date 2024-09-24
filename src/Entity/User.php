@@ -152,9 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
          $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Collective>
-     */
+    /** @return Collection<int, Collective> */
     public function getCollectives(): Collection
     {
         return $this->collectives;
@@ -180,5 +178,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function hasMultipleCollectives(): bool
+    {
+        return $this->collectives->count() > 1;
+    }
+
+    public function getFirstCollective(): ?Collective
+    {
+        return $this->collectives->first() ?: null;
     }
 }

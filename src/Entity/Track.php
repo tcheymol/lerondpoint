@@ -23,7 +23,6 @@ class Track
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Collective $collective = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]
