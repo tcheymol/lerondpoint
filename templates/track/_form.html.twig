@@ -1,14 +1,26 @@
 {{ form_start(form) }}
-    <div class="col-12 col-md-6 offset-md-3 my-5">
-        {{ form_widget(form.uploadedFile) }}
-    </div>
-    {{ form_row(form.name) }}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            {{ form_widget(form.uploadedFile) }}
+        </div>
+        <div class="col-12 col-md-6">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_label(form.kind) }}
+            {{ form_widget(form.kind) }}
+        </div>
     {% if form.collective is defined %}
         {{ form_row(form.collective) }}
     {% endif %}
-    {{ form_row(form.kind) }}
-    {{ form_row(form.tags) }}
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div class="col-12 col-md-6">
+        {{ form_label(form.tags) }}
+        {{ form_widget(form.tags) }}
+    </div>
+    <div class="col-12 col-md-6">
+        {{ include('track/_suggested_kinds.html.twig', {kinds}) }}
+    </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
         <button class="btn btn-primary">{{ 'Create'|trans }}</button>
     </div>
 {{ form_end(form) }}

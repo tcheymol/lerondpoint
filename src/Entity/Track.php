@@ -34,9 +34,7 @@ class Track
     #[ORM\ManyToMany(targetEntity: TrackTag::class, inversedBy: 'tracks')]
     private Collection $tags;
 
-    /**
-     * @var Collection<int, Attachment>
-     */
+    /** @var Collection<int, Attachment> */
     #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'track', cascade: ['persist'])]
     private Collection $attachments;
 

@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Domain\Track\TrackFactory;
+use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
+use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
 use App\Form\TrackType;
 use App\Helper\AttachmentHelper;
-use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +19,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class TrackController extends AbstractController
 {
     #[Route('', name: 'track_index', methods: ['GET'])]
-    public function index(TrackRepository $trackRepository): Response
+    public function index(TrackProvider $provider): Response
     {
-        return $this->render('track/index.html.twig', [
-            'tracks' => $trackRepository->findAll(),
-        ]);
+        return $this->render('track/index.html.twig', ['tracks' => $provider->provide()]);
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrackFactory $trackFactory, TrackPersister $trackPersister): Response
+    public function new(Request $request, TrackFactory $trackFactory, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
     {
         $track = $trackFactory->create();
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
@@ -37,7 +36,11 @@ class TrackController extends AbstractController
             return $this->redirectToRoute('track_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('track/new.html.twig', ['track' => $track, 'form' => $form ]);
+        return $this->render('track/new.html.twig', [
+            'track' => $track,
+            'form' => $form,
+            'kinds' => $trackKindProvider->provide(),
+        ]);
     }
 
     #[Route('/{id}', name: 'track_show', methods: ['GET'])]

@@ -25,9 +25,11 @@ $dark: #1e272e;
     }
 
     button.btn-#{$color}, a.btn-#{$color} {
-        color: white !important;
-        &:hover {
+        @if $color != 'light' {
             color: white !important;
+            &:hover {
+                color: white !important;
+            }
         }
     }
 }
@@ -36,6 +38,7 @@ div.dropzone-container {
     border: 4px dashed $danger;
     background-color: $light;
     border-radius: 25px;
+    height: 250px;
     padding: 10px;
     margin-bottom: 10px;
     text-align: center;

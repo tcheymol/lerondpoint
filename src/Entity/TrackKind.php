@@ -14,6 +14,13 @@ class TrackKind
 {
     use BlameableTrait;
 
+    public const KIND_MIME_MAPPING = [
+        'audio',
+        'text',
+        'image',
+        'video',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

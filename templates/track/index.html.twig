@@ -3,34 +3,23 @@
 {% block title %}{{ 'Tracks'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'Tracks'|trans }}</h1>
-
-    <table class="table text-white">
-        <thead>
-            <tr>
-                <th>{{ 'Name'|trans }}</th>
-                <th>{{ 'Created At'|trans }}</th>
-                <th>{{ 'Actions'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for track in tracks %}
-            <tr>
-                <td>{{ track.name }}</td>
-                <td>{{ track.createdAt ? track.createdAt|date : '' }}</td>
-                <td>
-                    <a href="{{ path('track_show', {'id': track.id}) }}">{{ 'Show'|trans }}</a>
-                    <a href="{{ path('track_edit', {'id': track.id}) }}">{{ 'Edit'|trans }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">{{ 'NoTrack'|trans }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary" href="{{ path('track_new') }}">{{ 'CreateTrack'|trans }}</a>
+    <div class="h-100">
+        <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-light" href="{{ path('track_new') }}">{{ 'CreateTrack'|trans }}</a>
+            </div>
+            {% for track in tracks %}
+                <div class="card p-2 px-3 mt-4">
+                    <div class="d-flex flex-row align-items-center">
+                        <div>
+                            {% for attachment in track.attachments %}
+                                <img src="{{ attachment.url }}" style="width: 80px; height: 80px" class="img-thumbnail" alt="{{ track.name ~ attachment.id }}">
+                            {% endfor %}
+                        </div>
+                        <h5 class="card-title ms-3">{{ track.name }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -26,7 +26,7 @@ readonly class AttachmentHelper
             $this->s3Adapter->uploadFile($file, $objectId->toString());
             $attachment = Attachment::fromFile($file)->setObjectId($objectId);
             $track->addAttachment($attachment);
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return;
         }
     }
