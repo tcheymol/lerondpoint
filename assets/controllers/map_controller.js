@@ -18,7 +18,7 @@ export default class extends Controller {
         }).addTo(map);
         var greenIcon = L.icon({
             iconUrl: 'rp1.png',
-            shadowUrl: 'leaf-shadow.png',
+            // shadowUrl: 'leaf-shadow.png',
             iconSize:     [35, 35], // size of the icon
         });
 

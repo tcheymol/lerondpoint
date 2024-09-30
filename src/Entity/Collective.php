@@ -38,7 +38,25 @@ class Collective implements OwnableInterface
     private ?float $lat = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $lng = null;
+    private ?float $lon = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $addressLine1 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $addressLine2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $country = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $postcode = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $state = null;
 
     public function __construct()
     {
@@ -143,14 +161,86 @@ class Collective implements OwnableInterface
         return $this;
     }
 
-    public function getLng(): ?float
+    public function getLon(): ?float
     {
-        return $this->lng;
+        return $this->lon;
     }
 
-    public function setLng(float $lng): static
+    public function setLon(float $lon): static
     {
-        $this->lng = $lng;
+        $this->lon = $lon;
+
+        return $this;
+    }
+
+    public function getAddressLine1(): ?string
+    {
+        return $this->addressLine1;
+    }
+
+    public function setAddressLine1(?string $addressLine1): static
+    {
+        $this->addressLine1 = $addressLine1;
+
+        return $this;
+    }
+
+    public function getAddressLine2(): ?string
+    {
+        return $this->addressLine2;
+    }
+
+    public function setAddressLine2(?string $addressLine2): static
+    {
+        $this->addressLine2 = $addressLine2;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getPostcode(): ?string
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode(?string $postcode): static
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

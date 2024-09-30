@@ -3,6 +3,16 @@
 {% block title %}{{ 'CreateCollective'|trans }}{% endblock %}
 {% block bodybg %}primary{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/@geoapify/geocoder-autocomplete@2.0.3/dist/index.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/@geoapify/geocoder-autocomplete@2.0.3/styles/minimal.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <div class="col-12 col-md-6 offset-md-3 ">
         <div class="card p-4">

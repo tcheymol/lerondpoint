@@ -6,30 +6,27 @@ import { Controller } from '@hotwired/stimulus';
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
+    static values = {
+        formName: String
+    }
+
     connect() {
-        console.log('Hello Stimulus! (places_controller.js)');
-        opencage.algoliaAutocomplete({
-            container: '#place',
-            plugins: [
-                opencage.OpenCageGeoSearchPlugin(
-                    {
-                        key: 'd406c8f6956244e1891843cf3c653bd9',
-                    },
-                    // optional event handlers:
-                    {
-                        onSelect: function handleSelect(params) {
-                            console.log('Selected Item is', params.item);
-                            const latlng = [params.item.geometry.lat, params.item.geometry.lng];
-                            // do something with the coords
-                            console.log('Selected result coords', latlng);
-                        },
-                        onSubmit: function handleSubmit(params) {
-                            // Do something with the selected and then submitted value
-                            console.log('Submit with', params.state.query);
-                        },
-                    }
-                ),
-            ],
+        const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+            document.getElementById("autocomplete"),
+            '089c0bbf75be49b483de4a7fa4b64007',
+            { /* Geocoder options */ });
+
+        autocompleteInput.on('select', (location) => {
+            const inputs = ['lat', 'lon', 'address_line1', 'address_line2', 'city', 'country', 'postcode', 'state'];
+            inputs.forEach(input => {
+                const inputElement = document.getElementById(`${this.formNameValue}_${input}`);
+                if (inputElement) {
+                    inputElement.value = location.properties[input];
+                }
+            });
+        });
+
+        autocompleteInput.on('suggestions', (suggestions) => {
         });
     }
 }
