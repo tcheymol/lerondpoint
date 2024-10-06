@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -43,11 +44,17 @@ class Attachment
 
     public ?string $thumbnailUrl = null;
 
+    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    private ?string $height = null;
+
+    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    private ?string $width = null;
+
     public static function fromFile(UploadedFile $file): static
     {
         return (new static())
-            ->setExtension($file->getExtension())
-            ->setKind($file->guessExtension())
+            ->setExtension($file->guessExtension())
+            ->setKind($file->getMimeType())
             ->setSize($file->getSize());
     }
 
@@ -136,6 +143,30 @@ class Attachment
     public function setThumbnailObjectId(?string $thumbnailObjectId): static
     {
         $this->thumbnailObjectId = $thumbnailObjectId;
+
+        return $this;
+    }
+
+    public function getHeight(): ?string
+    {
+        return $this->height;
+    }
+
+    public function setHeight(?string $height): static
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getWidth(): ?string
+    {
+        return $this->width;
+    }
+
+    public function setWidth(?string $width): static
+    {
+        $this->width = $width;
 
         return $this;
     }

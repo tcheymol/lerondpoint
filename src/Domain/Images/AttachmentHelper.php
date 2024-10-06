@@ -22,6 +22,11 @@ readonly class AttachmentHelper
                 ->setObjectId($objectId)
                 ->setThumbnailObjectId($thumbId);
 
+            $imageInfo = getimagesize($file);
+            if ($imageInfo) {
+                $attachment->setWidth($imageInfo[0])->setHeight($imageInfo[1]);
+            }
+
             unlink($file->getPathname());
 
             return $attachment;
