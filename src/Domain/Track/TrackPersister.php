@@ -3,12 +3,11 @@
 namespace App\Domain\Track;
 
 use App\Entity\Track;
-use App\Helper\AttachmentHelper;
 use Doctrine\ORM\EntityManagerInterface;
 
 readonly class TrackPersister
 {
-    public function __construct(private EntityManagerInterface $em, private AttachmentHelper $attachmentHelper) {
+    public function __construct(private EntityManagerInterface $em, private TrackAttachmentHelper $attachmentHelper) {
 
     }
 

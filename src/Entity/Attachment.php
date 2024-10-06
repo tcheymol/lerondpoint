@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use AllowDynamicProperties;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Uid\Uuid;
 
-#[AllowDynamicProperties] #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
+#[ORM\Entity(repositoryClass: AttachmentRepository::class)]
+
 class Attachment
 {
     use BlameableTrait;
@@ -34,10 +33,15 @@ class Attachment
     #[ORM\ManyToOne(inversedBy: 'attachments')]
     private ?Track $track = null;
 
-    #[ORM\Column(type: 'uuid', nullable: true)]
-    private ?Uuid $objectId = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $objectId = null;
 
     public ?string $url = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnailObjectId = null;
+
+    public ?string $thumbnailUrl = null;
 
     public static function fromFile(UploadedFile $file): static
     {
@@ -112,14 +116,26 @@ class Attachment
         return $this;
     }
 
-    public function getObjectId(): ?Uuid
+    public function getObjectId(): ?string
     {
         return $this->objectId;
     }
 
-    public function setObjectId(?Uuid $objectId): static
+    public function setObjectId(?string $objectId): static
     {
         $this->objectId = $objectId;
+
+        return $this;
+    }
+
+    public function getThumbnailObjectId(): ?string
+    {
+        return $this->thumbnailObjectId;
+    }
+
+    public function setThumbnailObjectId(?string $thumbnailObjectId): static
+    {
+        $this->thumbnailObjectId = $thumbnailObjectId;
 
         return $this;
     }

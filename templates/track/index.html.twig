@@ -13,7 +13,7 @@
                     <div class="d-flex flex-row align-items-center">
                         <div>
                             {% for attachment in track.attachments %}
-                                <img src="{{ attachment.url }}" style="width: 80px; height: 80px" class="img-thumbnail" alt="{{ track.name ~ attachment.id }}">
+                                <img src="{{ attachment.thumbnailUrl }}" style="width: 80px; height: 80px" class="img-thumbnail" alt="{{ track.name ~ attachment.id }}">
                             {% endfor %}
                         </div>
                         <h5 class="card-title ms-3">{{ track.name }}</h5>

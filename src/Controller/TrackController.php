@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
+use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackFactory;
 use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
 use App\Form\TrackType;
-use App\Helper\AttachmentHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +44,7 @@ class TrackController extends AbstractController
     }
 
     #[Route('/{id}', name: 'track_show', methods: ['GET'])]
-    public function show(Track $track, AttachmentHelper $helper): Response
+    public function show(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/show.html.twig', [
             'track' => $helper->hydrateTrackWithUrl($track),

@@ -125,9 +125,9 @@ class Track
         return $this->attachments;
     }
 
-    public function addAttachment(Attachment $attachment): static
+    public function addAttachment(?Attachment $attachment): static
     {
-        if (!$this->attachments->contains($attachment)) {
+        if ($attachment && !$this->attachments->contains($attachment)) {
             $this->attachments->add($attachment);
             $attachment->setTrack($this);
         }
