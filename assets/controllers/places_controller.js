@@ -11,22 +11,25 @@ export default class extends Controller {
     }
 
     connect() {
+        this.setupAutocomplete();
+    }
+
+    setupAutocomplete() {
         const autocompleteInput = new autocomplete.GeocoderAutocomplete(
             document.getElementById("autocomplete"),
             '089c0bbf75be49b483de4a7fa4b64007',
-            { /* Geocoder options */ });
+            { debounceDelay: 500 });
 
-        autocompleteInput.on('select', (location) => {
-            const inputs = ['lat', 'lon', 'address_line1', 'address_line2', 'city', 'country', 'postcode', 'state'];
-            inputs.forEach(input => {
-                const inputElement = document.getElementById(`${this.formNameValue}_${input}`);
-                if (inputElement) {
-                    inputElement.value = location.properties[input];
-                }
-            });
-        });
+        autocompleteInput.on('select', (location) => this.fillAddressFields(location));
+    }
 
-        autocompleteInput.on('suggestions', (suggestions) => {
+    fillAddressFields(location) {
+        const inputs = ['lat', 'lon', 'address_line1', 'address_line2', 'city', 'country', 'postcode', 'state'];
+        inputs.forEach(input => {
+            const inputElement = document.getElementById(`${this.formNameValue}_${input}`);
+            if (inputElement) {
+                inputElement.value = location.properties[input];
+            }
         });
     }
 }

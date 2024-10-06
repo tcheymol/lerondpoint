@@ -6,6 +6,10 @@ import { Controller } from '@hotwired/stimulus';
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
+    static values = {
+        collectives: Array
+    }
+
     connect() {
         this.initMap();
     }
@@ -16,21 +20,14 @@ export default class extends Controller {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var greenIcon = L.icon({
+        const greenIcon = L.icon({
             iconUrl: 'rp1.png',
             // shadowUrl: 'leaf-shadow.png',
             iconSize:     [35, 35], // size of the icon
         });
 
-        L.marker([47, 2], {icon: greenIcon}).addTo(map);
-        L.marker([48, 4], {icon: greenIcon}).addTo(map);
-        L.marker([48, 7], {icon: greenIcon}).addTo(map);
-        L.marker([48, -4], {icon: greenIcon}).addTo(map);
-        L.marker([49, -1], {icon: greenIcon}).addTo(map);
-        L.marker([46, -1], {icon: greenIcon}).addTo(map);
-        L.marker([44, 7], {icon: greenIcon}).addTo(map);
-        L.marker([46, 2], {icon: greenIcon}).addTo(map);
-        L.marker([44,1], {icon: greenIcon}).addTo(map);
-        L.marker([46, 3], {icon: greenIcon}).addTo(map);
+        this.collectivesValue.forEach(collective => {
+            L.marker([collective.lat, collective.lon], {icon: greenIcon}).addTo(map);
+        });
     }
 }

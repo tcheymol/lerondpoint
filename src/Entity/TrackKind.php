@@ -14,13 +14,6 @@ class TrackKind
 {
     use BlameableTrait;
 
-    public const KIND_MIME_MAPPING = [
-        'audio',
-        'text',
-        'image',
-        'video',
-    ];
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -101,5 +94,10 @@ class TrackKind
         $this->fileTypes = $fileTypes;
 
         return $this;
+    }
+
+    public function getFileTypesAsString(): ?string
+    {
+        return $this->fileTypes ? implode(',', $this->fileTypes) : null;
     }
 }

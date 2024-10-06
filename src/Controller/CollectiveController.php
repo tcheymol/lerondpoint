@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Domain\Map\MapDataBuilder;
 use App\Entity\Collective;
 use App\Form\CollectiveType;
-use App\Repository\CollectiveRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class CollectiveController extends AbstractController
 {
     #[Route('', name: 'collective_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(MapDataBuilder $mapDataBuilder): Response
     {
-        return $this->render('map/index.html.twig');
+        return $this->render('map/index.html.twig', [
+            'collectives' => $mapDataBuilder->build(),
+        ]);
     }
 
     #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]

@@ -5,6 +5,11 @@
 {% block bodybg %}primary{% endblock %}
 
 {% block content %}
-    <div id="map" class="box-shadow-white" style="height: 500px; width: 100%" {{ stimulus_controller('map') }}>
+    <div
+            id="map"
+            class="box-shadow-white"
+            style="height: 500px; width: 100%"
+            {{ stimulus_controller('map', {collectives}) }}
+    >
     </div>
 {% endblock %}

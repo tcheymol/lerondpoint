@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -30,8 +31,23 @@ class CollectiveCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            FormField::addColumn(8),
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
+            NumberField::new('lat'),
+            NumberField::new('lon'),
+
+            TextField::new('addressLine1'),
+            TextField::new('addressLine2'),
+            TextField::new('postcode'),
+            TextField::new('city'),
+            TextField::new('country'),
+            TextField::new('state'),
+
+            CollectionField::new('actions')->hideOnForm(),
+            CollectionField::new('tracks')->hideOnForm(),
+
+            FormField::addColumn(4),
             BooleanField::new('disabled'),
             BooleanField::new('validated'),
             AssociationField::new('owner')->hideOnForm(),
@@ -39,18 +55,11 @@ class CollectiveCrudController extends AbstractCrudController
             DateField::new('updatedAt')->hideOnForm(),
             DateField::new('deletedAt')->hideOnForm(),
             DateField::new('disabledAt')->hideOnForm(),
-
             AssociationField::new('createdBy')->hideOnForm(),
             AssociationField::new('updatedBy')->hideOnForm(),
             AssociationField::new('disabledBy')->hideOnForm(),
             AssociationField::new('deletedBy')->hideOnForm(),
             AssociationField::new('validatedBy')->hideOnForm(),
-
-            NumberField::new('lat'),
-            NumberField::new('lng'),
-
-            CollectionField::new('actions')->hideOnForm(),
-            CollectionField::new('tracks')->hideOnForm(),
         ];
     }
 }
