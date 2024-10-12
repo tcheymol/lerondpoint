@@ -5,43 +5,33 @@
 {% block bodybg %}dark{% endblock %}
 
 {% block content %}
-    <main class="px-3 flex-grow-1 d-flex flex-column justify-content-around">
-        <div class="row justify-content-around">
-            <div class="col-12 col-sm-6 col-md-5">
-                <div class="card text-light bg-secondary mb-3">
-                    <div class="card-header text-start">
-                        <h3>{{ 'Tracks'|trans }}</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="bg-dark" style="height: 400px; width: 100%; border-radius: 5px;"></div>
-                        <p class="card-text mt-4">{{ 'TracksSubtitle'|trans }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-5">
-                <div class="card text-light bg-primary mb-3">
-                    <div class="card-header text-start">
-                        <h3>{{ 'Collectives'|trans }}</h3>
-                    </div>
-                    <div class="card-body px-0">
-                        <div class="bg-dark">
-                            <div id="map" class="box-shadow-white" style="height: 400px; width: 100%" {{ stimulus_controller('map') }}>
-                            </div>
-                        </div>
-                        <p class="card-text mt-4">{{ 'CollectivesSubtitles'|trans }}</p>
-
-                    </div>
-                </div>
-            </div>
+    <main class="px-3 flex-grow-1 d-flex flex-column justify-content-center align-items-center position-relative">
+        <a class="btn btn-primary rounded-5 image-button-absolute top-left cloudy"
+           href="{{ path('collective_index') }}"
+        >
+            <img class="mh-200px" src="{{ asset('images/actus.png') }}" alt="{{ 'Actus'|trans }}">
+        </a>
+        <a class="btn btn-secondary rounded-5 image-button-absolute top-right cloudy"
+           href="{{ path('app_map') }}"
+        >
+            <img class="mh-200px" src="{{ asset('images/follows.png') }}" alt="{{ 'Follows'|trans }}">
+        </a>
+        <div class="">
+            <div class="bg-white rounded-5 text-dark shadow cloudy-sm w-100 h-100" style=""></div>
+            <h1 class="text-center text-uppercase mb-0 text-dark position-relative p-3" style="top: -100%">{{ 'HomeTitle'|trans }}</h1>
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 offset-sm-3 offset-md-4">
-                <a class="btn btn-outline-danger btn-lg bg-light rounded-5 p-4 px-5 text-danger hoverable"
-                   href="{{ path('track_new') }}"
-                >
-                    {{ 'Contribute'|trans }}
-                </a>
-            </div>
+        <div class="bg-white rounded-5 text-dark mt-4 shadow">
+            <p class="text-center fs-xs mb-0">{{ 'HomeSubtitle'|trans }}</p>
         </div>
+        <a class="btn btn-info rounded-5 image-button-absolute bottom-left cloudy"
+           href="{{ path('track_index') }}"
+        >
+            <img class="mh-200px" src="{{ asset('images/tracks.png') }}" alt="{{ 'Tracks'|trans }}">
+        </a>
+        <a class="btn btn-light rounded-5 image-button-absolute bottom-right cloudy"
+           href="{{ path('track_new') }}"
+        >
+            <img class="mh-200px" src="{{ asset('images/contribute.png') }}" alt="{{ 'Contribute'|trans }}">
+        </a>
     </main>
 {% endblock %}

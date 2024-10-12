@@ -35,6 +35,7 @@ FollowUps: Suites
 Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
+HomeTitleMultiline: LE <br/> ROND-POINT
 Kind: Type
 Kinds: Types
 KnowMore: En savoir plus
@@ -63,3 +64,5 @@ Users: Utilisateurs
 Validated By: Validé par
 Validated: Validé
 Yes: Oui
+Follows: Suites
+Actus: Actualités

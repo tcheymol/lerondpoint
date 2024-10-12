@@ -1,11 +1,79 @@
 /* Override some Bootstrap variables */
-$primary: #C2AA6E;
-$secondary: #8D5799;
-$info: #569681;
+$primary: #CBC259;
+$secondary: #6DCCAE;
+$info: #E97C30;
+$light: #4746C1;
 $danger: #ff7979;
 $dark: #1e272e;
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../images/bg-mobile.jpg');
+    @media (min-width: 450px) {
+        background-image: url('../images/bg.jpg');
+    }
+}
+
+.fs-xs {
+    font-size: 0.75rem !important;
+}
+
+.cloudy {
+    filter: url(#cloudy);
+}
+
+.cloudy-sm {
+    filter: url(#cloudy-sm);
+}
+
+.nav-link {
+    text-transform: uppercase;
+    color: white;
+    border-right: 4px solid black;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+}
+
+.image-button-absolute {
+    position: relative;
+    @media (min-width: 450px) {
+        position: absolute;
+    }
+    &.top-left {
+        @media (min-width: 450px) {
+            top: 10%;
+        }
+        left: 10%;
+    }
+    &.top-right {
+        @media (min-width: 450px) {
+            top: 10%;
+        }
+        right: 10%;
+    }
+    &.bottom-left {
+        @media (min-width: 450px) {
+            bottom: 10%;
+        }
+        left: 10%;
+    }
+    &.bottom-right {
+        @media (min-width: 450px) {
+            bottom: 10%;
+        }
+        right: 10%;
+    }
+
+}
+
+.mh-200px {
+    max-height: 200px;
+}
 
 #map {
     height: 180px;
@@ -36,7 +104,7 @@ $dark: #1e272e;
 
 div.dropzone-container {
     border: 4px dashed $danger;
-    background-color: $light;
+    background-color: whitesmoke;
     border-radius: 25px;
     height: 250px;
     padding: 10px;
@@ -60,7 +128,7 @@ div.dropzone-container {
         width: calc(100vw - 100px);
         min-height: calc(100vh - 100% - 50px);
         z-index: 1;
-        border: 3px solid $info;
+        border: 3px solid $light;
     }
 
     &:hover {

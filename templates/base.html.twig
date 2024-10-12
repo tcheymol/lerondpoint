@@ -21,10 +21,11 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    {{ include('helpers/_svg_filters.html.twig') }}
     <body class="d-flex justify-content-center h-100 text-center text-white bg-{% block bodybg %}secondary{% endblock %}">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center">
             {{ include('components/_header.html.twig') }}
-            <h1 style="margin-top: 50px">{{ block('title') }}</h1>
+{#            <h1 style="margin-top: 300px">{{ block('title') }}</h1>#}
             <main class="flex-grow-1 d-flex flex-column justify-content-center">
                 {% block content %}{% endblock %}
             </main>
