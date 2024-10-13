@@ -2,6 +2,7 @@
 <html lang="fr" class="h-100">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">.
         <title>{% block title %}{{ 'HomeTitle'|title }}{% endblock %}</title>
         <link rel="icon" href="{{ asset('rp.png') }}">
         {% block stylesheets %}
@@ -22,14 +23,14 @@
         {% endblock %}
     </head>
     {{ include('helpers/_svg_filters.html.twig') }}
-    <body class="d-flex justify-content-center h-100 text-center text-white bg-{% block bodybg %}secondary{% endblock %}">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center">
-            {{ include('components/_header.html.twig') }}
-{#            <h1 style="margin-top: 300px">{{ block('title') }}</h1>#}
-            <main class="flex-grow-1 d-flex flex-column justify-content-center">
+    <body class="d-flex flex-column justify-content-center h-100 text-center text-white bg-{% block bodybg %}secondary{% endblock %}">
+        {{ include('components/_header.html.twig') }}
+        <main class="vw-100">
+            <h1 style="visibility: hidden">{{ block('title') }}</h1>
+            <div class="flex-grow-1 d-flex flex-column justify-content-center">
                 {% block content %}{% endblock %}
-            </main>
-            {{ include('components/_footer.html.twig') }}
-        </div>
+            </div>
+        </main>
+        {{ include('components/_footer.html.twig') }}
     </body>
 </html>

@@ -14,7 +14,7 @@ body {
     background-position: center;
     background-size: cover;
     background-image: url('../images/bg-mobile.jpg');
-    @media (min-width: 450px) {
+    @include media-breakpoint-up(md) {
         background-image: url('../images/bg.jpg');
     }
 }
@@ -24,6 +24,8 @@ body {
 }
 
 .cloudy {
+    max-width: 90%;
+    margin: 16px;
     filter: url(#cloudy);
 }
 
@@ -34,45 +36,50 @@ body {
 .nav-link {
     text-transform: uppercase;
     color: white;
-    border-right: 4px solid black;
-    border-top: 4px solid black;
-    border-bottom: 4px solid black;
+    margin: 4px;
+    margin-right: 0;
 }
 
-.image-button-absolute {
-    position: relative;
-    @media (min-width: 450px) {
-        position: absolute;
-    }
-    &.top-left {
-        @media (min-width: 450px) {
-            top: 10%;
-        }
-        left: 10%;
-    }
-    &.top-right {
-        @media (min-width: 450px) {
-            top: 10%;
-        }
-        right: 10%;
-    }
-    &.bottom-left {
-        @media (min-width: 450px) {
-            bottom: 10%;
-        }
-        left: 10%;
-    }
-    &.bottom-right {
-        @media (min-width: 450px) {
-            bottom: 10%;
-        }
-        right: 10%;
-    }
 
+
+nav.navbar {
+    min-height: 60px;
+    @include media-breakpoint-up(md) {
+        height: 60px;
+    }
 }
 
-.mh-200px {
-    max-height: 200px;
+main {
+    height: calc(100vh - 100px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.mh-150px {
+    max-height: 150px;
+    @include media-breakpoint-up(sm) {
+        max-height: 200px;
+    }
+    @include media-breakpoint-up(md) {
+        max-height: 250px;
+    }
+}
+
+.home-button {
+    @include media-breakpoint-down(md) {
+        width: 100%;
+
+        &.left {
+
+        }
+        &.right {
+            position: absolute;
+            top: 25%;
+            text-align: end !important;
+        }
+    }
 }
 
 #map {
@@ -119,6 +126,7 @@ div.dropzone-container {
 }
 
 #contributeButton {
+    margin: 4px;
     .contribute-modal{
         visibility: hidden;
         position: absolute;

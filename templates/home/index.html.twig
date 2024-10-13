@@ -5,33 +5,15 @@
 {% block bodybg %}dark{% endblock %}
 
 {% block content %}
-    <main class="px-3 flex-grow-1 d-flex flex-column justify-content-center align-items-center position-relative">
-        <a class="btn btn-primary rounded-5 image-button-absolute top-left cloudy"
-           href="{{ path('collective_index') }}"
-        >
-            <img class="mh-200px" src="{{ asset('images/actus.png') }}" alt="{{ 'Actus'|trans }}">
-        </a>
-        <a class="btn btn-secondary rounded-5 image-button-absolute top-right cloudy"
-           href="{{ path('app_map') }}"
-        >
-            <img class="mh-200px" src="{{ asset('images/follows.png') }}" alt="{{ 'Follows'|trans }}">
-        </a>
-        <div class="">
-            <div class="bg-white rounded-5 text-dark shadow cloudy-sm w-100 h-100" style=""></div>
-            <h1 class="text-center text-uppercase mb-0 text-dark position-relative p-3" style="top: -100%">{{ 'HomeTitle'|trans }}</h1>
+    <div class="d-flex flex-column justify-content-around flex-grow-1">
+        <div class="d-flex justify-content-around row position-relative">
+            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/actus.png'), label: 'Actus'|trans, color: 'primary', position: 'left'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/follows.png'), label: 'Follows'|trans, color: 'secondary', position: 'right'}) }}
         </div>
-        <div class="bg-white rounded-5 text-dark mt-4 shadow">
-            <p class="text-center fs-xs mb-0">{{ 'HomeSubtitle'|trans }}</p>
+        {{ include('home/components/_home_title.html.twig') }}
+        <div class="d-flex justify-content-around row position-relative">
+            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks.png'), label: 'Tracks'|trans, color: 'info', position: 'left'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/contribute.png'), label: 'Contribute'|trans, color: 'light', position: 'right'}) }}
         </div>
-        <a class="btn btn-info rounded-5 image-button-absolute bottom-left cloudy"
-           href="{{ path('track_index') }}"
-        >
-            <img class="mh-200px" src="{{ asset('images/tracks.png') }}" alt="{{ 'Tracks'|trans }}">
-        </a>
-        <a class="btn btn-light rounded-5 image-button-absolute bottom-right cloudy"
-           href="{{ path('track_new') }}"
-        >
-            <img class="mh-200px" src="{{ asset('images/contribute.png') }}" alt="{{ 'Contribute'|trans }}">
-        </a>
-    </main>
+    </div>
 {% endblock %}
