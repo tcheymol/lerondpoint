@@ -7,13 +7,13 @@
 {% block content %}
     <div class="d-flex flex-column justify-content-around flex-grow-1">
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/actus.png'), label: 'Actus'|trans, color: 'primary', position: 'left'}) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/follows.png'), label: 'Follows'|trans, color: 'secondary', position: 'right'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/actus-btn.png'), label: 'Actus'|trans, color: 'primary', position: 'left'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/follow-ups-btn.png'), label: 'Follows'|trans, color: 'secondary', position: 'right'}) }}
         </div>
         {{ include('home/components/_home_title.html.twig') }}
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks.png'), label: 'Tracks'|trans, color: 'info', position: 'left'}) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/contribute.png'), label: 'Contribute'|trans, color: 'light', position: 'right'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks-btn.png'), label: 'Tracks'|trans, color: 'info', position: 'left'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/contribute-btn.png'), label: 'Contribute'|trans, color: 'light', position: 'right'}) }}
         </div>
     </div>
 {% endblock %}

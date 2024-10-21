@@ -17,7 +17,7 @@ export default class extends Controller {
     setupAutocomplete() {
         const autocompleteInput = new autocomplete.GeocoderAutocomplete(
             document.getElementById("autocomplete"),
-            '089c0bbf75be49b483de4a7fa4b64007',
+            'be7f0a8308a34e3e96e388a83e674477',
             { debounceDelay: 500 });
 
         autocompleteInput.on('select', (location) => this.fillAddressFields(location));
