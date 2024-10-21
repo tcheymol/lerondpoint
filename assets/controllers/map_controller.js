@@ -26,7 +26,9 @@ export default class extends Controller {
         });
 
         this.collectivesValue.forEach(collective => {
-            L.marker([collective.lat, collective.lon], {icon: greenIcon}).addTo(map);
+            if (collective.lat && collective.lon) {
+                L.marker([collective.lat, collective.lon], {icon: greenIcon}).addTo(map);
+            }
         });
     }
 }
