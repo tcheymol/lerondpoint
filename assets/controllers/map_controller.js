@@ -21,7 +21,7 @@ export default class extends Controller {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         const greenIcon = L.icon({
-            iconUrl: 'rp1.png',
+            iconUrl: 'hut.png',
             iconSize: [35, 35],
         });
 

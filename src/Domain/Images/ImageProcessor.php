@@ -66,10 +66,12 @@ readonly class ImageProcessor
     public function generateThumbnail(UploadedFile $file): ?string
     {
         $thumbnailPath = $this->buildThumbnail($file);
-        $thumbnailKey = $this->uploadFile(new File($thumbnailPath));
+        if ($thumbnailPath) {
+            $thumbnailKey = $this->uploadFile(new File($thumbnailPath));
 
-        unlink($thumbnailPath);
+            unlink($thumbnailPath);
+        }
 
-        return $thumbnailKey;
+        return $thumbnailKey ?? null;
     }
 }

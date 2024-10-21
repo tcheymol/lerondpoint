@@ -7,7 +7,6 @@ use App\Entity\ActionKind;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\User;
-use App\Repository\ActionKindRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -44,6 +43,8 @@ class LoadDataCommand extends Command
 
     private function loadTrackKinds(): void
     {
+        $this->emptyTable(TrackKind::class);
+
         $trackKindsByFileType = [
             'audio' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
             'text' => ['Film', 'Live', 'Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Cabane', 'Goodies', 'Gilet jaune', 'Banderole', 'Monument', 'Livre', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
@@ -61,6 +62,8 @@ class LoadDataCommand extends Command
 
     private function loadActionKinds(): void
     {
+        $this->emptyTable(ActionKind::class);
+
         $actionKinds = [
             "Rassemblement et tractage sur un rond-point",
             "Cabane à proximité d'un rond-point ou d'une route",
@@ -86,13 +89,15 @@ class LoadDataCommand extends Command
 
     private function loadTracks(): void
     {
+        $this->emptyTable(Track::class);
+
         $tracks = [
             ['name' => "L'assemblée des assemblées de Commercy", 'file' => 'adac.jpg'],
             ['name' => 'Appel de la première « assemblée des assemblées » des Gilets Jaunes', 'file' => 'aaagj.pdf'],
             ['name' => 'Appel des gilets jaunes de la maison du peuple de Saint Nazaire', 'file' => 'agj.mp4'],
             ['name' => 'Banderole Saint Nazaire', 'file' => 'banderole.jpg'],
             ['name' => 'Banderole Saint Nazaire 2', 'file' => 'banderole2.jpg'],
-            ['name' => 'Calendrier Saint Nazaire', 'file' => 'calendrier.odf'],
+            ['name' => 'Calendrier Saint Nazaire', 'file' => 'calendrier.pdf'],
             ['name' => 'Chanson enfile ton gilet', 'file' => 'chanson.pdf'],
             ['name' => 'Cabane des gilets Jaune du rond-point Necker à Saint Etienne', 'file' => 'cabane.jpg'],
             ['name' => 'Témoignage mutilée Vanessa', 'file' => 'vanessa.png'],
@@ -101,9 +106,10 @@ class LoadDataCommand extends Command
 
         foreach ($tracks as $trackData) {
             $track = (new Track())->setName($trackData['name']);
-            $filePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $trackData['file']);
-            dd($filePath);
-            $track->uploadedFile = new UploadedFile($filePath, $trackData['file']);
+            $originalFilePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $trackData['file']);
+            $tmpFilePath = sprintf('%s/var/tmp/%s', $this->kernelProjectDir, $trackData['file']);
+            copy($originalFilePath, $tmpFilePath);
+            $track->uploadedFile = new UploadedFile($tmpFilePath, $trackData['file']);
             $this->trackPersister->persist($track);
         }
 
@@ -111,6 +117,8 @@ class LoadDataCommand extends Command
     }
 
     private function loadUsers(): void {
+        $this->emptyTable(User::class);
+
         $users = [
             't@g.c',
             'thibault@le-rondpoint.com',
@@ -123,5 +131,9 @@ class LoadDataCommand extends Command
             $this->em->persist($user);
             $this->em->flush();
         }
+    }
+
+    private function emptyTable(string $entityName): void {
+        $this->em->createQuery(sprintf('DELETE %s e', $entityName))->execute();
     }
 }

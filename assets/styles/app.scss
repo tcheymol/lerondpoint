@@ -6,10 +6,6 @@ $light: #4746C1;
 $danger: #ff7979;
 $dark: #1e272e;
 
-$theme-colors: (
-    "custom-color": #900
-);
-
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 
 body {
@@ -17,10 +13,8 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    background-image: url('../images/bg-mobile.jpg');
-    @include media-breakpoint-up(md) {
-        background-image: url('../images/bg.jpg');
-    }
+    //background-image: url('../images/bg-mobile.jpg');
+    background-image: url('../images/bg.jpg');
 }
 
 .fs-xs {
@@ -71,6 +65,19 @@ main {
     }
 }
 
+.home-title {
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+        width: 350px;
+    }
+    @include media-breakpoint-up(md) {
+        width: 500px;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 600px;
+    }
+}
 .home-button {
     @include media-breakpoint-down(md) {
         width: 100%;
