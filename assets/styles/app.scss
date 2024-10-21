@@ -1,8 +1,8 @@
 /* Override some Bootstrap variables */
 $primary: #CBC259;
 $secondary: #6DCCAE;
-$info: #E97C30;
-$light: #4746C1;
+$info: #CBC259;
+$light: #E97C30;
 $danger: #ff7979;
 $dark: #1e272e;
 
@@ -111,11 +111,9 @@ main {
     }
 
     button.btn-#{$color}, a.btn-#{$color} {
-        @if $color != 'light' {
+        color: white !important;
+        &:hover {
             color: white !important;
-            &:hover {
-                color: white !important;
-            }
         }
     }
 }
