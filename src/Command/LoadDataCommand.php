@@ -2,13 +2,18 @@
 
 namespace App\Command;
 
+use App\Domain\Track\TrackPersister;
 use App\Entity\ActionKind;
+use App\Entity\Track;
 use App\Entity\TrackKind;
+use App\Entity\User;
+use App\Repository\ActionKindRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[AsCommand(
     name: 'app:load-data',
@@ -16,7 +21,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class LoadDataCommand extends Command
 {
-    public function __construct(private readonly EntityManagerInterface $em)
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly TrackPersister $trackPersister,
+        private readonly string $kernelProjectDir,
+    )
     {
         parent::__construct();
     }
@@ -25,13 +34,15 @@ class LoadDataCommand extends Command
     {
         $this->loadActionKinds();
         $this->loadTrackKinds();
+        $this->loadUsers();
+        $this->loadTracks();
 
         $this->em->flush();
 
         return Command::SUCCESS;
     }
 
-    public function loadTrackKinds(): void
+    private function loadTrackKinds(): void
     {
         $trackKindsByFileType = [
             'audio' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
@@ -48,7 +59,7 @@ class LoadDataCommand extends Command
         }
     }
 
-    public function loadActionKinds(): void
+    private function loadActionKinds(): void
     {
         $actionKinds = [
             "Rassemblement et tractage sur un rond-point",
@@ -70,6 +81,47 @@ class LoadDataCommand extends Command
         foreach ($actionKinds as $actionKind) {
             $actionKindEntity = new ActionKind($actionKind);
             $this->em->persist($actionKindEntity);
+        }
+    }
+
+    private function loadTracks(): void
+    {
+        $tracks = [
+            ['name' => "L'assemblée des assemblées de Commercy", 'file' => 'adac.jpg'],
+            ['name' => 'Appel de la première « assemblée des assemblées » des Gilets Jaunes', 'file' => 'aaagj.pdf'],
+            ['name' => 'Appel des gilets jaunes de la maison du peuple de Saint Nazaire', 'file' => 'agj.mp4'],
+            ['name' => 'Banderole Saint Nazaire', 'file' => 'banderole.jpg'],
+            ['name' => 'Banderole Saint Nazaire 2', 'file' => 'banderole2.jpg'],
+            ['name' => 'Calendrier Saint Nazaire', 'file' => 'calendrier.odf'],
+            ['name' => 'Chanson enfile ton gilet', 'file' => 'chanson.pdf'],
+            ['name' => 'Cabane des gilets Jaune du rond-point Necker à Saint Etienne', 'file' => 'cabane.jpg'],
+            ['name' => 'Témoignage mutilée Vanessa', 'file' => 'vanessa.png'],
+            ['name' => 'Tract Acte X', 'file' => 'actex.pdf'],
+        ];
+
+        foreach ($tracks as $trackData) {
+            $track = (new Track())->setName($trackData['name']);
+            $filePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $trackData['file']);
+            dd($filePath);
+            $track->uploadedFile = new UploadedFile($filePath, $trackData['file']);
+            $this->trackPersister->persist($track);
+        }
+
+        $this->em->flush();
+    }
+
+    private function loadUsers(): void {
+        $users = [
+            't@g.c',
+            'thibault@le-rondpoint.com',
+            'djo@le-rondpoint.com',
+            'adrien@le-rondpoint.com',
+        ];
+
+        foreach ($users as $user) {
+            $user = (new User($user))->setRoles([ 'ROLE_ADMIN' ])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q');
+            $this->em->persist($user);
+            $this->em->flush();
         }
     }
 }

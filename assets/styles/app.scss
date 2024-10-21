@@ -6,6 +6,10 @@ $light: #4746C1;
 $danger: #ff7979;
 $dark: #1e272e;
 
+$theme-colors: (
+    "custom-color": #900
+);
+
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 
 body {

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://releases.transloadit.com/uppy/v4.4.0/uppy.min.css" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://releases.transloadit.com/uppy/v4.4.0/uppy.min.js"></script>
+    <script src="https://releases.transloadit.com/uppy/locales/v3.3.1/fr_FR.min.js"></script>
+
+{% endblock %}
+
+{% block title %}{{ 'Tracks'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="h-100">
+        <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+            {{ include('components/upload/_uppy_widget.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

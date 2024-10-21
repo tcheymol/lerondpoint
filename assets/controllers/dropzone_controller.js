@@ -26,7 +26,19 @@ export default class extends Controller {
         }
 
         const fileType = event.detail.type;
-        // The dropzone just changed
+        const suggestedKinds = document.getElementById('suggested_kinds');
+        const children = suggestedKinds.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            child.classList.remove('d-none');
+            const fileTypes = child.dataset.kindFileTypes
+            if(child.dataset.kindFileTypes) {
+                if(!fileType.includes(fileTypes)) {
+                    child.classList.add('d-none');
+                }
+            }
+        }
+
     }
 
     _onClear(event) {
