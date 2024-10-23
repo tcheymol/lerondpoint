@@ -3,31 +3,13 @@
 {% block title %}Track{% endblock %}
 
 {% block content %}
-    {{ include('components/_back.html.twig') }}
-
-        <div class="row">
-            <b class="col-6 text-start">{{ 'Track'|trans }} : </b>
-            <span class="col-6">{{ track.name }}</span>
-        </div>
-        <div class="row">
-            <b class="col-6 text-start">{{ 'Created At'|trans }} : </b>
-            <span class="col-6">{{ track.createdAt ? track.createdAt|date : '' }}</span>
-        </div>
-        <div class="row">
-            <b class="col-6 text-start">{{ 'Updated At'|trans }} : </b>
-            <span class="col-6">{{ track.updatedAt ? track.updatedAt|date : '' }}</span>
-        </div>
-    {% for attachment in track.attachments %}
-        <img src="{{ attachment.url }}" alt="{{ 'Attachment'|trans }}"/>
-    {% endfor %}
-
-    <div class="row d-flex justify-content-between mt-3">
-        <div class="col text-start">
-            {{ include('track/_delete_form.html.twig') }}
-        </div>
-        <div class="col text-end">
-            <a class="btn btn-info" href="{{ path('track_edit', {'id': track.id}) }}">edit</a>
+    <div class="row bg-info text-dark p-3 h-100">
+        <div>{{ include('components/_back.html.twig') }}</div>
+        <h1 class="col-12">{{ 'Track'|trans }} : {{ track.name }}</h1>
+        <div class="col-12">
+            {% for attachment in track.attachments|filter(attachment => attachment.url is not empty) %}
+                {{ include('attachment/_attachment.html.twig', { attachment }) }}
+            {% endfor %}
         </div>
     </div>
-
 {% endblock %}

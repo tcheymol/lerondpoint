@@ -15,7 +15,7 @@
                 <label for="inputPassword" class="form-label">{{ 'Password'|trans }}</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button class="btn btn-lg btn-info mt-3" type="submit">
+                <button class="btn btn-lg btn-primary mt-3" type="submit">
                     {{ 'Login'|trans }}
                 </button>
             </form>

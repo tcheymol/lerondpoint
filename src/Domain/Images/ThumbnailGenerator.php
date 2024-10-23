@@ -7,21 +7,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Uid\UuidV4;
 
-readonly class ImageProcessor
+readonly class ThumbnailGenerator
 {
-    public function __construct(private FlysystemS3Client $s3Adapter)
-    {
-    }
-
-    public function uploadFile(File $file): ?string
-    {
-        try {
-            return $this->s3Adapter->uploadFile($file, UuidV4::v4()->toString());
-        } catch (\Exception) {
-            return null;
-        }
-    }
-
     public function buildThumbnail(UploadedFile $file): ?string
     {
         try {
@@ -39,7 +26,7 @@ readonly class ImageProcessor
         }
     }
 
-    public function buildPdfThumbnail(File $file): string
+    private function buildPdfThumbnail(File $file): string
     {
         $originalFilename = $file instanceof UploadedFile
             ? $file->getClientOriginalName()
@@ -49,29 +36,17 @@ readonly class ImageProcessor
         return PdfPreviewBuilder::genPdfThumbnail($file->getPathname(), $thumbnailName.'.png');
     }
 
-    public function buildImageThumbnail(string $imagePath): ?string
+    private function buildImageThumbnail(string $imagePath): ?string
     {
         try {
             $thumbnailPath = $imagePath.'-thumbnail.png';
             $imagick = new \Imagick(realpath($imagePath));
-            $imagick->thumbnailImage(100, 0);
+            $imagick->thumbnailImage(255, 0);
             $imagick->writeImage($thumbnailPath);
 
             return $thumbnailPath;
         } catch (\Exception) {
             return null;
         }
-    }
-
-    public function generateThumbnail(UploadedFile $file): ?string
-    {
-        $thumbnailPath = $this->buildThumbnail($file);
-        if ($thumbnailPath) {
-            $thumbnailKey = $this->uploadFile(new File($thumbnailPath));
-
-            unlink($thumbnailPath);
-        }
-
-        return $thumbnailKey ?? null;
     }
 }
