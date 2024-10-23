@@ -1,0 +1,28 @@
+
+{% if attachment.kind =='application/pdf' %}
+    <object data="{{ attachment.url }}" type="application/pdf" width="100%" height="500px">
+        <p>Unable to display PDF file. <a href="{{ attachment.url }}">Download</a> instead.</p>
+    </object>
+{% elseif attachment.url is defined %}
+    <img src="{{ attachment.url }}" alt="{{ 'Attachment'|trans }}" class="w-100"/>
+{% else %}
+    <a href="{{ attachment.url }}" target="_blank">
+        {% if attachment.kind in ['application/msword', 'application/vnd.oasis.opendocument.text', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'] %}
+            {% set iconName = 'file-word' %}
+            {% set iconColor = '#2980b9' %}
+        {% elseif attachment.kind in ['application/vnd.ms-powerpoint', 'application/vnd.oasis.opendocument.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'] %}
+            {% set iconName = 'file-powerpoint' %}
+            {% set iconColor = '#d35400' %}
+        {% elseif attachment.kind in ['application/vnd.ms-excel', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'] %}
+            {% set iconName = 'file-excel' %}
+            {% set iconColor = '#27ae60' %}
+        {% elseif attachment.kind == 'application/zip' %}
+            {% set iconName = 'file-archive' %}
+            {% set iconColor = '#f1c40f' %}
+        {% else %}
+            {% set iconColor = '#7f8c8d' %}
+            {% set iconName = 'file' %}
+        {% endif %}
+        <i class="fa fa-{{ iconName }}" style="font-size: 80px; color: {{ iconColor }};"></i>
+    </a>
+{% endif %}

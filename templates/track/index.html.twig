@@ -3,22 +3,25 @@
 {% block title %}{{ 'Tracks'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="h-100">
-        <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-light" href="{{ path('track_new') }}">{{ 'CreateTrack'|trans }}</a>
-            </div>
+    <div class="col-12 col-sm-10 offset-sm-1 h-100">
+        <div class="row">
             {% for track in tracks %}
-                <div class="card p-2 px-3 mt-4">
-                    <div class="d-flex flex-row align-items-center">
-                        <div>
-                            {% for attachment in track.attachments %}
-                                <img src="{{ attachment.thumbnailUrl }}" style="width: 80px; height: 80px" class="img-thumbnail" alt="{{ track.name ~ attachment.id }}">
-                            {% endfor %}
-                        </div>
-                        <h5 class="card-title ms-3">{{ track.name }}</h5>
+                {% set attachment = track.attachments|first %}
+                {% if attachment.thumbnailUrl is not empty %}
+                {% set isOdd = loop.index is odd %}
+                    <div class="col-3 p-2 px-3 mt-4">
+                        <a class="btn btn-link rotate{{ isOdd ? '' : '-back' }} p-0"
+                           href="{{ path('track_show', {id: track.id}) }}">
+                        >
+                            <img
+                                    style="max-height: 200px; overflow: hidden"
+                                src="{{ attachment.thumbnailUrl }}"
+                                class="img-thumbnail w-100 bg-black"
+                                alt="{{ track.name ~ attachment.id }}"
+                            />
+                        </a>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
