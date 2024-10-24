@@ -5,11 +5,13 @@
 {% block bodybg %}primary{% endblock %}
 
 {% block content %}
-    <div
-            id="map"
-            class="box-shadow-white"
-            style="height: 100%; width: 100%"
-            {{ stimulus_controller('map', {collectives}) }}
-    >
+    <div class="h-100 w-100" {{ stimulus_controller('map', {collectives}) }}>
+        <div id="map" class="h-100 w-100"></div>
+        <div
+            id="reunionMap"
+            class="position-absolute border-3 border-primary"
+            style="height: 100px; width: 100px; right: 0; bottom: 40px; z-index: 1000; border-style: solid"
+        >
+        </div>
     </div>
 {% endblock %}
