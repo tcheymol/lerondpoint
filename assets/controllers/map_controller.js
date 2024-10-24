@@ -15,11 +15,22 @@ export default class extends Controller {
     }
 
     initMap() {
-        const map = L.map('map').setView([46.966409, 2.483529], 5);
+        const map = L.map('map').setView([46.603354, 1.888334], 6);
         L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
             maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
+        var reunionMap = L.map('reunionMap', {
+            center: [-21.13, 55.53],
+            zoom: 7,
+            dragging: false,
+            zoomControl: false,
+            attributionControl: false
+        });
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+            maxZoom: 18,
+        }).addTo(reunionMap);
+
         const greenIcon = L.icon({
             iconUrl: 'hut.png',
             iconSize: [35, 35],
