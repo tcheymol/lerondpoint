@@ -38,6 +38,9 @@ class Track
     #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'track', cascade: ['persist'])]
     private Collection $attachments;
 
+    /** @var string[] */
+    public array $attachmentsIds = [];
+
     public ?UploadedFile $uploadedFile = null;
 
     #[ORM\Column(nullable: true)]

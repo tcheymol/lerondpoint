@@ -45,18 +45,14 @@ class LoadDataCommand extends Command
     {
         $this->emptyTable(TrackKind::class);
 
-        $trackKindsByFileType = [
-            'audio' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
-            'text' => ['Film', 'Live', 'Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Cabane', 'Goodies', 'Gilet jaune', 'Banderole', 'Monument', 'Livre', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
-            'image' => ['Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Gilet jaune', 'Livre', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
-            'video' => ['Appel', 'Tract', 'Cabane', 'Goodies', 'Gilet jaune', 'Banderole', 'Monument', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar'],
+        $trackKinds = [
+            'Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point', 'Manifestation', 'Péage', 'AdA', 'RIC',
+            'Actions', 'Radar', 'Gilet jaune', 'Live', 'Film', 'Cabane', 'Goodies', 'Banderole', 'Monument', 'Livre'
         ];
 
-        foreach ($trackKindsByFileType as $fileType => $trackKinds) {
-            foreach ($trackKinds as $trackKind) {
-                $trackKindEntity = (new TrackKind($trackKind))->setFileTypes([$fileType]);
-                $this->em->persist($trackKindEntity);
-            }
+        foreach ($trackKinds as $trackKind) {
+            $trackKindEntity = (new TrackKind($trackKind));
+            $this->em->persist($trackKindEntity);
         }
     }
 

@@ -7,7 +7,7 @@
         <div class="row">
             {% for track in tracks %}
                 {% set attachment = track.attachments|first %}
-                {% if attachment.thumbnailUrl is not empty %}
+                {% if attachment and attachment.thumbnailUrl is not empty %}
                 {% set isOdd = loop.index is odd %}
                     <div class="col-3 p-2 px-3 mt-4">
                         <a class="btn btn-link rotate{{ isOdd ? '' : '-back' }} p-0"

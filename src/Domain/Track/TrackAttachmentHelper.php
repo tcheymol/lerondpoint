@@ -4,25 +4,18 @@ namespace App\Domain\Track;
 
 use App\Domain\Images\AttachmentHelper;
 use App\Entity\Track;
+use App\Repository\AttachmentRepository;
 
 readonly class TrackAttachmentHelper
 {
-    public function __construct(private AttachmentHelper $attachmentHelper)
+    public function __construct(private AttachmentHelper $attachmentHelper, private AttachmentRepository $repository)
     {
     }
 
-    public function handleAttachment(Track $track): void
+    public function handleAttachments(Track $track): void
     {
-        $file = $track->uploadedFile;
-        if (!$file) {
-            return;
-        }
-
-        try {
-            $attachment = $this->attachmentHelper->createAttachment($file);
-            $track->addAttachment($attachment);
-        } catch (\Exception) {
-            return;
+        foreach ($track->attachmentsIds as $attachmentId) {
+            $track->addAttachment($this->repository->find($attachmentId));
         }
     }
 

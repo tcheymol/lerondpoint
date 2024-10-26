@@ -1,8 +1,0 @@
-<div class="row">
-    <span>{{ 'TrackKind'|trans }}</span>
-    <div class="col-md-12 mt-2" id="suggested_kinds">
-        {% for kind in kinds %}
-            <span class="badge text-bg-primary text-white" data-kind-file-types="{{ kind.fileTypesAsString }}">{{ kind.name }}</span>
-        {% endfor %}
-    </div>
-</div>

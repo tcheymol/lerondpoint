@@ -19,12 +19,37 @@ export default class extends Controller {
     };
 
     connect() {
-        new Uppy({ locale: French })
-            .use(Dashboard, {
-            inline: true,
-            target: '#uppy-dashboard'
+        const uppy  = new Uppy({ locale: French })
+        .use(Dashboard, {
+                inline: true,
+                target: '#uppy-dashboard',
             })
-            .use(XHR, { endpoint: this.endpointValue })
-        ;
+            .use(XHR, {
+                endpoint: this.endpointValue,
+                async onAfterResponse(xhr) {
+                    if (xhr.status !== 200) {
+                        return;
+                    }
+                    const response = JSON.parse(xhr.response);
+                    if (!response || !response.id) {
+                        return;
+                    }
+                    const attachmentId = response.id;
+                    const attachmentsIdsInput = document.getElementById('track_attachmentsIds');
+                    if (attachmentsIdsInput) {
+                        attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
+                    }
+                },
+            });
+
+        uppy.on('file-added', (file) => {
+            const name = file.name;
+            const nameInput = document.getElementById('track_name');
+            if (nameInput) {
+                nameInput.value = name;
+            }
+
+            uppy.upload();
+        });
     }
 }

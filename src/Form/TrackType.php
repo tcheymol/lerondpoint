@@ -10,9 +10,10 @@ use App\Entity\TrackTag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class TrackType extends AbstractType
 {
@@ -30,25 +31,20 @@ class TrackType extends AbstractType
                 'attr' => ['data-controller' => 'tomselect'],
                 'choice_label' => 'name',
             ])
-            ->add('tags', EntityType::class, [
-                'class' => TrackTag::class,
-                'attr' => ['data-controller' => 'tomselect'],
-                'choice_label' => 'name',
-                'multiple' => true,
-                'required' => false,
-            ])
-            ->add('uploadedFile', DropzoneType::class, [
-                'attr' => [
-                    'data-controller' => 'dropzone',
-                    'placeholder' => 'Recherchez ou déposez votre fichier ici',
-                ],
-            ])
+            ->add('attachmentsIds', HiddenType::class)
         ;
+
+        $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
+            fn ($tagsAsArray) => implode(',', $tagsAsArray),
+            fn ($tagsAsString) => explode(',', $tagsAsString)
+        ));
+
         $user = $this->getUser();
         if ($user && $user->hasMultipleCollectives()) {
             $builder->add('collective', EntityType::class, [
                 'class' => Collective::class,
                 'attr' => ['data-controller' => 'tomselect'],
+                'label_attr' => ['class' => 'col-sm-12'],
                 'choice_label' => 'name',
             ]);
         }

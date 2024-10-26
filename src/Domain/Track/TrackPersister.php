@@ -12,7 +12,7 @@ readonly class TrackPersister
     }
 
     public function persist(Track $track): Track {
-        $this->attachmentHelper->handleAttachment($track);
+        $this->attachmentHelper->handleAttachments($track);
         $this->em->persist($track);
         $this->em->flush();
 

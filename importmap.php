@@ -56,7 +56,7 @@ return [
         'version' => '6.0.3',
     ],
     '@uppy/utils/lib/generateFileID' => [
-        'version' => '6.0.2',
+        'version' => '6.0.3',
     ],
     '@uppy/utils/lib/getTimeStamp' => [
         'version' => '6.0.3',
@@ -74,7 +74,7 @@ return [
         'version' => '6.0.3',
     ],
     '@uppy/utils/lib/getTextDirection' => [
-        'version' => '6.0.2',
+        'version' => '6.0.3',
     ],
     '@uppy/core/dist/style.min.css' => [
         'version' => '4.2.2',
@@ -215,5 +215,12 @@ return [
     ],
     '@geoapify/geocoder-autocomplete' => [
         'version' => '2.1.0',
+    ],
+    '@uppy/drag-drop' => [
+        'version' => '4.0.3',
+    ],
+    '@uppy/drag-drop/dist/style.min.css' => [
+        'version' => '4.0.3',
+        'type' => 'css',
     ],
 ];

@@ -134,22 +134,6 @@ main {
     }
 }
 
-div.dropzone-container {
-    border: 4px dashed $danger;
-    background-color: whitesmoke;
-    border-radius: 25px;
-    height: 250px;
-    padding: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: $danger;
-
-    .dropzone-placeholder {
-        color: $danger;
-        font-size: 1.5rem;
-    }
-}
-
 #contributeButton {
     margin: 4px;
     .contribute-modal{
@@ -177,4 +161,8 @@ div.dropzone-container {
 
 .rotate {
     transform: rotate(5deg);
+}
+
+.ts-control {
+    border: none;
 }
