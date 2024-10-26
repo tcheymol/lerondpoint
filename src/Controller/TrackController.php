@@ -43,7 +43,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'track_show', methods: ['GET'])]
+    #[Route('/{id<\d+>}', name: 'track_show', methods: ['GET'])]
     public function show(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/show.html.twig', [
@@ -51,7 +51,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id<\d+>}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
@@ -68,7 +68,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'track_delete', methods: ['POST'])]
+    #[Route('/{id<\d+>}', name: 'track_delete', methods: ['POST'])]
     public function delete(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$track->getId(), $request->getPayload()->getString('_token'))) {

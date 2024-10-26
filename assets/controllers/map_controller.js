@@ -20,16 +20,32 @@ export default class extends Controller {
             maxZoom: 19,
         }).addTo(map);
 
-        var reunionMap = L.map('reunionMap', {
-            center: [-21.13, 55.53],
-            zoom: 7,
-            dragging: false,
-            zoomControl: false,
-            attributionControl: false
+        var dromLocations = [
+            { id: 'mapGuadeloupe', name: "Guadeloupe", coords: [16.265, -61.551], zoom: 7 },
+            { id: 'mapMartinique', name: "Martinique", coords: [14.6415, -61.0242], zoom: 7 },
+            { id: 'mapGuyane', name: "Guyane", coords: [3.9339, -53.1258], zoom: 4.5 },
+            { id: 'mapReunion', name: "La Réunion", coords: [-21.1151, 55.5364], zoom: 7 },
+            { id: 'mapMayotte', name: "Mayotte", coords: [-12.8275, 45.1662], zoom: 8 },
+            // { name: "Saint-Pierre-et-Miquelon", coords: [46.8852, -56.3159] },
+            // { name: "Saint-Barthélemy", coords: [17.9, -62.8333] },
+            // { name: "Saint-Martin", coords: [18.0708, -63.0501] },
+            // { name: "Wallis-et-Futuna", coords: [-13.7686, -177.1561] },
+            // { name: "Polynésie française", coords: [-17.6797, -149.4068] },
+            // { name: "Nouvelle-Calédonie", coords: [-20.9043, 165.6180] }
+        ];
+
+        dromLocations.forEach(function(location) {
+            var dromMap = L.map(location.id, {
+                center: location.coords,
+                zoom: location.zoom,
+                zoomControl: false,
+                attributionControl: false
+            });
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+                maxZoom: 18,
+            }).addTo(dromMap);
         });
-        L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
-            maxZoom: 18,
-        }).addTo(reunionMap);
+
 
         const greenIcon = L.icon({
             iconUrl: 'hut.png',

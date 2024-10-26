@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Attachment{% endblock %}
+
+{% block content %}
+    <div class="row bg-info text-dark p-3 h-100">
+        <div>{{ include('components/_back.html.twig') }}</div>
+        <h1 class="col-12">{{ 'Attachment'|trans }} :</h1>
+        <div class="col-12">
+            {{ include('attachment/_attachment.html.twig', { attachment }) }}
+        </div>
+    </div>
+{% endblock %}

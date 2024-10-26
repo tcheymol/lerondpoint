@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -15,7 +16,7 @@ export default class extends Controller {
     }
 
     setupAutocomplete() {
-        const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+        const autocompleteInput = new GeocoderAutocomplete(
             document.getElementById("autocomplete"),
             'be7f0a8308a34e3e96e388a83e674477',
             { debounceDelay: 500 });

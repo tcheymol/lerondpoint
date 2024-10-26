@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import TomSelect from 'tom-select';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed

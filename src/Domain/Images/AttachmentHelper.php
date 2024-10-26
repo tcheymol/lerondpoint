@@ -3,6 +3,7 @@
 namespace App\Domain\Images;
 
 use App\Entity\Attachment;
+use Doctrine\ORM\EntityManagerInterface;
 use Reconnect\S3Bundle\Service\FlysystemS3Client;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -10,7 +11,10 @@ use Symfony\Component\Uid\UuidV4;
 
 readonly class AttachmentHelper
 {
-    public function __construct(private FlysystemS3Client $s3Adapter, private ThumbnailGenerator $thumbnailGenerator)
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FlysystemS3Client $s3Adapter,
+        private ThumbnailGenerator $thumbnailGenerator)
     {
     }
 
@@ -24,6 +28,9 @@ readonly class AttachmentHelper
             $this->storeFileInfo($file, $attachment);
 
             unlink($file->getPathname());
+
+            $this->em->persist($attachment);
+            $this->em->flush();
 
             return $attachment;
         } catch (\Exception) {

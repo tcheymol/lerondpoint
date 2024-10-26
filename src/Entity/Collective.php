@@ -149,12 +149,12 @@ class Collective implements OwnableInterface
         return $this;
     }
 
-    public function getLat(): ?int
+    public function getLat(): ?float
     {
         return $this->lat;
     }
 
-    public function setLat(?int $lat): static
+    public function setLat(?float $lat): static
     {
         $this->lat = $lat;
 

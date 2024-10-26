@@ -42,7 +42,7 @@ class CollectiveController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'collective_show', methods: ['GET'])]
+    #[Route('/{id<\d+>}', name: 'collective_show', methods: ['GET'])]
     public function show(Collective $collective): Response
     {
         return $this->render('collective/show.html.twig', [
@@ -50,7 +50,7 @@ class CollectiveController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'collective_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id<\d+>}/edit', name: 'collective_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CollectiveType::class, $collective);
@@ -68,7 +68,7 @@ class CollectiveController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'collective_delete', methods: ['POST'])]
+    #[Route('/{id<\d+>}', name: 'collective_delete', methods: ['POST'])]
     public function delete(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$collective->getId(), $request->getPayload()->getString('_token'))) {
