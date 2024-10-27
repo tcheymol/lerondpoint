@@ -2,8 +2,10 @@
 
 namespace App\Command;
 
+use App\Domain\Images\AttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Entity\ActionKind;
+use App\Entity\Attachment;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\User;
@@ -22,11 +24,20 @@ class LoadDataCommand extends Command
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly TrackPersister $trackPersister,
-        private readonly string $kernelProjectDir,
+        private readonly TrackPersister         $trackPersister,
+        private readonly string                 $kernelProjectDir, private readonly AttachmentHelper $attachmentHelper,
     )
     {
         parent::__construct();
+    }
+
+    public function createAttachment(string $fileName): Attachment
+    {
+        $originalFilePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $fileName);
+        $tmpFilePath = sprintf('%s/var/tmp/%s', $this->kernelProjectDir, $fileName);
+        copy($originalFilePath, $tmpFilePath);
+
+        return $this->attachmentHelper->createAttachment(new UploadedFile($tmpFilePath, $fileName));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -86,6 +97,7 @@ class LoadDataCommand extends Command
     private function loadTracks(): void
     {
         $this->emptyTable(Track::class);
+        $this->emptyTable(Attachment::class);
 
         $tracks = [
             ['name' => "L'assemblée des assemblées de Commercy", 'file' => 'adac.jpg'],
@@ -102,10 +114,9 @@ class LoadDataCommand extends Command
 
         foreach ($tracks as $trackData) {
             $track = (new Track())->setName($trackData['name']);
-            $originalFilePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $trackData['file']);
-            $tmpFilePath = sprintf('%s/var/tmp/%s', $this->kernelProjectDir, $trackData['file']);
-            copy($originalFilePath, $tmpFilePath);
-            $track->uploadedFile = new UploadedFile($tmpFilePath, $trackData['file']);
+            $attachment = $this->createAttachment($trackData['file']);
+            $track->attachmentsIds[] = $attachment->getId();
+
             $this->trackPersister->persist($track);
         }
 

@@ -17,9 +17,7 @@ class AttachmentController extends AbstractController
     {
         $attachment = $helper->createAttachment($request->files->get('file'));
 
-        return $this->json([
-            'id' => $attachment->getId(),
-        ]);
+        return $this->json(['id' => $attachment->getId()]);
     }
 
     #[Route('/{id<\d+>}/show', name: 'show_attachment', methods: ['GET'])]
