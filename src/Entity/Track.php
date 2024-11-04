@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
+use App\Domain\Location\Region;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
@@ -42,8 +42,6 @@ class Track
     /** @var string[] */
     public array $attachmentsIds = [];
 
-    public ?UploadedFile $uploadedFile = null;
-
     #[ORM\Column(nullable: true)]
     private ?float $lat = null;
 
@@ -52,6 +50,15 @@ class Track
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $year = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Location = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?Region $region = null;
 
     public function __construct()
     {
@@ -186,6 +193,42 @@ class Track
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    public function setYear(?int $year): static
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?string $Location): static
+    {
+        $this->Location = $Location;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(Region $region): static
+    {
+        $this->region = $region;
 
         return $this;
     }

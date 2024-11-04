@@ -170,3 +170,52 @@ main {
 .border-default {
     border: 5px solid $black;
 }
+
+form {
+    .vertical-form {
+        label {
+            width: 100%;
+        }
+    }
+    input, select {
+        height: 48px;
+    }
+    input[role="combobox"] {
+        height: auto;
+    }
+}
+
+div#uppy-dashboard {
+    max-width: 750px;
+    width: 100%;
+    height: 100px;
+    @include media-breakpoint-up(sm) {
+        height: 200px;
+    }
+    @include media-breakpoint-up(md) {
+        height: 300px;
+    }
+    @include media-breakpoint-up(lg) {
+        height: 400px;
+    }
+    .uppy-Root {
+        height: 100%;
+        .uppy-Dashboard {
+            height: 100%;
+        }
+    }
+
+    .uppy-Dashboard-inner {
+        border-radius: 4px;
+        background-color: $dark;
+
+        .uppy-Dashboard-AddFiles-title {
+            color: $white;
+        }
+    }
+
+    .uppy-DashboardContent-bar, .uppy-Dashboard-progressindicators {
+        background-color: $dark;
+        color: $white;
+    }
+}

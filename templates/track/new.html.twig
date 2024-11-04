@@ -4,13 +4,6 @@
 
 {% block content %}
     <div class="h-100 row">
-        <div class="col-12 col-sm-8 p-4 d-flex justify-content-center">
-            {{ include('components/upload/_uppy_widget.html.twig') }}
-        </div>
-        <div class="col-12 col-sm-4 p-4">
-            <div class="card  p-4">
-                {{ include('track/_form.html.twig') }}
-            </div>
-        </div>
+        {{ include('track/_form.html.twig') }}
     </div>
 {% endblock %}

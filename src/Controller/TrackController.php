@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Track\TrackAttachmentHelper;
-use App\Domain\Track\TrackFactory;
 use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
@@ -25,9 +24,9 @@ class TrackController extends AbstractController
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrackFactory $trackFactory, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
+    public function new(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
     {
-        $track = $trackFactory->create();
+        $track = new Track();
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

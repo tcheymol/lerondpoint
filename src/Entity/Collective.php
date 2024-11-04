@@ -58,8 +58,9 @@ class Collective implements OwnableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = null;
 
-    public function __construct()
+    public function __construct(?string $name = null)
     {
+        $this->name = $name;
         $this->actions = new ArrayCollection();
         $this->tracks = new ArrayCollection();
     }
