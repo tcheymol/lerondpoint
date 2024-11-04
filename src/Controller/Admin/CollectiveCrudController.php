@@ -50,7 +50,7 @@ class CollectiveCrudController extends AbstractCrudController
             FormField::addColumn(4),
             BooleanField::new('disabled'),
             BooleanField::new('validated'),
-            AssociationField::new('owner')->hideOnForm(),
+            AssociationField::new('owner'),
             DateField::new('createdAt')->hideOnForm(),
             DateField::new('updatedAt')->hideOnForm(),
             DateField::new('deletedAt')->hideOnForm(),

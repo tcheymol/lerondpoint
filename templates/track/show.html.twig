@@ -8,19 +8,52 @@
         <h1 class="col-12">{{ track.name }}</h1>
         <div class="col-12 p-4">
             <div class="row">
-                <div class="col-12 col-sm-8">
-                    {% for attachment in track.attachments|filter(attachment => attachment.url is not empty) %}
-                        {{ include('attachment/_attachment.html.twig', { attachment }) }}
-                    {% endfor %}
+                <div class="col-12 col-sm-7">
+{#                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">#}
+{#                        <div class="carousel-inner">#}
+{#                            {% for attachment in track.attachments|filter(attachment => attachment.url is not empty) %}#}
+{#                                <div class="carousel-item {{ loop.first ? 'active' : ''}}">#}
+{#                                    {{ include('attachment/_attachment.html.twig', { attachment }) }}#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        {% for attachment in track.attachments %}
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' : ''}}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner">
+                        {% for attachment in track.attachments %}
+                            <div class="carousel-item {{ loop.first ? 'active' : ''}}">
+                                {{ include('attachment/_attachment.html.twig', {attachment}) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">{{ 'Previous'|trans }}</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">{{ 'Next'|trans }}</span>
+                    </button>
                 </div>
-                <div class="col-12 col-sm-4 text-start">
+                </div>
+                <div class="col-12 col-sm-5 text-start">
                     <h5 class="text-uppercase text-decoration-underline">{{ 'TrackNumber'|trans }} {{ track.id }}</h5>
-                    <p class="">{{ track.name }}</p>
-                    {% if track.kind is not null %}
-                        <p class="">{{ track.kind.name }}</p>
+                    <p class="fs-4">{{ track.name }}</p>
+                    <p class="">{{ 'Category'|trans }} : {{ track.kind.name }}</p>
+                    {% if track.tags is not null %}
+                        <p class="">{{ 'Tags'|trans }} : {% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</p>
                     {% endif %}
-                    <p class="">{{ track.createdAt|date('d/m/Y') }}</p>
-                    <p class="">{{ track.description }}</p>
+                    <p class="">{{ 'Region'|trans }} : {{ track.region.value }}</p>
+                    <p class="">{{ 'Location'|trans }} : {{ track.location }}</p>
+                    <p class="">{{ 'Year'|trans }} : {{ track.year }}</p>
+                    <p class="">{{ 'Collective'|trans }} : {{ track.collective.name }}</p>
+                    <p class="fs-5">{{ track.description }}</p>
                 </div>
             </div>
         </div>

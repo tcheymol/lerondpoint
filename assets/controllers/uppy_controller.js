@@ -45,7 +45,7 @@ export default class extends Controller {
         uppy.on('file-added', (file) => {
             const name = file.name;
             const nameInput = document.getElementById('track_name');
-            if (nameInput) {
+            if (nameInput && !nameInput.value) {
                 nameInput.value = name;
             }
 

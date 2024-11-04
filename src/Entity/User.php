@@ -180,9 +180,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function hasMultipleCollectives(): bool
+    public function hasCollective(): bool
     {
-        return $this->collectives->count() > 1;
+        return $this->collectives->count() > 0;
     }
 
     public function getFirstCollective(): ?Collective

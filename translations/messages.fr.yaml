@@ -2,20 +2,27 @@ Action: Action
 ActionKind: Type d'action
 ActionTag: Label action
 Actions: Actions
+Actus: Actualités
 Admin: Admin
 Attachment: Document
 Attachments: Documents
+AuvergneRhoneAlpes: Auvergne-Rhône-Alpes
 Back: Retour
-Collective: Collectif
-Collectives: Collectifs
-CollectivesSubtitles: Les collectifs mobilisés près de chez toi
+BourgogneFrancheComte: Bourgogne-Franche-Comté
+Bretagne: Bretagne
+Category: Catégorie
+CentreValDeLoire: Centre-Val de Loire
+Collective: Groupe
+Collectives: Groupes
+CollectivesSubtitles: Les groupes mobilisés près de chez toi
 Contribute: Contribuer
 ContributeKnowMore: Cette plate-forme est collaborative et soumise à une modération
 ContributeSubtitle: Gilet jaune, nous avons besoin de toi pour vivre notre mémoire et renforcer nos liens
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
+Corse: Corse
 Create: Créer
-CreateCollective: Ajoute ton collectif à la carte
+CreateCollective: Ajoute ton groupe à la carte
 CreateTrack: Ajouter une trace
 CreateTrackAnonymous: Ajoute une trace sans connexion
 Created At: Créé le
@@ -27,35 +34,49 @@ Deleted By: Supprimé par
 Disabled At: Désactivé le
 Disabled By: Désactivé par
 Disabled: Désactivé
+Droms: DROMS
 Edit: Modifier
 Email: Email
 Enabled: Activé
 Extension: Extension
 FollowUps: Suites
+Follows: Suites
+GrandEst: Grand Est
+HautsDeFrance: Hauts-de-France
 Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE <br/> ROND-POINT
+IleDeFrance: Île-de-France
 Kind: Type
 Kinds: Types
 KnowMore: En savoir plus
+Location: Localisation
 Login: Connexion
 Logout: Déconnexion
 Misc: Divers
 Name: Nom
+Next: Suivant
 No: Non
 NoTrack: Pas de trace
+Normandie: Normandie
 Notes: Notes
+NouvelleAquitaine: Nouvelle-Aquitaine
+Occitanie: Occitanie
 Owner: Propriétaire
 Password: Mot de passe
 Path: Chemin
+PaysDeLaLoire: Pays de la Loire
+Previous: Précédent
+ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
+Region: Région
 Show: Voir
 Size: Taille
 Tags: Labels
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
-TrackNumber: Trace N°
 TrackKind: Type de trace
+TrackNumber: Trace N°
 TrackTag: Label trace
 Tracks: Traces
 TracksSubtitle: Mémoire vivante par les gilets jaunes
@@ -64,6 +85,5 @@ Updated By: MAJ par
 Users: Utilisateurs
 Validated By: Validé par
 Validated: Validé
+Year: Année
 Yes: Oui
-Follows: Suites
-Actus: Actualités
