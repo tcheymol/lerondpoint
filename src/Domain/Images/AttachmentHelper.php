@@ -4,6 +4,7 @@ namespace App\Domain\Images;
 
 use App\Entity\Attachment;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Reconnect\S3Bundle\Service\FlysystemS3Client;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -14,7 +15,9 @@ readonly class AttachmentHelper
     public function __construct(
         private EntityManagerInterface $em,
         private FlysystemS3Client $s3Adapter,
-        private ThumbnailGenerator $thumbnailGenerator)
+        private ThumbnailGenerator $thumbnailGenerator,
+        private LoggerInterface $logger,
+    )
     {
     }
 
@@ -33,7 +36,9 @@ readonly class AttachmentHelper
             $this->em->flush();
 
             return $attachment;
-        } catch (\Exception) {
+        } catch (\Exception $e) {
+            $this->logger->error(sprintf('Error while uploading attachment: %s', $e->getMessage()));
+
             return null;
         }
     }
