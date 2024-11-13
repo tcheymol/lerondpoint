@@ -25,8 +25,6 @@ class AttachmentController extends AbstractController
     {
         $helper->hydrateWithUrl($attachment);
 
-        return $this->render('attachment/show.html.twig', [
-            'attachment' => $attachment,
-        ]);
+        return $this->render('attachment/show.html.twig', ['attachment' => $attachment]);
     }
 }

@@ -24,6 +24,5 @@ class HomeController extends AbstractController
     public function root(): Response
     {
         return $this->render('maintenance/index.html.twig');
-//        return $this->render('home/index.html.twig');
     }
 }
