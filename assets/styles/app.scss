@@ -1,8 +1,8 @@
 /* Override some Bootstrap variables */
-$primary: #CBC259;
-$secondary: #6DCCAE;
-$info: #EAEBDD;
-$light: #E97C30;
+$primary: #6FBCA2;
+$secondary: #797BD9;
+$info: #EADF5F;
+$light: #71B6E6;
 $danger: #ff7979;
 $dark: #1e272e;
 
@@ -30,29 +30,23 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    //background-image: url('../images/bg-mobile.jpg');
     background-image: url('../images/bg.jpg');
+    transition: margin 2s ease-in-out;
+}
+
+.show-on-show-hide {
+    top: -100px;
+    transition: top 2s ease-in-out;
 }
 
 .fs-xs {
     font-size: 0.75rem !important;
 }
 
-.cloudy {
-    max-width: 90%;
-    margin: 16px;
-    filter: url(#cloudy);
-}
-
-.cloudy-sm {
-    filter: url(#cloudy-sm);
-}
-
 .nav-link {
     text-transform: uppercase;
     color: white;
-    margin: 4px;
-    margin-right: 0;
+    margin: 4px 0 4px 4px;
 }
 
 
@@ -218,4 +212,11 @@ div#uppy-dashboard {
         background-color: $dark;
         color: $white;
     }
+
+}
+
+.scroll-button {
+    bottom: 10%;
+    width: 40%;
+    left: 30%;
 }

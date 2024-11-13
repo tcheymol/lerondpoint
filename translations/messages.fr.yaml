@@ -1,9 +1,11 @@
+AboutUs: Qui sommes nous ?
 Action: Action
 ActionKind: Type d'action
 ActionTag: Label action
 Actions: Actions
 Actus: Actualités
 Admin: Admin
+AndNow: Et maintenant ?
 Attachment: Document
 Attachments: Documents
 AuvergneRhoneAlpes: Auvergne-Rhône-Alpes
@@ -15,9 +17,6 @@ CentreValDeLoire: Centre-Val de Loire
 Collective: Groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-Contribute: Contribuer
-ContributeKnowMore: Cette plate-forme est collaborative et soumise à une modération
-ContributeSubtitle: Gilet jaune, nous avons besoin de toi pour vivre notre mémoire et renforcer nos liens
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
 Corse: Corse
@@ -54,6 +53,7 @@ KnowMore: En savoir plus
 Location: Localisation
 Login: Connexion
 Logout: Déconnexion
+Memory: Mémoire
 Misc: Divers
 Name: Nom
 Next: Suivant
@@ -64,12 +64,16 @@ Notes: Notes
 NouvelleAquitaine: Nouvelle-Aquitaine
 Occitanie: Occitanie
 Owner: Propriétaire
+Participate: Participer
+ParticipateKnowMore: Cette plate-forme est collaborative et soumise à une modération
+ParticipateSubtitle: Gilet jaune, nous avons besoin de toi pour vivre notre mémoire et renforcer nos liens
 Password: Mot de passe
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
 Previous: Précédent
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 Region: Région
+ScrollToStart: Scroller pour commencer
 Show: Voir
 Size: Taille
 Tags: Labels

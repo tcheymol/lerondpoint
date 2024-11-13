@@ -20,15 +20,23 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    {{ include('helpers/_svg_filters.html.twig') }}
-    <body class="d-flex flex-column justify-content-center h-100 text-center text-white bg-{% block bodybg %}secondary{% endblock %}">
-        {{ include('components/_header.html.twig') }}
+    <body
+            class="d-flex flex-column justify-content-center h-100 text-center text-white bg-{% block bodybg %}secondary{% endblock %}"
+            style="{% block bodyStyle %}{% endblock %}"
+    >
+
+        {% block headerClass %}{% endblock %}
+        {% block header %}
+            {{ include('components/_header.html.twig', {headerClass: block('headerClass')}) }}
+        {% endblock %}
         <main class="vw-100" style="padding-top: 60px">
             <h1 style="visibility: hidden; position: absolute">{{ block('title') }}</h1>
             <div class="flex-grow-1 d-flex flex-column justify-content-center">
                 {% block content %}{% endblock %}
             </div>
         </main>
-        {{ include('components/_footer.html.twig') }}
+        {% block footer %}
+            {{ include('components/_footer.html.twig') }}
+        {% endblock %}
     </body>
 </html>

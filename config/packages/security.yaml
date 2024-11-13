@@ -24,6 +24,8 @@ security:
                 check_path: app_login
                 enable_csrf: true
 
+            logout:
+                path: app_logout
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             remember_me:

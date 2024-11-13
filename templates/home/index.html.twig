@@ -4,7 +4,25 @@
 
 {% block bodybg %}dark{% endblock %}
 
+{% block bodyStyle %}margin-top: 100vh;{% endblock %}
+{% block headerClass %}show-on-show-hide{% endblock %}
+
 {% block content %}
+    <div class="vh-100 vw-100 position-absolute top-0 z-1"
+            {{ stimulus_controller('show_hide') }}
+            {{ stimulus_action('show_hide', 'show', 'scroll') }}
+    >
+        <a class="h-100 w-100 d-block"
+            {{ stimulus_action('show_hide', 'show') }}
+        >
+        </a>
+        <a class="btn btn-lg btn-primary position-absolute scroll-button"
+            {{ stimulus_action('show_hide', 'show') }}
+        >
+            <i class="fa fa-angles-down me-3"></i>{{ 'ScrollToStart'|trans }}<i class="fa fa-angles-down ms-3"></i>
+        </a>
+
+    </div>
     <div class="d-flex flex-column justify-content-around flex-grow-1">
         <div class="d-flex justify-content-around row position-relative">
             {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/actus-btn.png'), label: 'Actus'|trans, color: 'primary', position: 'left'}) }}
@@ -13,7 +31,7 @@
         {{ include('home/components/_home_title.html.twig') }}
         <div class="d-flex justify-content-around row position-relative">
             {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks-btn.png'), label: 'Tracks'|trans, color: 'info', position: 'left'}) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/contribute-btn.png'), label: 'Contribute'|trans, color: 'light', position: 'right'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/participate-btn.png'), label: 'Participate'|trans, color: 'light', position: 'right'}) }}
         </div>
     </div>
 {% endblock %}
