@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
     private Collection $collectives;
 
-    public function __construct(?string $email)
+    public function __construct(?string $email = null)
     {
         $this->email = $email;
         $this->collectives = new ArrayCollection();

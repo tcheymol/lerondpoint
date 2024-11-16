@@ -23,6 +23,10 @@ class HomeController extends AbstractController
     #[Route('/', name: 'root')]
     public function root(): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('maintenance/index.html.twig');
     }
 }
