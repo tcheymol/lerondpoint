@@ -42,7 +42,9 @@
                     <p class="">{{ 'Region'|trans }} : {{ track.region.value }}</p>
                     <p class="">{{ 'Location'|trans }} : {{ track.location }}</p>
                     <p class="">{{ 'Year'|trans }} : {{ track.year }}</p>
-                    <p class="">{{ 'Collective'|trans }} : {{ track.collective.name }}</p>
+                    {% if track.collective is not null %}
+                        <p class="">{{ 'Collective'|trans }} : {{ track.collective.name }}</p>
+                    {% endif %}
                     <p class="fs-5">{{ track.description }}</p>
                 </div>
             </div>
