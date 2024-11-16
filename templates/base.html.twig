@@ -25,7 +25,9 @@
             style="{% block bodyStyle %}{% endblock %}"
     >
 
-        {% block headerClass %}{% endblock %}
+        <div style="display: none">
+            {% block headerClass %}{% endblock %}
+        </div>
         {% block header %}
             {{ include('components/_header.html.twig', {headerClass: block('headerClass')}) }}
         {% endblock %}
