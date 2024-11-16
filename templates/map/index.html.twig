@@ -2,19 +2,19 @@
 
 {% block title %}{{ 'FollowUps'|trans }}{% endblock %}
 
-{% block bodybg %}primary{% endblock %}
+{% block bodybg %}success{% endblock %}
 
 {% block content %}
     <div class="h-100 w-100" {{ stimulus_controller('map', {collectives}) }}>
         <div id="map" class="h-100 w-100"></div>
         {% set maps = [ 'mapGuadeloupe', 'mapMartinique', 'mapGuyane', 'mapReunion', 'mapMayotte' ] %}
-        <div class="position-absolute border-3 border-primary"
+        <div class="position-absolute border-3 border-success"
             style="right: 0; bottom: 40px; z-index: 1000; border-style: solid"
          >
             {% for map in maps %}
                 <div
                     id="{{ map }}"
-                    class="border-3 border-primary"
+                    class="border-3 border-success"
                     style="width: 100px; height: 100px; border-style: solid"
                 >
                 </div>

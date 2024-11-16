@@ -1,11 +1,12 @@
 /* Override some Bootstrap variables */
-$primary: #6FBCA2;
-$secondary: #797BD9;
-$info: #EADF5F;
-$light: #71B6E6;
+$success: #6FBCA2;
+$primary: #797BD9;
+$secondary: #d9d779;
+$warning: #ffbe76;
+$info: #71B6E6;
 $danger: #ff7979;
 $dark: #1e272e;
-
+$light: #ECE4DB;
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 
@@ -23,6 +24,13 @@ $dark: #1e272e;
     font-style: normal;
 }
 
+@font-face {
+    font-family: "plaine";
+    src: url('../fonts/laPlaine.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     font-family: AkzidenzGrotesk-Medium, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -32,6 +40,13 @@ body {
     background-size: cover;
     background-image: url('../images/bg.jpg');
     transition: margin 2s ease-in-out;
+}
+
+.plaine {
+    font-family: plaine, sans-serif;
+}
+.grotesk {
+    font-family: AkzidenzGrotesk-Medium, sans-serif;
 }
 
 .show-on-show-hide {
@@ -52,9 +67,9 @@ body {
 
 
 nav.navbar {
-    min-height: 60px;
+    min-height: 50px;
     @include media-breakpoint-up(md) {
-        height: 60px;
+        height: 50px;
     }
 }
 
@@ -139,7 +154,7 @@ main {
         width: calc(100vw - 100px);
         min-height: calc(100vh - 100% - 50px);
         z-index: 1;
-        border: 3px solid $light;
+        border: 3px solid $secondary;
     }
 
     &:hover {
@@ -150,11 +165,11 @@ main {
 }
 
 .rotate-back {
-    transform: rotate(-5deg);
+    transform: rotate(-2deg);
 }
 
 .rotate {
-    transform: rotate(5deg);
+    transform: rotate(2deg);
 }
 
 .ts-control {

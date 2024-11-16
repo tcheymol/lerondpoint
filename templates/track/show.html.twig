@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Track{% endblock %}
+{% block bodybg %}light{% endblock %}
 
 {% block content %}
-    <div class="row bg-info text-dark h-100 p-2">
+    <div class="row text-dark h-100 p-2">
         <div>{{ include('components/_back.html.twig') }}</div>
         <h1 class="col-12">{{ track.name }}</h1>
         <div class="col-12 p-4">
@@ -35,11 +36,15 @@
                 <div class="col-12 col-sm-5 text-start">
                     <h5 class="text-uppercase text-decoration-underline">{{ 'TrackNumber'|trans }} {{ track.id }}</h5>
                     <p class="fs-4">{{ track.name }}</p>
-                    <p class="">{{ 'Category'|trans }} : {{ track.kind.name }}</p>
+                    {% if track.kind is not null %}
+                        <p class="">{{ 'Category'|trans }} : {{ track.kind.name }}</p>
+                    {% endif %}
                     {% if track.tags is not null %}
                         <p class="">{{ 'Tags'|trans }} : {% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</p>
                     {% endif %}
+                    {% if track.region is not null %}
                     <p class="">{{ 'Region'|trans }} : {{ track.region.value }}</p>
+                    {% endif %}
                     <p class="">{{ 'Location'|trans }} : {{ track.location }}</p>
                     <p class="">{{ 'Year'|trans }} : {{ track.year }}</p>
                     {% if track.collective is not null %}

@@ -1,28 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'Tracks'|trans }}{% endblock %}
+{% block title %}{{ 'TracksListTitle'|trans }}{% endblock %}
+{% block bodybg %}light{% endblock %}
 
 {% block content %}
-    <div class="col-12 col-sm-10 offset-sm-1 h-100">
-        <div class="row">
-            {% for track in tracks %}
-                {% set attachment = track.attachments|first %}
-                {% if attachment and attachment.thumbnailUrl is not empty %}
-                {% set isOdd = loop.index is odd %}
-                    <div class="col-3 p-2 px-3 mt-4">
-                        <a class="btn btn-link rotate{{ isOdd ? '' : '-back' }} p-0"
-                           href="{{ path('track_show', {id: track.id}) }}">
-                        >
-                            <img
-                                    style="max-height: 200px; overflow: hidden"
-                                src="{{ attachment.thumbnailUrl }}"
-                                class="img-thumbnail w-100 bg-black"
-                                alt="{{ track.name ~ attachment.id }}"
-                            />
-                        </a>
-                    </div>
-                {% endif %}
-            {% endfor %}
+    <div class="row">
+        <h1 class="col-12 text-center text-dark mt-3 plaine">{{ 'TracksListTitle'|trans }}</h1>
+        <div class="col-12 col-sm-10 offset-sm-1 h-100">
+            <div class="row">
+                {% for track in tracks %}
+                    {% set attachment = track.attachments|first %}
+                    {% if attachment and attachment.thumbnailUrl is not empty %}
+                    {% set isOdd = loop.index is odd %}
+                        <div class="col-3 p-2 px-3 mt-4">
+                            <a class="btn btn-link rotate{{ isOdd ? '' : '-back' }} p-0"
+                               href="{{ path('track_show', {id: track.id}) }}">
+                                <img
+                                        style="max-height: 200px; overflow: hidden"
+                                    src="{{ attachment.thumbnailUrl }}"
+                                    class="img-thumbnail w-100 bg-black"
+                                    alt="{{ track.name ~ attachment.id }}"
+                                />
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
