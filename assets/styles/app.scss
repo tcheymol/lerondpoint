@@ -1,7 +1,7 @@
 /* Override some Bootstrap variables */
 $success: #6FBCA2;
-$primary: #797BD9;
-$secondary: #d9d779;
+$primary: #E0D557;
+$secondary: #6FBCA2;
 $warning: #ffbe76;
 $info: #71B6E6;
 $danger: #ff7979;
@@ -60,7 +60,6 @@ body {
 
 .nav-link {
     text-transform: uppercase;
-    color: white;
     margin: 4px 0 4px 4px;
 }
 
@@ -127,19 +126,10 @@ main {
     padding-top: 66px !important;
 }
 
-@each $color, $value in $theme-colors {
-    a.hoverable-#{$color} {
-        &:hover {
-            background-color: $value !important;
-            color: white;
-        }
-    }
-
-    button.btn-#{$color}, a.btn-#{$color} {
-        color: white !important;
-        &:hover {
-            color: white !important;
-        }
+.nav-link {
+    color: $dark !important;
+    &:hover {
+        color: $dark !important;
     }
 }
 
