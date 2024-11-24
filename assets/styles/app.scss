@@ -63,13 +63,69 @@ body {
     margin: 4px 0 4px 4px;
 }
 
-
-
 nav.navbar {
     min-height: 50px;
+    .collapsing {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: $dark;
+        width: 100%;
+        max-width: 500px;
+    }
+    .collapse.show {
+        width: 100%;
+        max-width: 500px;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: $dark;
+    }
+
     @include media-breakpoint-up(md) {
         height: 50px;
     }
+
+    a {
+        min-height: 40px;
+    }
+
+
+    .nav-link {
+        color: $dark !important;
+        &:hover {
+            color: $dark !important;
+        }
+    }
+
+    #participateButton {
+        margin: 4px;
+        height: 40px;
+        @include media-breakpoint-up(lg) {
+            height: 42px;
+        }
+
+        .participate-modal{
+            visibility: hidden;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            .btn {
+                border: 3px solid $dark;
+                border-radius: 0;
+                border-collapse: collapse;
+                height: 50px;
+                line-height: 40px;
+            }
+        }
+
+        &:hover {
+            .participate-modal{
+                visibility: visible;
+            }
+        }
+    }
+
 }
 
 main {
@@ -77,6 +133,24 @@ main {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+}
+
+.scroll-down-btn {
+    height: 150px;
+}
+
+.hover-rotate-10:hover {
+    transform: rotate(-10deg);
+}
+
+.hover-rotate-5:hover {
+    transform: rotate(-2deg);
+}
+
+@each $color, $value in $theme-colors {
+    .hoverable-#{$color}:hover {
+        background-color: darken($value, 30%) !important;
+    }
 }
 
 .mh-150px {
@@ -124,42 +198,6 @@ main {
 
 .cover-container {
     padding-top: 66px !important;
-}
-
-.nav-link {
-    color: $dark !important;
-    &:hover {
-        color: $dark !important;
-    }
-}
-
-#contributeButton {
-    margin: 4px;
-    .contribute-modal{
-        visibility: hidden;
-        position: absolute;
-        cursor: auto;
-        top: 100%;
-        right: 50px;
-        width: calc(100vw - 100px);
-        min-height: calc(100vh - 100% - 50px);
-        z-index: 1;
-        border: 3px solid $secondary;
-    }
-
-    &:hover {
-        .contribute-modal{
-            visibility: visible;
-        }
-    }
-}
-
-.rotate-back {
-    transform: rotate(-2deg);
-}
-
-.rotate {
-    transform: rotate(2deg);
 }
 
 .ts-control {

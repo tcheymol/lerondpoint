@@ -7,11 +7,11 @@ import { Controller } from '@hotwired/stimulus';
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     connect() {
-        document.body.style.marginTop = '100vh';
+        document.body.style.marginTop = '85vh';
         window.addEventListener("scroll", () => {
             this.show();
         });
-        // setTimeout(this.show, 4000)
+        setTimeout(this.show, 5000)
     }
 
     show = () => {
