@@ -19,12 +19,12 @@
                 href="{{ path('about_us') }}"
             >{{ 'AboutUs'|trans }}
             </a>
-            <div id="participateButton" class="flex-grow-1 me-0">
+            <div id="contributeButton" class="flex-grow-1 me-0">
                 <a class="bg-white nav-link hover-rotate-5 hoverable-light d-flex align-items-center justify-content-center h-100 w-100 px-3 fs-5 m-0"
                     href="{{ path('track_new') }}"
                 >{{ 'Participate'|trans }}
                 </a>
-                {{ include('components/_participate_modal.html.twig') }}
+                {{ include('components/_contribute_modal.html.twig') }}
             </div>
         <div class="flex-grow-1"></div>
             {% if app.user %}

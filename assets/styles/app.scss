@@ -98,14 +98,14 @@ nav.navbar {
         }
     }
 
-    #participateButton {
+    #contributeButton {
         margin: 4px;
         height: 40px;
         @include media-breakpoint-up(lg) {
             height: 42px;
         }
 
-        .participate-modal{
+        .contribute-modal{
             visibility: hidden;
             position: relative;
             width: 100%;
@@ -120,7 +120,7 @@ nav.navbar {
         }
 
         &:hover {
-            .participate-modal{
+            .contribute-modal{
                 visibility: visible;
             }
         }
