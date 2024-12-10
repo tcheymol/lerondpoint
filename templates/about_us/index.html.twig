@@ -3,8 +3,23 @@
 {% block title %}{{ "AboutUs"|trans }}{% endblock %}
 
 {% block content %}
-    <div class="row bg-light h-100 p-2">
-        <div>{{ include('components/_back.html.twig') }}</div>
-        <h1 class="col-12 text-dark">Cette page est en cours de rédaction</h1>
+    <div class="px-3 plaine text-dark">
+        <div class="mt-2">{{ include('components/_back.html.twig') }}</div>
+        <div class="bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 mt-3">
+            <p class="fs-3">{{ 'ShareCatchPhrase'|trans }}</p>
+            <p class="fs-5 grotesk text-start">
+                <a href="{{ path('home') }}" class="link-dark">Le-rondpoint.org</a> est un site plateforme qui repose sur la collaboration des Gilets Jaunes, qu’ils et elles soient encore actif·ves ou pas.
+                <br/>
+                La médiation du site est gérée par un collectif, <a href="{{ path('home') }}" class="link-dark">on vous en dit plus ici</a>.
+                <br/>
+                Nous sommes soucieux de la sécurité de nos visiteur·ses et utilisateur·rices, en hébergeant le site XXXXXXXXXXX et en n’utilisant aucun cookie.
+                <br/><br/>
+                Vous pouvez participer :
+                    • <a href="{{ path('track_new') }}" class="link-dark">en partageant une ou des archives du mouvement</a>, ces contributions apparaitront parmi les <a href="{{ path('track_index') }}" class="link-dark">« traces »</a> que nous répertorions.
+                    • <a href="{{ path('collective_new') }}" class="link-dark">en ajoutant votre groupe à la carte</a>, ce qui permettra de localiser votre collectif sur la page <a href="{{ path('collective_index') }}" class="link-dark">« Et maintenant ? »</a>.
+
+            </p>
+
+        </div>
     </div>
 {% endblock %}
