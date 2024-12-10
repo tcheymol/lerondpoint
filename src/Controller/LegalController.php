@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class AboutUsController extends AbstractController
+class LegalController extends AbstractController
 {
-    #[Route('/about/us', name: 'about_us')]
+    #[Route('/legal', name: 'app_legal')]
     public function index(): Response
     {
-        return $this->render('about_us/index.html.twig');
+        return $this->render('legal/index.html.twig');
     }
 }
