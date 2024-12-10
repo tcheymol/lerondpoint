@@ -3,13 +3,13 @@
 {% block title %}{{ 'Participate'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="h-100 d-flex justify-content-center align-items-center plaine">
+    <div class="h-100 d-flex justify-content-center align-items-center">
         <div class="col-12 col-lg-6 h-100 d-flex justify-content-center align-items-center p-3">
-            <div
-                    class="row border border-3 border-dark h-100"
-                    style="max-height: 400px;"
-            >
-                <div class="col-12 bg-dark d-flex justify-content-center align-items-center fs-3">{{ 'ShareCatchPhrase'|trans }}</div>
+            <div class="row border border-3 border-dark h-100" style="max-height: 400px;">
+                <div class="col-12 bg-dark d-flex justify-content-center align-items-center fs-3">
+                    <h2>{{ 'WeNeedYou'|trans }}</h2>
+                    <h2>{{ 'WeNeedYou'|trans }}</h2>
+                </div>
                 <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center hover-rotate-5 btn-primary rounded-0" href="{{ path('track_new') }}">{{ 'CreateTrack'|trans }}</a>
                 <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center hover-rotate-5 btn-secondary rounded-0" href="{{ path('collective_new') }}">{{ 'CreateCollective'|trans }}</a>
                 <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center hover-rotate-5 btn-light bg-white rounded-0" href="{{ path('app_login') }}">{{ 'Login'|trans }}</a>
