@@ -9,7 +9,7 @@ use Symfony\Component\Uid\UuidV4;
 
 readonly class ThumbnailGenerator
 {
-    public function buildThumbnail(UploadedFile $file): ?string
+    public function buildThumbnail(UploadedFile $file, int $size = 255): ?string
     {
         try {
             $extension = $file->getMimeType();
@@ -20,10 +20,14 @@ readonly class ThumbnailGenerator
         if ($extension === 'application/pdf') {
             return $this->buildPdfThumbnail($file);
         } elseif (getimagesize($file->getPathname())) {
-            return $this->buildImageThumbnail($file->getRealPath());
+            return $this->buildImageThumbnail($file->getRealPath(), $size);
         } else {
             return null;
         }
+    }
+
+    private function buildThumbnails(File $file): string {
+
     }
 
     private function buildPdfThumbnail(File $file): string
@@ -36,12 +40,12 @@ readonly class ThumbnailGenerator
         return PdfPreviewBuilder::genPdfThumbnail($file->getPathname(), $thumbnailName.'.png');
     }
 
-    private function buildImageThumbnail(string $imagePath): ?string
+    private function buildImageThumbnail(string $imagePath, int $size = 255): ?string
     {
         try {
             $thumbnailPath = $imagePath.'-thumbnail.png';
             $imagick = new \Imagick(realpath($imagePath));
-            $imagick->thumbnailImage(255, 0);
+            $imagick->thumbnailImage($size, 0);
             $imagick->writeImage($thumbnailPath);
 
             return $thumbnailPath;

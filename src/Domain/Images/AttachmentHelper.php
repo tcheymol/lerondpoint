@@ -27,7 +27,7 @@ readonly class AttachmentHelper
             $attachment = Attachment::fromFile($file);
 
             $this->uploadFile($file, $attachment);
-            $this->uploadThumbnail($file, $attachment);
+            $this->uploadThumbnails($file, $attachment);
             $this->storeFileInfo($file, $attachment);
 
             unlink($file->getPathname());
@@ -57,15 +57,23 @@ readonly class AttachmentHelper
     }
 
     /** @throws \Exception */
-    private function uploadThumbnail(UploadedFile $file, Attachment $attachment): void
+    private function uploadThumbnails(UploadedFile $file, Attachment $attachment): void {
+        $attachment->setThumbnailObjectId($this->uploadThumbnail($file, $attachment));
+        $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, $attachment, 1024));
+    }
+
+    /** @throws \Exception */
+    private function uploadThumbnail(UploadedFile $file, Attachment $attachment, int $size = 255): ?string
     {
-        $thumbnailPath = $this->thumbnailGenerator->buildThumbnail($file);
+        $thumbnailPath = $this->thumbnailGenerator->buildThumbnail($file, $size);
         if ($thumbnailPath) {
             $thumbnailId = $this->s3Adapter->uploadFile(new File($thumbnailPath), UuidV4::v4()->toString());
-
-            $attachment->setThumbnailObjectId($thumbnailId);
             unlink($thumbnailPath);
+
+            return $thumbnailId;
         }
+
+        return null;
     }
 
     private function storeFileInfo(UploadedFile $file, Attachment $attachment): void

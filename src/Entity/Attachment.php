@@ -42,7 +42,12 @@ class Attachment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnailObjectId = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $bigThumbnailObjectId = null;
+
     public ?string $thumbnailUrl = null;
+
+    public ?string $bigThumbnailUrl = null;
 
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $height = null;
@@ -167,6 +172,18 @@ class Attachment
     public function setWidth(?string $width): static
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    public function getBigThumbnailObjectId(): ?string
+    {
+        return $this->bigThumbnailObjectId;
+    }
+
+    public function setBigThumbnailObjectId(?string $bigThumbnailObjectId): static
+    {
+        $this->bigThumbnailObjectId = $bigThumbnailObjectId;
 
         return $this;
     }
