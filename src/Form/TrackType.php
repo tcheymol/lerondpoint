@@ -15,6 +15,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,11 +33,6 @@ class TrackType extends AbstractType
         $years = array_reverse(range(2010, (int) date('Y') + 1));
         $builder
             ->add('name')
-            ->add('kind', EntityType::class, [
-                'class' => TrackKind::class,
-                'attr' => ['data-controller' => 'tomselect'],
-                'choice_label' => 'name',
-            ])
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
                 'attr' => ['data-controller' => 'tomselect'],
@@ -47,7 +43,9 @@ class TrackType extends AbstractType
                 'class' => Region::class,
                 'attr' => ['data-controller' => 'tomselect'],
             ])
-            ->add('description')
+            ->add('description', TextAreaType::class, [
+                'attr' => ['rows' => 5],
+            ])
             ->add('location')
             ->add('year', ChoiceType::class, [
                 'choices' => array_combine($years, $years),

@@ -28,14 +28,16 @@ class TrackController extends AbstractController
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
     public function new(): Response
     {
-        return $this->render('track/new.html.twig', []);
+        return $this->render('track/new.html.twig');
     }
 
     #[Route('/{id<\d+>}/main_infos', name: 'track_new_main_infos', methods: ['GET', 'POST'])]
-    public function newMainInfos(Request $request, Track $track, TrackKindProvider $trackKindProvider): Response
+    public function newMainInfos(Request $request, Track $track, TrackKindProvider $trackKindProvider, TrackPersister $trackPersister): Response
     {
         $form = ($this->createForm(TrackType::class, $track))->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $trackPersister->persist($track);
+
             return $this->redirectToRoute('track_index');
         }
 
