@@ -57,7 +57,6 @@ readonly class DisableSubscriber
             $entity->setCreatedBy($user);
             $entity->setUpdatedBy($user);
         }
-
     }
 
     public function preRemove(PreRemoveEventArgs $args): void

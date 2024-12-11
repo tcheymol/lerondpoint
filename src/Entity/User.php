@@ -51,9 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     public function __construct(
         #[ORM\Column(length: 180)]
-        private ?string $email = null
-    )
-    {
+        private ?string $email = null,
+    ) {
         $this->collectives = new ArrayCollection();
     }
 
@@ -78,7 +77,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
      * A visual identifier that represents this user.
      *
      * @see UserInterface
-     *
      */
     #[\Override]
     public function getUserIdentifier(): string
