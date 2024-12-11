@@ -10,30 +10,15 @@
         <div class="col-12 p-4">
             <div class="row">
                 <div class="col-12 col-sm-7">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        {% for attachment in track.attachments %}
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' : ''}}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
-                        {% endfor %}
-                    </div>
-                    <div class="carousel-inner">
-                        {% for attachment in track.attachments %}
-                            <div class="carousel-item {{ loop.first ? 'active' : ''}}">
-                                {{ include('attachment/_attachment.html.twig', {attachment}) }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">{{ 'Previous'|trans }}</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">{{ 'Next'|trans }}</span>
-                    </button>
-                </div>
+                    {% set attachment = track.attachments|first %}
+                    {% if attachment and attachment.thumbnailUrl is not empty %}
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#carouselModal">
+                            {{ include('attachment/_attachment.html.twig', {attachment}) }}
+                        </button>
+                    {% endif %}
                 </div>
                 {{ include('track/components/_information.html.twig', {track}) }}
+                {{ include('track/components/_carousel.html.twig', {track}) }}
             </div>
         </div>
     </div>

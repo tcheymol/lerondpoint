@@ -1,7 +1,7 @@
 {% set attachment = track.attachments|first %}
     {% if attachment and attachment.thumbnailUrl is not empty %}
         <div class="col-6 col-sm-4 col-md-3 p-1 mt-4 hover-rotate-5">
-            <a class="btn btn-link p-0 w-100 h-100 overflow-hidden {{ attachment.kind == 'application/pdf' ? '' : 'border border-black border-4' }} "
+            <a class="btn btn-link p-0 w-100 h-100 bg-dark overflow-hidden {{ attachment.kind == 'application/pdf' ? '' : 'border border-black border-4' }} "
                href="{{ path('track_show', {id: track.id}) }}"
                style="max-height: 150px;">
                 <img
