@@ -9,13 +9,13 @@ readonly class TrackProvider
 {
     public function __construct(
         private TrackRepository $trackRepository,
-        private TrackAttachmentHelper $attachmentHelper
-    )
-    {
+        private TrackAttachmentHelper $attachmentHelper,
+    ) {
     }
 
     /** @return array<Track> */
-    public function provide(): array {
+    public function provide(): array
+    {
         $allTracks = $this->trackRepository->findAll();
 
         foreach ($allTracks as $track) {

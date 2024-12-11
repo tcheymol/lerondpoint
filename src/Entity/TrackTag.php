@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackTagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackTagRepository::class)]
-class TrackTag
+class TrackTag implements BlameableInterface
 {
     use BlameableTrait;
 
@@ -18,18 +19,16 @@ class TrackTag
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
     /**
      * @var Collection<int, Track>
      */
     #[ORM\ManyToMany(targetEntity: Track::class, mappedBy: 'tags')]
     private Collection $tracks;
 
-    public function __construct(?string $name = null)
-    {
-        $this->name = $name;
+    public function __construct(
+        #[ORM\Column(length: 255)]
+        private ?string $name = null,
+    ) {
         $this->tracks = new ArrayCollection();
     }
 

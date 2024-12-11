@@ -24,13 +24,16 @@ class DashboardController extends AbstractDashboardController
 {
     /** @throws NotFoundExceptionInterface|ContainerExceptionInterface */
     #[Route('/admin', name: 'admin')]
+    #[\Override]
     public function index(): Response
     {
-         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        /** @var AdminUrlGenerator $adminUrlGenerator */
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
 
-         return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
     }
 
+    #[\Override]
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -38,6 +41,7 @@ class DashboardController extends AbstractDashboardController
             ->setFaviconPath('jacket.png');
     }
 
+    #[\Override]
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Home', 'fas fa-house-user text-success', 'home')->setCssClass('text-success');

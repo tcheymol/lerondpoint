@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
 use Doctrine\DBAL\Types\Types;
@@ -9,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
-
-class Attachment
+class Attachment implements BlameableInterface
 {
     use BlameableTrait;
 
@@ -55,10 +55,10 @@ class Attachment
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $width = null;
 
-    public static function fromFile(UploadedFile $file): static
+    public static function fromFile(UploadedFile $file): self
     {
-        return (new static())
-            ->setExtension($file->guessExtension())
+        return (new Attachment())
+            ->setExtension((string) $file->guessExtension())
             ->setKind($file->getMimeType())
             ->setSize($file->getSize());
     }

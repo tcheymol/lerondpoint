@@ -1,8 +1,11 @@
 <?php
 
+phpinfo();
+
 namespace App\Entity;
 
 use App\Domain\Location\Region;
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +14,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
-class Track
+class Track implements BlameableInterface
 {
     use BlameableTrait;
 
@@ -59,6 +62,9 @@ class Track
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?Region $region = null;
+
+    #[ORM\Column(length: 2083, nullable: true)]
+    private ?string $url = null;
 
     public function __construct()
     {
@@ -232,4 +238,41 @@ class Track
 
         return $this;
     }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getVideoPreview(): ?string
+    {
+        if (!$this->url) {
+            return null;
+        }
+
+        $url_components = parse_url($this->url);
+        parse_str($url_components['query'], $params);
+
+        return 'https://img.youtube.com/vi/'. $params['v'] . '/hqdefault.jpg';
+    }
+
+    public function getVideoEmbed(): ?string
+    {
+        if (!$this->url) {
+            return null;
+        }
+
+        $url_components = parse_url($this->url);
+        parse_str($url_components['query'], $params);
+
+        return 'https://www.youtube.com/embed/' . $params['v'];
+    }
+
 }

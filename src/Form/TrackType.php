@@ -13,7 +13,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,10 +21,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TrackType extends AbstractType
 {
     use UserAwareTrait;
+
     public function __construct(private readonly Security $security)
     {
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $years = array_reverse(range(2010, (int) date('Y') + 1));
@@ -56,7 +57,7 @@ class TrackType extends AbstractType
 
         $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
             fn ($tagsAsArray) => implode(',', $tagsAsArray),
-            fn ($tagsAsString) => explode(',', $tagsAsString)
+            fn ($tagsAsString) => explode(',', (string) $tagsAsString)
         ));
 
         $user = $this->getUser();
@@ -72,6 +73,7 @@ class TrackType extends AbstractType
         }
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

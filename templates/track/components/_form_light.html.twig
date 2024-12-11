@@ -1,0 +1,53 @@
+{{ form_start(form) }}
+<div class="row text-white">
+    <div class="col-6 p-4">
+        <div class="card p-3 pt-0 bg-dark text-white">
+            <div class="row">
+                <div class="col-12">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.kind) }}
+                    {{ form_widget(form.kind) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.tags) }}
+                    {{ form_widget(form.tags) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 p-4">
+        <div class="card bg-dark p-4 pt-0 text-white">
+            <div class="row vertical-form">
+                <div class="col-12">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.location) }}
+                    {{ form_widget(form.location) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.region) }}
+                    {{ form_widget(form.region) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.year) }}
+                    {{ form_widget(form.year) }}
+                </div>
+                {% if form.collective is defined %}
+                    <div class="col-12">
+                        {{ form_label(form.collective) }}
+                        {{ form_widget(form.collective) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                <button class="btn btn-success">{{ 'Create'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

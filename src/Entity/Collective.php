@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\CollectiveRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
-class Collective implements OwnableInterface
+class Collective implements OwnableInterface, BlameableInterface
 {
     use BlameableTrait;
 
@@ -27,9 +28,6 @@ class Collective implements OwnableInterface
      */
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'collective')]
     private Collection $tracks;
-
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'collectives')]
     private ?User $owner = null;
@@ -58,9 +56,10 @@ class Collective implements OwnableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = null;
 
-    public function __construct(?string $name = null)
-    {
-        $this->name = $name;
+    public function __construct(
+        #[ORM\Column(length: 255)]
+        private ?string $name = null,
+    ) {
         $this->actions = new ArrayCollection();
         $this->tracks = new ArrayCollection();
     }
@@ -138,11 +137,13 @@ class Collective implements OwnableInterface
         return $this;
     }
 
+    #[\Override]
     public function getOwner(): ?User
     {
         return $this->owner;
     }
 
+    #[\Override]
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;

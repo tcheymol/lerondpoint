@@ -7,7 +7,9 @@ use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
+use App\Form\Model\UrlModel;
 use App\Form\TrackType;
+use App\Form\UrlType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +26,45 @@ class TrackController extends AbstractController
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
+    public function new(): Response
+    {
+        return $this->render('track/new.html.twig', []);
+    }
+
+    #[Route('/{id<\d+>}/main_infos', name: 'track_new_main_infos', methods: ['GET', 'POST'])]
+    public function newMainInfos(Request $request, Track $track, TrackKindProvider $trackKindProvider): Response
+    {
+        $form = ($this->createForm(TrackType::class, $track))->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('track_index');
+        }
+
+        return $this->render('track/new_main_infos.html.twig', [
+            'track' => $track,
+            'form' => $form,
+            'kinds' => $trackKindProvider->provide(),
+        ]);
+    }
+
+    #[Route('/new/link', name: 'track_new_link', methods: ['GET', 'POST'])]
+    public function newWithLink(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response {
+        $urlModel = new UrlModel();
+        $form = $this->createForm(UrlType::class, $urlModel)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $track = (new Track())->setUrl($urlModel->url)->setName('Trace Anonyme');
+            $trackPersister->persist($track);
+
+            return $this->redirectToRoute('track_new_main_infos', ['id' => $track->getId()]);
+        }
+
+        return $this->render('track/new_link.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/new/upload', name: 'track_new_upload', methods: ['GET', 'POST'])]
+    public function newUpload(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
     {
         $track = new Track();
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
@@ -35,7 +75,7 @@ class TrackController extends AbstractController
             return $this->redirectToRoute('track_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('track/new.html.twig', [
+        return $this->render('track/new_upload.html.twig', [
             'track' => $track,
             'form' => $form,
             'kinds' => $trackKindProvider->provide(),

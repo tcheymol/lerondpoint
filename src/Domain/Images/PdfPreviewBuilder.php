@@ -2,20 +2,18 @@
 
 namespace App\Domain\Images;
 
-use Imagick;
-
 class PdfPreviewBuilder
 {
-    public static function genPdfThumbnail($source, $target, $size = 256, $page = 1): ?string
+    public static function genPdfThumbnail(string $source, string $target, int $size = 256, int $page = 1): ?string
     {
         try {
             if (file_exists($source) && !is_dir($source)) {
                 if ('application/pdf' != \mime_content_type($source)) {
-                    return false;
+                    return null;
                 }
 
-                $sepa = '/';
-                $target = dirname((string)$source) . $sepa . $target;
+                $separator = '/';
+                $target = dirname((string) $source).$separator.$target;
                 $size = intval($size);
                 $page = intval($page);
 
@@ -24,7 +22,7 @@ class PdfPreviewBuilder
                     $page = 0;
                 }
 
-                $img = new \Imagick($source . "[$page]");
+                $img = new \Imagick($source."[$page]");
                 $imH = $img->getImageHeight();
                 $imW = $img->getImageWidth();
                 if (0 == $imH) {
@@ -34,7 +32,7 @@ class PdfPreviewBuilder
                     $imW = 1;
                 }
 
-                $sizR = round($size * (min($imW, $imH) / max($imW, $imH)));
+                $sizR = (int) round($size * (min($imW, $imH) / max($imW, $imH)));
 
                 $img->setImageColorspace(255);
                 $img->setImageBackgroundColor('white');

@@ -14,7 +14,7 @@ readonly class PasswordHelper
 
     public function hashUserPlainPassword(User $user): string
     {
-        return $this->hasher->hashPassword($user, $user->getPlainPassword());
+        return $this->hasher->hashPassword($user, (string) $user->getPlainPassword());
     }
 
     public function updateUserPasswordWithPlain(User $user): void

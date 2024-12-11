@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackKindRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackKindRepository::class)]
-class TrackKind
+class TrackKind implements BlameableInterface
 {
     use BlameableTrait;
 
@@ -19,21 +20,20 @@ class TrackKind
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name;
-
     /**
      * @var Collection<int, Track>
      */
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'kind')]
     private Collection $tracks;
 
+    /** @var string[] */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $fileTypes = null;
 
-    public function __construct(?string $name = null)
-    {
-        $this->name = $name;
+    public function __construct(
+        #[ORM\Column(length: 255)]
+        private ?string $name = null,
+    ) {
         $this->tracks = new ArrayCollection();
     }
 
@@ -54,9 +54,7 @@ class TrackKind
         return $this;
     }
 
-    /**
-     * @return Collection<int, Track>
-     */
+    /** @return Collection<int, Track> */
     public function getTracks(): Collection
     {
         return $this->tracks;
@@ -84,11 +82,13 @@ class TrackKind
         return $this;
     }
 
+    /** @return ?string[] */
     public function getFileTypes(): ?array
     {
         return $this->fileTypes;
     }
 
+    /** @param ?string[] $fileTypes */
     public function setFileTypes(?array $fileTypes): static
     {
         $this->fileTypes = $fileTypes;

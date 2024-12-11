@@ -3,8 +3,8 @@
 namespace App\Subscribers;
 
 use App\Entity\OwnableInterface;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
-use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -23,6 +23,11 @@ readonly class OwnableSubscriber
             return;
         }
 
-        $entity->setOwner($this->security->getUser());
+        $user = $this->security->getUser();
+        if (!$user instanceof User) {
+            return;
+        }
+
+        $entity->setOwner($user);
     }
 }

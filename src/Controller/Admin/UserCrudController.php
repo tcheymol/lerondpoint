@@ -14,14 +14,17 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher) {
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
+    {
     }
 
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -34,22 +37,33 @@ class UserCrudController extends AbstractCrudController
         ];
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    #[\Override]
+    public function persistEntity(EntityManagerInterface $entityManager, mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         $this->updatePassword($entityInstance);
 
         parent::persistEntity($entityManager, $entityInstance);
     }
 
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    #[\Override]
+    public function updateEntity(EntityManagerInterface $entityManager, mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         $this->updatePassword($entityInstance);
 
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-    public function updatePassword($entityInstance): void
+    public function updatePassword(mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         if ($entityInstance->getPlainPassword()) {
             $hashedPassword = $this->passwordHasher->hashPassword($entityInstance, $entityInstance->getPlainPassword());
             $entityInstance->setPassword($hashedPassword);
