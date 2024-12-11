@@ -23,6 +23,7 @@ class CreateUserCommand extends Command
         parent::__construct();
     }
 
+    #[\Override]
     protected function configure(): void
     {
         $this
@@ -37,6 +38,7 @@ class CreateUserCommand extends Command
         ;
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -45,6 +47,7 @@ class CreateUserCommand extends Command
 
         if (!$email || !$password) {
             $io->error('You must provide an email and a password');
+
             return Command::FAILURE;
         }
 

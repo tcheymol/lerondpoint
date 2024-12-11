@@ -2,8 +2,6 @@
 
 namespace App\Domain\Images;
 
-use Imagick;
-
 class PdfPreviewBuilder
 {
     public static function genPdfThumbnail($source, $target, $size = 256, $page = 1): ?string
@@ -15,7 +13,7 @@ class PdfPreviewBuilder
                 }
 
                 $sepa = '/';
-                $target = dirname((string)$source) . $sepa . $target;
+                $target = dirname((string) $source).$sepa.$target;
                 $size = intval($size);
                 $page = intval($page);
 
@@ -24,7 +22,7 @@ class PdfPreviewBuilder
                     $page = 0;
                 }
 
-                $img = new \Imagick($source . "[$page]");
+                $img = new \Imagick($source."[$page]");
                 $imH = $img->getImageHeight();
                 $imW = $img->getImageWidth();
                 if (0 == $imH) {

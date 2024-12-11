@@ -24,18 +24,18 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 )]
 class LoadDataCommand extends Command
 {
-    const array ENTITIES = [
+    public const array ENTITIES = [
         ActionKind::class => [
-            "Rassemblement et tractage sur un rond-point",
+            'Rassemblement et tractage sur un rond-point',
             "Cabane à proximité d'un rond-point ou d'une route",
             "Animation d'un lieu (exemples de bâtiment, hangar ou terrain) pour en faire un espace d'entraide, de réunion, d'éducation populaire (conférence gesticulée, concert, projection, etc.).",
             "Tractage ou tenue de stand dans l'espace public, action d'information vers la population (exemple : défense des services publics locaux)",
-            "Réunion publique autour de questions de citoyenneté et de démocratie",
-            "Jardin partagé",
-            "Permanence administrative pour aider les personnes en situation de précarité",
-            "Maraude",
-            "Distribution alimentaire",
-            "Participation aux mobilisations sociales/manifestations",
+            'Réunion publique autour de questions de citoyenneté et de démocratie',
+            'Jardin partagé',
+            'Permanence administrative pour aider les personnes en situation de précarité',
+            'Maraude',
+            'Distribution alimentaire',
+            'Participation aux mobilisations sociales/manifestations',
             "Gestion et animation d'une épicerie participative",
             "Animation d'une émission de radio",
             "Rédaction d'un journal local",
@@ -71,14 +71,12 @@ class LoadDataCommand extends Command
         ],
     ];
 
-
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly TrackPersister         $trackPersister,
-        private readonly string                 $kernelProjectDir,
+        private readonly TrackPersister $trackPersister,
+        private readonly string $kernelProjectDir,
         private readonly AttachmentHelper $attachmentHelper,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -91,6 +89,7 @@ class LoadDataCommand extends Command
         return $this->attachmentHelper->createAttachment(new UploadedFile($tmpFilePath, $fileName));
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->emptyTable(Attachment::class);
@@ -108,19 +107,21 @@ class LoadDataCommand extends Command
 
     private function createTrack(array $trackData): Track
     {
-            $track = (new Track())->setName($trackData['name']);
-            $attachment = $this->createAttachment($trackData['file']);
-            $track->attachmentsIds[] = $attachment->getId();
-            $this->trackPersister->persist($track);
+        $track = (new Track())->setName($trackData['name']);
+        $attachment = $this->createAttachment($trackData['file']);
+        $track->attachmentsIds[] = $attachment->getId();
+        $this->trackPersister->persist($track);
 
-            return $track;
+        return $track;
     }
 
-    private function emptyTable(string $entityName): void {
+    private function emptyTable(string $entityName): void
+    {
         $this->em->createQuery(sprintf('DELETE %s e', $entityName))->execute();
     }
 
-    private function loadEntityData(string $entityName): void {
+    private function loadEntityData(string $entityName): void
+    {
         $this->emptyTable($entityName);
         $data = self::ENTITIES[$entityName];
 
@@ -141,7 +142,7 @@ class LoadDataCommand extends Command
             TrackKind::class => new TrackKind($datum),
             TrackTag::class => new TrackTag($datum),
             Collective::class => $this->createCollective($datum),
-            User::class => (new User($datum))->setRoles([ 'ROLE_ADMIN' ])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
+            User::class => (new User($datum))->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             Track::class => $this->createTrack($datum),
             default => null,
         };

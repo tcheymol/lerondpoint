@@ -2,10 +2,8 @@
 
 namespace App\Domain\Images;
 
-use Reconnect\S3Bundle\Service\FlysystemS3Client;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Uid\UuidV4;
 
 readonly class ThumbnailGenerator
 {
@@ -17,7 +15,7 @@ readonly class ThumbnailGenerator
             return null;
         }
 
-        if ($extension === 'application/pdf') {
+        if ('application/pdf' === $extension) {
             return $this->buildPdfThumbnail($file);
         } elseif (getimagesize($file->getPathname())) {
             return $this->buildImageThumbnail($file->getRealPath(), $size);
@@ -26,8 +24,8 @@ readonly class ThumbnailGenerator
         }
     }
 
-    private function buildThumbnails(File $file): string {
-
+    private function buildThumbnails(File $file): string
+    {
     }
 
     private function buildPdfThumbnail(File $file): string

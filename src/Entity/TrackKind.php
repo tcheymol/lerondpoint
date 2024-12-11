@@ -19,9 +19,6 @@ class TrackKind
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name;
-
     /**
      * @var Collection<int, Track>
      */
@@ -31,9 +28,11 @@ class TrackKind
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $fileTypes = null;
 
-    public function __construct(?string $name = null)
+    public function __construct(
+        #[ORM\Column(length: 255)]
+        private ?string $name = null
+    )
     {
-        $this->name = $name;
         $this->tracks = new ArrayCollection();
     }
 

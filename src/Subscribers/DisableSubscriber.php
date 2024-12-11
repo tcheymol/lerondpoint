@@ -27,10 +27,10 @@ readonly class DisableSubscriber
             return;
         }
 
-        if ($args->hasChangedField('disabled') && $args->getNewValue('disabled') === true) {
+        if ($args->hasChangedField('disabled') && true === $args->getNewValue('disabled')) {
             $entity->setDisabledBy($this->security->getUser());
         }
-        if ($args->hasChangedField('validated') && $args->getNewValue('validated') === true) {
+        if ($args->hasChangedField('validated') && true === $args->getNewValue('validated')) {
             $entity->setValidatedBy($this->security->getUser());
         }
 

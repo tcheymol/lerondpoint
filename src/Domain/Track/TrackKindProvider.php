@@ -12,7 +12,8 @@ readonly class TrackKindProvider
     }
 
     /** @return array<Track> */
-    public function provide(): array {
+    public function provide(): array
+    {
         return $this->repository->findAll();
     }
 }

@@ -17,8 +17,7 @@ readonly class AttachmentHelper
         private FlysystemS3Client $s3Adapter,
         private ThumbnailGenerator $thumbnailGenerator,
         private LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     public function createAttachment(UploadedFile $file): ?Attachment
@@ -57,7 +56,8 @@ readonly class AttachmentHelper
     }
 
     /** @throws \Exception */
-    private function uploadThumbnails(UploadedFile $file, Attachment $attachment): void {
+    private function uploadThumbnails(UploadedFile $file, Attachment $attachment): void
+    {
         $attachment->setThumbnailObjectId($this->uploadThumbnail($file, $attachment));
         $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, $attachment, 1024));
     }

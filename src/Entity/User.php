@@ -13,11 +13,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     use BlameableTrait;
 
-    const array ROLES = [
+    public const array ROLES = [
         'ROLE_USER' => 'ROLE_USER',
         'ROLE_VALIDATED_USER' => 'ROLE_VALIDATED_USER',
         'ROLE_MODERATOR' => 'ROLE_MODERATOR',
@@ -29,9 +29,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
-    private ?string $email;
-
     /** @var string[] */
     #[ORM\Column]
     private array $roles = [];
@@ -41,18 +38,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    #[\Override]
     public function __toString(): string
     {
-        return $this->email;
+        return (string) $this->email;
     }
 
     /** @var Collection<int, Collective> */
     #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
     private Collection $collectives;
 
-    public function __construct(?string $email = null)
+    public function __construct(
+        #[ORM\Column(length: 180)]
+        private ?string $email = null
+    )
     {
-        $this->email = $email;
         $this->collectives = new ArrayCollection();
     }
 
@@ -78,6 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @see UserInterface
      */
+    #[\Override]
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -88,6 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return list<string>
      */
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -120,9 +122,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return in_array($string, $this->roles, true);
     }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
+    #[\Override]
     public function getPassword(): string
     {
         return $this->password;
@@ -147,9 +151,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[\Override]
     public function eraseCredentials(): void
     {
-         $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     /** @return Collection<int, Collective> */

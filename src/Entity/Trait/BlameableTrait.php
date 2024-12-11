@@ -139,6 +139,4 @@ trait BlameableTrait
     {
         $this->validatedBy = $validatedBy;
     }
-
-
 }

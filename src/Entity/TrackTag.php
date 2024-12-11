@@ -18,18 +18,17 @@ class TrackTag
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
     /**
      * @var Collection<int, Track>
      */
     #[ORM\ManyToMany(targetEntity: Track::class, mappedBy: 'tags')]
     private Collection $tracks;
 
-    public function __construct(?string $name = null)
+    public function __construct(
+        #[ORM\Column(length: 255)]
+        private ?string $name = null
+    )
     {
-        $this->name = $name;
         $this->tracks = new ArrayCollection();
     }
 

@@ -4,7 +4,7 @@ namespace App\Helper;
 
 class TraitHelper
 {
-    static function usesTrait(?object $entity, string $traitFqcn): bool
+    public static function usesTrait(?object $entity, string $traitFqcn): bool
     {
         if (!$entity) {
             return false;
