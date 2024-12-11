@@ -4,7 +4,7 @@ namespace App\Domain\Images;
 
 class PdfPreviewBuilder
 {
-    public static function genPdfThumbnail($source, $target, $size = 256, $page = 1): ?string
+    public static function genPdfThumbnail(string $source, string $target, int $size = 256, int $page = 1): ?string
     {
         try {
             if (file_exists($source) && !is_dir($source)) {

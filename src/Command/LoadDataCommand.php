@@ -26,33 +26,54 @@ class LoadDataCommand extends Command
 {
     public const array ENTITIES = [
         ActionKind::class => [
-            'Rassemblement et tractage sur un rond-point',
-            "Cabane à proximité d'un rond-point ou d'une route",
-            "Animation d'un lieu (exemples de bâtiment, hangar ou terrain) pour en faire un espace d'entraide, de réunion, d'éducation populaire (conférence gesticulée, concert, projection, etc.).",
-            "Tractage ou tenue de stand dans l'espace public, action d'information vers la population (exemple : défense des services publics locaux)",
-            'Réunion publique autour de questions de citoyenneté et de démocratie',
-            'Jardin partagé',
-            'Permanence administrative pour aider les personnes en situation de précarité',
-            'Maraude',
-            'Distribution alimentaire',
-            'Participation aux mobilisations sociales/manifestations',
-            "Gestion et animation d'une épicerie participative",
-            "Animation d'une émission de radio",
-            "Rédaction d'un journal local",
-            "Animation d'un local type ressourcerie",
+            ['name' => 'Rassemblement et tractage sur un rond-point'],
+            ['name' => "Cabane à proximité d'un rond-point ou d'une route"],
+            ['name' => "Animation d'un lieu (exemples de bâtiment, hangar ou terrain) pour en faire un espace d'entraide, de réunion, d'éducation populaire (conférence gesticulée, concert, projection, etc.)."],
+            ['name' => "Tractage ou tenue de stand dans l'espace public, action d'information vers la population (exemple : défense des services publics locaux)"],
+            ['name' => 'Réunion publique autour de questions de citoyenneté et de démocratie'],
+            ['name' => 'Jardin partagé'],
+            ['name' => 'Permanence administrative pour aider les personnes en situation de précarité'],
+            ['name' => 'Maraude'],
+            ['name' => 'Distribution alimentaire'],
+            ['name' => 'Participation aux mobilisations sociales/manifestations'],
+            ['name' => "Gestion et animation d'une épicerie participative"],
+            ['name' => "Animation d'une émission de radio"],
+            ['name' => "Rédaction d'un journal local"],
+            ['name' => "Animation d'un local type ressourcerie"],
         ],
-        TrackKind::class => ['audio', 'text', 'image', 'video'],
+        TrackKind::class => [
+            ['name' => 'audio'],
+            ['name' => 'text'],
+            ['name' => 'image'],
+            ['name' => 'video'],
+        ],
         TrackTag::class => [
-            'Appel', 'Tract', 'Chanson', 'Doléances', 'Poème', 'Rond-point',
-            'Manifestation', 'Péage', 'AdA', 'RIC', 'Actions', 'Radar',
-            'Gilet jaune', 'Live', 'Film', 'Cabane', 'Goodies', 'Banderole',
-            'Monument', 'Livre',
+            ['name' => 'Appel'],
+            ['name' => 'Tract'],
+            ['name' => 'Chanson'],
+            ['name' => 'Doléances'],
+            ['name' => 'Poème'],
+            ['name' => 'Rond-point'],
+            ['name' => 'Manifestation'],
+            ['name' => 'Péage'],
+            ['name' => 'AdA'],
+            ['name' => 'RIC'],
+            ['name' => 'Actions'],
+            ['name' => 'Radar'],
+            ['name' => 'Gilet jaune'],
+            ['name' => 'Live'],
+            ['name' => 'Film'],
+            ['name' => 'Cabane'],
+            ['name' => 'Goodies'],
+            ['name' => 'Banderole'],
+            ['name' => 'Monument'],
+            ['name' => 'Livre'],
         ],
         User::class => [
-            't@g.c',
-            'thibaut@le-rondpoint.com',
-            'djo@le-rondpoint.com',
-            'adrien@le-rondpoint.com',
+            ['email' => 't@g.c'],
+            ['email' => 'thibaut@le-rondpoint.com'],
+            ['email' => 'djo@le-rondpoint.com'],
+            ['email' => 'adrien@le-rondpoint.com'],
         ],
         Track::class => [
             ['name' => "L'assemblée des assemblées de Commercy", 'file' => 'adac.jpg'],
@@ -67,7 +88,15 @@ class LoadDataCommand extends Command
             ['name' => 'Tract Acte X', 'file' => 'actex.pdf'],
         ],
         Collective::class => [
-            ['name' => 'Groupe Beliard', 'lat' => 48.8958803, 'lon' => 2.3330117, 'address_line1' => '20 Rue Georgette Agutte', 'city' => 'Paris', 'country' => 'France', 'postcode' => '75018', 'state' => 'Ile-de-France'],
+            ['name' => 'Groupe Beliard',
+                'lat' => '48.8958803',
+                'lon' => '2.3330117',
+                'address_line1' => '20 Rue Georgette Agutte',
+                'city' => 'Paris',
+                'country' => 'France',
+                'postcode' => '75018',
+                'state' => 'Ile-de-France',
+            ],
         ],
     ];
 
@@ -80,7 +109,7 @@ class LoadDataCommand extends Command
         parent::__construct();
     }
 
-    public function createAttachment(string $fileName): Attachment
+    public function createAttachment(string $fileName): ?Attachment
     {
         $originalFilePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $fileName);
         $tmpFilePath = sprintf('%s/var/tmp/%s', $this->kernelProjectDir, $fileName);
@@ -105,11 +134,14 @@ class LoadDataCommand extends Command
         return Command::SUCCESS;
     }
 
+    /** @param array<string, string> $trackData */
     private function createTrack(array $trackData): Track
     {
         $track = (new Track())->setName($trackData['name']);
         $attachment = $this->createAttachment($trackData['file']);
-        $track->attachmentsIds[] = $attachment->getId();
+        if ($attachment && $attachment->getId()) {
+            $track->attachmentsIds[] = (string) $attachment->getId();
+        }
         $this->trackPersister->persist($track);
 
         return $track;
@@ -135,26 +167,28 @@ class LoadDataCommand extends Command
         $this->em->flush();
     }
 
-    private function createEntity(string $entityName, array|string $datum): ?object
+    /** @param array<string, string> $datum */
+    private function createEntity(string $entityName, array $datum): ?object
     {
         return match ($entityName) {
-            ActionKind::class => new ActionKind($datum),
-            TrackKind::class => new TrackKind($datum),
-            TrackTag::class => new TrackTag($datum),
+            ActionKind::class => new ActionKind($datum['name']),
+            TrackKind::class => new TrackKind($datum['name']),
+            TrackTag::class => new TrackTag($datum['name']),
             Collective::class => $this->createCollective($datum),
-            User::class => (new User($datum))->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
+            User::class => (new User($datum['email']))->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             Track::class => $this->createTrack($datum),
             default => null,
         };
     }
 
+    /** @param array<string, string> $datum */
     private function createCollective(array $datum): Collective
     {
         $owner = $this->em->getRepository(User::class)->findOneBy([]);
 
         return (new Collective($datum['name']))
-            ->setLat($datum['lat'])
-            ->setLon($datum['lon'])
+            ->setLat((float) $datum['lat'])
+            ->setLon((float) $datum['lon'])
             ->setAddressLine1($datum['address_line1'])
             ->setCity($datum['city'])
             ->setCountry($datum['country'])

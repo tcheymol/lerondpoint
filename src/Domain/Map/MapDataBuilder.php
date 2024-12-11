@@ -11,6 +11,7 @@ readonly class MapDataBuilder
     {
     }
 
+    /** @return array{lat: ?float, lon: ?float, name: ?string}[] */
     public function build(): array
     {
         return array_map(

@@ -25,6 +25,7 @@ class TrackKind
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'kind')]
     private Collection $tracks;
 
+    /** @var string[] */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $fileTypes = null;
 
@@ -53,9 +54,7 @@ class TrackKind
         return $this;
     }
 
-    /**
-     * @return Collection<int, Track>
-     */
+    /** @return Collection<int, Track> */
     public function getTracks(): Collection
     {
         return $this->tracks;
@@ -83,11 +82,13 @@ class TrackKind
         return $this;
     }
 
+    /** @return ?string[] */
     public function getFileTypes(): ?array
     {
         return $this->fileTypes;
     }
 
+    /** @param ?string[] $fileTypes */
     public function setFileTypes(?array $fileTypes): static
     {
         $this->fileTypes = $fileTypes;
