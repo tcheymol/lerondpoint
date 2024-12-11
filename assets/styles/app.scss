@@ -158,6 +158,10 @@ main {
     }
 }
 
+.mnh-100 {
+    min-height: 100%;
+}
+
 .mh-150px {
     max-height: 150px;
     @include media-breakpoint-up(sm) {
