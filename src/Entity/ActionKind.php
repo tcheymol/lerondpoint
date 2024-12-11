@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\ActionKindRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActionKindRepository::class)]
-class ActionKind
+class ActionKind implements BlameableInterface
 {
     use BlameableTrait;
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable, BlameableInterface
 {
     use BlameableTrait;
 
@@ -77,11 +78,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
      * A visual identifier that represents this user.
      *
      * @see UserInterface
+     *
      */
     #[\Override]
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->email ?: 'Anonymous user';
     }
 
     /**

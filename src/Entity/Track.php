@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Domain\Location\Region;
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +12,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
-class Track
+class Track implements BlameableInterface
 {
     use BlameableTrait;
 

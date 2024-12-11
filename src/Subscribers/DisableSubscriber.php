@@ -2,8 +2,8 @@
 
 namespace App\Subscribers;
 
-use App\Entity\Trait\BlameableTrait;
-use App\Helper\TraitHelper;
+use App\Entity\Inteface\BlameableInterface;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
@@ -23,42 +23,55 @@ readonly class DisableSubscriber
     public function preUpdate(PreUpdateEventArgs $args): void
     {
         $entity = $args->getObject();
-        if (!TraitHelper::usesTrait($entity, BlameableTrait::class)) {
+        if (!$entity instanceof BlameableInterface) {
+            return;
+        }
+        $entity->setUpdatedAt(new \DateTimeImmutable());
+
+        $user = $this->security->getUser();
+        if (!$user instanceof User) {
             return;
         }
 
         if ($args->hasChangedField('disabled') && true === $args->getNewValue('disabled')) {
-            $entity->setDisabledBy($this->security->getUser());
+            $entity->setDisabledBy($user);
         }
         if ($args->hasChangedField('validated') && true === $args->getNewValue('validated')) {
-            $entity->setValidatedBy($this->security->getUser());
+            $entity->setValidatedBy($user);
         }
 
-        $entity->setUpdatedAt(new \DateTimeImmutable());
-        $entity->setUpdatedBy($this->security->getUser());
+        $entity->setUpdatedBy($user);
     }
 
     public function prePersist(PrePersistEventArgs $args): void
     {
         $entity = $args->getObject();
-        if (!TraitHelper::usesTrait($entity, BlameableTrait::class)) {
+        if (!$entity instanceof BlameableInterface) {
             return;
         }
-
         $entity->setCreatedAt(new \DateTimeImmutable());
-        $entity->setCreatedBy($this->security->getUser());
         $entity->setUpdatedAt(new \DateTimeImmutable());
-        $entity->setUpdatedBy($this->security->getUser());
+
+        $user = $this->security->getUser();
+        if ($user instanceof User) {
+            $entity->setCreatedBy($user);
+            $entity->setUpdatedBy($user);
+        }
+
     }
 
     public function preRemove(PreRemoveEventArgs $args): void
     {
         $entity = $args->getObject();
-        if (!TraitHelper::usesTrait($entity, BlameableTrait::class)) {
+        if (!$entity instanceof BlameableInterface) {
             return;
         }
 
         $entity->setDeletedAt(new \DateTimeImmutable());
-        $entity->setDeletedBy($this->security->getUser());
+
+        $user = $this->security->getUser();
+        if ($user instanceof User) {
+            $entity->setDeletedBy($user);
+        }
     }
 }

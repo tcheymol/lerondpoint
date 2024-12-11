@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
 use Doctrine\DBAL\Types\Types;
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
-class Attachment
+class Attachment implements BlameableInterface
 {
     use BlameableTrait;
 
