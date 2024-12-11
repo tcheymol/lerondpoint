@@ -20,8 +20,11 @@ readonly class AttachmentHelper
     ) {
     }
 
-    public function createAttachment(UploadedFile $file): ?Attachment
+    public function createAttachment(?UploadedFile $file): ?Attachment
     {
+        if (!$file) {
+            return null;
+        }
         try {
             $attachment = Attachment::fromFile($file);
 

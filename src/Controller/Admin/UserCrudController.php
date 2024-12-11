@@ -38,26 +38,32 @@ class UserCrudController extends AbstractCrudController
     }
 
     #[\Override]
-    /** @param User $entityInstance */
     public function persistEntity(EntityManagerInterface $entityManager, mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         $this->updatePassword($entityInstance);
 
         parent::persistEntity($entityManager, $entityInstance);
     }
 
     #[\Override]
-    /** @param User $entityInstance */
     public function updateEntity(EntityManagerInterface $entityManager, mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         $this->updatePassword($entityInstance);
 
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-    /** @param User $entityInstance */
     public function updatePassword(mixed $entityInstance): void
     {
+        if (!$entityInstance instanceof User) {
+            return;
+        }
         if ($entityInstance->getPlainPassword()) {
             $hashedPassword = $this->passwordHasher->hashPassword($entityInstance, $entityInstance->getPlainPassword());
             $entityInstance->setPassword($hashedPassword);
