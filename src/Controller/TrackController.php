@@ -7,7 +7,9 @@ use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
+use App\Form\Model\Search;
 use App\Form\Model\UrlModel;
+use App\Form\SearchType;
 use App\Form\TrackType;
 use App\Form\UrlType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,13 +21,25 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/track')]
 class TrackController extends AbstractController
 {
-    #[Route('', name: 'track_index', methods: ['GET'])]
-    public function index(TrackProvider $provider): Response
+    #[Route('', name: 'track_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, TrackProvider $provider): Response
     {
-        return $this->render('track/index.html.twig', ['tracks' => $provider->provide()]);
+        $search = new Search($request->query->getString('q'));
+        $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('track_index', [
+                'q' => $search->text,
+            ]);
+        }
+
+        return $this->render('track/index.html.twig', [
+            'tracks' => $provider->provide($search),
+            'form' => $form->createView(),
+        ]);
     }
 
-    #[Route('/new', name: 'track_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'track_new', methods: ['GET'])]
     public function new(): Response
     {
         return $this->render('track/new.html.twig');

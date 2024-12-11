@@ -40,4 +40,14 @@ class TrackRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /** @return Track[] */
+    public function search(string $searchText): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.name LIKE :searchText')
+            ->setParameter('searchText', '%'.$searchText.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

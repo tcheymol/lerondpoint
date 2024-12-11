@@ -6,6 +6,24 @@
 {% block content %}
     <div class="row">
         <h1 class="col-12 text-center text-dark mt-3">{{ 'TracksListTitle'|trans }}</h1>
+        <div class="col-12 col-sm-10 offset-sm-1">
+            <div class="row px-3 text-dark">
+                <div class="bg-primary p-4">
+                    {{ form_start(form) }}
+                    <div class="row d-flex align-items-center">
+                        <div class="col">
+                            {{ form_widget(form.text)}}
+                        </div>
+                        <div class="col-1">
+                        <button class="btn btn-dark rounded-0">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    </div>
+                    {{ form_end(form) }}
+            </div>
+            </div>
+        </div>
         <div class="col-12 col-sm-10 offset-sm-1 h-100">
             <div class="row px-3">
                 {% for track in tracks %}

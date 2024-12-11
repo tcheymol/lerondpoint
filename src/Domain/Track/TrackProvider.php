@@ -3,6 +3,7 @@
 namespace App\Domain\Track;
 
 use App\Entity\Track;
+use App\Form\Model\Search;
 use App\Repository\TrackRepository;
 
 readonly class TrackProvider
@@ -14,9 +15,12 @@ readonly class TrackProvider
     }
 
     /** @return array<Track> */
-    public function provide(): array
+    public function provide(Search $search): array
     {
-        $allTracks = $this->trackRepository->findAll();
+        $searchText = $search->text;
+        $allTracks = $searchText
+            ? $this->trackRepository->search($searchText)
+            : $this->trackRepository->findAll();
 
         foreach ($allTracks as $track) {
             $this->attachmentHelper->hydrateTrackWithUrl($track);
