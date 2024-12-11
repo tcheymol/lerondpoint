@@ -6,16 +6,18 @@ import { Controller } from '@hotwired/stimulus';
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static targets = [ 'input', 'preview' ];
+    static targets = [ 'input', 'preview', 'button' ];
 
     preview() {
         try {
             this.previewTarget.src = '';
+            this.buttonTarget.disabled = true;
             const url = new URL(this.inputTarget.value);
             const urlParams = new URLSearchParams(url.search);
             const videoId = urlParams.get('v');
             if (videoId) {
                 this.previewTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                this.buttonTarget.disabled = '';
             }
         } catch (e) {
             console.log(e);
