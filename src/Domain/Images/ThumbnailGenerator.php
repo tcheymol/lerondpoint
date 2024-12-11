@@ -24,7 +24,7 @@ readonly class ThumbnailGenerator
         }
     }
 
-    private function buildPdfThumbnail(File $file): string
+    private function buildPdfThumbnail(File $file): ?string
     {
         $originalFilename = $file instanceof UploadedFile
             ? $file->getClientOriginalName()

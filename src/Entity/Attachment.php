@@ -58,7 +58,7 @@ class Attachment implements BlameableInterface
     public static function fromFile(UploadedFile $file): self
     {
         return (new Attachment())
-            ->setExtension($file->guessExtension())
+            ->setExtension((string) $file->guessExtension())
             ->setKind($file->getMimeType())
             ->setSize($file->getSize());
     }
