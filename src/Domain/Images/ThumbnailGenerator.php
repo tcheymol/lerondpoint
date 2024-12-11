@@ -24,10 +24,6 @@ readonly class ThumbnailGenerator
         }
     }
 
-    private function buildThumbnails(File $file): string
-    {
-    }
-
     private function buildPdfThumbnail(File $file): string
     {
         $originalFilename = $file instanceof UploadedFile

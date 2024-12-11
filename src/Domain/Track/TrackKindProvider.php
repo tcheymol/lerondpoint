@@ -2,7 +2,7 @@
 
 namespace App\Domain\Track;
 
-use App\Entity\Track;
+use App\Entity\TrackKind;
 use App\Repository\TrackKindRepository;
 
 readonly class TrackKindProvider
@@ -11,7 +11,7 @@ readonly class TrackKindProvider
     {
     }
 
-    /** @return array<Track> */
+    /** @return TrackKind[] */
     public function provide(): array
     {
         return $this->repository->findAll();

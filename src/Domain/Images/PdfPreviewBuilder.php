@@ -9,11 +9,11 @@ class PdfPreviewBuilder
         try {
             if (file_exists($source) && !is_dir($source)) {
                 if ('application/pdf' != \mime_content_type($source)) {
-                    return false;
+                    return null;
                 }
 
-                $sepa = '/';
-                $target = dirname((string) $source).$sepa.$target;
+                $separator = '/';
+                $target = dirname((string) $source).$separator.$target;
                 $size = intval($size);
                 $page = intval($page);
 

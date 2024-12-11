@@ -54,9 +54,9 @@ class Attachment
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $width = null;
 
-    public static function fromFile(UploadedFile $file): static
+    public static function fromFile(UploadedFile $file): self
     {
-        return (new static())
+        return (new Attachment())
             ->setExtension($file->guessExtension())
             ->setKind($file->getMimeType())
             ->setSize($file->getSize());
