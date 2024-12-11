@@ -80,7 +80,7 @@ readonly class AttachmentHelper
     {
         $imageInfo = getimagesize($file);
         if ($imageInfo) {
-            $attachment->setWidth($imageInfo[0])->setHeight($imageInfo[1]);
+            $attachment->setWidth((string) $imageInfo[0])->setHeight((string) $imageInfo[1]);
         }
     }
 }

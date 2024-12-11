@@ -32,7 +32,7 @@ class PdfPreviewBuilder
                     $imW = 1;
                 }
 
-                $sizR = round($size * (min($imW, $imH) / max($imW, $imH)));
+                $sizR = (int) round($size * (min($imW, $imH) / max($imW, $imH)));
 
                 $img->setImageColorspace(255);
                 $img->setImageBackgroundColor('white');
