@@ -1,0 +1,7 @@
+{% set attachment = track.attachments|first %}
+{% if attachment and attachment.thumbnailUrl is not empty %}
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#carouselModal">
+    {{ include('attachment/_attachment.html.twig', {attachment}) }}
+</button>
+{% endif %}
+{{ include('track/components/_carousel.html.twig', {track}) }}

@@ -1,14 +1,24 @@
 {% set attachment = track.attachments|first %}
-    {% if attachment and attachment.thumbnailUrl is not empty %}
+{% set thumbnailUrl = track.url
+    ? track.videoPreview
+    : attachment and attachment.thumbnailUrl
+        ? attachment.thumbnailUrl
+        : null
+%}
+{% set kind = attachment and attachment.kind == 'application/pdf'
+    ? 'pdf'
+    : track.url ? 'video' : 'image'
+%}
+    {% if thumbnailUrl %}
         <div class="col-6 col-sm-4 col-md-3 p-1 mt-4 hover-rotate-5">
-            <a class="btn btn-link p-0 w-100 h-100 bg-dark overflow-hidden {{ attachment.kind == 'application/pdf' ? '' : 'border border-black border-4' }} "
+            <a class="btn btn-link p-0 w-100 h-100 bg-dark overflow-hidden {{ kind == 'pdf' ? '' : 'border border-black border-4' }} "
                href="{{ path('track_show', {id: track.id}) }}"
                style="max-height: 150px;">
                 <img
                         style="max-width: 100%; overflow: hidden"
-                        src="{{ attachment.thumbnailUrl }}"
-                        class="mnh-100 {{ attachment.kind == 'application/pdf' ? 'h-100' : 'w-100' }}"
-                        alt="{{ track.name ~ attachment.id }}"
+                        src="{{ thumbnailUrl }}"
+                        class="mnh-100 {{ kind == 'pdf' ? 'h-100' : 'w-100' }}"
+                        alt="{{ track.name }}"
                 />
             </a>
             <p class="fs-xs text-dark text-start">

@@ -10,15 +10,13 @@
         <div class="col-12 p-4">
             <div class="row">
                 <div class="col-12 col-sm-7">
-                    {% set attachment = track.attachments|first %}
-                    {% if attachment and attachment.thumbnailUrl is not empty %}
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#carouselModal">
-                            {{ include('attachment/_attachment.html.twig', {attachment}) }}
-                        </button>
+                    {% if track.url %}
+                        {{ include('track/components/_track_video.html.twig', {track}) }}
+                    {% else %}
+                        {{ include('track/components/_track_image.html.twig', {track}) }}
                     {% endif %}
                 </div>
                 {{ include('track/components/_information.html.twig', {track}) }}
-                {{ include('track/components/_carousel.html.twig', {track}) }}
             </div>
         </div>
     </div>
