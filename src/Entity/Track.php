@@ -1,7 +1,5 @@
 <?php
 
-phpinfo();
-
 namespace App\Entity;
 
 use App\Domain\Location\Region;
