@@ -14,7 +14,7 @@
                             'data-video-preview-target': 'input',
                             'data-action': 'video-preview#preview',
                         }}) }}
-                            <button class="btn btn-primary mt-4">{{ 'CreateTrack'|trans }}</button>
+                            <button disabled class="btn btn-primary mt-4" {{ stimulus_target('video-preview', 'button') }}>{{ 'CreateTrack'|trans }}</button>
                         {{ form_end(form) }}
                     </div>
                 </div>
