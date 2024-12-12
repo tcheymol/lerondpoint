@@ -223,4 +223,7 @@ return [
         'version' => '4.0.3',
         'type' => 'css',
     ],
+    'axios' => [
+        'version' => '1.7.9',
+    ],
 ];

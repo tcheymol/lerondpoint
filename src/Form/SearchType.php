@@ -15,7 +15,10 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('text', TextType::class, [
-                'attr' => ['placeholder' => 'Search'],
+                'attr' => [
+                    'placeholder' => 'Search',
+                    'data-action' => 'async-search#search',
+                ],
                 'required' => false,
             ])
         ;

@@ -1,0 +1,5 @@
+<div class="row px-3">
+    {% for track in tracks %}
+        {{ include('track/components/_thumbnail.html.twig', {track}) }}
+    {% endfor %}
+</div>

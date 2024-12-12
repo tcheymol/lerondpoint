@@ -39,6 +39,21 @@ class TrackController extends AbstractController
         ]);
     }
 
+    #[Route('/search', name: 'track_async_search', methods: ['POST'])]
+    public function asyncSearch(Request $request, TrackProvider $provider): Response
+    {
+        $search = new Search($request->query->getString('q'));
+        $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->render('track/components/_tracks_list.html.twig', [
+                'tracks' => $provider->provide($search),
+            ]);
+        }
+
+        return $this->render('components/_empty.html.twig');
+    }
+
     #[Route('/new', name: 'track_new', methods: ['GET'])]
     public function new(): Response
     {

@@ -1,0 +1,16 @@
+<div class="row px-3 text-dark">
+    <div class="bg-primary p-4">
+        {{ form_start(form) }}
+        <div class="row d-flex align-items-center">
+            <div class="col">
+                {{ form_widget(form.text)}}
+            </div>
+            <div class="col-1">
+                <button class="btn btn-dark rounded-0">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
