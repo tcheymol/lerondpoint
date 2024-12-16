@@ -172,11 +172,15 @@ main {
 
 .mh-150px {
     max-height: 150px;
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
         max-height: 200px;
     }
+}
+
+.mh-50px {
+    max-height: 50px;
     @include media-breakpoint-up(md) {
-        max-height: 250px;
+        max-height: 80px;
     }
 }
 

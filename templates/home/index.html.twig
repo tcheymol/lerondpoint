@@ -16,14 +16,36 @@
 
     </div>
     <div class="d-flex flex-column justify-content-around flex-grow-1">
-        {{ include('home/components/_home_title.html.twig') }}
+        <div
+                class="d-flex align-items-center position-relative"
+                style="transform: rotate(-5deg); top: -25px;"
+        >
+            <img class="home-title" src="{{ asset('images/le-rond-point.png') }}" alt="{{ 'HomeTitle'|trans }}">
+        </div>
+
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks.png'), label: 'Tracks'|trans }) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/and-now.png'), label: 'Follows'|trans }) }}
+            <div class="home-button col-6 z-1">
+                <a class="btn btn-link rounded-5 hover-rotate-10" href="{{ path('track_index') }}">
+                    <img class="mh-150px" src="{{ asset('images/tracks.png') }}" alt="{{ 'Tracks'|trans }}">
+                </a>
+            </div>
+            <div class="home-button col-6  z-1">
+                <a class="btn btn-link rounded-5 hover-rotate-10" href="{{ path('app_map') }}">
+                    <img class="mh-150px" src="{{ asset('images/and-now.png') }}" alt="{{ 'Follows'|trans }}">
+                </a>
+            </div>
         </div>
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/share.png'), label: 'Participate'|trans }) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/who-are-we.png'), label: 'WhoAreWe'|trans }) }}
+            <div class="home-button col-6 z-1 d-flex justify-content-center justify-content-md-end">
+                <a class="btn btn-link rounded-5 hover-rotate-10" href="{{ path('track_new') }}">
+                    <img class="mh-50px" src="{{ asset('images/share.png') }}" alt="{{ 'Participate'|trans }}">
+                </a>
+            </div>
+            <div class="home-button col-6 z-1 d-flex justify-content-center justify-content-md-start">
+                <a class="btn btn-link rounded-5 hover-rotate-10" href="{{ path('collective_index') }}">
+                    <img class="mh-50px" src="{{ asset('images/who-are-we.png') }}" alt="{{ 'WhoAreWe'|trans }}">
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
