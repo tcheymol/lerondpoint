@@ -13,27 +13,25 @@ export default class extends Controller {
     }
 
     search = (event) => {
-        console.log(event);
-        const input = event.target;
-        console.log(input);
+        try {
+            const input = event.target;
+            const form = input.form;
+            const params = new FormData(form);
 
-        const form = input.form;
-        console.log(form);
-        const params = new FormData(form);
-        console.log(params);
-
-        axios({
-            method: "post",
-            url: this.urlValue,
-            data: params,
-            headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((response) => {
-            console.log(response);
-            this.containerTarget.innerHTML = response.data;
-        })
-        .catch(function (response) {
-            console.log(response);
-        });
+            axios({
+                method: "post",
+                url: this.urlValue,
+                data: params,
+                headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then((response) => {
+                this.containerTarget.innerHTML = response.data;
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

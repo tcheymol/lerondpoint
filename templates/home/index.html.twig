@@ -18,12 +18,12 @@
     <div class="d-flex flex-column justify-content-around flex-grow-1">
         {{ include('home/components/_home_title.html.twig') }}
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks-btn.png'), label: 'Tracks'|trans, color: 'info', position: 'left'}) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/follow-ups-btn.png'), label: 'Follows'|trans, color: 'primary', position: 'right'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_index'), pictureUrl: asset('images/tracks.png'), label: 'Tracks'|trans }) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('app_map'), pictureUrl: asset('images/and-now.png'), label: 'Follows'|trans }) }}
         </div>
         <div class="d-flex justify-content-around row position-relative">
-            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/actus-btn.png'), label: 'Actus'|trans, color: 'success', position: 'left'}) }}
-            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/contribute-btn.png'), label: 'Participate'|trans, color: 'info', position: 'right'}) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('track_new'), pictureUrl: asset('images/share.png'), label: 'Participate'|trans }) }}
+            {{ include('home/components/_home_button.html.twig', {url: path('collective_index'), pictureUrl: asset('images/who-are-we.png'), label: 'WhoAreWe'|trans }) }}
         </div>
     </div>
 {% endblock %}

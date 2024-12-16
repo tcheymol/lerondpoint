@@ -199,16 +199,7 @@ main {
 }
 .home-button {
     @include media-breakpoint-down(md) {
-        width: 100%;
-
-        &.left {
-
-        }
-        &.right {
-            position: absolute;
-            top: 25%;
-            text-align: end !important;
-        }
+        width: 90%;
     }
 }
 
