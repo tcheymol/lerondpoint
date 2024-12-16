@@ -121,6 +121,14 @@ class TrackController extends AbstractController
         ]);
     }
 
+    #[Route('/{id<\d+>}/carousel', name: 'track_carousel', methods: ['GET'])]
+    public function carousel(Track $track, TrackAttachmentHelper $helper): Response
+    {
+        return $this->render('track/carousel.html.twig', [
+            'track' => $helper->hydrateTrackWithUrl($track),
+        ]);
+    }
+
     #[Route('/{id<\d+>}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
