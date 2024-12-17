@@ -117,7 +117,7 @@ class TrackController extends AbstractController
     public function show(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/show.html.twig', [
-            'track' => $helper->hydrateTrackWithUrl($track),
+            'track' => $helper->hydrateTrackWithUrl($track, 'medium'),
         ]);
     }
 
@@ -125,7 +125,7 @@ class TrackController extends AbstractController
     public function carousel(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/carousel.html.twig', [
-            'track' => $helper->hydrateTrackWithUrl($track),
+            'track' => $helper->hydrateTrackWithUrl($track, 'big'),
         ]);
     }
 

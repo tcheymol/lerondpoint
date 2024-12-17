@@ -45,10 +45,14 @@ readonly class AttachmentHelper
         }
     }
 
-    public function hydrateWithUrl(Attachment $attachment): void
+    public function hydrateWithUrl(Attachment $attachment, string $thumbKind = null): void
     {
-        $attachment->url = $this->s3Adapter->getPreSignedUrl($attachment->getObjectId());
-        $attachment->thumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId());
+        $attachment->url = match ($thumbKind) {
+            'small' => $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId()),
+            'medium' => $this->s3Adapter->getPreSignedUrl($attachment->getMediumThumbnailObjectId()),
+            'big' => $this->s3Adapter->getPreSignedUrl($attachment->getBigThumbnailObjectId()),
+            default => $this->s3Adapter->getPreSignedUrl($attachment->getObjectId()),
+        };
     }
 
     /** @throws \Exception */
@@ -62,6 +66,7 @@ readonly class AttachmentHelper
     private function uploadThumbnails(UploadedFile $file, Attachment $attachment): void
     {
         $attachment->setThumbnailObjectId($this->uploadThumbnail($file, $attachment));
+        $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($file, $attachment, 512));
         $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, $attachment, 1024));
     }
 

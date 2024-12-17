@@ -1,6 +1,6 @@
 {% set attachment = track.attachments|first %}
-{% if attachment and attachment.thumbnailUrl is not empty %}
-<a class="btn btn-link" href="{{ path('track_carousel', {id: track.id}) }}">
-    {{ include('attachment/_attachment.html.twig', {attachment}) }}
-</a>
+{% if attachment and attachment.mediumThumbnailUrl is not empty %}
+    <a class="btn btn-link" href="{{ path('track_carousel', {id: track.id}) }}">
+        {{ include('attachment/_attachment.html.twig', {attachment}) }}
+    </a>
 {% endif %}

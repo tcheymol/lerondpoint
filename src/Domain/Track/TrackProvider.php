@@ -23,7 +23,7 @@ readonly class TrackProvider
             : $this->trackRepository->findAll();
 
         foreach ($allTracks as $track) {
-            $this->attachmentHelper->hydrateTrackWithUrl($track);
+            $this->attachmentHelper->hydrateTrackWithUrl($track, 'small');
         }
 
         return $allTracks;

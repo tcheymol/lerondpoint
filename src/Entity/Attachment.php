@@ -43,9 +43,14 @@ class Attachment implements BlameableInterface
     private ?string $thumbnailObjectId = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mediumThumbnailObjectId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $bigThumbnailObjectId = null;
 
     public ?string $thumbnailUrl = null;
+
+    public ?string $mediumThumbnailUrl = null;
 
     public ?string $bigThumbnailUrl = null;
 
@@ -184,6 +189,18 @@ class Attachment implements BlameableInterface
     public function setBigThumbnailObjectId(?string $bigThumbnailObjectId): static
     {
         $this->bigThumbnailObjectId = $bigThumbnailObjectId;
+
+        return $this;
+    }
+
+    public function getMediumThumbnailObjectId(): ?string
+    {
+        return $this->mediumThumbnailObjectId;
+    }
+
+    public function setMediumThumbnailObjectId(?string $mediumThumbnailObjectId): static
+    {
+        $this->mediumThumbnailObjectId = $mediumThumbnailObjectId;
 
         return $this;
     }
