@@ -7,7 +7,12 @@
 {% block content %}
     <div class="h-100 w-100" {{ stimulus_controller('map', {collectives}) }}>
         <div id="map" class="h-100 w-100"></div>
-        {% set maps = [ 'mapGuadeloupe', 'mapMartinique', 'mapGuyane', 'mapReunion', 'mapMayotte' ] %}
+        <div class="position-absolute border-3 border-success mt-2 bg-dark"
+             style="left: 50px; top: 50px; z-index: 1000; border-style: solid; padding-right: 25px"
+        >
+            <div id="autocomplete" class="autocomplete-container position-relative"></div>
+        </div>
+        {% set maps = [ 'mapGuadeloupe', 'mapMartinique', 'mapReunion', 'mapMayotte', 'mapGuyane' ] %}
         <div class="position-absolute border-3 border-success"
             style="right: 0; bottom: 40px; z-index: 1000; border-style: solid"
          >

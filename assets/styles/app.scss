@@ -184,6 +184,16 @@ main {
     }
 }
 
+.geoapify-autocomplete-item {
+    text-align: left;
+}
+
+.geoapify-close-button {
+    position: absolute;
+    top: 0;
+    right: -25px;
+}
+
 .form-control {
     border-radius: 0;
 }
