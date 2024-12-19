@@ -56,7 +56,7 @@ class Track implements BlameableInterface
     private ?int $year = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Location = null;
+    private ?string $location = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?Region $region = null;
@@ -215,12 +215,12 @@ class Track implements BlameableInterface
 
     public function getLocation(): ?string
     {
-        return $this->Location;
+        return $this->location;
     }
 
-    public function setLocation(?string $Location): static
+    public function setLocation(?string $location): static
     {
-        $this->Location = $Location;
+        $this->location = $location;
 
         return $this;
     }

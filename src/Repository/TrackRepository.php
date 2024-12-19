@@ -45,7 +45,21 @@ class TrackRepository extends ServiceEntityRepository
     public function search(string $searchText): array
     {
         return $this->createQueryBuilder('t')
-            ->where('t.name LIKE :searchText')
+            ->innerJoin('t.kind', 'k')
+            ->innerJoin('t.collective', 'c')
+            ->innerJoin('t.createdBy', 'u')
+            ->innerJoin('t.tags', 'tg')
+            ->where('
+                t.name LIKE :searchText
+                OR t.description LIKE :searchText
+                OR t.location LIKE :searchText
+                OR t.region LIKE :searchText
+                OR t.year LIKE :searchText
+                OR k.name LIKE :searchText
+                OR c.name LIKE :searchText
+                OR u.email LIKE :searchText
+                OR tg.name LIKE :searchText
+            ')
             ->setParameter('searchText', '%'.$searchText.'%')
             ->getQuery()
             ->getResult();
