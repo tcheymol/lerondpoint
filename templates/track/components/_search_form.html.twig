@@ -1,15 +1,22 @@
 <div class="row px-3 text-dark">
-    <div class="bg-primary p-4">
+    <div class="bg-primary p-2 p-sm-3 p-md-4"
+         style="background: url({{ asset('images/tracks-bg.jpg') }}) no-repeat center center; background-size: contain;"
+    >
         {{ form_start(form) }}
         <div class="row d-flex align-items-center">
-            <div class="col">
+            <div class="col-10 col-sm-11">
                 {{ form_widget(form.text)}}
             </div>
-            <div class="col-1">
+            <div class="col-2 col-sm-1">
                 <button class="btn btn-dark rounded-0">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
+            <div class="col-6 col-md-4 mt-3">{{ form_widget(form.kind)}}</div>
+            <div class="col-6 col-md-4 mt-3">{{ form_widget(form.tags)}}</div>
+            <div class="col-6 col-md-4 mt-3">{{ form_widget(form.region)}}</div>
+            <div class="col-6 col-md-4 mt-3">{{ form_widget(form.year)}}</div>
+            <div class="col-6 col-md-4 mt-3">{{ form_widget(form.location)}}</div>
         </div>
         {{ form_end(form) }}
     </div>

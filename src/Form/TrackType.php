@@ -6,7 +6,6 @@ use App\Domain\Location\Region;
 use App\Domain\Security\UserAwareTrait;
 use App\Entity\Collective;
 use App\Entity\Track;
-use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -43,7 +42,7 @@ class TrackType extends AbstractType
                 'class' => Region::class,
                 'attr' => ['data-controller' => 'tomselect'],
             ])
-            ->add('description', TextAreaType::class, [
+            ->add('description', TextareaType::class, [
                 'attr' => ['rows' => 5],
             ])
             ->add('location')

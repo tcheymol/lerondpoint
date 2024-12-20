@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import axios from 'axios';
+import debounce from 'lodash/debounce';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -12,7 +13,11 @@ export default class extends Controller {
         url: String,
     }
 
-    search = (event) => {
+    initialize(){
+        this.search = debounce(this.search, 1000).bind(this)
+    }
+
+    search(event) {
         try {
             const input = event.target;
             const form = input.form;
@@ -22,16 +27,16 @@ export default class extends Controller {
                 method: "post",
                 url: this.urlValue,
                 data: params,
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {"Content-Type": "multipart/form-data"},
             })
-            .then((response) => {
-                this.containerTarget.innerHTML = response.data;
-            })
-            .catch(function (response) {
-                console.log(response);
-            });
+                .then((response) => {
+                    this.containerTarget.innerHTML = response.data;
+                })
+                .catch(function (response) {
+                    console.log(response);
+                });
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 }

@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackKindRepository::class)]
-class TrackKind implements BlameableInterface
+class TrackKind implements BlameableInterface, \Stringable
 {
     use BlameableTrait;
 
@@ -35,6 +35,12 @@ class TrackKind implements BlameableInterface
         private ?string $name = null,
     ) {
         $this->tracks = new ArrayCollection();
+    }
+
+    #[\Override]
+    public function __toString(): string
+    {
+        return $this->name ?? 'Unknown';
     }
 
     public function getId(): ?int

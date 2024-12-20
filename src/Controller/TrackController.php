@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Domain\Search\SearchFactory;
+use App\Domain\Search\SearchType;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackKindProvider;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
-use App\Form\Model\Search;
 use App\Form\Model\UrlModel;
-use App\Form\SearchType;
 use App\Form\TrackType;
 use App\Form\UrlType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,15 +22,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class TrackController extends AbstractController
 {
     #[Route('', name: 'track_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, TrackProvider $provider): Response
+    public function index(Request $request, TrackProvider $provider, SearchFactory $factory): Response
     {
-        $search = new Search($request->query->getString('q'));
+        $search = $factory->create($request->query->all());
         $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('track_index', [
-                'q' => $search->text,
-            ]);
+            return $this->redirectToRoute('track_index', $search->toParamsArray());
         }
 
         return $this->render('track/index.html.twig', [
@@ -40,18 +38,16 @@ class TrackController extends AbstractController
     }
 
     #[Route('/search', name: 'track_async_search', methods: ['POST'])]
-    public function asyncSearch(Request $request, TrackProvider $provider): Response
+    public function asyncSearch(Request $request, TrackProvider $provider, SearchFactory $factory): Response
     {
-        $search = new Search($request->query->getString('q'));
+        $search = $factory->create($request->query->all());
         $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->render('track/components/_tracks_list.html.twig', [
+        return $form->isSubmitted() && $form->isValid()
+            ? $this->render('track/components/_tracks_list.html.twig', [
                 'tracks' => $provider->provide($search),
-            ]);
-        }
-
-        return $this->render('components/_empty.html.twig');
+            ])
+            : $this->render('components/_empty.html.twig');
     }
 
     #[Route('/new', name: 'track_new', methods: ['GET'])]
@@ -63,7 +59,7 @@ class TrackController extends AbstractController
     #[Route('/{id<\d+>}/main_infos', name: 'track_new_main_infos', methods: ['GET', 'POST'])]
     public function newMainInfos(Request $request, Track $track, TrackKindProvider $trackKindProvider, TrackPersister $trackPersister): Response
     {
-        $form = ($this->createForm(TrackType::class, $track))->handleRequest($request);
+        $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trackPersister->persist($track);
 
@@ -78,7 +74,8 @@ class TrackController extends AbstractController
     }
 
     #[Route('/new/link', name: 'track_new_link', methods: ['GET', 'POST'])]
-    public function newWithLink(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response {
+    public function newWithLink(Request $request, TrackPersister $trackPersister, TrackKindProvider $trackKindProvider): Response
+    {
         $urlModel = new UrlModel();
         $form = $this->createForm(UrlType::class, $urlModel)->handleRequest($request);
 

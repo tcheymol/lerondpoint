@@ -45,7 +45,7 @@ readonly class AttachmentHelper
         }
     }
 
-    public function hydrateWithUrl(Attachment $attachment, string $thumbKind = null): void
+    public function hydrateWithUrl(Attachment $attachment, ?string $thumbKind = null): void
     {
         $attachment->url = match ($thumbKind) {
             'small' => $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId()),

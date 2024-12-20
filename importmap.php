@@ -226,4 +226,7 @@ return [
     'axios' => [
         'version' => '1.7.9',
     ],
+    'lodash/debounce' => [
+        'version' => '4.17.21',
+    ],
 ];

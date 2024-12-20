@@ -19,7 +19,7 @@ readonly class TrackAttachmentHelper
         }
     }
 
-    public function hydrateTrackWithUrl(Track $track, string $thumbKind = null): Track
+    public function hydrateTrackWithUrl(Track $track, ?string $thumbKind = null): Track
     {
         foreach ($track->getAttachments() as $attachment) {
             $this->attachmentHelper->hydrateWithUrl($attachment, $thumbKind);

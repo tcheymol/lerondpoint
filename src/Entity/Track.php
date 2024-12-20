@@ -16,6 +16,9 @@ class Track implements BlameableInterface
 {
     use BlameableTrait;
 
+    public const string YOUTUBE_PREVIEW_URL_SCHEME = 'https://img.youtube.com/vi/%s/hqdefault.jpg';
+    public const string YOUTUBE_EMBED_URL_SCHEME = 'https://www.youtube.com/embed/%s';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -249,28 +252,39 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function getVideoPreview(): ?string
+    private function getVideoIdFromYoutubeUrl(): ?string
     {
         if (!$this->url) {
             return null;
         }
 
+        /** @var array<string, string> $url_components */
         $url_components = parse_url($this->url);
         parse_str($url_components['query'], $params);
 
-        return 'https://img.youtube.com/vi/'. $params['v'] . '/hqdefault.jpg';
+        $videoId = $params['v'];
+
+        if (!is_array($videoId)) {
+            return $videoId;
+        }
+
+        return null;
+    }
+
+    private function buildYoutubeUrl(string $urlScheme): ?string
+    {
+        $videoId = $this->getVideoIdFromYoutubeUrl();
+
+        return !$videoId ? null : sprintf($urlScheme, $videoId);
+    }
+
+    public function getVideoPreview(): ?string
+    {
+        return $this->buildYoutubeUrl(self::YOUTUBE_PREVIEW_URL_SCHEME);
     }
 
     public function getVideoEmbed(): ?string
     {
-        if (!$this->url) {
-            return null;
-        }
-
-        $url_components = parse_url($this->url);
-        parse_str($url_components['query'], $params);
-
-        return 'https://www.youtube.com/embed/' . $params['v'];
+        return $this->buildYoutubeUrl(self::YOUTUBE_EMBED_URL_SCHEME);
     }
-
 }

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackTagRepository::class)]
-class TrackTag implements BlameableInterface
+class TrackTag implements BlameableInterface, \Stringable
 {
     use BlameableTrait;
 
@@ -30,6 +30,12 @@ class TrackTag implements BlameableInterface
         private ?string $name = null,
     ) {
         $this->tracks = new ArrayCollection();
+    }
+
+    #[\Override]
+    public function __toString(): string
+    {
+        return $this->name ?? 'Unknown';
     }
 
     public function getId(): ?int
