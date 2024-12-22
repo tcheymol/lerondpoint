@@ -1,21 +1,23 @@
-<div id="carouselExampleControls" class="carousel position-relative bg-dark slide d-flex justify-content-center" data-bs-ride="carousel" data-bs-touch="true"
+<div id="carouselExampleControls" class="carousel position-relative bg-dark slide d-flex justify-content-center h-100" data-bs-ride="carousel" data-bs-touch="true"
      style="z-index: 10001;">
     <div class="position-absolute top-0 start-0 bg-dark p-2 ps-5" style="z-index: 10002;">
         {{ include('components/_back.html.twig') }}
     </div>
-    <div class="carousel-inner vw-90" style="padding-top: 50px;">
+    <div class="carousel-inner vw-90 d-flex align-items-center" style="padding-top: 50px;">
         {% for attachment in track.attachments %}
             <div class="carousel-item {{ loop.first ? 'active' : '' }} ">
                 {{ include('attachment/_attachment.html.twig', {attachment}) }}
             </div>
         {% endfor %}
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+    {% if track.attachments.count > 1 %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    {% endif %}
 </div>

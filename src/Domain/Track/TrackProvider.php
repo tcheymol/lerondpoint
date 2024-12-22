@@ -2,6 +2,7 @@
 
 namespace App\Domain\Track;
 
+use App\Domain\Images\ThumbSize;
 use App\Domain\Search\Search;
 use App\Domain\Search\SearchPerformer;
 use App\Entity\Track;
@@ -17,14 +18,14 @@ readonly class TrackProvider
     }
 
     /** @return array<Track> */
-    public function provide(Search $search): array
+    public function provide(Search $search, ?ThumbSize $thumbSize = ThumbSize::Small): array
     {
         $allTracks = $search->isEmpty()
             ? $this->trackRepository->findAll()
             : $this->searchPerformer->perform($search);
 
         foreach ($allTracks as $track) {
-            $this->attachmentHelper->hydrateTrackWithUrl($track, 'small');
+            $this->attachmentHelper->hydrateTrackWithUrl($track, $thumbSize);
         }
 
         return $allTracks;

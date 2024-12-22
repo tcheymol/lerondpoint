@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Images\ThumbSize;
 use App\Domain\Location\Region;
 use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
@@ -286,5 +287,36 @@ class Track implements BlameableInterface
     public function getVideoEmbed(): ?string
     {
         return $this->buildYoutubeUrl(self::YOUTUBE_EMBED_URL_SCHEME);
+    }
+
+    public function getObjectUrl(): ?string {
+        return $this->getThumbnailUrl(ThumbSize::Full);
+    }
+
+    public function getThumbnailUrl(?ThumbSize $thumbSize = null): ?string
+    {
+        if ($this->url) {
+            return $this->getVideoPreview();
+        }
+
+        return $this->attachments
+            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getBestFitUrl($thumbSize))
+            ?->getBestFitUrl($thumbSize);
+    }
+
+    public function getMediaType(): ?string
+    {
+        if ('application/pdf' === $this->getMime()) {
+            return 'pdf';
+        }
+
+        return $this->url ? 'video' : 'image';
+    }
+
+    public function getMime(): ?string
+    {
+        return $this->attachments
+            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getKind())
+            ?->getKind();
     }
 }

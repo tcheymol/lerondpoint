@@ -5,13 +5,13 @@
 {% block content %}
     <div class="h-100 row justify-content-center align-items-center">
         <div class="col-12 col-md-6 col-xl-4 mx-auto px-5">
-            <a href="{{ path('track_new_link') }}" class="btn btn-primary border-dark border-4 btn-lg p-5 w-100" style="min-height: 250px">
+            <a href="{{ path('track_new_link') }}" class="btn btn-primary border-dark border-4 btn-lg p-5 w-100 d-flex flex-column justify-content-center" style="min-height: 250px">
                 <i class="fa fa-link fs-1 mb-4"></i><br/>
                 {{ 'PastALink'|trans }}
             </a>
         </div>
         <div class="col-12 col-md-6 col-xl-4 mx-auto px-5">
-            <a href="{{ path('track_new_upload') }}" class="btn btn-primary border-dark border-4 btn-lg p-5 w-100" style="min-height: 250px">
+            <a href="{{ path('track_new_upload') }}" class="btn btn-primary border-dark border-4 btn-lg p-5 w-100 d-flex flex-column justify-content-center" style="min-height: 250px">
                 <i class="fa fa-upload fs-1 mb-4"></i><br/>
                 {{ 'UploadAFile'|trans }}
             </a>

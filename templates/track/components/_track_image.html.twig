@@ -1,6 +1,19 @@
-{% set attachment = track.attachments|first %}
-{% if attachment and attachment.mediumThumbnailUrl is not empty %}
+{% set thumbUrl = track.thumbnailUrl %}
+{% set objectUrl = track.objectUrl %}
+{% set mimeType = track.mime %}
+{% if thumbUrl is defined %}
     <a class="btn btn-link" href="{{ path('track_carousel', {id: track.id}) }}">
-        {{ include('attachment/_attachment.html.twig', {attachment}) }}
+        <div class="border-default h-100">
+            {% if mimeType =='application/pdf' and objectUrl is defined %}
+                <object data="{{ objectUrl }}" type="application/pdf" width="100%" height="500px">
+                    <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
+                </object>
+            {% elseif thumbUrl is defined %}
+                <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
+            {% elseif mimeType is defined %}
+                {{ include('attachment/_attachment_icon.html.twig', {mimeType}) }}
+            {% else %}
+            {% endif %}
+        </div>
     </a>
 {% endif %}

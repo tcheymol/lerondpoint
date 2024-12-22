@@ -15,4 +15,19 @@ class TrackRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Track::class);
     }
+
+    /** @return Track[] */
+    public function findMissingPreviews(): array
+    {
+        /** @var Track[] $tracks */
+        $tracks = $this->createQueryBuilder('t')
+            ->innerJoin('t.attachments', 'a')
+            ->andWhere('a.thumbnailObjectId IS NULL
+                OR a.mediumThumbnailObjectId IS NULL
+                OR a.bigThumbnailObjectId IS NULL')
+            ->getQuery()
+            ->getResult();
+
+        return $tracks;
+    }
 }

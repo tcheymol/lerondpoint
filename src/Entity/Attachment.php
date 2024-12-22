@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Images\ThumbSize;
 use App\Entity\Inteface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
@@ -37,7 +38,7 @@ class Attachment implements BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $objectId = null;
 
-    public ?string $url = null;
+    public ?string $objectUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnailObjectId = null;
@@ -48,7 +49,7 @@ class Attachment implements BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $bigThumbnailObjectId = null;
 
-    public ?string $thumbnailUrl = null;
+    public ?string $smallThumbnailUrl = null;
 
     public ?string $mediumThumbnailUrl = null;
 
@@ -66,6 +67,42 @@ class Attachment implements BlameableInterface
             ->setExtension((string) $file->guessExtension())
             ->setKind($file->getMimeType())
             ->setSize($file->getSize());
+    }
+
+    public function getUrl(?ThumbSize $size = ThumbSize::Small): ?string
+    {
+        return match ($size) {
+            ThumbSize::Medium => $this->mediumThumbnailUrl,
+            ThumbSize::Big => $this->bigThumbnailObjectId,
+            ThumbSize::Full => $this->objectUrl,
+            default => $this->smallThumbnailUrl,
+        };
+    }
+
+    /** @return array<string, ?string> */
+    private function getUrls(): array
+    {
+        return [
+            ThumbSize::Small->value => $this->smallThumbnailUrl,
+            ThumbSize::Medium->value => $this->mediumThumbnailUrl,
+            ThumbSize::Big->value => $this->bigThumbnailUrl,
+            ThumbSize::Full->value => $this->objectUrl,
+        ];
+    }
+
+    public function getBestFitUrl(?ThumbSize $size = null): ?string
+    {
+        if ($size) {
+            return $this->getUrl($size);
+        }
+
+        foreach ($this->getUrls() as $url) {
+            if (null !== $url) {
+                return $url;
+            }
+        }
+
+        return null;
     }
 
     public function getId(): ?int
@@ -203,5 +240,10 @@ class Attachment implements BlameableInterface
         $this->mediumThumbnailObjectId = $mediumThumbnailObjectId;
 
         return $this;
+    }
+
+    public function hasMissingThumbnail(): bool
+    {
+        return !$this->thumbnailObjectId || !$this->mediumThumbnailObjectId || !$this->bigThumbnailObjectId;
     }
 }

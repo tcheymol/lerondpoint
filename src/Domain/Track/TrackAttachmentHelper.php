@@ -3,6 +3,7 @@
 namespace App\Domain\Track;
 
 use App\Domain\Images\AttachmentHelper;
+use App\Domain\Images\ThumbSize;
 use App\Entity\Track;
 use App\Repository\AttachmentRepository;
 
@@ -19,10 +20,10 @@ readonly class TrackAttachmentHelper
         }
     }
 
-    public function hydrateTrackWithUrl(Track $track, ?string $thumbKind = null): Track
+    public function hydrateTrackWithUrl(Track $track, ?ThumbSize $thumbSize = null): Track
     {
         foreach ($track->getAttachments() as $attachment) {
-            $this->attachmentHelper->hydrateWithUrl($attachment, $thumbKind);
+            $this->attachmentHelper->hydrateWithUrl($attachment, $thumbSize);
         }
 
         return $track;

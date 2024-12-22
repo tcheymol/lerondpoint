@@ -22,12 +22,4 @@ class AttachmentController extends AbstractController
 
         return $this->json(['id' => $attachment?->getId()]);
     }
-
-    #[Route('/{id<\d+>}/show', name: 'show_attachment', methods: ['GET'])]
-    public function show(Attachment $attachment, AttachmentHelper $helper): Response
-    {
-        $helper->hydrateWithUrl($attachment);
-
-        return $this->render('attachment/show.html.twig', ['attachment' => $attachment]);
-    }
 }

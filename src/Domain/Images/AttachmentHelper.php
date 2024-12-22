@@ -45,14 +45,34 @@ readonly class AttachmentHelper
         }
     }
 
-    public function hydrateWithUrl(Attachment $attachment, ?string $thumbKind = null): void
+    public function hydrateWithUrl(Attachment $attachment, ?ThumbSize $thumbSize = ThumbSize::Small): void
     {
-        $attachment->url = match ($thumbKind) {
-            'small' => $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId()),
-            'medium' => $this->s3Adapter->getPreSignedUrl($attachment->getMediumThumbnailObjectId()),
-            'big' => $this->s3Adapter->getPreSignedUrl($attachment->getBigThumbnailObjectId()),
-            default => $this->s3Adapter->getPreSignedUrl($attachment->getObjectId()),
+        match ($thumbSize) {
+            ThumbSize::Medium => $this->hydrateMediumThumbnailUrl($attachment),
+            ThumbSize::Big => $this->hydrateBigThumbnailUrl($attachment),
+            ThumbSize::Full => $this->hydratePreSignedUrl($attachment),
+            default => $this->hydrateSmallThumbnailUrl($attachment),
         };
+    }
+
+    private function hydratePreSignedUrl(Attachment $attachment): void
+    {
+        $attachment->objectUrl = $this->s3Adapter->getPreSignedUrl($attachment->getObjectId());
+    }
+
+    private function hydrateSmallThumbnailUrl(Attachment $attachment): void
+    {
+        $attachment->smallThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId());
+    }
+
+    private function hydrateMediumThumbnailUrl(Attachment $attachment): void
+    {
+        $attachment->mediumThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getMediumThumbnailObjectId());
+    }
+
+    private function hydrateBigThumbnailUrl(Attachment $attachment): void
+    {
+        $attachment->bigThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getBigThumbnailObjectId());
     }
 
     /** @throws \Exception */
@@ -68,6 +88,28 @@ readonly class AttachmentHelper
         $attachment->setThumbnailObjectId($this->uploadThumbnail($file, $attachment));
         $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($file, $attachment, 512));
         $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, $attachment, 1024));
+    }
+
+    /** @throws \Exception */
+    public function uploadMissingThumbnails(Attachment $attachment): void
+    {
+        if (!$attachment->hasMissingThumbnail() || !$attachment->getObjectId()) {
+            return;
+        }
+
+        $tempFilePath = new UuidV4();
+        $this->s3Adapter->downloadFile($attachment->getObjectId(), $tempFilePath);
+        $originalFile = new UploadedFile($tempFilePath, $tempFilePath);
+
+        if (!$attachment->getThumbnailObjectId()) {
+            $attachment->setThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment));
+        }
+        if (!$attachment->getMediumThumbnailObjectId()) {
+            $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment, 512));
+        }
+        if (!$attachment->getBigThumbnailObjectId()) {
+            $attachment->setBigThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment, 1024));
+        }
     }
 
     /** @throws \Exception */
