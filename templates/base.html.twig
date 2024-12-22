@@ -25,11 +25,8 @@
             class="d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }}"
             style="{% block bodyStyle %}{% endblock %}  {{ _bodyBg is not empty ? 'background-image: none;' }}"
     >
-        <div style="display: none">
-            {% block headerClass %}{% endblock %}
-        </div>
         {% block header %}
-            {{ include('components/_header.html.twig', {headerClass: block('headerClass')}) }}
+            {{ include('components/_header.html.twig') }}
         {% endblock %}
 
         <main class="vw-100 " style="padding-top: 50px">

@@ -39,7 +39,7 @@ body {
     background-position: center;
     background-size: cover;
     background-image: url('../images/bg.jpg');
-    transition: margin 2s ease-in-out;
+    transition: padding 2s ease-in-out;
 }
 
 .plaine {
@@ -296,4 +296,8 @@ div#uppy-dashboard {
 
 .col-form-label {
     width: auto;
+}
+
+.pt-100vh {
+    padding-top: 100vh;
 }
