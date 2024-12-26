@@ -27,7 +27,7 @@ doctrine:
         controller_resolver:
             auto_mapping: false
         filters:
-            validatedEntity:
+            validated_entity:
                 class: App\Domain\Moderation\ValidatedEntityFilter
                 enabled: true
 when@test:
