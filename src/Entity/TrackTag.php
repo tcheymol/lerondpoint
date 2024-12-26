@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Inteface\BlameableInterface;
+use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackTagRepository;
 use Doctrine\Common\Collections\ArrayCollection;

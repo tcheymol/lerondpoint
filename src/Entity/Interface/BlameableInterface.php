@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Inteface;
+namespace App\Entity\Interface;
 
 use App\Entity\User;
 
@@ -45,4 +45,12 @@ interface BlameableInterface
     public function getValidatedBy(): ?User;
 
     public function setValidatedBy(?User $validatedBy): void;
+
+    public function isRejected(): bool;
+
+    public function setRejected(bool $rejected): void;
+
+    public function getRejectedBy(): ?User;
+
+    public function setRejectedBy(?User $rejectedBy): void;
 }

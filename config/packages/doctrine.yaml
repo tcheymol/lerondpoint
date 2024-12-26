@@ -26,7 +26,10 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: false
-
+        filters:
+            validatedEntity:
+                class: App\Domain\Moderation\ValidatedEntityFilter
+                enabled: true
 when@test:
     doctrine:
         dbal:
