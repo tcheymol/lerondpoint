@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Domain\Images\ThumbSize;
 use App\Domain\Location\Region;
-use App\Entity\Inteface\BlameableInterface;
+use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -67,6 +67,9 @@ class Track implements BlameableInterface
 
     #[ORM\Column(length: 2083, nullable: true)]
     private ?string $url = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rejectionCause = null;
 
     public function __construct()
     {
@@ -318,5 +321,17 @@ class Track implements BlameableInterface
         return $this->attachments
             ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getKind())
             ?->getKind();
+    }
+
+    public function getRejectionCause(): ?string
+    {
+        return $this->rejectionCause;
+    }
+
+    public function setRejectionCause(?string $rejectionCause): static
+    {
+        $this->rejectionCause = $rejectionCause;
+
+        return $this;
     }
 }

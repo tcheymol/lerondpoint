@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Domain\Images\ThumbSize;
-use App\Entity\Inteface\BlameableInterface;
+use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\AttachmentRepository;
 use Doctrine\DBAL\Types\Types;

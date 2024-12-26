@@ -37,6 +37,7 @@ Droms: DROMS
 Edit: Modifier
 Email: Email
 Enabled: Activé
+EnterUrl: Entrez une URL vers une vidéo Youtube
 Extension: Extension
 FollowUps: Suites
 Follows: Suites
@@ -68,15 +69,21 @@ Participate: Participer
 ParticipateKnowMore: Cette plate-forme est collaborative et soumise à une modération
 ParticipateSubtitle: Gilet jaune, nous avons besoin de toi pour vivre notre mémoire et renforcer nos liens
 Password: Mot de passe
+PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
 Previous: Précédent
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 Region: Région
+Rejected By: Refusé par
+Rejected: Refusé
+RejectionCause: Raison du refus
 ScrollToStart: Scroller pour commencer
+Search: Rechercher...
 Show: Voir
 Size: Taille
 Tags: Sous catégories
+TermsOfUse: Conditions générales d'utilisation
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackKind: Type de trace
@@ -87,15 +94,11 @@ TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
 Updated At: MAJ le
 Updated By: MAJ par
+UploadAFile: Téléverser un fichier
 Users: Utilisateurs
 Validated By: Validé par
 Validated: Validé
+WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
+WhoAreWe: Qui sommes-nous ?
 Year: Année
 Yes: Oui
-WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
-TermsOfUse: Conditions générales d'utilisation
-UploadAFile: Téléverser un fichier
-PastALink: Copier un lien vers une ressource
-EnterUrl: Entrez une URL vers une vidéo Youtube
-Search: Rechercher...
-WhoAreWe: Qui sommes-nous ?

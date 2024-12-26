@@ -40,6 +40,13 @@ trait BlameableTrait
     #[ORM\JoinColumn(nullable: true)]
     private ?User $validatedBy = null;
 
+    #[ORM\Column(nullable: true)]
+    protected ?bool $rejected = false;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $rejectedBy = null;
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -138,5 +145,25 @@ trait BlameableTrait
     public function setValidatedBy(?User $validatedBy): void
     {
         $this->validatedBy = $validatedBy;
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->rejected;
+    }
+
+    public function setRejected(bool $rejected): void
+    {
+        $this->rejected = $rejected;
+    }
+
+    public function getRejectedBy(): ?User
+    {
+        return $this->rejectedBy;
+    }
+
+    public function setRejectedBy(?User $rejectedBy): void
+    {
+        $this->rejectedBy = $rejectedBy;
     }
 }
