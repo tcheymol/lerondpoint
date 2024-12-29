@@ -29,7 +29,6 @@ doctrine:
         filters:
             validated_entity:
                 class: App\Domain\Moderation\ValidatedEntityFilter
-                enabled: true
 when@test:
     doctrine:
         dbal:

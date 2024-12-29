@@ -19,9 +19,8 @@ readonly class ShowAllEntitiesForAdminSubscriber implements EventSubscriberInter
     {
         $filterManager = $this->em->getFilters();
 
-        // Vérifier si l'utilisateur est administrateur
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            $filterManager->disable('validated_entity');
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
+            $filterManager->enable('validated_entity');
         }
     }
 
