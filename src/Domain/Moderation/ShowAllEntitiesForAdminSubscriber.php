@@ -10,9 +10,8 @@ readonly class ShowAllEntitiesForAdminSubscriber implements EventSubscriberInter
 {
     public function __construct(
         private Security $security,
-        private EntityManagerInterface $em
-    )
-    {
+        private EntityManagerInterface $em,
+    ) {
     }
 
     public function onRequest(): void
@@ -24,6 +23,7 @@ readonly class ShowAllEntitiesForAdminSubscriber implements EventSubscriberInter
         }
     }
 
+    #[\Override]
     public static function getSubscribedEvents(): array
     {
         return [

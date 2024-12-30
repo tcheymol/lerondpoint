@@ -292,7 +292,8 @@ class Track implements BlameableInterface
         return $this->buildYoutubeUrl(self::YOUTUBE_EMBED_URL_SCHEME);
     }
 
-    public function getObjectUrl(): ?string {
+    public function getObjectUrl(): ?string
+    {
         return $this->getThumbnailUrl(ThumbSize::Full);
     }
 

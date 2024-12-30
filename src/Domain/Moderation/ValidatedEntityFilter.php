@@ -8,10 +8,11 @@ use Doctrine\ORM\Query\Filter\SQLFilter;
 
 class ValidatedEntityFilter extends SQLFilter
 {
-
+    #[\Override]
     public function addFilterConstraint(ClassMetadata $targetEntity, string $targetTableAlias): string
     {
-        if ($targetEntity->getReflectionClass()->name !== Track::class) {
+        $reflectionClass = $targetEntity->getReflectionClass();
+        if ($reflectionClass && Track::class !== $reflectionClass->name) {
             return '';
         }
 

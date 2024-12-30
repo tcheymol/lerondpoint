@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Images\AttachmentHelper;
-use App\Entity\Attachment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;

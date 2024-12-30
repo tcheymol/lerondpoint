@@ -127,7 +127,7 @@ trait BlameableTrait
         $this->disabledBy = $disabledBy;
     }
 
-    public function isValidated(): bool
+    public function isValidated(): ?bool
     {
         return $this->validated;
     }
@@ -147,7 +147,7 @@ trait BlameableTrait
         $this->validatedBy = $validatedBy;
     }
 
-    public function isRejected(): bool
+    public function isRejected(): ?bool
     {
         return $this->rejected;
     }

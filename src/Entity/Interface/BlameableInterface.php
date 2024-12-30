@@ -38,7 +38,7 @@ interface BlameableInterface
 
     public function setDisabledBy(?User $disabledBy): void;
 
-    public function isValidated(): bool;
+    public function isValidated(): ?bool;
 
     public function setValidated(bool $validated): void;
 
@@ -46,7 +46,7 @@ interface BlameableInterface
 
     public function setValidatedBy(?User $validatedBy): void;
 
-    public function isRejected(): bool;
+    public function isRejected(): ?bool;
 
     public function setRejected(bool $rejected): void;
 

@@ -84,7 +84,7 @@ class TrackController extends AbstractController
         $form = $this->createForm(UrlType::class, $urlModel)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $track = new Track()->setUrl($urlModel->url)->setName('Trace Anonyme');
+            $track = (new Track())->setUrl($urlModel->url)->setName('Trace Anonyme');
             $trackPersister->persist($track);
 
             return $this->redirectToRoute('track_new_main_infos', ['id' => $track->getId()]);

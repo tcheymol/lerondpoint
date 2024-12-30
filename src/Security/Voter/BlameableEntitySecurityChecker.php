@@ -12,8 +12,7 @@ readonly class BlameableEntitySecurityChecker
     public function __construct(
         private Security $security,
         private AuthorizationCheckerInterface $authorizationChecker,
-    )
-    {
+    ) {
     }
 
     public function canView(BlameableInterface $entity): bool
