@@ -32,8 +32,11 @@ class TrackController extends AbstractController
             return $this->redirectToRoute('track_index', $search->toParamsArray());
         }
 
+        $tracks = $provider->provide($search);
+        shuffle($tracks);
+
         return $this->render('track/index.html.twig', [
-            'tracks' => $provider->provide($search),
+            'tracks' => $tracks,
             'form' => $form->createView(),
         ]);
     }
