@@ -71,6 +71,9 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $rejectionCause = null;
 
+    public ?int $previousTrackId = null;
+    public ?int $nextTrackId = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();

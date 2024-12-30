@@ -30,4 +30,12 @@ readonly class TrackProvider
 
         return $allTracks;
     }
+
+    public function hydrateWithPreviousAndNextIds(Track $track): Track
+    {
+        $track->previousTrackId = $this->trackRepository->findPreviousValidatedTrack($track)?->getId();
+        $track->nextTrackId = $this->trackRepository->findNextValidatedTrack($track)?->getId();
+
+        return $track;
+    }
 }

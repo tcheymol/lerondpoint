@@ -115,11 +115,12 @@ class TrackController extends AbstractController
     }
 
     #[Route('/{id<\d+>}', name: 'track_show', methods: ['GET'])]
-    public function show(Track $track, TrackAttachmentHelper $helper): Response
+    public function show(Track $track, TrackAttachmentHelper $helper, TrackProvider $provider): Response
     {
-        return $this->render('track/show.html.twig', [
-            'track' => $helper->hydrateTrackWithUrl($track, ThumbSize::Medium),
-        ]);
+        $track = $helper->hydrateTrackWithUrl($track, ThumbSize::Medium);
+        $track = $provider->hydrateWithPreviousAndNextIds($track);
+
+        return $this->render('track/show.html.twig', ['track' => $track]);
     }
 
     #[Route('/{id<\d+>}/carousel', name: 'track_carousel', methods: ['GET'])]
