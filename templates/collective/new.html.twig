@@ -10,12 +10,26 @@
 
 {% block content %}
     <div class="row d-flex justify-content-between flex-grow-1">
-        <h1 class="col-12 text-center text-dark mt-5">{{ 'CreateCollective'|trans }}</h1>
-        <div class="col-12 col-md-6 offset-md-3">
-            <div class="card p-4">
-                {{ include('components/_back.html.twig') }}
-                <br/>
-                {{ include('collective/_form.html.twig') }}
+        <div class="col-12 pt-2 px-3">
+            {{ include('components/_back.html.twig') }}
+        </div>
+        <div class="col-12 px-1 px-sm-3 px-md-5">
+            <div class="p-3 text-dark">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <h3 class="text-center mt-2">{{ 'CreateCollectiveSearchAddress'|trans }}</h3>
+                <div {{ stimulus_controller('map')}} style="height: 500px; width: 100%" class="position-relative">
+                    <div id="map" style="height: 500px; width: 100%"></div>
+                    <div class="position-absolute border-3 border-success mt-2"
+                         style="left: 50px; top: 5px; z-index: 1000; border-style: solid"
+                    >
+                        <div id="autocomplete" class="autocomplete-container position-relative"></div>
+                    </div>
+                </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-success">{{ 'Create'|trans }}</button>
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

@@ -17,9 +17,7 @@ class CollectiveController extends AbstractController
     #[Route('', name: 'collective_index', methods: ['GET'])]
     public function index(MapDataBuilder $mapDataBuilder): Response
     {
-        return $this->render('map/index.html.twig', [
-            'collectives' => $mapDataBuilder->build(),
-        ]);
+        return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build()]);
     }
 
     #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]
@@ -36,10 +34,7 @@ class CollectiveController extends AbstractController
             return $this->redirectToRoute('collective_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('collective/new.html.twig', [
-            'collective' => $collective,
-            'form' => $form,
-        ]);
+        return $this->render('collective/new.html.twig', ['collective' => $collective,  'form' => $form]);
     }
 
     #[Route('/{id<\d+>}', name: 'collective_show', methods: ['GET'])]

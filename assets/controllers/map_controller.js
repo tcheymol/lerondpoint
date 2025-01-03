@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { createGeocoder } from "./helpers.js";
+import { fillAddressFields } from "./helper/mapHelpers.js";
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -7,9 +8,7 @@ import { createGeocoder } from "./helpers.js";
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static values = {
-        collectives: Array
-    }
+    static values = { collectives: Array }
     maps = [];
     mainMap = null;
     positionPinMarker = null;
@@ -22,7 +21,11 @@ export default class extends Controller {
 
     initMap() {
         this.mainMap = L.map('map').setView([46.603354, 1.888334], 6);
-        const greenIcon = L.icon({ iconUrl: 'hut.png', iconSize: [35, 35] });
+        const greenIcon = L.icon({ iconUrl: '/hut.png', iconSize: [35, 35] });
+        this.mainMap.on('click', (e) => {
+            const location = { properties: { lat: e.latlng.lat, lon: e.latlng.lng } };
+            this.recenterMap(location);
+        });
 
         const dromLocations = [
             { id: 'mapGuadeloupe', name: "Guadeloupe", coords: [16.265, -61.551], zoom: 7 },
@@ -38,12 +41,15 @@ export default class extends Controller {
             // { name: "Nouvelle-Calédonie", coords: [-20.9043, 165.6180] }
         ];
 
-        this.maps = dromLocations.map(location => L.map(location.id, {
-            center: location.coords,
-            zoom: location.zoom,
-            zoomControl: false,
-            attributionControl: false
-        }));
+        try {
+            this.maps = dromLocations.map(location => L.map(location.id, {
+                center: location.coords,
+                zoom: location.zoom,
+                zoomControl: false,
+                attributionControl: false
+            }));
+        } catch (e) {
+        }
 
         [this.mainMap, ...this.maps].forEach(map => {
             L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', { maxZoom: 18 }).addTo(map);
@@ -56,6 +62,8 @@ export default class extends Controller {
     }
 
     recenterMap = (location) =>{
+        fillAddressFields(location, 'collective');
+
         if (this.positionPinMarker) {
             this.mainMap.removeLayer(this.positionPinMarker);
         }
@@ -67,9 +75,10 @@ export default class extends Controller {
         }
         const lon = location.properties.lon;
         const lat = location.properties.lat;
-        const positionPin = L.icon({ iconUrl: 'pin.png', iconSize: [35, 35] });
+        const positionPin = L.icon({ iconUrl: '/pin.png', iconSize: [35, 35] });
         this.positionPinMarker = L.marker([lat, lon], {icon: positionPin}).addTo(this.mainMap);
 
-        this.mainMap.setView([lat, lon], 9);
+
+        this.mainMap.setView([lat, lon], 15);
     }
 }

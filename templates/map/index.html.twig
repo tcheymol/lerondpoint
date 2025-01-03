@@ -3,12 +3,16 @@
 {% block title %}{{ 'FollowUps'|trans }}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/@geoapify/geocoder-autocomplete@2.0.3/styles/minimal.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <div class="h-100 w-100" {{ stimulus_controller('map', {collectives}) }}>
+    <div class="h-100 w-100 position-relative text-dark" {{ stimulus_controller('map', {collectives}) }}>
         <div id="map" class="h-100 w-100"></div>
-        <div class="position-absolute border-3 border-success mt-2 bg-dark"
-             style="left: 50px; top: 50px; z-index: 1000; border-style: solid; padding-right: 25px"
+        <div class="position-absolute border-3 border-success mt-2"
+             style="left: 50px; top: 5px; z-index: 1000; border-style: solid"
         >
             <div id="autocomplete" class="autocomplete-container position-relative"></div>
         </div>
