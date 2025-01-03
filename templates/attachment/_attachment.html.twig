@@ -1,12 +1,12 @@
 {% set thumbUrl = attachment.getBestFitUrl %}
 {% set objectUrl = attachment.objectUrl %}
-<div class="border-default h-100">
+<div class="vh-90">
     {% if attachment.kind =='application/pdf' and objectUrl is defined %}
         <object data="{{ objectUrl }}" type="application/pdf" width="100%" height="500px">
             <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
         </object>
     {% elseif thumbUrl is defined %}
-        <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
+        <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="h-100 border-default "/>
     {% elseif attachment.kind is defined %}
         {{ include('attachment/_attachment_icon.html.twig', {kind: attachment.kind}) }}
     {% else %}
