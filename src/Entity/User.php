@@ -87,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     /**
      * @see UserInterface
      *
-     * @return list<string>
+     * @return string[]
      */
     #[\Override]
     public function getRoles(): array

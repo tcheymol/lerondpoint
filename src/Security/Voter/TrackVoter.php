@@ -2,12 +2,12 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Interface\BlameableInterface;
 use App\Entity\Track;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/** @extends Voter<string, mixed> */
 final class TrackVoter extends Voter
 {
     public function __construct(
@@ -26,7 +26,7 @@ final class TrackVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        if (!$user instanceof UserInterface || !$subject instanceof BlameableInterface) {
+        if (!$user instanceof UserInterface || !$subject instanceof Track) {
             return false;
         }
 

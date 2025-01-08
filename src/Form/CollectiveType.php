@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @extends AbstractType<Collective> */
 class CollectiveType extends AbstractType
 {
     #[\Override]

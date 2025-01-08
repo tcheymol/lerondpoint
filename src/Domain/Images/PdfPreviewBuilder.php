@@ -34,7 +34,7 @@ class PdfPreviewBuilder
 
                 $sizR = (int) round($size * (min($imW, $imH) / max($imW, $imH)));
 
-                $img->setImageColorspace(255);
+                $img->setImageColorspace($img::COLORSPACE_RGB);
                 $img->setImageBackgroundColor('white');
                 $img = $img->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
                 $img->setimageformat('jpeg');

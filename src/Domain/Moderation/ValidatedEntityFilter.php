@@ -12,7 +12,7 @@ class ValidatedEntityFilter extends SQLFilter
     public function addFilterConstraint(ClassMetadata $targetEntity, string $targetTableAlias): string
     {
         $reflectionClass = $targetEntity->getReflectionClass();
-        if ($reflectionClass && Track::class !== $reflectionClass->name) {
+        if (Track::class !== $reflectionClass->name) {
             return '';
         }
 
