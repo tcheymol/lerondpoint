@@ -77,6 +77,7 @@ Password: Mot de passe
 PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
+Preview: "Partager une archive du mouvement : Aperçu"
 Previous: Précédent
 PreviousTrack: Trace précédente
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
@@ -106,6 +107,7 @@ Updated By: MAJ par
 UploadAFile: Téléverser un fichier
 Users: Utilisateurs
 Validate: Valider
+ValidateAndSend: Valider et envoyer
 ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé

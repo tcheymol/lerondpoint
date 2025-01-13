@@ -107,6 +107,14 @@ class TrackController extends AbstractController
         ]);
     }
 
+    #[Route('/new/{id<\d+>}/publish', name: 'track_publish', methods: ['GET'])]
+    public function publish(Track $track, TrackPersister $persister): Response
+    {
+        $persister->publish($track);
+
+        return $this->redirectToRoute('track_list');
+    }
+
     #[Route('/{id<\d+>}/main_infos', name: 'track_new_main_infos', methods: ['GET', 'POST'])]
     public function newMainInfos(Request $request, Track $track, TrackKindProvider $trackKindProvider, TrackPersister $trackPersister): Response
     {

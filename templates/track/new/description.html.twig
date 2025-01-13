@@ -4,11 +4,12 @@
 {% block innerContent %}
     <div class="row">
         <div class="col-6 d-none d-sm-flex">
-            {{ include('track/components/_track_preview.html.twig', {track}) }}
+            {{ include('track/components/_preview.html.twig', {track}) }}
         </div>
         <div class="col-12 col-sm-6">
             {{ form_start(form) }}
-                <div class="p-2">{{ form_widget(form.description) }}</div>
+                <div class="text-start">{{ form_label(form.description) }}</div>
+                {{ form_widget(form.description) }}
                 {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
                 {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
                 {{ form_widget(form._token) }}

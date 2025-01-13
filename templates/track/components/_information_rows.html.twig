@@ -1,0 +1,18 @@
+<div class="mt-4">
+    <p class="fs-4">{{ track.name }}</p>
+    {% if track.kind is not null %}
+        <p class="">{{ 'Category'|trans }} : {{ track.kind.name }}</p>
+    {% endif %}
+    {% if track.tags is not null %}
+        <p class="">{{ 'Tags'|trans }} : {% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</p>
+    {% endif %}
+    {% if track.region is not null %}
+        <p class="">{{ 'Region'|trans }} : {{ track.region.value }}</p>
+    {% endif %}
+    <p class="">{{ 'Location'|trans }} : {{ track.location }}</p>
+    <p class="">{{ 'Year'|trans }} : {{ track.year }}</p>
+    {% if track.collective is not null %}
+        <p class="">{{ 'Collective'|trans }} : {{ track.collective.name }}</p>
+    {% endif %}
+    <p class="fs-5">{{ track.description }}</p>
+</div>

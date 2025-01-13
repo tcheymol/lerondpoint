@@ -74,6 +74,9 @@ class Track implements BlameableInterface
     public ?int $previousTrackId = null;
     public ?int $nextTrackId = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isDraft = true;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -341,5 +344,22 @@ class Track implements BlameableInterface
         $this->rejectionCause = $rejectionCause;
 
         return $this;
+    }
+
+    public function isDraft(): ?bool
+    {
+        return $this->isDraft;
+    }
+
+    public function setDraft(?bool $isDraft): static
+    {
+        $this->isDraft = $isDraft;
+
+        return $this;
+    }
+
+    public function publish(): void
+    {
+        $this->isDraft = false;
     }
 }

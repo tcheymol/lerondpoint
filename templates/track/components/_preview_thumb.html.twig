@@ -1,0 +1,17 @@
+{% if track.url %}
+    {{ include('track/components/_track_video.html.twig', {track}) }}
+{% else %}
+    {% set thumbUrl = track.thumbnailUrl %}
+    {% set objectUrl = track.objectUrl %}
+    {% set mimeType = track.mime %}
+    {% if thumbUrl is defined %}
+        <div class="border-default h-100 w-100">
+            {% if thumbUrl is defined %}
+                <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
+            {% elseif mimeType is defined %}
+                {{ include('attachment/_attachment_icon.html.twig', {mimeType}) }}
+            {% else %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endif %}

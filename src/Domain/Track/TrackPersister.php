@@ -19,4 +19,10 @@ readonly class TrackPersister
 
         return $track;
     }
+
+    public function publish(Track $track): void
+    {
+        $track->publish();
+        $this->em->flush();
+    }
 }

@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Track{% endblock %}
-{% block bodybg %}light{% endblock %}
+{% block bodybg %}primary{% endblock %}
 
 {% block content %}
     <div class="text-dark h-100 p-2 flex-column">
-        <div>{{ include('components/_back.html.twig') }}</div>
-        <h1>{{ track.name }}</h1>
+        <h1>{{ 'Preview'|trans }}</h1>
         <div class="p-4">
             <div class="row">
                 <div class="col-12 col-sm-7">
-                   {{ include('track/components/_track_preview.html.twig', {track}) }}
+                   {{ include('track/components/_track_image.html.twig', {track}) }}
                 </div>
-                {{ include('track/components/_information.html.twig', {track}) }}
+                <div class="col-12 col-sm-5">
+                    {{ include('track/components/_information.html.twig', {track}) }}
+                    <a href="{{ path('track_new_add_description', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'Back'|trans }} 3/3</a>
+                    <a href="{{ path('track_publish', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'ValidateAndSend'|trans }}</a>
+                </div>
             </div>
         </div>
     </div>

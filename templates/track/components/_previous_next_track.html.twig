@@ -1,0 +1,17 @@
+<div class="d-flex">
+    {% if track.previousTrackId %}
+        <a
+                href="{{ path('track_show', {'id': track.previousTrackId}) }}"
+                class="btn btn-primary me-2"
+                {{ stimulus_controller('tooltip', {text: 'PreviousTrack'|trans}) }}
+        ><i class="fa fa-arrow-left-long fa-fw"></i></a>
+    {% endif %}
+    <span class="bg-primary grotesk d-flex align-items-center px-2">{{ 'TrackNumber'|trans }} {{ track.id }}</span>
+    {% if track.nextTrackId %}
+        <a
+                href="{{ path('track_show', {'id': track.nextTrackId}) }}"
+                class="btn btn-primary ms-2"
+                {{ stimulus_controller('tooltip', {text: 'NextTrack'|trans}) }}
+        ><i class="fa fa-arrow-right-long"></i></a>
+    {% endif %}
+</div>

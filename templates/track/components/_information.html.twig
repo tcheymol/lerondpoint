@@ -1,37 +1,4 @@
 <div class="col-12 col-sm-5 text-start flex-grow-1">
-    <div class="d-flex">
-        {% if track.previousTrackId %}
-            <a
-                    href="{{ path('track_show', {'id': track.previousTrackId}) }}"
-                    class="btn btn-primary me-2"
-                    {{ stimulus_controller('tooltip', {text: 'PreviousTrack'|trans}) }}
-            ><i class="fa fa-arrow-left-long fa-fw"></i></a>
-        {% endif %}
-        <span class="bg-primary grotesk d-flex align-items-center px-2">{{ 'TrackNumber'|trans }} {{ track.id }}</span>
-        {% if track.nextTrackId %}
-            <a
-                    href="{{ path('track_show', {'id': track.nextTrackId}) }}"
-                    class="btn btn-primary ms-2"
-                    {{ stimulus_controller('tooltip', {text: 'NextTrack'|trans}) }}
-            ><i class="fa fa-arrow-right-long"></i></a>
-        {% endif %}
-    </div>
-    <div class="mt-4">
-        <p class="fs-4">{{ track.name }}</p>
-        {% if track.kind is not null %}
-            <p class="">{{ 'Category'|trans }} : {{ track.kind.name }}</p>
-        {% endif %}
-        {% if track.tags is not null %}
-            <p class="">{{ 'Tags'|trans }} : {% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</p>
-        {% endif %}
-        {% if track.region is not null %}
-            <p class="">{{ 'Region'|trans }} : {{ track.region.value }}</p>
-        {% endif %}
-        <p class="">{{ 'Location'|trans }} : {{ track.location }}</p>
-        <p class="">{{ 'Year'|trans }} : {{ track.year }}</p>
-        {% if track.collective is not null %}
-            <p class="">{{ 'Collective'|trans }} : {{ track.collective.name }}</p>
-        {% endif %}
-        <p class="fs-5">{{ track.description }}</p>
-    </div>
+    {{ include('track/components/_previous_next_track.html.twig', {track}) }}
+    {{ include('track/components/_information_rows.html.twig', {track}) }}
 </div>
