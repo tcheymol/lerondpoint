@@ -90,7 +90,7 @@ class Track implements BlameableInterface
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -297,6 +297,10 @@ class Track implements BlameableInterface
 
     public function getObjectUrl(): ?string
     {
+        if ($this->url) {
+            return $this->getVideoPreview();
+        }
+
         return $this->getThumbnailUrl(ThumbSize::Full);
     }
 

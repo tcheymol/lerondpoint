@@ -1,0 +1,5 @@
+{% if track.url %}
+    {{ include('track/components/_track_video.html.twig', {track}) }}
+{% else %}
+    {{ include('track/components/_track_image.html.twig', {track}) }}
+{% endif %}

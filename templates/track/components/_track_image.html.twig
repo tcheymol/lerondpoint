@@ -2,7 +2,7 @@
 {% set objectUrl = track.objectUrl %}
 {% set mimeType = track.mime %}
 {% if thumbUrl is defined %}
-    <a class="btn btn-link" href="{{ path('track_carousel', {id: track.id}) }}">
+    <a class="btn btn-link w-100" href="{{ path('track_carousel', {id: track.id}) }}">
         <div class="border-default h-100">
             {% if mimeType =='application/pdf' and objectUrl is defined %}
                 <object data="{{ objectUrl }}" type="application/pdf" width="100%" height="500px">

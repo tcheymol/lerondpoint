@@ -10,6 +10,7 @@ Attachment: Document
 Attachments: Documents
 AuvergneRhoneAlpes: Auvergne-Rhône-Alpes
 Back: Retour
+BackStep: Retour %step%/%total%
 BourgogneFrancheComte: Bourgogne-Franche-Comté
 Bretagne: Bretagne
 Category: Catégorie
@@ -19,6 +20,7 @@ Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
+CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
 Create: Créer
 CreateCollective: Ajoute ton groupe à la carte
@@ -35,6 +37,7 @@ Disabled At: Désactivé le
 Disabled By: Désactivé par
 Disabled: Désactivé
 Droms: DROMS
+DropFiles: déposer vos documents
 Edit: Modifier
 Email: Email
 Enabled: Activé
@@ -83,6 +86,8 @@ Rejected: Refusé
 RejectionCause: Raison du refus
 ScrollToStart: Scroller pour commencer
 Search: Rechercher...
+ShareArchive: Partager une archive du mouvement
+ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
 Show: Voir
 Size: Taille
 Tags: Sous catégories
@@ -92,6 +97,7 @@ Track: Trace
 TrackKind: Type de trace
 TrackNumber: Trace N°
 TrackTag: Label trace
+TrackTitle: Titre de la trace
 Tracks: Traces
 TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
@@ -99,6 +105,8 @@ Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
 Users: Utilisateurs
+Validate: Valider
+ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé
 WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !

@@ -1,0 +1,25 @@
+{% extends 'track/new/step_template.html.twig' %}
+
+{% block step %}2{% endblock %}
+{% block innerContent %}
+    <div class="row">
+        <div class="col-6 d-none d-sm-flex">
+            {{ include('track/components/_track_preview.html.twig', {track}) }}
+        </div>
+        <div class="col-12 col-sm-6">
+            {{ form_start(form) }}
+                <div class="p-2">{{ form_widget(form.kind) }}</div>
+                <div class="p-2">{{ form_widget(form.tags) }}</div>
+                <div class="p-2">{{ form_widget(form.location) }}</div>
+                <div class="p-2">{{ form_widget(form.region) }}</div>
+                <div class="p-2">{{ form_widget(form.year) }}</div>
+                {% if form.collective is defined %}
+                    <div class="p-2">{{ form_widget(form.collective) }}</div>
+                {% endif %}
+                {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
+                {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
+                {{ form_widget(form._token) }}
+            {{ form_end(form, {render_rest: false}) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'track/new/step_template.html.twig' %}
+
+{% block step %}1{% endblock %}
+{% block innerContent %}
+    {{ form_start(form) }}
+        {{ form_row(form.attachmentsIds) }}
+        <div class="row text-start fs-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            <p class="grotesk mt-3 fs-5"> {{ 'ShareTrackWays'|trans }}</p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-4">
+                <h5>{{ 'DropFiles'|trans }}</h5>
+                {{ include('components/upload/_uppy_widget.html.twig') }}
+            </div>
+            <div class="col-12 col-sm-6 mt-4">
+                <h5>{{ 'CopyResourceLink'|trans }}</h5>
+                {{ form_widget(form.url, {attr: {
+                    'data-video-preview-target': 'input',
+                    'data-action': 'video-preview#preview',
+                }}) }}
+                <img src="" class="w-100" alt="" {{ stimulus_target('video-preview', 'preview') }} style="max-width: 90vw" />
+            </div>
+        </div>
+        {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
+        {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
+        {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

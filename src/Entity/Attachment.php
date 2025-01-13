@@ -93,16 +93,13 @@ class Attachment implements BlameableInterface
     public function getBestFitUrl(?ThumbSize $size = null): ?string
     {
         if ($size) {
-            return $this->getUrl($size);
-        }
-
-        foreach ($this->getUrls() as $url) {
-            if (null !== $url) {
-                return $url;
+            $exactSizeUrl = $this->getUrl($size);
+            if (null === $exactSizeUrl) {
+                return $this->getBestFitUrl();
             }
         }
 
-        return null;
+        return array_find($this->getUrls(), fn ($url) => null !== $url);
     }
 
     public function getId(): ?int

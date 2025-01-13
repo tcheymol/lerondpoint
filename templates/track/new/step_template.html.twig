@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'CreateTrack'|trans }}{% endblock %}
+{% block bodybg %}primary{% endblock %}
+{% set step = block('step') %}
+
+{% block content %}
+    <div class="h-100 text-dark" {{ stimulus_controller('video_preview') }}>
+        <h3 class="mt-5">{{ 'ShareArchive'|trans }} <span class="d-sm-none">{{ step }}/3</span></h3>
+        <h4 class="d-none d-sm-block">{{ step }}/3</h4>
+        <div class="col-12 col-sm-10 offset-sm-1 p-3">
+            {% block innerContent %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

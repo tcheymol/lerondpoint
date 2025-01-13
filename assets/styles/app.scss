@@ -50,8 +50,17 @@ body {
     font-family: AkzidenzGrotesk-Medium, sans-serif;
 }
 
-h1, h2, h3, h4, h5, .btn, .nav-link {
+h1, h2, h3, h4, h5, .btn, .nav-link, label {
     font-family: plaine, sans-serif;
+}
+
+input.form-control {
+    font-size: 13px;
+    padding-left: 16px;
+    color: #757575;
+    &::placeholder {
+        color: #757575;
+    }
 }
 
 .btn {
@@ -147,7 +156,7 @@ main {
     transform: rotate(-10deg);
 }
 
-.hover-rotate-5:hover {
+.hover-rotate-5:hover, .nav-link:hover, .btn:hover {
     transform: rotate(-2deg);
 }
 
@@ -263,12 +272,6 @@ div#uppy-dashboard {
     @include media-breakpoint-up(sm) {
         height: 200px;
     }
-    @include media-breakpoint-up(md) {
-        height: 300px;
-    }
-    @include media-breakpoint-up(lg) {
-        height: 400px;
-    }
     .uppy-Root {
         height: 100%;
         .uppy-Dashboard {
@@ -278,18 +281,7 @@ div#uppy-dashboard {
 
     .uppy-Dashboard-inner {
         border-radius: 4px;
-        background-color: $dark;
-
-        .uppy-Dashboard-AddFiles-title {
-            color: $white;
-        }
     }
-
-    .uppy-DashboardContent-bar, .uppy-Dashboard-progressindicators {
-        background-color: $dark;
-        color: $white;
-    }
-
 }
 
 .scroll-button {
@@ -308,4 +300,9 @@ div#uppy-dashboard {
 
 .pt-100vh {
     padding-top: 100vh;
+}
+
+.hidden {
+    position: absolute;
+    left: -9999px;
 }
