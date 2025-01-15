@@ -91,6 +91,7 @@ class TrackType extends AbstractType
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Tags'],
+                'required' => false,
                 'multiple' => true,
                 'choice_label' => 'name',
             ])

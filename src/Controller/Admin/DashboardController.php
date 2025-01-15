@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Action;
-use App\Entity\ActionKind;
-use App\Entity\ActionTag;
 use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Track;
@@ -54,8 +52,6 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Actions');
         yield MenuItem::linkToCrud('Actions', 'fas fa-location-crosshairs', Action::class);
-        yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', ActionKind::class);
-        yield MenuItem::linkToCrud('Tags', 'fas fa-tag', ActionTag::class);
 
         yield MenuItem::section('Tracks');
         yield MenuItem::linkToCrud('Tracks', 'fas fa-clipboard', Track::class);

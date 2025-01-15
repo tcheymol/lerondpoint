@@ -25,4 +25,10 @@ readonly class TrackPersister
         $track->publish();
         $this->em->flush();
     }
+
+    public function remove(Track $track): void
+    {
+        $this->em->remove($track);
+        $this->em->flush();
+    }
 }

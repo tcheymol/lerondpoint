@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Domain\Images\AttachmentHelper;
 use App\Domain\Track\TrackPersister;
-use App\Entity\ActionKind;
 use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Track;
@@ -18,29 +17,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-#[AsCommand(
-    name: 'app:load-data',
-    description: 'Load some necessary data',
-)]
+#[AsCommand(name: 'app:load-data', description: 'Load some necessary data')]
 class LoadDataCommand extends Command
 {
     public const array ENTITIES = [
-        ActionKind::class => [
-            ['name' => 'Rassemblement et tractage sur un rond-point'],
-            ['name' => "Cabane à proximité d'un rond-point ou d'une route"],
-            ['name' => "Animation d'un lieu (exemples de bâtiment, hangar ou terrain) pour en faire un espace d'entraide, de réunion, d'éducation populaire (conférence gesticulée, concert, projection, etc.)."],
-            ['name' => "Tractage ou tenue de stand dans l'espace public, action d'information vers la population (exemple : défense des services publics locaux)"],
-            ['name' => 'Réunion publique autour de questions de citoyenneté et de démocratie'],
-            ['name' => 'Jardin partagé'],
-            ['name' => 'Permanence administrative pour aider les personnes en situation de précarité'],
-            ['name' => 'Maraude'],
-            ['name' => 'Distribution alimentaire'],
-            ['name' => 'Participation aux mobilisations sociales/manifestations'],
-            ['name' => "Gestion et animation d'une épicerie participative"],
-            ['name' => "Animation d'une émission de radio"],
-            ['name' => "Rédaction d'un journal local"],
-            ['name' => "Animation d'un local type ressourcerie"],
-        ],
         TrackKind::class => [
             ['name' => 'audio'],
             ['name' => 'text'],
@@ -123,7 +103,6 @@ class LoadDataCommand extends Command
     {
         $this->emptyTable(Attachment::class);
 
-        $this->loadEntityData(ActionKind::class);
         $this->loadEntityData(TrackKind::class);
         $this->loadEntityData(TrackTag::class);
 
@@ -171,7 +150,6 @@ class LoadDataCommand extends Command
     private function createEntity(string $entityName, array $datum): ?object
     {
         return match ($entityName) {
-            ActionKind::class => new ActionKind($datum['name']),
             TrackKind::class => new TrackKind($datum['name']),
             TrackTag::class => new TrackTag($datum['name']),
             Collective::class => $this->createCollective($datum),

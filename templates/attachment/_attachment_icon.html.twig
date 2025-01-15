@@ -1,15 +1,15 @@
 {% set iconColor = '#7f8c8d' %}
 {% set iconName = 'file' %}
-{% if mimeType in ['application/msword', 'application/vnd.oasis.opendocument.text', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'] %}
+{% if mime in ['application/msword', 'application/vnd.oasis.opendocument.text', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'] %}
     {% set iconName = 'file-word' %}
     {% set iconColor = '#2980b9' %}
-{% elseif mimeType in ['application/vnd.ms-powerpoint', 'application/vnd.oasis.opendocument.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'] %}
+{% elseif mime in ['application/vnd.ms-powerpoint', 'application/vnd.oasis.opendocument.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'] %}
     {% set iconName = 'file-powerpoint' %}
     {% set iconColor = '#d35400' %}
-{% elseif mimeType in ['application/vnd.ms-excel', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'] %}
+{% elseif mime in ['application/vnd.ms-excel', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'] %}
     {% set iconName = 'file-excel' %}
     {% set iconColor = '#27ae60' %}
-{% elseif mimeType == 'application/zip' %}
+{% elseif mime == 'application/zip' %}
     {% set iconName = 'file-archive' %}
     {% set iconColor = '#f1c40f' %}
 {% endif %}

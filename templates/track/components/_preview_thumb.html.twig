@@ -1,17 +1,15 @@
-{% if track.url %}
+{% set previewUrl = preview_track(track, enum('App\\Domain\\Images\\ThumbSize').Small) %}
+{% set mediaType = track.mediaType %}
+
+{% if mediaType == 'pdf' %}
+{% elseif mediaType == 'video' %}
     {{ include('track/components/_track_video.html.twig', {track}) }}
 {% else %}
-    {% set thumbUrl = track.thumbnailUrl %}
-    {% set objectUrl = track.objectUrl %}
-    {% set mimeType = track.mime %}
-    {% if thumbUrl is defined %}
-        <div class="border-default h-100 w-100">
-            {% if thumbUrl is defined %}
-                <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
-            {% elseif mimeType is defined %}
-                {{ include('attachment/_attachment_icon.html.twig', {mimeType}) }}
-            {% else %}
-            {% endif %}
-        </div>
-    {% endif %}
+    <div class="border-default h-100 w-100">
+        {% if previewUrl is defined %}
+            <img src="{{ previewUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
+        {% elseif track.mime is defined %}
+            {{ include('attachment/_attachment_icon.html.twig', {mime}) }}
+        {% endif %}
+    </div>
 {% endif %}

@@ -34,14 +34,17 @@ class Track implements BlameableInterface
     #[ORM\ManyToOne(inversedBy: 'tracks')]
     private ?TrackKind $kind = null;
 
-    /**
-     * @var Collection<int, TrackTag>
-     */
+    /** @var Collection<int, TrackTag> */
     #[ORM\ManyToMany(targetEntity: TrackTag::class, inversedBy: 'tracks')]
     private Collection $tags;
 
     /** @var Collection<int, Attachment> */
-    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'track', cascade: ['persist'])]
+    #[ORM\OneToMany(
+        targetEntity: Attachment::class,
+        mappedBy: 'track',
+        cascade: ['persist', 'remove'],
+        //        orphanRemoval: true,
+    )]
     private Collection $attachments;
 
     /** @var string[] */
