@@ -79,6 +79,6 @@ export default class extends Controller {
         this.positionPinMarker = L.marker([lat, lon], {icon: positionPin}).addTo(this.mainMap);
 
 
-        this.mainMap.setView([lat, lon], 15);
+        this.mainMap.setView([lat, lon]);
     }
 }

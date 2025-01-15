@@ -197,7 +197,15 @@ main {
 }
 
 .geoapify-autocomplete-input {
-    width: 100%;
+    width: 100% !important;
+}
+
+.autocomplete-container {
+    min-width: 250px;
+
+    @include media-breakpoint-up(sm) {
+        min-width: 400px;
+    }
 }
 
 .carousel-indicators {
