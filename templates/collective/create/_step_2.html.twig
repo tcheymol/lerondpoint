@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    <h3 class="text-center mt-2">{{ 'CreateCollectiveSearchAddress'|trans }}</h3>
+    <div {{ stimulus_controller('map')}}  class="position-relative w-100" style="height: 500px;">
+        <div id="map" style="height: 500px; width: 100%"></div>
+        {{ include('map/_autocomplete.html.twig') }}
+    </div>
+    <div class="text-end mt-4">
+        <button type="submit" class="btn btn-light bg-white">{{ 'Validate'|trans }}</button>
+    </div>
+{{ form_end(form) }}

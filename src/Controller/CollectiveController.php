@@ -20,29 +20,43 @@ class CollectiveController extends AbstractController
         return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build()]);
     }
 
-    #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/choose_location/{id<\d+>}', name: 'collective_new_choose_location', methods: ['GET', 'POST'])]
+    public function chooseLocation(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
     {
-        $collective = new Collective();
-        $form = $this->createForm(CollectiveType::class, $collective);
-        $form->handleRequest($request);
+        $form = $this->createForm(CollectiveType::class, $collective, ['step' => 2])
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($collective);
             $entityManager->flush();
 
-            return $this->redirectToRoute('collective_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('collective_index');
         }
 
-        return $this->render('collective/new.html.twig', ['collective' => $collective,  'form' => $form]);
+        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => 2]);
+    }
+
+    #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $collective = new Collective();
+        $form = $this->createForm(CollectiveType::class, $collective, ['step' => 1])
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($collective);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('collective_new_choose_location', ['id' => $collective->getId()]);
+        }
+
+        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => 1]);
     }
 
     #[Route('/{id<\d+>}', name: 'collective_show', methods: ['GET'])]
     public function show(Collective $collective): Response
     {
-        return $this->render('collective/show.html.twig', [
-            'collective' => $collective,
-        ]);
+        return $this->render('collective/show.html.twig', ['collective' => $collective]);
     }
 
     #[Route('/{id<\d+>}/edit', name: 'collective_edit', methods: ['GET', 'POST'])]

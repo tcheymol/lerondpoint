@@ -314,3 +314,10 @@ div#uppy-dashboard {
     position: absolute;
     left: -9999px;
 }
+
+.map-autocomplete-container {
+    left: 50px;
+    top: 5px;
+    z-index: 1000;
+    border-style: solid;
+}

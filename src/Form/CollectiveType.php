@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Action;
 use App\Entity\Collective;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,16 +16,12 @@ class CollectiveType extends AbstractType
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name')
-            ->add('lat', HiddenType::class)
-            ->add('lon', HiddenType::class)
-            ->add('address_line1', HiddenType::class)
-            ->add('address_line2', HiddenType::class)
-            ->add('city', HiddenType::class)
-            ->add('country', HiddenType::class)
-            ->add('postcode', HiddenType::class)
-            ->add('state', HiddenType::class)
-        ;
+        $step = $options['step'];
+
+        match ($step) {
+            2 => $this->buildStep2($builder),
+            default => $this->buildStep1($builder),
+        };
     }
 
     #[\Override]
@@ -31,6 +29,37 @@ class CollectiveType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Collective::class,
+            'step' => 1,
         ]);
+    }
+
+    private function buildStep1(FormBuilderInterface $builder): void
+    {
+        $builder
+            ->add('name', null, ['label' => 'CollectiveName'])
+            ->add('actions', EntityType::class, [
+                'class' => Action::class,
+                'choice_label' => 'name',
+                'choice_attr' => fn (Action $action) => [
+                    'data-name' => $action->getName(),
+                    'data-icon' => $action->getIconPublicPath(),
+                ],
+                'attr' => ['data-controller' => 'tomselect'],
+                'multiple' => true,
+                'required' => false,
+            ]);
+    }
+
+    private function buildStep2(FormBuilderInterface $builder): void
+    {
+        $builder
+            ->add('lat', HiddenType::class)
+            ->add('lon', HiddenType::class)
+            ->add('address_line1', HiddenType::class)
+            ->add('address_line2', HiddenType::class)
+            ->add('city', HiddenType::class)
+            ->add('country', HiddenType::class)
+            ->add('postcode', HiddenType::class)
+            ->add('state', HiddenType::class);
     }
 }

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'CreateCollective'|trans }}{% endblock %}
-{% block bodybg %}light{% endblock %}
+{% block bodybg %}secondary{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,22 +15,15 @@
         </div>
         <div class="col-12 px-1 px-sm-3 px-md-5">
             <div class="p-3 text-dark">
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <h3 class="text-center mt-2">{{ 'CreateCollectiveSearchAddress'|trans }}</h3>
-                <div {{ stimulus_controller('map')}} style="height: 500px; width: 100%" class="position-relative">
-                    <div id="map" style="height: 500px; width: 100%"></div>
-                    <div class="position-absolute border-3 border-success mt-2"
-                         style="left: 50px; top: 5px; z-index: 1000; border-style: solid"
-                    >
-                        <div id="autocomplete" class="autocomplete-container position-relative"></div>
-                    </div>
-                </div>
-                <div class="text-end mt-3">
-                    <button class="btn btn-success">{{ 'Create'|trans }}</button>
-                </div>
-                {{ form_end(form) }}
+                {% if 2 == step %}
+                    {{ include('collective/create/_step_2.html.twig', {form}) }}
+                {% else %}
+                    {{ include('collective/create/_step_1.html.twig', {form}) }}
+                {% endif %}
             </div>
+        </div>
+        <div class="col-6 offset-3 col-sm-4 offset-sm-4 col-md-2 offset-md-5 ">
+            {{ include('components/_progress.html.twig', {step, total: 2, label: 'Step'}) }}
         </div>
     </div>
 {% endblock %}

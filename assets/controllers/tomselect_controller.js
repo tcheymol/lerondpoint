@@ -8,6 +8,15 @@ import TomSelect from 'tom-select';
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     connect() {
-        new TomSelect(this.element, {});
+        new TomSelect(this.element,{
+            render: {
+                option: function (data) {
+                    return `<div><img style="width: 25px" class="me-2" src="${data.icon}" alt="${data.name}" />${data.name}</div>`;
+                },
+                item: function (item) {
+                    return `<div><img style="width: 25px" class="me-2" src="${item.icon}" alt="${item.name}" />${item.name}</div>`;
+                }
+            }
+        });
     }
 }

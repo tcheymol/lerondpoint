@@ -20,7 +20,7 @@ class Collective implements OwnableInterface, BlameableInterface
     private ?int $id = null;
 
     /** @var Collection<int, Action> */
-    #[ORM\OneToMany(targetEntity: Action::class, mappedBy: 'collective')]
+    #[ORM\ManyToMany(targetEntity: Action::class)]
     private Collection $actions;
 
     /**
@@ -79,7 +79,6 @@ class Collective implements OwnableInterface, BlameableInterface
     {
         if (!$this->actions->contains($action)) {
             $this->actions->add($action);
-            $action->setCollective($this);
         }
 
         return $this;
@@ -87,12 +86,7 @@ class Collective implements OwnableInterface, BlameableInterface
 
     public function removeAction(Action $action): static
     {
-        if ($this->actions->removeElement($action)) {
-            // set the owning side to null (unless already changed)
-            if ($action->getCollective() === $this) {
-                $action->setCollective(null);
-            }
-        }
+        $this->actions->removeElement($action);
 
         return $this;
     }

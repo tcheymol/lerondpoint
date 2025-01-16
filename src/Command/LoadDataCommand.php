@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Domain\Images\AttachmentHelper;
 use App\Domain\Track\TrackPersister;
+use App\Entity\Action;
 use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Track;
@@ -21,6 +22,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class LoadDataCommand extends Command
 {
     public const array ENTITIES = [
+        Action::class => [
+            ['name' => 'Rond-point', 'iconPath' => 'rondpoint'],
+            ['name' => 'Solidarité', 'iconPath' => 'solidarite'],
+            ['name' => "Animation d'un lieu", 'iconPath' => 'amination'],
+            ['name' => 'Jardin partagé', 'iconPath' => 'jardin'],
+            ['name' => 'Éducation populaire', 'iconPath' => 'educpop'],
+            ['name' => 'Manifestation', 'iconPath' => 'manif'],
+            ['name' => 'Tractage', 'iconPath' => 'tract'],
+            ['name' => 'RIC', 'iconPath' => 'ric'],
+            ['name' => 'Réunion publique', 'iconPath' => 'reunion'],
+            ['name' => 'Information/Média', 'iconPath' => 'media'],
+            ['name' => 'Politique locale', 'iconPath' => 'local'],
+            ['name' => 'Autre', 'iconPath' => 'autre'],
+        ],
         TrackKind::class => [
             ['name' => 'audio'],
             ['name' => 'text'],
@@ -68,7 +83,8 @@ class LoadDataCommand extends Command
             ['name' => 'Tract Acte X', 'file' => 'actex.pdf'],
         ],
         Collective::class => [
-            ['name' => 'Groupe Beliard',
+            [
+                'name' => 'Groupe Beliard',
                 'lat' => '48.8958803',
                 'lon' => '2.3330117',
                 'address_line1' => '20 Rue Georgette Agutte',
@@ -108,7 +124,9 @@ class LoadDataCommand extends Command
 
         $this->loadEntityData(User::class);
         $this->loadEntityData(Track::class);
+
         $this->loadEntityData(Collective::class);
+        $this->loadEntityData(Action::class);
 
         return Command::SUCCESS;
     }
@@ -133,6 +151,7 @@ class LoadDataCommand extends Command
 
     private function loadEntityData(string $entityName): void
     {
+        var_dump('Loading data for '.$entityName);
         $this->emptyTable($entityName);
         $data = self::ENTITIES[$entityName];
 
@@ -152,6 +171,7 @@ class LoadDataCommand extends Command
         return match ($entityName) {
             TrackKind::class => new TrackKind($datum['name']),
             TrackTag::class => new TrackTag($datum['name']),
+            Action::class => new Action($datum['name'], $datum['iconPath']),
             Collective::class => $this->createCollective($datum),
             User::class => (new User($datum['email']))->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             Track::class => $this->createTrack($datum),

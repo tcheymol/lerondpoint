@@ -17,14 +17,12 @@ class Action implements BlameableInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\ManyToOne(inversedBy: 'actions')]
-    private ?Collective $collective = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $iconPath = null;
+    public function __construct(#[ORM\Column(length: 255)]
+        private ?string $name = null,
+        #[ORM\Column(length: 255, nullable: true)]
+        private ?string $iconPath = null,
+    ) {
+    }
 
     public function getId(): ?int
     {
@@ -43,18 +41,6 @@ class Action implements BlameableInterface
         return $this;
     }
 
-    public function getCollective(): ?Collective
-    {
-        return $this->collective;
-    }
-
-    public function setCollective(?Collective $collective): static
-    {
-        $this->collective = $collective;
-
-        return $this;
-    }
-
     public function getIconPath(): ?string
     {
         return $this->iconPath;
@@ -65,5 +51,14 @@ class Action implements BlameableInterface
         $this->iconPath = $iconPath;
 
         return $this;
+    }
+
+    public function getIconPublicPath(): string
+    {
+        if (!$this->iconPath) {
+            return '';
+        }
+
+        return '/images/action/'.$this->iconPath.'.png';
     }
 }

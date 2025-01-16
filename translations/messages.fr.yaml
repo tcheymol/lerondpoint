@@ -14,6 +14,7 @@ Bretagne: Bretagne
 Category: Catégorie
 CentreValDeLoire: Centre-Val de Loire
 Collective: Groupe
+CollectiveName: Nom du collectif
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 Coordinates X: Coordonnées X
@@ -89,6 +90,7 @@ ShareArchive: Partager une archive du mouvement
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
 Show: Voir
 Size: Taille
+Step: Étape
 Tags: Sous catégories
 TermsOfUse: Conditions générales d'utilisation
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
