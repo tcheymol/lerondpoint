@@ -273,7 +273,13 @@ class Track implements BlameableInterface
 
         /** @var array<string, string> $url_components */
         $url_components = parse_url($this->url);
-        parse_str($url_components['query'], $params);
+        $query = $url_components['query'] ?? null;
+
+        if (!$query) {
+            return null;
+        }
+
+        parse_str($query, $params);
 
         $videoId = $params['v'];
 
