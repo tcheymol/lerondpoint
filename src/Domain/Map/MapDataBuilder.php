@@ -19,6 +19,7 @@ readonly class MapDataBuilder
                 'lat' => $collective->getLat(),
                 'lon' => $collective->getLon(),
                 'name' => $collective->getName(),
+                'iconPath' => $collective->getIconPath(),
             ],
             $this->collectiveRepository->findAll()
         );

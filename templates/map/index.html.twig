@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <div {{ stimulus_controller('map', {collectives}) }} class="position-relative h-100 w-100">
+    <div {{ stimulus_controller('map', { collectives, enableDroms: true, }) }} class="position-relative h-100 w-100">
         <div id="map" class="h-100 w-100"></div>
         {{ include('map/_autocomplete.html.twig') }}
         {{ include('map/_droms.html.twig') }}
