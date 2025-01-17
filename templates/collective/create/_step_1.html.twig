@@ -1,4 +1,18 @@
-<img src="" alt="collective_icon"  id="autocompleteIconPreviewImage" class="d-none" />
+<div class="d-flex justify-content-center">
+    <div id="autocompleteIconPreviewImage" class="d-none position-relative" style="width: 200px;">
+        <button
+                type="button"
+                class="btn btn-link text-dark position-absolute top--40 start-0 w-100 btn"
+                aria-label="Change icon"
+                data-bs-toggle="modal"
+                data-bs-target="#updateIconModal"
+        >
+            {{ 'UpdateIcon'|trans }}
+        </button>
+        <img src="" style="width: 200px;" alt="collective_icon" />
+        {{ include('collective/create/_update_icon_modal.html.twig') }}
+    </div>
+</div>
 
 {{ form_start(form) }}
     <div class="col-12 text-start">

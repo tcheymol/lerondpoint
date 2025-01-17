@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import TomSelect from 'tom-select';
+import { fillFieldUrl, displayPreviewImage } from './helper/imgHelper.js';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -25,32 +26,8 @@ export default class extends Controller {
         };
     }
     onItemAdd = (index, item) => {
-        this.displayPreviewImage(item);
-        this.fillImageUrlField(item);
-    }
-
-    displayPreviewImage(item) {
-        if (!this.hasPreviewImageIdValue) return;
-
-        try {
-            const previewImageElement = document.getElementById(this.previewImageIdValue);
-            previewImageElement.src = item.children[0].src;
-            previewImageElement.classList.remove('d-none');
-        } catch (e) {
-            console.error('Failed displaying preview image', e);
-        }
-    }
-
-    fillImageUrlField(item) {
-        if (!this.hasUrlFieldIdValue) return;
-
-        try {
-            const urlFieldElement = document.getElementById(this.urlFieldIdValue);
-            urlFieldElement.value = item.children[0].src;
-        } catch (e) {
-            console.error('Failed filling image url field', e);
-        }
-
+        displayPreviewImage(this.previewImageIdValue, item.children[0].src);
+        fillFieldUrl(this.urlFieldIdValue, item.children[0].src);
     }
 }
 
