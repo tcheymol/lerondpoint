@@ -50,13 +50,13 @@ export default class extends Controller {
         if (this.hasEnableClickToCenterValue) {
             mainMap.on('click', (e) => {
                 if (this.positionPinMarker) mainMap.removeLayer(this.positionPinMarker);
-                this.positionPinMarker = centerMapOnClickLocation(mainMap, e.latlng);
+                this.positionPinMarker = centerMapOnClickLocation(mainMap, e.latlng, this.addressFieldsFormNameValue);
             });
         }
     }
 
-    onSelectAutocompleteLocation = (map, addressFieldsFormName) => (location) =>{
-        fillAddressFields(location, addressFieldsFormName);
+    onSelectAutocompleteLocation = (map) => (location) =>{
+        fillAddressFields(location, this.addressFieldsFormNameValue);
         this.positionPinMarker = recenterMap(map, location, this.positionPinMarker);
     }
 

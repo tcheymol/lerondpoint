@@ -84,8 +84,9 @@ export const addDroms = () => {
     }
 }
 
-export const centerMapOnClickLocation = (map, latlng) => {
+export const centerMapOnClickLocation = (map, latlng, addressFieldsFormName) => {
     const location = {properties: {lat: latlng.lat, lon: latlng.lng}};
+    fillAddressFields(location, addressFieldsFormName);
 
     return recenterMap(map, location);
 };
