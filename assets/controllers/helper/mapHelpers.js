@@ -1,3 +1,5 @@
+import { Modal } from 'bootstrap';
+
 export const fillAddressFields = (location, formName) => {
     if (!formName) return;
 
@@ -20,13 +22,46 @@ const getDromLocations = () => [
 
 const createIcon = (iconUrl) => L.icon({ iconUrl,  iconSize: [35, 35] });
 
+function onCollectiveClick(collective, e) {
+    const modalElement = document.getElementById('collectiveDetailsModal');
+    (new Modal(modalElement)).show();
+
+    try {
+        const modalTitle = modalElement.getElementsByClassName('modal-title')[0];
+        modalTitle.textContent = collective.id + ' - ' + collective.name;
+        const modalBody = modalElement.getElementsByClassName('modal-body')[0];
+        modalBody.innerHTML = '';
+
+        collective.actions.forEach(action => {
+            const item = document.createElement('div');
+            item.style.textAlign = 'center';
+
+            const img = document.createElement('img');
+            img.src = action.iconPath;
+            img.alt = action.name;
+            img.style.width = '100px';
+
+            const text = document.createElement('div');
+            text.textContent = action.name;
+
+            item.appendChild(img);
+            item.appendChild(text);
+
+            modalBody.appendChild(item);
+        });
+
+    } catch (e) {
+        console.error('Failed to display collective details', e);
+    }
+
+}
+
 export const addCollectiveToMap = (map, collective) => {
+    const iconPath = collective.iconPath ?? '/hut.png';
     if (collective.lat && collective.lon) {
-        L.marker([collective.lat, collective.lon], {icon: createIcon('/hut.png')}).addTo(map)
-            .on('click', (e) => {
-                console.log('clicked on collective', collective, e);
-            })
-        ;
+        L.marker([collective.lat, collective.lon], {icon: createIcon(iconPath)})
+            .addTo(map)
+            .on('click', (e) => onCollectiveClick(collective, e));
     }
 }
 
