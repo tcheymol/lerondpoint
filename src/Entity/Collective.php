@@ -56,6 +56,9 @@ class Collective implements OwnableInterface, BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $iconPath = null;
+
     public function __construct(
         #[ORM\Column(length: 255)]
         private ?string $name = null,
@@ -237,6 +240,18 @@ class Collective implements OwnableInterface, BlameableInterface
     public function setState(?string $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getIconPath(): ?string
+    {
+        return $this->iconPath;
+    }
+
+    public function setIconPath(?string $iconPath): static
+    {
+        $this->iconPath = $iconPath;
 
         return $this;
     }

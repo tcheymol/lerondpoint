@@ -1,7 +1,10 @@
+<img src="" alt="collective_icon"  id="autocompleteIconPreviewImage" class="d-none" />
+
 {{ form_start(form) }}
     <div class="col-12 text-start">
         {{ form_label(form.name) }}
         {{ form_widget(form.name) }}
+        {{ form_widget(form.iconPath) }}
         {{ form_label(form.actions) }}
         {{ form_widget(form.actions) }}
         <div class="text-end mt-4">

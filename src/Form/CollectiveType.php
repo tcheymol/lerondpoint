@@ -37,6 +37,7 @@ class CollectiveType extends AbstractType
     {
         $builder
             ->add('name', null, ['label' => 'CollectiveName'])
+            ->add('iconPath', HiddenType::class)
             ->add('actions', EntityType::class, [
                 'class' => Action::class,
                 'choice_label' => 'name',
@@ -44,7 +45,12 @@ class CollectiveType extends AbstractType
                     'data-name' => $action->getName(),
                     'data-icon' => $action->getIconPublicPath(),
                 ],
-                'attr' => ['data-controller' => 'tomselect'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'data-tomselect-icons-value' => 'true',
+                    'data-tomselect-preview-image-id-value' => 'autocompleteIconPreviewImage',
+                    'data-tomselect-url-field-id-value' => 'collective_iconPath',
+                ],
                 'multiple' => true,
                 'required' => false,
             ]);
