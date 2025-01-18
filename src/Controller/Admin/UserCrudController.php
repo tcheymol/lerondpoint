@@ -27,14 +27,12 @@ class UserCrudController extends AbstractCrudController
     #[\Override]
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            EmailField::new('email'),
-            TextField::new('plainPassword')->onlyOnForms(),
-            ChoiceField::new('roles', 'roles')->setChoices(User::ROLES)->allowMultipleChoices(),
-            BooleanField::new('disabled'),
-            BooleanField::new('validated'),
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield EmailField::new('email');
+        yield TextField::new('plainPassword')->onlyOnForms();
+        yield ChoiceField::new('roles', 'roles')->setChoices(User::ROLES)->allowMultipleChoices();
+        yield BooleanField::new('disabled');
+        yield BooleanField::new('validated');
     }
 
     #[\Override]

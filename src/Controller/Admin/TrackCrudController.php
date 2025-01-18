@@ -20,14 +20,12 @@ class TrackCrudController extends AbstractCrudController
     #[\Override]
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            BooleanField::new('disabled'),
-            BooleanField::new('validated'),
-            BooleanField::new('rejected'),
-            AssociationField::new('validatedBy')->hideOnForm(),
-            AssociationField::new('rejectedBy')->hideOnForm(),
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('name');
+        yield BooleanField::new('disabled');
+        yield BooleanField::new('validated');
+        yield BooleanField::new('rejected');
+        yield AssociationField::new('validatedBy')->hideOnForm();
+        yield AssociationField::new('rejectedBy')->hideOnForm();
     }
 }

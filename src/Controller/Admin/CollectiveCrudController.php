@@ -33,36 +33,34 @@ class CollectiveCrudController extends AbstractCrudController
     #[\Override]
     public function configureFields(string $pageName): iterable
     {
-        return [
-            FormField::addColumn(8),
-            IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            NumberField::new('lat'),
-            NumberField::new('lon'),
+        yield FormField::addColumn(8);
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('name');
+        yield NumberField::new('lat');
+        yield NumberField::new('lon');
 
-            TextField::new('addressLine1'),
-            TextField::new('addressLine2'),
-            TextField::new('postcode'),
-            TextField::new('city'),
-            TextField::new('country'),
-            TextField::new('state'),
+        yield TextField::new('addressLine1');
+        yield TextField::new('addressLine2');
+        yield TextField::new('postcode');
+        yield TextField::new('city');
+        yield TextField::new('country');
+        yield TextField::new('state');
 
-            CollectionField::new('actions')->hideOnForm(),
-            CollectionField::new('tracks')->hideOnForm(),
+        yield CollectionField::new('actions')->hideOnForm();
+        yield CollectionField::new('tracks')->hideOnForm();
 
-            FormField::addColumn(4),
-            BooleanField::new('disabled'),
-            BooleanField::new('validated'),
-            AssociationField::new('owner'),
-            DateField::new('createdAt')->hideOnForm(),
-            DateField::new('updatedAt')->hideOnForm(),
-            DateField::new('deletedAt')->hideOnForm(),
-            DateField::new('disabledAt')->hideOnForm(),
-            AssociationField::new('createdBy')->hideOnForm(),
-            AssociationField::new('updatedBy')->hideOnForm(),
-            AssociationField::new('disabledBy')->hideOnForm(),
-            AssociationField::new('deletedBy')->hideOnForm(),
-            AssociationField::new('validatedBy')->hideOnForm(),
-        ];
+        yield FormField::addColumn(4);
+        yield BooleanField::new('disabled');
+        yield BooleanField::new('validated');
+        yield AssociationField::new('owner');
+        yield DateField::new('createdAt')->hideOnForm();
+        yield DateField::new('updatedAt')->hideOnForm();
+        yield DateField::new('deletedAt')->hideOnForm();
+        yield DateField::new('disabledAt')->hideOnForm();
+        yield AssociationField::new('createdBy')->hideOnForm();
+        yield AssociationField::new('updatedBy')->hideOnForm();
+        yield AssociationField::new('disabledBy')->hideOnForm();
+        yield AssociationField::new('deletedBy')->hideOnForm();
+        yield AssociationField::new('validatedBy')->hideOnForm();
     }
 }
