@@ -21,7 +21,9 @@ class TrackController extends AbstractController
     public function index(Request $request, TrackProvider $provider, SearchFactory $factory): Response
     {
         $search = $factory->create($request->query->all());
-        $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
+        $form = $this->createForm(SearchType::class, $search, [
+            'action' => $this->generateUrl('track_async_search')
+        ])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('track_list', $search->toParamsArray());
