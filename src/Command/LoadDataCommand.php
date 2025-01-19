@@ -44,10 +44,10 @@ class LoadDataCommand extends Command
             ['name' => 'Ressourcerie', 'iconPath' => 'ressourcerie'],
         ],
         TrackKind::class => [
-            ['name' => 'audio'],
-            ['name' => 'text'],
-            ['name' => 'image'],
-            ['name' => 'video'],
+            ['name' => 'AUDIO'],
+            ['name' => 'TEXT'],
+            ['name' => 'PHOTO-IMAGE'],
+            ['name' => 'VIDEO'],
         ],
         TrackTag::class => [
             ['name' => 'Appel'],
