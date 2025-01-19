@@ -13,14 +13,17 @@ enum Region: string implements TranslatableInterface
     case CentreValDeLoire = 'Centre-Val de Loire';
     case Corse = 'Corse';
     case GrandEst = 'Grand Est';
+    case Guadeloupe = 'Guadeloupe';
+    case Guyane = 'Guyane';
     case HautsDeFrance = 'Hauts-de-France';
     case IleDeFrance = 'Île-de-France';
+    case Martinique = 'Martinique';
     case Normandie = 'Normandie';
     case NouvelleAquitaine = 'Nouvelle-Aquitaine';
     case Occitanie = 'Occitanie';
     case PaysDeLaLoire = 'Pays de la Loire';
     case ProvenceAlpesCoteDazur = "Provence-Alpes-Côte d'Azur";
-    case Droms = 'DROMS';
+    case Réunion = 'Réunion';
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
