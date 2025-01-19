@@ -1,0 +1,10 @@
+{% if value is defined %}
+    <p>
+        {% if label is defined and label is not null %}
+            <u>{{ label }} :</u>
+            <span> {{ value }}</span>
+        {% else %}
+            <span class="fs-4">{{ value }}</span>
+        {% endif %}
+    </p>
+{% endif %}

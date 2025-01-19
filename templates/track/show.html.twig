@@ -16,7 +16,10 @@
                         {{ include('track/components/_track_image.html.twig', {track}) }}
                     {% endif %}
                 </div>
-                {{ include('track/components/_information.html.twig', {track}) }}
+                <div class="col-12 col-sm-5 text-start">
+                    {{ include('track/components/_previous_next_track.html.twig', {track}) }}
+                    {{ include('track/components/_information_rows.html.twig', {track}) }}
+                </div>
             </div>
         </div>
     </div>

@@ -103,6 +103,11 @@ class Track implements BlameableInterface
         return $this;
     }
 
+    public function getCollectiveName(): ?string
+    {
+        return $this->collective?->getName();
+    }
+
     public function getCollective(): ?Collective
     {
         return $this->collective;
@@ -113,6 +118,11 @@ class Track implements BlameableInterface
         $this->collective = $collective;
 
         return $this;
+    }
+
+    public function getKindName(): ?string
+    {
+        return $this->kind?->getName();
     }
 
     public function getKind(): ?TrackKind
@@ -127,9 +137,12 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrackTag>
-     */
+    public function getTagsAsString(): string
+    {
+        return implode(',', $this->tags->map(fn (TrackTag $tag) => $tag->getName())->toArray());
+    }
+
+    /** @return Collection<int, TrackTag> */
     public function getTags(): Collection
     {
         return $this->tags;
@@ -239,6 +252,11 @@ class Track implements BlameableInterface
         $this->location = $location;
 
         return $this;
+    }
+
+    public function getRegionName(): ?string
+    {
+        return $this->region?->value;
     }
 
     public function getRegion(): ?Region

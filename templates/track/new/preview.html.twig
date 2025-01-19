@@ -11,8 +11,8 @@
                 <div class="col-12 col-sm-7">
                    {{ include('track/components/_track_image.html.twig', {track}) }}
                 </div>
-                <div class="col-12 col-sm-5">
-                    {{ include('track/components/_information.html.twig', {track}) }}
+                <div class="col-12 col-sm-5 text-start">
+                    {{ include('track/components/_information_rows.html.twig', {track}) }}
                     <a href="{{ path('track_new_add_description', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'Back'|trans }} 3/3</a>
                     <a href="{{ path('track_publish', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'ValidateAndSend'|trans }}</a>
                 </div>
