@@ -48,6 +48,13 @@ class Search
         return $this;
     }
 
+    public function setQ(?string $q): self
+    {
+        $this->text = $q;
+
+        return $this;
+    }
+
     private function addKindParam(): self
     {
         if ($this->kind) {

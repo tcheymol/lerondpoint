@@ -18,12 +18,16 @@ export default class extends Controller {
         new TomSelect(this.element, this.getConfig());
     }
     getConfig = () => {
-        if (!this.hasIconsValue) return {};
+        const config = {
+            plugins: ['remove_button'],
+        }
 
-        return {
-            render: { option: renderItemWithIcon, item: renderItemWithIcon },
-            onItemAdd : this.onItemAdd,
-        };
+        if (this.hasIconsValue) {
+            config.render = { option: renderItemWithIcon, item: renderItemWithIcon };
+            config.onItemAdd = this.onItemAdd;
+        }
+
+        return config;
     }
     onItemAdd = (index, item) => {
         displayPreviewImage(this.previewImageIdValue, item.children[0].src);
