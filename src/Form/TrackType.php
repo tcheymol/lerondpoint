@@ -107,7 +107,7 @@ class TrackType extends AbstractType
             ->add('year', ChoiceType::class, [
                 'choices' => array_combine($years, $years),
                 'required' => false,
-                'attr' => ['placeholder' => 'Location'],
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Year'],
             ]);
 
         $user = $this->getUser();
