@@ -36,12 +36,12 @@ class LoadDataCommand extends Command
             ['name' => 'Information/Média', 'iconPath' => 'journal'],
             ['name' => 'Tractage', 'iconPath' => 'reunionpublique'],
 
-            ['name' => "Animation", 'iconPath' => 'animation'],
-            ['name' => "Permanence", 'iconPath' => 'permanence'],
-            ['name' => "Distribution alimentaire", 'iconPath' => 'distributionalimentaire'],
-            ['name' => "Épicerie", 'iconPath' => 'epicerie'],
-            ['name' => "Radio", 'iconPath' => 'radio'],
-            ['name' => "Ressourcerie", 'iconPath' => 'ressourcerie'],
+            ['name' => 'Animation', 'iconPath' => 'animation'],
+            ['name' => 'Permanence', 'iconPath' => 'permanence'],
+            ['name' => 'Distribution alimentaire', 'iconPath' => 'distributionalimentaire'],
+            ['name' => 'Épicerie', 'iconPath' => 'epicerie'],
+            ['name' => 'Radio', 'iconPath' => 'radio'],
+            ['name' => 'Ressourcerie', 'iconPath' => 'ressourcerie'],
         ],
         TrackKind::class => [
             ['name' => 'audio'],

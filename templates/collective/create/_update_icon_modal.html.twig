@@ -12,7 +12,7 @@
                             <button class="btn btn-link p-0" style="width: 50px"
                                     {{
                                         stimulus_controller('update_collective_icon', {
-                                            iconPath: action.iconPublicPath,
+                                            iconPath: action.iconPublicPath(true),
                                             imagePreviewElementId: 'autocompleteIconPreviewImage',
                                             fieldElementId: 'collective_iconPath',
                                         })

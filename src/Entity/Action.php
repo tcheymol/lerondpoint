@@ -53,12 +53,14 @@ class Action implements BlameableInterface
         return $this;
     }
 
-    public function getIconPublicPath(): string
+    public function getIconPublicPath(?bool $big = false): string
     {
         if (!$this->iconPath) {
             return '';
         }
 
-        return '/images/action/'.$this->iconPath.'.png';
+        $folder = sprintf('/images/action/%s', $big ? 'big/' : '');
+
+        return sprintf('%s%s.png', $folder, $this->iconPath);
     }
 }

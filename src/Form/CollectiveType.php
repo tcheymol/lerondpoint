@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Action;
 use App\Entity\Collective;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -43,8 +45,9 @@ class CollectiveType extends AbstractType
                 'choice_label' => 'name',
                 'choice_attr' => fn (Action $action) => [
                     'data-name' => $action->getName(),
-                    'data-icon' => $action->getIconPublicPath(),
+                    'data-icon' => $action->getIconPublicPath(true),
                 ],
+                'query_builder' => fn (EntityRepository $er): QueryBuilder => $er->createQueryBuilder('a')->andWhere('a.disabled != TRUE'),
                 'attr' => [
                     'data-controller' => 'tomselect',
                     'data-tomselect-icons-value' => 'true',
