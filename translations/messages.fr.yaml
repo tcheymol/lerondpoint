@@ -18,6 +18,7 @@ Collective: Groupe
 CollectiveName: Nom du collectif
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
+ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
 CopyResourceLink: copier un lien vers une ressource
@@ -45,6 +46,7 @@ Enabled: Activé
 EnterUrl: Entrez une URL vers une vidéo Youtube
 Extension: Extension
 FollowUps: Suites
+FollowUs: Nous suivre (page FB, site internet ou autre...)
 Follows: Suites
 GrandEst: Grand Est
 HautsDeFrance: Hauts-de-France
@@ -60,6 +62,7 @@ KnowMore: En savoir plus
 Location: Localisation
 Login: Connexion
 Logout: Déconnexion
+LongDescription: Description longue
 Memory: Mémoire
 Misc: Divers
 Name: Nom
@@ -92,6 +95,7 @@ Search: Rechercher...
 ShareArchive: Partager une archive du mouvement
 ShareTrack: Vous souhaitez partager une trace ?
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
+ShortDescription: Courte description
 Show: Voir
 Size: Taille
 Step: Étape

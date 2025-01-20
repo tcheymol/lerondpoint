@@ -92,10 +92,8 @@ class TrackType extends AbstractType
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Tags'],
-                'query_builder' => function (EntityRepository $repository) {
-                    return $repository->createQueryBuilder('t')
-                        ->orderBy('t.name', 'ASC');
-                },
+                'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('t')
+                    ->orderBy('t.name', 'ASC'),
                 'required' => false,
                 'multiple' => true,
                 'choice_label' => 'name',

@@ -22,7 +22,7 @@ class TrackController extends AbstractController
     {
         $search = $factory->create($request->query->all());
         $form = $this->createForm(SearchType::class, $search, [
-            'action' => $this->generateUrl('track_async_search')
+            'action' => $this->generateUrl('track_async_search'),
         ])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

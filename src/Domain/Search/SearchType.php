@@ -5,6 +5,7 @@ namespace App\Domain\Search;
 use App\Domain\Location\Region;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,6 +45,8 @@ class SearchType extends AbstractType
                     'data-controller' => 'tomselect',
                     'data-action' => 'async-search#search',
                 ],
+                'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('t')
+                    ->orderBy('t.name', 'ASC'),
                 'required' => false,
                 'multiple' => true,
             ])

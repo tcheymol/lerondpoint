@@ -9,6 +9,8 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,6 +42,10 @@ class CollectiveType extends AbstractType
         $builder
             ->add('name', null, ['label' => 'CollectiveName'])
             ->add('iconPath', HiddenType::class)
+            ->add('shortDescription', TextType::class, ['label' => 'ShortDescription'])
+            ->add('followUs', TextType::class, ['label' => 'FollowUs'])
+            ->add('contactUs', TextType::class, ['label' => 'ContactUs'])
+            ->add('description', TextareaType::class, ['label' => 'LongDescription'])
             ->add('actions', EntityType::class, [
                 'class' => Action::class,
                 'choice_label' => 'name',

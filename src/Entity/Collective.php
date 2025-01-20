@@ -7,6 +7,7 @@ use App\Entity\Trait\BlameableTrait;
 use App\Repository\CollectiveRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
@@ -58,6 +59,18 @@ class Collective implements OwnableInterface, BlameableInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $iconPath = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $followUs = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $contactus = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $shortDescription = null;
 
     public function __construct(
         #[ORM\Column(length: 255)]
@@ -252,6 +265,54 @@ class Collective implements OwnableInterface, BlameableInterface
     public function setIconPath(?string $iconPath): static
     {
         $this->iconPath = $iconPath;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFollowUs(): ?string
+    {
+        return $this->followUs;
+    }
+
+    public function setFollowUs(?string $followUs): static
+    {
+        $this->followUs = $followUs;
+
+        return $this;
+    }
+
+    public function getContactus(): ?string
+    {
+        return $this->contactus;
+    }
+
+    public function setContactus(?string $contactus): static
+    {
+        $this->contactus = $contactus;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(string $shortDescription): static
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }

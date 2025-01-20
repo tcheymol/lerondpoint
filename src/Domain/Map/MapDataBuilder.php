@@ -22,6 +22,9 @@ readonly class MapDataBuilder
                 'lon' => $collective->getLon(),
                 'name' => $collective->getName(),
                 'iconPath' => $collective->getIconPath(),
+                'shortDescription' => $collective->getShortDescription(),
+                'followUs' => $collective->getFollowUs(),
+                'description' => $collective->getDescription(),
                 'actions' => $collective->getActions()->map(
                     fn (Action $action) => ['name' => $action->getName(), 'iconPath' => $action->getIconPublicPath()]
                 )->toArray(),

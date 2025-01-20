@@ -1,4 +1,5 @@
 import { Modal } from 'bootstrap';
+import {appendImg, appendText, generateDiv, updateElementHtml} from './domManipulationHelper.js';
 
 export const fillAddressFields = (location, formName) => {
     if (!formName) return;
@@ -22,34 +23,30 @@ const getDromLocations = () => [
 
 const createIcon = (iconUrl) => L.icon({ iconUrl,  iconSize: [35, 35] });
 
+
+const generateActionsDom = (collective) => {
+    const container = generateDiv();
+
+    collective.actions.forEach(action => {
+        const item = generateDiv();
+        appendImg(action, item);
+        appendText(action, item);
+
+        container.appendChild(item);
+    });
+
+    return container.innerHTML;
+}
+
 function onCollectiveClick(collective, e) {
-    const modalElement = document.getElementById('collectiveDetailsModal');
-    (new Modal(modalElement)).show();
+    (new Modal(document.getElementById('collectiveDetailsModal'))).show();
 
     try {
-        const modalTitle = modalElement.getElementsByClassName('modal-title')[0];
-        modalTitle.textContent = collective.id + ' - ' + collective.name;
-        const modalBody = modalElement.getElementsByClassName('modal-body')[0];
-        modalBody.innerHTML = '';
-
-        collective.actions.forEach(action => {
-            const item = document.createElement('div');
-            item.style.textAlign = 'center';
-
-            const img = document.createElement('img');
-            img.src = action.iconPath;
-            img.alt = action.name;
-            img.style.width = '100px';
-
-            const text = document.createElement('div');
-            text.textContent = action.name;
-
-            item.appendChild(img);
-            item.appendChild(text);
-
-            modalBody.appendChild(item);
-        });
-
+        updateElementHtml('collectiveDetailsModalTitle', `${collective.id} - ${collective.name}`);
+        updateElementHtml('collectiveDetailsModalActions', generateActionsDom(collective));
+        updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
+        updateElementHtml('collectiveDetailsModalFollowUs', collective.followUs);
+        updateElementHtml('collectiveDetailsModalDescription', collective.description);
     } catch (e) {
         console.error('Failed to display collective details', e);
     }
