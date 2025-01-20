@@ -8,6 +8,7 @@ use App\Entity\Collective;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
@@ -91,6 +92,10 @@ class TrackType extends AbstractType
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Tags'],
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('t')
+                        ->orderBy('t.name', 'ASC');
+                },
                 'required' => false,
                 'multiple' => true,
                 'choice_label' => 'name',

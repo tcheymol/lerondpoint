@@ -9,6 +9,7 @@ use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Order;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +37,7 @@ class Track implements BlameableInterface
 
     /** @var Collection<int, TrackTag> */
     #[ORM\ManyToMany(targetEntity: TrackTag::class, inversedBy: 'tracks')]
+    #[ORM\OrderBy(['name' => Order::Ascending->value])]
     private Collection $tags;
 
     /** @var Collection<int, Attachment> */
