@@ -5,35 +5,29 @@
 {% block content %}
     <div class="px-3 text-dark fw-bold">
         <div class="mt-2">{{ include('components/_back.html.twig') }}</div>
-        <div class="bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 mt-3">
-            <h2 class="fs-3">{{ 'WeNeedYou'|trans }}</h2>
-            <p class="fs-5 grotesk text-start">
-                <a href="{{ path('home') }}" class="link-dark">Le-rondpoint.org</a> est un site plateforme lancé fin 2024, 6 ans après le début du mouvement. Il repose sur la collaboration des Gilets Jaunes, qu’ils et elles soient encore actif·ves ou pas.
-                <br/>
-                La médiation du site est gérée par un collectif, <a href="{{ path('home') }}" class="link-dark">on vous en dit plus ici</a>.
-                <br/>
-                Nous sommes soucieux de la sécurité de nos visiteur·ses et utilisateur·rices, en hébergeant le site XXXXXXXXXXX et en n’utilisant aucun cookie de traçage.
+        <div class=" text-start bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 my-3">
+            <h2 class="fs-3">{{ 'AboutUs'|trans }}</h2>
 
+            <p class="fs-5">
+                <a href="{{ path('home') }}" class="link-dark">Le-rondpoint.org</a> est un site contributif lancé fin 2024, 6 ans après le début du mouvement et après un an de travail.
+                Le groupe a l’origine du site en assure également la médiation. Nous sommes X personnes, nous avons été investies dans les groupes GJ de St-Nazaire, Montreuil, ??????????? et nous sommes restées pleinement attachées au mouvement, à son histoire comme à son actualité. Aucun·e d’entre nous n’est membre d’un parti politique.
                 <br/><br/>
 
-                Pour participer, vous pouvez :
+                <span class="plaine">Traces</span>
                 <br/>
-                <a href="{{ path('track_new') }}" class="btn btn-primary fw-bold">Partager une ou plusieurs archives du mouvement</a>
-                <br/>
-                Ces contributions apparaitront parmi les <a href="{{ path('track_list') }}" class="link-dark">« traces »</a> que nous répertorions.
-
+                Il nous a semblé crucial de réunir une archive ambitieuse de ce mouvement extraordinaire, valorisant les mobilisations dans leurs diversités et les productions nombreuses que les Gilets Jaunes ont créé. C’est une mémoire des Gilets Jaunes par eux·elles-mêmes.
                 <br/><br/>
 
-                <a href="{{ path('collective_new') }}" class="btn btn-secondary">Ajouter votre groupe actif à la carte</a>
+                <span class="plaine">Et maintenant ?</span>
                 <br/>
-                Ce qui permet de localiser votre collectif sur la page <a href="{{ path('collective_index') }}" class="link-dark">Et maintenant ?</a>.
-
+                Nous sommes aussi les témoins enthousiastes de la prolongation du mouvement : de nombreux groupes ont poursuivi leurs actions à leur échelle, en inventant des actions de solidarité, de contestation citoyenne, de lien social... répertorier ces suites est important pour valoriser à la fois chacun de ces groupes encore actifs et la vivacité encore globale et forte du mouvement.
                 <br/><br/>
 
-                Si vous avez déjà contribué, vous pouvez accéder à vos contributions en vous connectant par ici
-                <a href="{{ path('app_login') }}" class="link-dark">en vous connectant par ici</a>
+                <span class="plaine">Crédits et soutiens</span>
+                <br/>
+                Le site a été conçu par notre groupe, accompagné d’Adrien Zammit pour le dessin et la mise en page et Thibaut Cheymol pour la
+                programmation informatique. Il est hébergé en France chez OVW et n’utilise pas de cookie de traçage
             </p>
-
         </div>
     </div>
 {% endblock %}

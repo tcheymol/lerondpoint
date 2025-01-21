@@ -3,16 +3,37 @@
 {% block title %}{{ 'Participate'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="h-100 d-flex justify-content-center align-items-center">
-        <div class="col-12 col-lg-6 h-100 d-flex justify-content-center align-items-center p-3">
-            <div class="row border border-3 border-dark h-100" style="max-height: 400px;">
-                <div class="col-12 bg-dark d-flex justify-content-center align-items-center fs-3">
-                    <h2>{{ 'WeNeedYou'|trans }}</h2>
-                </div>
-                <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center btn-primary rounded-0" href="{{ path('track_new') }}">{{ 'CreateTrack'|trans }}</a>
-                <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center btn-secondary rounded-0" href="{{ path('collective_new') }}">{{ 'CreateCollective'|trans }}</a>
-                <a class="col-12 btn btn-lg d-flex justify-content-center align-items-center btn-light bg-white rounded-0" href="{{ path('app_login') }}">{{ 'Login'|trans }}</a>
-            </div>
+    <div class="px-3 text-dark fw-bold">
+        <div class="mt-2">{{ include('components/_back.html.twig') }}</div>
+        <div class="text-start bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 my-3">
+            <h2 class="fs-3">{{ 'WeNeedYou'|trans }}</h2>
+            <p class="fs-5 grotesk">
+                <a href="{{ path('home') }}" class="link-dark">Le-rondpoint.org</a> est un site plateforme lancé fin 2024, 6 ans après le début du mouvement. Il repose sur la collaboration des Gilets Jaunes, qu’ils et elles soient encore actif·ves ou pas.
+                <br/>
+                La médiation du site est gérée par un collectif, <a href="{{ path('home') }}" class="link-dark">on vous en dit plus ici</a>.
+                <br/>
+                Nous sommes soucieux de la sécurité de nos visiteur·ses et utilisateur·rices, en hébergeant le site XXXXXXXXXXX et en n’utilisant aucun cookie de traçage.
+
+                <br/><br/>
+
+                Pour participer, vous pouvez :
+                <br/>
+                <a href="{{ path('track_new') }}" class="btn btn-primary fw-bold">Partager une ou plusieurs archives du mouvement</a>
+                <br/>
+                Ces contributions apparaitront parmi les <a href="{{ path('track_list') }}" class="link-dark">« traces »</a> que nous répertorions.
+
+                <br/><br/>
+
+                <a href="{{ path('collective_new') }}" class="btn btn-secondary">Ajouter votre groupe actif à la carte</a>
+                <br/>
+                Ce qui permet de localiser votre collectif sur la page <a href="{{ path('collective_index') }}" class="link-dark">Et maintenant ?</a>.
+
+                <br/><br/>
+
+                Si vous avez déjà contribué, vous pouvez accéder à vos contributions en vous connectant par ici
+                <a href="{{ path('app_login') }}" class="link-dark">en vous connectant par ici</a>
+            </p>
+
         </div>
     </div>
 {% endblock %}
