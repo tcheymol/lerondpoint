@@ -1,0 +1,32 @@
+.scroll-button {
+  bottom: 10%;
+  width: 40%;
+  left: 30%;
+
+  img {
+    height: 150px;
+  }
+}
+
+.cover-container {
+  padding-top: 66px !important;
+}
+
+.home-title {
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    width: 350px;
+  }
+  @include media-breakpoint-up(md) {
+    width: 500px;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 600px;
+  }
+}
+.home-button {
+  @include media-breakpoint-down(md) {
+    width: 90%;
+  }
+}

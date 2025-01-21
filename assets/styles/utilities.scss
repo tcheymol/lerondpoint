@@ -1,0 +1,70 @@
+h1, h2, h3, h4, h5, .btn, .nav-link, label {
+  font-family: plaine, sans-serif;
+}
+
+.fs-xs {
+  font-size: 0.75rem !important;
+}
+
+.hover-rotate-10:hover {
+  transform: rotate(-10deg);
+}
+
+.hover-rotate-5:hover, .nav-link:hover, .btn:hover {
+  transform: rotate(-2deg);
+}
+
+.mnh-100 {
+  min-height: 100%;
+}
+
+.vh-90 {
+  height: 90vh;
+}
+
+.vw-90 {
+  width: 90vh;
+}
+
+.mh-150px {
+  max-height: 150px;
+  @include media-breakpoint-up(md) {
+    max-height: 200px;
+  }
+}
+
+.mh-50px {
+  max-height: 50px;
+  @include media-breakpoint-up(md) {
+    max-height: 80px;
+  }
+}
+
+.mh-70px {
+  max-height: 70px;
+  @include media-breakpoint-up(md) {
+    max-height: 90px;
+  }
+}
+
+.border-default {
+  border: 5px solid $black;
+}
+
+.pt-100vh {
+  padding-top: 100vh;
+}
+
+.hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.top--40 {
+  top: -40px;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+  transform: none;
+}

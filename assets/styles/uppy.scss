@@ -1,0 +1,18 @@
+div#uppy-dashboard {
+  max-width: 750px;
+  width: 100%;
+  height: 100px;
+  @include media-breakpoint-up(sm) {
+    height: 200px;
+  }
+  .uppy-Root {
+    height: 100%;
+    .uppy-Dashboard {
+      height: 100%;
+    }
+  }
+
+  .uppy-Dashboard-inner {
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,27 @@
+.geoapify-autocomplete-item {
+  text-align: left;
+}
+
+.geoapify-autocomplete-input {
+  width: 100% !important;
+}
+
+.autocomplete-container {
+  min-width: 250px;
+
+  @include media-breakpoint-up(sm) {
+    min-width: 400px;
+  }
+}
+
+#map {
+  height: 180px;
+  width: 180px;
+}
+
+.map-autocomplete-container {
+  left: 50px;
+  top: 5px;
+  z-index: 1000;
+  border-style: solid;
+}

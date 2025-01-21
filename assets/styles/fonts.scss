@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "AkzidenzGrotesk-Medium";
+  src: url('../fonts/AkzidenzGrotesk-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AkzidenzGrotesk-Bold";
+  src: url('../fonts/AkzidenzGrotesk-Medium.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "plaine";
+  src: url('../fonts/laPlaine.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.plaine {
+  font-family: plaine, sans-serif;
+}
+
+.grotesk {
+  font-family: AkzidenzGrotesk-Medium, sans-serif;
+}
