@@ -4,7 +4,7 @@
 {% block bodybg %}light{% endblock %}
 
 {% block content %}
-    <div class="row" {{ stimulus_controller('async_search', {url: path('track_async_search')}) }}>
+    <div class="row h-100" {{ stimulus_controller('async_search', {url: path('track_async_search')}) }}>
         <h1 class="col-12 text-center text-dark mt-3">{{ 'TracksListTitle'|trans }}</h1>
         <div class="col-12 col-md-10 offset-md-1">
            {{ include('track/components/_search_form.html.twig', {form}) }}

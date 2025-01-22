@@ -28,4 +28,11 @@ readonly class TrackAttachmentHelper
 
         return $track;
     }
+
+    public function deleteAttachments(Track $track): void
+    {
+        foreach ($track->getAttachments() as $attachment) {
+            $this->attachmentHelper->deleteObjects($attachment);
+        }
+    }
 }

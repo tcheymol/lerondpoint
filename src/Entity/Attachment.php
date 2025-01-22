@@ -69,6 +69,17 @@ class Attachment implements BlameableInterface
             ->setSize($file->getSize());
     }
 
+    /** @return string[] */
+    public function getObjectIds(): array
+    {
+        return array_filter([
+            $this->objectId,
+            $this->thumbnailObjectId,
+            $this->mediumThumbnailObjectId,
+            $this->bigThumbnailObjectId,
+        ], fn (?string $objectId) => null !== $objectId);
+    }
+
     public function getUrl(?ThumbSize $size = ThumbSize::Small): ?string
     {
         return match ($size) {

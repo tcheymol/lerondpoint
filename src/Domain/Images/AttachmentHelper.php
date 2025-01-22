@@ -133,4 +133,15 @@ readonly class AttachmentHelper
             $attachment->setWidth((string) $imageInfo[0])->setHeight((string) $imageInfo[1]);
         }
     }
+
+    public function deleteObjects(Attachment $attachment): void
+    {
+        foreach ($attachment->getObjectIds() as $objectId) {
+            try {
+                $this->s3Adapter->deleteFile($objectId);
+            } catch (\Exception $e) {
+                $this->logger->error(sprintf('Error while deleting attachment %s objet with id %s: %s', $attachment->getId(), $objectId, $e->getMessage()));
+            }
+        }
+    }
 }
