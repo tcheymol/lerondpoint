@@ -56,4 +56,17 @@ class TrackRepository extends ServiceEntityRepository
 
         return $tracks;
     }
+
+    /** @return Track[] */
+    public function findToModerate(): array
+    {
+        /** @var Track[] $tracks */
+        $tracks = $this->createQueryBuilder('t')
+            ->andWhere('t.validated = 0 AND t.rejected = 0')
+            ->andWhere('t.isDraft = 0')
+            ->getQuery()
+            ->getResult();
+
+        return $tracks;
+    }
 }

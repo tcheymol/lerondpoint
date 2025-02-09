@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Track{% endblock %}
-{% block bodybg %}light{% endblock %}
+{% block title %}Moderation{% endblock %}
+{% block bodybg %}warning{% endblock %}
 
 {% block content %}
     <div class="text-dark h-100 p-2 flex-column">
@@ -22,8 +22,21 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-primary position-absolute bottom-0 end-0 border-4 border-dark hover-underline mb-1 me-1" href="{{ path('track_new_index')}}">
-            {{ "ShareTrack"|trans }}
-        </a>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <a class="btn btn-danger border-dark hover-underline w-100"
+                   href="{{ path('moderate_track_reject' , {id: track.id}) }}"
+                >
+                    {{ "Refuse"|trans }}
+                </a>
+            </div>
+            <div class="col-12 col-sm-6">
+                <a class="btn btn-success border-dark hover-underline w-100 "
+                   href="{{ path('moderate_track_accept' , {id: track.id}) }}"
+                >
+                    {{ "Accept"|trans }}
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock %}

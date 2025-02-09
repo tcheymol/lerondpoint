@@ -7,9 +7,11 @@ use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Entity\Track;
 use App\Form\TrackType;
+use App\Security\Voter\Constants;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/track/new')]
 class CreateTrackController extends AbstractController
@@ -28,6 +30,7 @@ class CreateTrackController extends AbstractController
         return $this->render('track/new/create.html.twig', ['form' => $form]);
     }
 
+    #[IsGranted(Constants::EDIT, subject: 'track')]
     #[Route('/{id<\d+>}/information', name: 'track_new_add_main_information', methods: ['GET', 'POST'])]
     public function newAddMainInformation(Request $request, Track $track, TrackPersister $persister, TrackAttachmentHelper $helper): Response
     {
@@ -46,6 +49,7 @@ class CreateTrackController extends AbstractController
         ]);
     }
 
+    #[IsGranted(Constants::EDIT, subject: 'track')]
     #[Route('/{id<\d+>}/description', name: 'track_new_add_description', methods: ['GET', 'POST'])]
     public function newAddDescription(Request $request, TrackPersister $persister, Track $track, TrackAttachmentHelper $helper): Response
     {
@@ -64,6 +68,7 @@ class CreateTrackController extends AbstractController
         ]);
     }
 
+    #[IsGranted(Constants::EDIT, subject: 'track')]
     #[Route('/{id<\d+>}/preview', name: 'track_new_preview', methods: ['GET'])]
     public function newPreview(Track $track, TrackAttachmentHelper $attachmentHelper): Response
     {
@@ -72,6 +77,7 @@ class CreateTrackController extends AbstractController
         ]);
     }
 
+    #[IsGranted(Constants::EDIT, subject: 'track')]
     #[Route('/{id<\d+>}/publish', name: 'track_publish', methods: ['GET'])]
     public function publish(Track $track, TrackPersister $persister): Response
     {
@@ -80,6 +86,7 @@ class CreateTrackController extends AbstractController
         return $this->redirectToRoute('track_list');
     }
 
+    #[IsGranted(Constants::EDIT, subject: 'track')]
     #[Route('/{id<\d+>}/cancel', name: 'track_cancel', methods: ['GET'])]
     public function cancel(Track $track, TrackPersister $persister): Response
     {

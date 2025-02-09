@@ -1,8 +1,7 @@
 {% set previewUrl = preview_track(track, enum('App\\Domain\\Images\\ThumbSize').Small) %}
 {% set mediaType = track.mediaType %}
 
-{% if mediaType == 'pdf' %}
-{% elseif mediaType == 'video' %}
+{% if mediaType == 'video' %}
     {{ include('track/components/_track_video.html.twig', {track}) }}
 {% else %}
     <div class="border-default h-100 w-100">

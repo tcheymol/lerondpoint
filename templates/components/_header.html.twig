@@ -16,6 +16,9 @@
                 {{ include('components/_nav_link.html.twig', { url: path('app_contribute'), label: 'Participate'|trans, color: 'white',}) }}
                 {{ include('components/_contribute_modal.html.twig') }}
             </div>
+            {% if is_granted('ROLE_MODERATOR') %}
+                {{ include('components/_nav_link.html.twig', { url: path('moderation_index'), label: 'Moderation'|trans, color: 'warning',}) }}
+            {% endif %}
         <div class="flex-grow-1"></div>
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}

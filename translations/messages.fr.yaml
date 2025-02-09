@@ -1,4 +1,5 @@
 AboutUs: Qui sommes nous ?
+Accept: Accepter
 Action: Action
 Actions: Actions
 Actus: Actualités
@@ -65,6 +66,8 @@ Logout: Déconnexion
 LongDescription: Description longue
 Memory: Mémoire
 Misc: Divers
+Moderation: Modération
+ModerationTitle: Traces en attente de modération
 Name: Nom
 Next: Suivant
 NextTrack: Trace suivante
@@ -86,6 +89,7 @@ Preview: "Partager une archive du mouvement : Aperçu"
 Previous: Précédent
 PreviousTrack: Trace précédente
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
+Refuse: Refuser
 Region: Région
 Rejected By: Refusé par
 Rejected: Refusé

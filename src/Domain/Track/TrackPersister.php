@@ -26,6 +26,18 @@ readonly class TrackPersister
         $this->em->flush();
     }
 
+    public function accept(Track $track): void
+    {
+        $track->accept();
+        $this->em->flush();
+    }
+
+    public function reject(Track $track): void
+    {
+        $track->reject();
+        $this->em->flush();
+    }
+
     public function remove(Track $track): void
     {
         $this->em->remove($track);

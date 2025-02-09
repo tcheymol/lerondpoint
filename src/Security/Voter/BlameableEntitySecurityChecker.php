@@ -35,6 +35,10 @@ readonly class BlameableEntitySecurityChecker
             return false;
         }
 
+        if ($entity->getCreatedBy() === $this->security->getUser()) {
+            return true;
+        }
+
         return $this->authorizationChecker->isGranted('ROLE_MODERATOR');
     }
 }

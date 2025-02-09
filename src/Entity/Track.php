@@ -391,4 +391,9 @@ class Track implements BlameableInterface
     {
         $this->isDraft = false;
     }
+
+    public function needsModeration(): bool
+    {
+        return !$this->isDraft && !$this->rejected && !$this->validated;
+    }
 }

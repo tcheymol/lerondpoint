@@ -137,6 +137,14 @@ trait BlameableTrait
         $this->validated = $validated;
     }
 
+    public function accept(): self
+    {
+        $this->setRejected(false);
+        $this->setValidated(true);
+
+        return $this;
+    }
+
     public function getValidatedBy(): ?User
     {
         return $this->validatedBy;
@@ -160,6 +168,14 @@ trait BlameableTrait
     public function getRejectedBy(): ?User
     {
         return $this->rejectedBy;
+    }
+
+    public function reject(): self
+    {
+        $this->setRejected(true);
+        $this->setValidated(false);
+
+        return $this;
     }
 
     public function setRejectedBy(?User $rejectedBy): void
