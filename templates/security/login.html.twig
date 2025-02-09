@@ -4,6 +4,8 @@
 {% block bodybg %}light{% endblock %}
 
 {% block content %}
+    <h1 class="col-12 text-center text-dark mt-3">{{ 'Login'|trans }}</h1>
+
     <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <div class="card p-5">
             <form method="post">
@@ -23,6 +25,12 @@
                 <button class="btn btn-lg btn-success mt-3" type="submit">
                     {{ 'Login'|trans }}
                 </button>
+                <br/>
+                <a class="btn btn-lg btn-link mt-3"
+                   href="{{ path('app_sign_in') }}"
+                >
+                    {{ 'CreateAccount'|trans }}
+                </a>
             </form>
         </div>
     </div>

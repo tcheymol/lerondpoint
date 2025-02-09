@@ -4,6 +4,7 @@ Action: Action
 Actions: Actions
 Actus: Actualités
 Admin: Admin
+AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
 Attachment: Document
 Attachments: Documents
@@ -25,6 +26,7 @@ Coordinates Y: Coordonnées Y
 CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
 Create: Créer
+CreateAccount: Pas de compte ? Créez en un ici
 CreateCollective: Ajoute ton groupe à la carte
 CreateCollectiveSearchAddress: Recherchez une adresse ou déposez un point sur la carte
 CreateTrack: Ajouter une trace
@@ -101,6 +103,7 @@ ShareTrack: Vous souhaitez partager une trace ?
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
 ShortDescription: Courte description
 Show: Voir
+SignIn: Inscription
 Size: Taille
 Step: Étape
 Tags: Sous catégories
@@ -121,6 +124,7 @@ UploadAFile: Téléverser un fichier
 Users: Utilisateurs
 Validate: Valider
 ValidateAndSend: Valider et envoyer
+ValidateSignIn: Valider mon inscription
 ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé

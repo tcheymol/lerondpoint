@@ -22,9 +22,6 @@ nav.navbar {
       .contribute-modal{
         display: flex;
       }
-      .nav-link {
-        display: none !important;
-      }
     }
 
     .nav-link {
@@ -37,7 +34,7 @@ nav.navbar {
       z-index: 1;
       border-color: $dark;
       border-style: solid;
-      border-width: 3px 3px 0 3px;
+      border-width: 0 3px 0 3px;
       .btn {
         height: 50px;
         border-color: $dark;
