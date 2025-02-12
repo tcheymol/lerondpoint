@@ -18,7 +18,6 @@ function toggleHeader(scrollDirection) {
     );
 }
 
-/* stimulusFetch: 'lazy' */
 export default class extends Controller {
     lastScrollPosition = 0;
 
