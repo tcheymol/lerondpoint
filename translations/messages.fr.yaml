@@ -54,6 +54,7 @@ Extension: Extension
 FollowUps: Suites
 FollowUs: Nous suivre (page FB, site internet ou autre...)
 Follows: Suites
+ForgotPasswordResetPassword: Mot de passe oublié ? Réinitialisez le ici
 GrandEst: Grand Est
 HautsDeFrance: Hauts-de-France
 Home: Accueil
@@ -99,8 +100,10 @@ Region: Région
 Rejected By: Refusé par
 Rejected: Refusé
 RejectionCause: Raison du refus
+ResetPassword: Réinitialiser votre mot de passe
 ScrollToStart: Scroller pour commencer
 Search: Rechercher...
+SendPasswordRequestEmail: Envoyer un email de réinitialisation
 ShareArchive: Partager une archive du mouvement
 ShareTrack: Vous souhaitez partager une trace ?
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
