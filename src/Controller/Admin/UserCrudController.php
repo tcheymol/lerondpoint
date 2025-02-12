@@ -41,6 +41,7 @@ class UserCrudController extends AbstractCrudController
         if (!$entityInstance instanceof User) {
             return;
         }
+        $entityInstance->validateEmail();
         $this->updatePassword($entityInstance);
 
         parent::persistEntity($entityManager, $entityInstance);
