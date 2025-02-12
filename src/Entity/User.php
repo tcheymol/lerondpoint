@@ -8,12 +8,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable, BlameableInterface
 {
     use BlameableTrait;
@@ -48,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     /** @var Collection<int, Collective> */
     #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
     private Collection $collectives;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $validatedEmail = null;
 
     public function __construct(
         #[ORM\Column(length: 180)]
@@ -193,5 +197,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function getFirstCollective(): ?Collective
     {
         return $this->collectives->first() ?: null;
+    }
+
+    public function isValidatedEmail(): ?bool
+    {
+        return $this->validatedEmail;
+    }
+
+    public function setValidatedEmail(?bool $validatedEmail): static
+    {
+        $this->validatedEmail = $validatedEmail;
+
+        return $this;
+    }
+
+    public function validateEmail(): static
+    {
+        $this->validatedEmail = true;
+
+        return $this;
     }
 }

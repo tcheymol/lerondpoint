@@ -11,6 +11,7 @@ Attachments: Documents
 AuvergneRhoneAlpes: Auvergne-Rhône-Alpes
 Back: Retour
 BackStep: Retour %step%/%total%
+BackToLogin: Retour à la page de connexion
 BourgogneFrancheComte: Bourgogne-Franche-Comté
 Bretagne: Bretagne
 Category: Catégorie
@@ -45,6 +46,8 @@ Droms: DROMS
 DropFiles: déposer vos documents
 Edit: Modifier
 Email: Email
+EmailNotVerified: Votre adresse email n'a pas encore été validée
+EmailVerified: Votre email a été validé avec succès
 Enabled: Activé
 EnterUrl: Entrez une URL vers une vidéo Youtube
 Extension: Extension
@@ -104,6 +107,8 @@ ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre or
 ShortDescription: Courte description
 Show: Voir
 SignIn: Inscription
+SignInSuccess: Inscription envoyée
+SignInSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
 Size: Taille
 Step: Étape
 Tags: Sous catégories
@@ -128,6 +133,10 @@ ValidateSignIn: Valider mon inscription
 ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé
+VerifyEmailBody: Pour valider votre inscription, veuillez cliquer sur le lien ci-dessous
+VerifyEmailCta: Valider mon email
+VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
+VerifyEmailTitle: Bienvenue sur le-rondpoint.org
 WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
 WhoAreWe: Qui sommes-nous ?
 Year: Année

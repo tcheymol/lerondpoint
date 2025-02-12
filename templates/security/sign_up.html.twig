@@ -10,8 +10,10 @@
             {{ form_start(form) }}
                 {{ form_label(form.email) }}
                 {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
                 {{ form_label(form.plainPassword) }}
                 {{ form_widget(form.plainPassword) }}
+                {{ form_errors(form.plainPassword) }}
                 <button class="btn btn-lg btn-success mt-3" type="submit">
                     {{ 'ValidateSignIn'|trans }}
                 </button>
