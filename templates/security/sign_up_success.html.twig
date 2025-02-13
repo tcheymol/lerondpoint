@@ -4,11 +4,11 @@
 {% block bodybg %}light{% endblock %}
 
 {% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ 'SignInSuccess'|trans }}</h1>
+    <h1 class="col-12 text-center text-dark mt-3">{{ 'SignUpSuccess'|trans }}</h1>
     <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <div class="card p-5">
             <p class="fs-3">
-                {{ 'SignInSuccessSubtitle'|trans({'%emailAddress%': email}) }}
+                {{ 'SignUpSuccessSubtitle'|trans({'%emailAddress%': email}) }}
             </p>
             <a class="btn btn-lg btn-link mt-3" href="{{ path('app_login') }}">
                 {{ 'BackToLogin'|trans }}

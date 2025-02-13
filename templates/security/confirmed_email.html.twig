@@ -1,14 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{{ 'Login'|trans}}{% endblock %}
+{% block title %}{{ 'EmailVerified'|trans}}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
-{% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ 'Login'|trans }}</h1>
-
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <div class="card p-5">
-            EMAIL IS CONFIRMED
-        </div>
-    </div>
+{% block cardContent %}
+    <p>{{ 'EmailVerified'|trans }}</p>
 {% endblock %}

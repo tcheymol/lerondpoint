@@ -1,38 +1,28 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
 {% block title %}{{ 'Login'|trans}}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
-{% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ 'Login'|trans }}</h1>
+{% block cardContent %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <label for="username" class="form-label">{{ 'Email'|trans }}</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+        <label for="password" class="form-label">{{ 'Password'|trans }}</label>
+        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'Login'|trans }}</button>
+        <br/>
+        <a class="btn btn-lg btn-link mt-3" href="{{ path('app_sign_up') }}">
+            {{ 'CreateAccount'|trans }}
+        </a>
+    </form>
+{% endblock %}
 
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <div class="card p-5">
-            <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                    </div>
-                {% endif %}
-                <label for="username" class="form-label">{{ 'Email'|trans }}</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-
-                <label for="password" class="form-label">{{ 'Password'|trans }}</label>
-                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                <button class="btn btn-lg btn-success mt-3" type="submit">
-                    {{ 'Login'|trans }}
-                </button>
-                <br/>
-                <a class="btn btn-lg btn-link mt-3" href="{{ path('app_sign_up') }}">
-                    {{ 'CreateAccount'|trans }}
-                </a>
-            </form>
-        </div>
+{% block outterContent %}
         <a class="btn btn-lg btn-link text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
             {{ 'ForgotPasswordResetPassword'|trans }}
         </a>
-    </div>
 {% endblock %}

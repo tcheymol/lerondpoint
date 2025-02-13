@@ -1,18 +1,10 @@
-{% extends 'base.html.twig' %}
-
 {% block title %}{{ 'ResetPassword'|trans}}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
-{% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ 'ResetPassword'|trans }}</h1>
-
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <div class="card p-5">
-            {{ form_start(resetForm) }}
-                {{ form_row(resetForm.plainPassword.first) }}
-                {{ form_row(resetForm.plainPassword.second) }}
-                <button class="btn btn-primary">{{ 'ResetPassword'|trans }}</button>
-            {{ form_end(resetForm) }}
-        </div>
-    </div>
+{% block cardContent %}
+    {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword.first) }}
+        {{ form_row(resetForm.plainPassword.second) }}
+        <button class="btn btn-primary">{{ 'ResetPassword'|trans }}</button>
+    {{ form_end(resetForm) }}
 {% endblock %}

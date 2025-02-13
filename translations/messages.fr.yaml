@@ -120,9 +120,9 @@ ShareTrack: Vous souhaitez partager une trace ?
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
 ShortDescription: Courte description
 Show: Voir
-SignIn: Inscription
-SignInSuccess: Inscription envoyée
-SignInSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
+SignUp: Inscription
+SignUpSuccess: Inscription envoyée
+SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
 Size: Taille
 Step: Étape
 Tags: Sous catégories
@@ -143,7 +143,7 @@ UploadAFile: Téléverser un fichier
 Users: Utilisateurs
 Validate: Valider
 ValidateAndSend: Valider et envoyer
-ValidateSignIn: Valider mon inscription
+ValidateSignUp: Valider mon inscription
 ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé

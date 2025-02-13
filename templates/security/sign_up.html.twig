@@ -1,28 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{{ 'Login'|trans}}{% endblock %}
+{% block title %}{{ 'SignUp'|trans}}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
-{% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ 'SignIn'|trans }}</h1>
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <div class="card p-5">
-            {{ form_start(form) }}
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email) }}
-                {{ form_errors(form.email) }}
-                {{ form_label(form.plainPassword) }}
-                {{ form_widget(form.plainPassword) }}
-                {{ form_errors(form.plainPassword) }}
-                <button class="btn btn-lg btn-success mt-3" type="submit">
-                    {{ 'ValidateSignIn'|trans }}
-                </button>
-            {{ form_end(form) }}
-            <a class="btn btn-lg btn-link mt-3"
-               href="{{ path('app_login') }}"
-            >
-                {{ 'AlreadyHaveAccount'|trans }}
-            </a>
-        </div>
-    </div>
+{% block cardContent %}
+    {{ form_start(form) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+        {{ form_label(form.plainPassword) }}
+        {{ form_widget(form.plainPassword) }}
+        {{ form_errors(form.plainPassword) }}
+        <button class="btn btn-lg btn-success mt-3" type="submit">
+            {{ 'ValidateSignUp'|trans }}
+        </button>
+    {{ form_end(form) }}
+    <a class="btn btn-lg btn-link mt-3" href="{{ path('app_login') }}">
+        {{ 'AlreadyHaveAccount'|trans }}
+    </a>
 {% endblock %}
