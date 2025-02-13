@@ -1,10 +1,13 @@
 {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
+    <div class="alert alert-success m-5">
         {{ message|trans }}
     </div>
 {% endfor %}
 {% for message in app.flashes('danger') %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger m-5">
         {{ message|trans }}
     </div>
+{% endfor %}
+{% for flash_error in app.flashes('reset_password_error') %}
+    <div class="alert alert-danger m-5" role="alert">{{ flash_error }}</div>
 {% endfor %}

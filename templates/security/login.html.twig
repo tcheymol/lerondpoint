@@ -29,10 +29,10 @@
                 <a class="btn btn-lg btn-link mt-3" href="{{ path('app_sign_up') }}">
                     {{ 'CreateAccount'|trans }}
                 </a>
-                <a class="btn btn-lg btn-link mt-3" href="{{ path('app_forgot_password_request') }}">
-                    {{ 'ForgotPasswordResetPassword'|trans }}
-                </a>
             </form>
         </div>
+        <a class="btn btn-lg btn-link text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
+            {{ 'ForgotPasswordResetPassword'|trans }}
+        </a>
     </div>
 {% endblock %}

@@ -57,6 +57,7 @@ Follows: Suites
 ForgotPasswordResetPassword: Mot de passe oublié ? Réinitialisez le ici
 GrandEst: Grand Est
 HautsDeFrance: Hauts-de-France
+Hello: Bonjour !
 Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
@@ -66,6 +67,7 @@ IleDeFrance: Île-de-France
 Kind: Type
 Kinds: Types
 KnowMore: En savoir plus
+LinkExpiresIn: Ce lien expirera dans
 Location: Localisation
 Login: Connexion
 Logout: Déconnexion
@@ -75,6 +77,7 @@ Misc: Divers
 Moderation: Modération
 ModerationTitle: Traces en attente de modération
 Name: Nom
+NewPassword: Nouveau mot de passe
 Next: Suivant
 NextTrack: Trace suivante
 No: Non
@@ -100,9 +103,17 @@ Region: Région
 Rejected By: Refusé par
 Rejected: Refusé
 RejectionCause: Raison du refus
+RepeatPassword: Confirmez votre mot de passe
 ResetPassword: Réinitialiser votre mot de passe
+ResetPasswordEmailSendFail: L'envoi de l'email de réinitialisation de mot de passe a échoué, veuillez réessayer ultérieurement et nous contacter si le problème persiste.
+ResetPasswordEmailSentPitch: Si un compte avec correspondant à votre email existe, un email vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+ResetPasswordEmailSubject: "[Le Rond-point] Réinitialisation de mot de passe"
+ResetPasswordLinkPitch: Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien ci-dessous
+ResetPasswordRetryPitch: Si vous ne recevez pas d'email, veuillez vérifier votre dossier de courrier indésirable ou
+Retry: réessayer
 ScrollToStart: Scroller pour commencer
 Search: Rechercher...
+SeeYouSoon: À tout de suite sur Le Rond-point !
 SendPasswordRequestEmail: Envoyer un email de réinitialisation
 ShareArchive: Partager une archive du mouvement
 ShareTrack: Vous souhaitez partager une trace ?
