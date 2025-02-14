@@ -1,21 +1,15 @@
 {% extends 'templates/card_page.html.twig' %}
 
 {% block title %}{{ 'SignUp'|trans}}{% endblock %}
-{% block bodybg %}light{% endblock %}
 
 {% block cardContent %}
-    {{ form_start(form) }}
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        {{ form_errors(form.email) }}
-        {{ form_label(form.plainPassword) }}
-        {{ form_widget(form.plainPassword) }}
-        {{ form_errors(form.plainPassword) }}
-        <button class="btn btn-lg btn-success mt-3" type="submit">
-            {{ 'ValidateSignUp'|trans }}
-        </button>
-    {{ form_end(form) }}
-    <a class="btn btn-lg btn-link mt-3" href="{{ path('app_login') }}">
+    <div class="text-start">
+        {{ include('user/_form.html.twig', {button_label: 'ValidateSignUp'|trans }) }}
+    </div>
+{% endblock %}
+
+{% block afterCard %}
+    <a class="btn btn-lg btn-primary mt-3 text-muted" href="{{ path('app_login') }}">
         {{ 'AlreadyHaveAccount'|trans }}
     </a>
 {% endblock %}

@@ -27,7 +27,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/sign_up', name: 'app_sign_up', methods: ['GET', 'POST'])]
-    public function signUP(Request $request, UserPersister $persister): Response
+    public function signUp(Request $request, UserPersister $persister): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user)->handleRequest($request);

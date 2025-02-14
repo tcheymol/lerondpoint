@@ -36,6 +36,7 @@ Created At: Créé le
 Created By: Créé par
 Credits_to: Par
 Dashboard: Accueil
+DeleteMyAccount: Supprimer mon compte et toutes les données associées
 Deleted At: Supprimé le
 Deleted By: Supprimé par
 Description: Description
@@ -64,6 +65,7 @@ HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE <br/> ROND-POINT
 Icon: Icone
 IleDeFrance: Île-de-France
+IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
 Kind: Type
 Kinds: Types
 KnowMore: En savoir plus
@@ -97,6 +99,9 @@ PaysDeLaLoire: Pays de la Loire
 Preview: "Partager une archive du mouvement : Aperçu"
 Previous: Précédent
 PreviousTrack: Trace précédente
+Profile: Profil
+ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les données qui y étaient associées ont été supprimé·es avec succès
+ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 Refuse: Refuser
 Region: Région
@@ -120,6 +125,7 @@ ShareTrack: Vous souhaitez partager une trace ?
 ShareTrackWays: 'Deux possibilités pour partager vos documents, depuis votre ordinateur ou depuis un site d’hébergement de vidéos (YouTube...) :'
 ShortDescription: Courte description
 Show: Voir
+SignOut: Déconnexion
 SignUp: Inscription
 SignUpSuccess: Inscription envoyée
 SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
@@ -136,6 +142,7 @@ TrackTitle: Titre de la trace
 Tracks: Traces
 TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
+Update: Mettre à jour
 UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par

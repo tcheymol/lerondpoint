@@ -1,7 +1,6 @@
 {% extends 'templates/card_page.html.twig' %}
 
 {% block title %}{{ 'Login'|trans}}{% endblock %}
-{% block bodybg %}light{% endblock %}
 
 {% block cardContent %}
     <form method="post">
@@ -14,15 +13,15 @@
         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'Login'|trans }}</button>
-        <br/>
-        <a class="btn btn-lg btn-link mt-3" href="{{ path('app_sign_up') }}">
-            {{ 'CreateAccount'|trans }}
-        </a>
     </form>
 {% endblock %}
 
-{% block outterContent %}
-        <a class="btn btn-lg btn-link text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
-            {{ 'ForgotPasswordResetPassword'|trans }}
-        </a>
+{% block afterCard %}
+    <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_sign_up') }}">
+        {{ 'CreateAccount'|trans }}
+    </a>
+    <br/>
+    <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
+        {{ 'ForgotPasswordResetPassword'|trans }}
+    </a>
 {% endblock %}

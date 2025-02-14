@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
-    public function isButtonClicked(FormInterface $form, string $formName): bool
+    protected function isButtonClicked(FormInterface $form, string $formName): bool
     {
         if (!$form instanceof Form) {
             return false;
@@ -19,5 +20,10 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
         }
 
         return $button->getName() === $formName;
+    }
+
+    protected function backHome(): RedirectResponse
+    {
+        return $this->redirectToRoute('home');
     }
 }

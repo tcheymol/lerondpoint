@@ -19,6 +19,12 @@ readonly class UserPersister
     ) {
     }
 
+    public function update(User $user): void
+    {
+        $this->helper->updateUserPasswordWithPlain($user);
+        $this->em->flush();
+    }
+
     public function persist(User $user): void
     {
         try {
@@ -26,11 +32,10 @@ readonly class UserPersister
             if (!$userEmail) {
                 return;
             }
-            $this->helper->updateUserPasswordWithPlain($user);
             $this->em->persist($user);
-            $this->em->flush();
-
             $this->emailVerifier->sendEmailConfirmation($user);
+
+            $this->update($user);
         } catch (\Exception|TransportExceptionInterface $e) {
             $this->logger->error('An error occurred sending registration email : '.$e->getMessage());
         }

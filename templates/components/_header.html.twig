@@ -21,13 +21,16 @@
             {% endif %}
         <div class="flex-grow-1"></div>
             {% if app.user %}
+                <a class="nav-link hover-underline bg-light d-flex align-items-center justify-content-center fs-6 border-0 px-3"
+                   href="{{ path('app_user_profile') }}"
+                >
+                    <i class="fa fa-user"></i>
+                </a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a class="nav-link hover-underline bg-light d-flex align-items-center justify-content-center fs-6 border-0 px-3"
                     href="{{ path('admin') }}"
                     ><i class="fa fa-user-cog"></i></a>
                 {% endif %}
-                <a class="nav-link hover-underline bg-light d-flex align-items-center justify-content-center fs-6 border-0 px-3"
-                    href="{{ path('app_logout') }}"><i class="fa fa-power-off"></i></a>
             {% else %}
                 <a class="nav-link hover-underline bg-light d-flex align-items-center justify-content-center fs-6 border-0 px-3"
                  href="{{ path('app_login') }}"

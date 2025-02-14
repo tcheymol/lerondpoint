@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ block('title') }}{% endblock %}
-{% block bodybg %}{{ block('bodybg') }}{% endblock %}
-
 {% block content %}
-    <h1 class="col-12 text-center text-dark mt-3">{{ block('title') }}</h1>
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <div class="card p-5 m-3">
-            {% block cardContent %}{% endblock %}
+    <div class="row d-flex align-content-between h-100 p-3 text-dark">
+        <div class="col-12">
+            {% block beforeCard %}
+                {{ include('components/_browser_back.html.twig') }}
+            {% endblock %}
         </div>
-        {% block outterContent %}{% endblock %}
+        <div>
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <div class=" bg-white border border-dark border-4 p-4">
+                    <h1 class="fs-1">{{ block('title') }}</h1>
+                    <div class="text-start">
+                        {% block cardContent %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            {% block afterCard %}{% endblock %}
+        </div>
     </div>
 {% endblock %}
