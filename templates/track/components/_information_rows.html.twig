@@ -1,3 +1,4 @@
+{% set collectiveUrl = track.collective is null ? null : path('collective_show', { id: track.collective.id }) %}
 {% set fields = [
     { label: null, value: track.name },
     { label: 'Category'|trans, value: track.kindName },
@@ -5,12 +6,16 @@
     { label: 'Region'|trans, value: track.regionName },
     { label: 'Location'|trans, value: track.location },
     { label: 'Year'|trans, value: track.year },
-    { label: 'Collective'|trans, value: track.collectiveName},
+    { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
     { label: 'Description'|trans, value: track.description },
 ] %}
 
 <div class="mt-4">
     {% for field in fields %}
-        {{ include('track/components/_information_row.html.twig', { label: field.label, value: field.value }) }}
+        {{ include('track/components/_information_row.html.twig', {
+            label: field.label,
+            value: field.value,
+            url: field.url ?? null,
+        }) }}
     {% endfor %}
 </div>

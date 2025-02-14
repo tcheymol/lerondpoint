@@ -1,18 +1,31 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}Collective{% endblock %}
+{% block title %}{{ 'Collective'|trans }}{% endblock %}
 {% block bodybg %}secondary{% endblock %}
 
-{% block content %}
-    <h1>{{ 'Collective'|trans }}</h1>
-
-    <h2>{{ collective.name }}</h2>
-
-    <div class="row">
-        <div class="col-10 offset-1 col-sm-6 offset-sm-3">
-            <img style="width: 150px" class="me-2" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
+{% block cardContent %}
+    <hr/>
+    {% if collective.iconPath %}
+        <div class="row">
+            <div class="col-12 col-sm-6 offset-sm-3 d-flex justify-content-center">
+                <img style="width: 150px" class="me-2" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
+            </div>
         </div>
-    </div>
+    {% endif %}
+
+    <h2 class="text-center mt-4">{{ collective.name }}</h2>
+
+    {{ collective.shortDescription }}
+    <br/>
+    {{ collective.followUs }}
+    <br/>
+    {{ collective.contactUs }}
+    <br/>
+    {{ collective.description }}
+
+    {% for action in collective.actions %}
+        <span class="badge bg-secondary">{{ action.name }}</span>
+    {% endfor %}
 
     <div class="row mt-4">
         <div class="col-10 offset-1 col-sm-6 offset-sm-3">

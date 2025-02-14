@@ -2,9 +2,13 @@
     <p>
         {% if label is defined and label is not null %}
             <span>{{ label }} :</span>
-            <u> {{ value }}</u>
+            {% if url is defined and url is not null %}
+                <a href="{{ url }}" class="text-dark"><u>{{ value }}</u></a>
+            {% else %}
+                <u>{{ value }}</u>
+            {% endif %}
         {% else %}
-            <span class="fs-4">{{ value }}</span>
+                <span class="fs-4">{{ value }}</span>
         {% endif %}
     </p>
 {% endif %}
