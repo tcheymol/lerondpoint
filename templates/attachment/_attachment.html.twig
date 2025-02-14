@@ -6,7 +6,7 @@
             <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
         </object>
     {% elseif thumbUrl is defined %}
-        <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="h-100 border-default "/>
+        <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="h-100 border-default" style="max-width: calc(100% - 10px)"/>
     {% elseif attachment.kind is defined %}
         {{ include('attachment/_attachment_icon.html.twig', {kind: attachment.kind}) }}
     {% else %}
