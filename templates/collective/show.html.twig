@@ -13,21 +13,9 @@
         </div>
     {% endif %}
 
-    <div class="row mt-4">
-        <div class="col-10 offset-1 col-sm-6 offset-sm-3">
-            <div class="row">
-                {% for action in collective.actions %}
-                    <div class="col h-100">
-                        <div class="card d-flex align-items-center">
-                            <img style="width: 50px" class="me-2" src="{{ action.iconPublicPath }}"  alt="{{ action.name }}"/>
-                            <div>{{ action.name }}</div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {{ include('collective/components/_actions.html.twig', { actions: collective.actions }) }}
     <br/>
+    <a href="{{ collective.followUs }}">{{ 'ViewGroupTracks'|trans }}</a>
     <br/>
     <h5>{{ collective.shortDescription }}</h5>
     <br/>

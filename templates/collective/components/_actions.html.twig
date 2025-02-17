@@ -1,0 +1,9 @@
+<div class="row mt-4">
+    <div class="col-10 offset-1 col-sm-6 offset-sm-3">
+        <div class="row">
+            {% for action in collective.actions %}
+                {{ include('collective/components/_action.html.twig', {action}) }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
