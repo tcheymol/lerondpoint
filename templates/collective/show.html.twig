@@ -1,6 +1,6 @@
 {% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{{ 'Collective'|trans }}{% endblock %}
+{% block title %}{{ collective.name|trans }}{% endblock %}
 {% block bodybg %}secondary{% endblock %}
 
 {% block cardContent %}
@@ -12,20 +12,6 @@
             </div>
         </div>
     {% endif %}
-
-    <h2 class="text-center mt-4">{{ collective.name }}</h2>
-
-    {{ collective.shortDescription }}
-    <br/>
-    {{ collective.followUs }}
-    <br/>
-    {{ collective.contactUs }}
-    <br/>
-    {{ collective.description }}
-
-    {% for action in collective.actions %}
-        <span class="badge bg-secondary">{{ action.name }}</span>
-    {% endfor %}
 
     <div class="row mt-4">
         <div class="col-10 offset-1 col-sm-6 offset-sm-3">
@@ -41,4 +27,24 @@
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <h5>{{ collective.shortDescription }}</h5>
+    <br/>
+    {{ collective.description }}
+    <br/>
+    <br/>
+    {% if is_email(collective.contactUs) %}
+        <a href="{{ collective.contactUs }}">{{ collective.contactUs }}</a>
+    {% else %}
+        <p>{{ collective.contactus }}</p>
+    {% endif %}
+
+    <br/>
+    {% if is_url(collective.followUs) %}
+        <a href="{{ collective.followUs }}">{{ collective.followUs }}</a>
+    {% else %}
+        <p>{{ collective.followUs }}</p>
+    {% endif %}
+    <br/>
 {% endblock %}
