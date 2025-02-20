@@ -7,7 +7,6 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
@@ -18,12 +17,12 @@ class RepeatedPasswordType extends AbstractType
         $resolver->setDefaults([
             'type' => PasswordType::class,
             'label' => false,
-            'options' => ['attr' => ['autocomplete' => 'NewPassword'],
+            'options' => [
+                'attr' => ['autocomplete' => 'NewPassword'],
             ],
             'first_options' => [
                 'row_attr' => ['class' => 'col-12'],
                 'constraints' => [
-                    new NotBlank(['message' => 'PleaseEnterPassword']),
                     new Length([
                         'min' => 8,
                         'minMessage' => 'Veuillez entrer au moins {{ limit }} caractères',

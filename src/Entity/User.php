@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\Column(nullable: true)]
     private ?bool $validatedEmail = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $username = null;
+
     public function __construct(
         #[ORM\Column(length: 180)]
         private ?string $email = null,
@@ -214,6 +217,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function validateEmail(): static
     {
         $this->validatedEmail = true;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): static
+    {
+        $this->username = $username;
 
         return $this;
     }

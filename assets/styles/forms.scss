@@ -1,5 +1,9 @@
-
 form {
+  label.required:after {
+    content: "  *";
+    color: $danger;
+  }
+
   .vertical-form {
     label {
       width: 100%;

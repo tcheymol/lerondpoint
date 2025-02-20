@@ -19,7 +19,6 @@ CentreValDeLoire: Centre-Val de Loire
 Close: Fermer
 Collective: Groupe
 CollectiveName: Nom du collectif
-Groups: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
@@ -57,6 +56,7 @@ FollowUs: Nous suivre (page FB, site internet ou autre...)
 Follows: Suites
 ForgotPasswordResetPassword: Mot de passe oublié ? Réinitialisez le ici
 GrandEst: Grand Est
+Groups: Groupes
 HautsDeFrance: Hauts-de-France
 Hello: Bonjour !
 Home: Accueil
@@ -147,6 +147,7 @@ UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
+UsernameLabel: Nom d'utilisateur (Optionnel)
 Users: Utilisateurs
 Validate: Valider
 ValidateAndSend: Valider et envoyer
@@ -158,6 +159,7 @@ VerifyEmailBody: Pour valider votre inscription, veuillez cliquer sur le lien ci
 VerifyEmailCta: Valider mon email
 VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
 VerifyEmailTitle: Bienvenue sur le-rondpoint.org
+ViewGroupTracks: Voir les traces de ce groupe
 WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
 WhoAreWe: Qui sommes-nous ?
 Year: Année

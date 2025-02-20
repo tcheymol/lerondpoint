@@ -109,6 +109,6 @@ const resetView = (map) => map.setView([46.603354, 1.888334], 6);
 
 export const addLayers = (maps) => maps.forEach(map => addLayer(map));
 
-export const addGroup = (maps, groups) => maps.forEach(map => {
-    groups.forEach(collgroupective => addGroupToMap(map, group))
+export const addGroups = (maps, groups) => maps.forEach(map => {
+    groups.forEach(group => addGroupToMap(map, group))
 });

@@ -3,6 +3,7 @@
 namespace App\Domain\Search;
 
 use App\Domain\Location\Region;
+use App\Entity\Collective;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,6 +12,8 @@ use Doctrine\Common\Collections\Collection;
 class Search
 {
     public ?TrackKind $kind = null;
+    public ?Collective $group = null;
+
     /** @var Collection<int, TrackTag> */
     public Collection $tags;
 
@@ -36,6 +39,7 @@ class Search
             ->addYearParam()
             ->addLocationParam()
             ->addTagsParam()
+            ->addCollectiveParam()
             ->params;
     }
 
@@ -98,6 +102,15 @@ class Search
         return $this;
     }
 
+    private function addCollectiveParam(): self
+    {
+        if ($this->group) {
+            $this->params['group'] = (string) $this->group->getId();
+        }
+
+        return $this;
+    }
+
     public function isEmpty(): bool
     {
         return
@@ -106,6 +119,7 @@ class Search
             && !$this->year
             && !$this->location
             && !$this->kind
+            && !$this->group
             && 0 === $this->tags->count();
     }
 }

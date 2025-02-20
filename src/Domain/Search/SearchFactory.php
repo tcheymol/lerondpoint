@@ -3,6 +3,7 @@
 namespace App\Domain\Search;
 
 use App\Domain\Location\Region;
+use App\Repository\CollectiveRepository;
 use App\Repository\TrackKindRepository;
 use App\Repository\TrackTagRepository;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -14,6 +15,7 @@ readonly class SearchFactory
     public function __construct(
         private TrackTagRepository $trackTagRepository,
         private TrackKindRepository $trackKindRepository,
+        private CollectiveRepository $collectiveRepository,
     ) {
         $this->propertyAccessor = new PropertyAccessor();
     }
@@ -33,6 +35,8 @@ readonly class SearchFactory
                 }
             } elseif ('kind' === $key) {
                 $search->kind = $this->trackKindRepository->find((int) $value);
+            } elseif ('group' === $key) {
+                $search->group = $this->collectiveRepository->find((int) $value);
             } elseif ('region' === $key && is_string($value)) {
                 $search->region = Region::from($value);
             } elseif (!is_array($value)) {

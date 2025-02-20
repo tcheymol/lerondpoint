@@ -36,7 +36,8 @@ class SearchQueryBuilder
             ->searchRegion($search)
             ->searchYear($search)
             ->searchLocation($search)
-            ->searchTags($search);
+            ->searchTags($search)
+            ->searchGroups($search);
     }
 
     private function searchText(Search $search): self
@@ -110,6 +111,17 @@ class SearchQueryBuilder
         if ($tags->count() > 0) {
             $this->qb->andWhere('tg.id IN (:tags)')
                 ->setParameter('tags', $tags);
+        }
+
+        return $this;
+    }
+
+    private function searchGroups(Search $search): self
+    {
+        $group = $search->group;
+        if ($group) {
+            $this->qb->andWhere('t.collective = :group')
+                ->setParameter('group', $group);
         }
 
         return $this;

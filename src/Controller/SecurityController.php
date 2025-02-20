@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
     public function signUp(Request $request, UserPersister $persister): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user)->handleRequest($request);
+        $form = $this->createForm(UserType::class, $user, ['isCreating' => true])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $persister->persist($user);

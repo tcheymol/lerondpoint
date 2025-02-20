@@ -3,7 +3,7 @@
 {% block title %}{{ 'Login'|trans}}{% endblock %}
 
 {% block cardContent %}
-    <form method="post">
+    <form method="post" class="p-1 p-sm-2 p-md-4 p-lg-5">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -12,7 +12,9 @@
         <label for="password" class="form-label">{{ 'Password'|trans }}</label>
         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'Login'|trans }}</button>
+        <div class="text-end">
+            <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'Login'|trans }}</button>
+        </div>
     </form>
 {% endblock %}
 

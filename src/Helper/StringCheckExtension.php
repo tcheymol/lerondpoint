@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Twig\Extension;
+namespace App\Helper;
 
 use App\Twig\Runtime\StringCheckExtensionRuntime;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class StringCheckExtension extends AbstractExtension
 {
+    #[\Override]
     public function getFunctions(): array
     {
         return [

@@ -19,6 +19,9 @@ readonly class PasswordHelper
 
     public function updateUserPasswordWithPlain(User $user): void
     {
+        if (null === $user->getPlainPassword()) {
+            return;
+        }
         $user->setPassword($this->hashUserPlainPassword($user));
         $this->em->persist($user);
         $this->em->flush();
