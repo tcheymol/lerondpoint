@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\Collection;
 class Search
 {
     public ?TrackKind $kind = null;
-    public ?Collective $group = null;
+    public ?Collective $collective = null;
 
     /** @var Collection<int, TrackTag> */
     public Collection $tags;
@@ -104,8 +104,8 @@ class Search
 
     private function addCollectiveParam(): self
     {
-        if ($this->group) {
-            $this->params['group'] = (string) $this->group->getId();
+        if ($this->collective) {
+            $this->params['$this->collective'] = (string) $this->collective->getId();
         }
 
         return $this;
@@ -119,7 +119,7 @@ class Search
             && !$this->year
             && !$this->location
             && !$this->kind
-            && !$this->group
+            && !$this->collective
             && 0 === $this->tags->count();
     }
 }

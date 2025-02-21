@@ -48,8 +48,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
 
-        yield MenuItem::section('Groups');
-        yield MenuItem::linkToCrud('Groups', 'fas fa-people-arrows', Collective::class);
+        yield MenuItem::section('Collectives');
+        yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
         yield MenuItem::linkToCrud('Actions', 'fas fa-location-crosshairs', Action::class);
 
         yield MenuItem::section('Tracks');

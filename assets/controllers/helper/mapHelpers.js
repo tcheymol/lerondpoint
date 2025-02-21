@@ -24,10 +24,10 @@ const getDromLocations = () => [
 const createIcon = (iconUrl) => L.icon({ iconUrl,  iconSize: [35, 35] });
 
 
-const generateActionsDom = (group) => {
+const generateActionsDom = (collective) => {
     const container = generateDiv();
 
-    group.actions.forEach(action => {
+    collective.actions.forEach(action => {
         const item = generateDiv();
         appendImg(action, item);
         appendText(action, item);
@@ -38,27 +38,27 @@ const generateActionsDom = (group) => {
     return container.innerHTML;
 }
 
-function onGroupClick(group, e) {
-    (new Modal(document.getElementById('groupDetailsModal'))).show();
+function onCollectiveClick(collective, e) {
+    (new Modal(document.getElementById('collectiveDetailsModal'))).show();
 
     try {
-        updateElementHtml('groupDetailsModalTitle', `${group.id} - ${group.name}`);
-        updateElementHtml('groupDetailsModalActions', generateActionsDom(group));
-        updateElementHtml('groupDetailsModalShortDescription', group.shortDescription);
-        updateElementHtml('groupDetailsModalFollowUs', group.followUs);
-        updateElementHtml('groupDetailsModalDescription', group.description);
+        updateElementHtml('collectiveDetailsModalTitle', `${collective.id} - ${collective.name}`);
+        updateElementHtml('collectiveDetailsModalActions', generateActionsDom(collective));
+        updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
+        updateElementHtml('collectiveDetailsModalFollowUs', collective.followUs);
+        updateElementHtml('collectiveDetailsModalDescription', collective.description);
     } catch (e) {
         console.error('Failed to display collective details', e);
     }
 
 }
 
-export const addGroupToMap = (map, group) => {
-    const iconPath = group.iconPath ?? '/hut.png';
-    if (group.lat && group.lon) {
-        L.marker([group.lat, group.lon], {icon: createIcon(iconPath)})
+export const addCollectiveToMap = (map, collective) => {
+    const iconPath = collective.iconPath ?? '/hut.png';
+    if (collective.lat && collective.lon) {
+        L.marker([collective.lat, collective.lon], {icon: createIcon(iconPath)})
             .addTo(map)
-            .on('click', (e) => onGroupClick(group, e));
+            .on('click', (e) => onCollectiveClick(collective, e));
     }
 }
 
@@ -109,6 +109,6 @@ const resetView = (map) => map.setView([46.603354, 1.888334], 6);
 
 export const addLayers = (maps) => maps.forEach(map => addLayer(map));
 
-export const addGroups = (maps, groups) => maps.forEach(map => {
-    groups.forEach(group => addGroupToMap(map, group))
+export const addCollectives = (maps, collectives) => maps.forEach(map => {
+    collectives.forEach(collective => addCollectiveToMap(map, collective))
 });

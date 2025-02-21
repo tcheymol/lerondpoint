@@ -6,7 +6,7 @@ import {
     fillAddressFields,
     recenterMap,
     addLayers,
-    addGroups,
+    addCollectives,
     centerMapOnClickLocation,
 } from './helper/mapHelpers.js';
 
@@ -36,7 +36,7 @@ export default class extends Controller {
         this.enableFillFieldsOnAutocomplete(mainMap, geocoder);
 
         addLayers(allMaps);
-        addGroups(allMaps, this.collectivesValue);
+        addCollectives(allMaps, this.collectivesValue);
     }
 
     enableFillFieldsOnAutocomplete(mainMap, geocoder) {

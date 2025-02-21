@@ -37,7 +37,7 @@ class SearchQueryBuilder
             ->searchYear($search)
             ->searchLocation($search)
             ->searchTags($search)
-            ->searchGroups($search);
+            ->searchCollectives($search);
     }
 
     private function searchText(Search $search): self
@@ -116,12 +116,12 @@ class SearchQueryBuilder
         return $this;
     }
 
-    private function searchGroups(Search $search): self
+    private function searchCollectives(Search $search): self
     {
-        $group = $search->group;
-        if ($group) {
-            $this->qb->andWhere('t.collective = :group')
-                ->setParameter('group', $group);
+        $collective = $search->collective;
+        if ($collective) {
+            $this->qb->andWhere('t.collective = :collective')
+                ->setParameter('collective', $collective);
         }
 
         return $this;

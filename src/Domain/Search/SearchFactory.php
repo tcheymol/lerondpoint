@@ -35,8 +35,8 @@ readonly class SearchFactory
                 }
             } elseif ('kind' === $key) {
                 $search->kind = $this->trackKindRepository->find((int) $value);
-            } elseif ('group' === $key) {
-                $search->group = $this->collectiveRepository->find((int) $value);
+            } elseif ('collective' === $key) {
+                $search->collective = $this->collectiveRepository->find((int) $value);
             } elseif ('region' === $key && is_string($value)) {
                 $search->region = Region::from($value);
             } elseif (!is_array($value)) {
