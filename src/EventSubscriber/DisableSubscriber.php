@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Subscribers;
+namespace App\EventSubscriber;
 
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\User;

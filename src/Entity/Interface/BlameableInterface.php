@@ -53,4 +53,8 @@ interface BlameableInterface
     public function getRejectedBy(): ?User;
 
     public function setRejectedBy(?User $rejectedBy): void;
+
+    public function accept(): self;
+
+    public function reject(): self;
 }

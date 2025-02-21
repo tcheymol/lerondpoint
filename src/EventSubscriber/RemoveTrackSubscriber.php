@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Subscribers;
+namespace App\EventSubscriber;
 
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Entity\Track;
