@@ -13,13 +13,16 @@ class Invitation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'invitations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Collective $collective = null;
-
-    #[ORM\ManyToOne(inversedBy: 'invitations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    public function __construct(
+        #[ORM\ManyToOne(inversedBy: 'invitations')]
+        #[ORM\JoinColumn(nullable: false)]
+        private ?Collective $collective = null,
+        #[ORM\ManyToOne(inversedBy: 'invitations')]
+        #[ORM\JoinColumn(nullable: false)]
+        private ?User $user = null
+    )
+    {
+    }
 
     public function getId(): ?int
     {

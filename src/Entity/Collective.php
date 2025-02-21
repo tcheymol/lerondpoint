@@ -75,7 +75,7 @@ class Collective implements OwnableInterface, BlameableInterface
     /**
      * @var Collection<int, Invitation>
      */
-    #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'collective', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'collective', cascade: ['persist'], orphanRemoval: true)]
     private Collection $invitations;
 
     public function __construct(
@@ -350,6 +350,14 @@ class Collective implements OwnableInterface, BlameableInterface
                 $invitation->setCollective(null);
             }
         }
+
+        return $this;
+    }
+
+    public function invite(User $user): static
+    {
+        $invitation = new Invitation($this, $user);
+        $this->addInvitation($invitation);
 
         return $this;
     }
