@@ -37,7 +37,6 @@ class RepeatedPasswordType extends AbstractType
                 'label' => 'RepeatPassword',
             ],
             'invalid_message' => 'PasswordFieldsMismatch',
-            'mapped' => false,
         ]);
     }
 

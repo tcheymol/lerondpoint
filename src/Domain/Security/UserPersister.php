@@ -32,6 +32,7 @@ readonly class UserPersister
             if (!$userEmail) {
                 return;
             }
+            $this->helper->updateUserPasswordWithPlain($user);
             $this->em->persist($user);
             $this->emailVerifier->sendEmailConfirmation($user);
 
