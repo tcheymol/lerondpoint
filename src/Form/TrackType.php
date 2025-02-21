@@ -9,6 +9,7 @@ use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\ORM\EntityRepository;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
@@ -71,7 +72,10 @@ class TrackType extends AbstractType
                 'required' => false,
                 'attr' => ['placeholder' => 'https://example.com'],
             ])
-            ->add('attachmentsIds', HiddenType::class);
+            ->add('attachmentsIds', HiddenType::class)
+            ->add('captcha', CaptchaType::class, [
+                'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
+            ]);
 
         $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
             fn ($tagsAsArray) => implode(',', $tagsAsArray),
@@ -127,26 +131,30 @@ class TrackType extends AbstractType
 
     private function buildStep3(FormBuilderInterface $builder): void
     {
-        $builder->add('description', TextareaType::class, [
-            'required' => false,
-            'attr' => ['rows' => 5],
-        ]);
+        $builder
+            ->add('description', TextareaType::class, [
+                'required' => false,
+                'attr' => ['rows' => 5],
+            ]);
     }
 
     private function buildButtons(FormBuilderInterface $builder, int $step): void
     {
+        $buttonClasses = 'btn btn-light bg-white hoverable-light btn-lg mt-3';
         if ($step > 1) {
             $previousStep = $step - 1;
             $builder->add('back', SubmitType::class, [
                 'label' => 'BackStep',
                 'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
-                'attr' => ['class' => 'btn btn-light bg-white hoverable-light btn-lg mt-3'],
+                'attr' => ['class' => $buttonClasses],
             ]);
         }
         $builder->add('next', SubmitType::class, [
             'label' => 'ValidateStep',
             'label_translation_parameters' => ['%step%' => $step, '%total%' => self::stepsCount],
-            'attr' => ['class' => 'btn btn-light bg-white hoverable-light btn-lg mt-3'],
+            'attr' => [
+                'class' => sprintf('%s %s', $buttonClasses, $step > 1 ? '' : ' disabled '),
+            ],
         ]);
     }
 }

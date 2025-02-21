@@ -12,6 +12,8 @@ import '@uppy/dashboard/dist/style.min.css';
 * See https://github.com/symfony/stimulus-bridge#lazy-controllers
 */
 export default class extends Controller {
+    static targets = [ 'button' ];
+
     static values = {
         endpoint: String,
     };
@@ -37,10 +39,16 @@ export default class extends Controller {
                     if (attachmentsIdsInput) {
                         attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
                     }
+
+                    const button = document.getElementById('track_next');
+                    button.classList.remove('disabled');
                 },
             });
 
         uppy.on('file-added', (file) => {
+            const button = document.getElementById('track_next');
+            button.classList.add('disabled');
+
             const name = file.name;
             const nameInput = document.getElementById('track_name');
             if (nameInput && !nameInput.value) {
