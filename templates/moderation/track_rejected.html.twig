@@ -1,0 +1,11 @@
+{% apply inky_to_html|inline_css(source('@styles/foundation-emails.css')) %}
+    <container>
+        <row class="header">
+            <columns>
+                <spacer size="16"></spacer>
+                <p class="text-center text-lg">{{ 'TrackRejectedSubtitle'|trans({ '%trackName%': track.name }) }}</p>
+            </columns>
+        </row>
+        {{ include('moderation/signature.html.twig') }}
+    </container>
+{% endapply %}

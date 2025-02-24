@@ -17,25 +17,9 @@
                     {% endif %}
                 </div>
                 <div class="col-12 col-sm-5 text-start">
-                    {{ include('track/components/_previous_next_track.html.twig', {track}) }}
+                    {{ include('track/moderation/_moderate_buttons.html.twig', {track}) }}
                     {{ include('track/components/_information_rows.html.twig', {track}) }}
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <a class="btn btn-danger border-dark hover-underline w-100"
-                   href="{{ path('moderate_track_reject' , {id: track.id}) }}"
-                >
-                    {{ "Refuse"|trans }}
-                </a>
-            </div>
-            <div class="col-12 col-sm-6">
-                <a class="btn btn-success border-dark hover-underline w-100 "
-                   href="{{ path('moderate_track_accept' , {id: track.id}) }}"
-                >
-                    {{ "Accept"|trans }}
-                </a>
             </div>
         </div>
     </div>

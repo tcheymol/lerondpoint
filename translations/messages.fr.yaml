@@ -131,14 +131,19 @@ SignOut: Déconnexion
 SignUp: Inscription
 SignUpSuccess: Inscription envoyée
 SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
+Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
 Tags: Sous catégories
 TermsOfUse: Conditions générales d'utilisation
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
+TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
+TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
 TrackKind: Type de trace
 TrackNumber: Trace N°
+TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
+TrackRejectedSubtitle: Votre trace %trackName% n'a pas pu être acceptée, veuillez contacter nos équipes à l'adresse contact@le-rondpoint.org si vous désirez obtenir de plus amples informations sur les raisons qui justifient ce refus
 TrackTag: Label trace
 TrackTitle: Titre de la trace
 Tracks: Traces
@@ -166,3 +171,4 @@ WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos 
 WhoAreWe: Qui sommes-nous ?
 Year: Année
 Yes: Oui
+YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici

@@ -4,6 +4,8 @@ twig:
     date:
         format: d-m-Y
         timezone: Europe/Paris
+    paths:
+        '%kernel.project_dir%/assets/styles': styles
 when@test:
     twig:
         strict_variables: true

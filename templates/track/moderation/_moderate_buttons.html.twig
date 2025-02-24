@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <a class="btn btn-danger border-dark hover-underline w-100"
+           href="{{ path('moderate_track_reject' , {id: track.id}) }}"
+        >
+            {{ "Refuse"|trans }}
+        </a>
+    </div>
+    <div class="col-12 col-sm-6">
+        <a class="btn btn-success border-dark hover-underline w-100 "
+           href="{{ path('moderate_track_accept' , {id: track.id}) }}"
+        >
+            {{ "Accept"|trans }}
+        </a>
+    </div>
+</div>

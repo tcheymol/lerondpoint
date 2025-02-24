@@ -1,0 +1,18 @@
+{% apply inky_to_html|inline_css(source('@styles/foundation-emails.css')) %}
+    <container>
+        <row class="header">
+            <columns>
+                <spacer size="16"></spacer>
+                <p class="text-center text-lg">{{ 'TrackAcceptedSubtitle'|trans({ '%trackName%': track.name }) }}</p>
+            </columns>
+        </row>
+        <row>
+            <columns>
+                <center>
+                    <button href="{{ url('track_show', { id: track.id }, true) }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
+                </center>
+            </columns>
+        </row>
+        {{ include('moderation/signature.html.twig') }}
+    </container>
+{% endapply %}
