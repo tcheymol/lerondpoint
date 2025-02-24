@@ -52,6 +52,7 @@ class CollectiveCrudController extends AbstractCrudController
         yield FormField::addColumn(4);
         yield BooleanField::new('disabled');
         yield BooleanField::new('validated');
+        yield BooleanField::new('isCreating');
         yield AssociationField::new('owner');
         yield DateField::new('createdAt')->hideOnForm();
         yield DateField::new('updatedAt')->hideOnForm();

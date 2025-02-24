@@ -29,7 +29,7 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tracks')]
+    #[ORM\ManyToOne(fetch: 'EAGER', inversedBy: 'tracks')]
     private ?Collective $collective = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]

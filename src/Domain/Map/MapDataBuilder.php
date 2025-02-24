@@ -29,7 +29,7 @@ readonly class MapDataBuilder
                     fn (Action $action) => ['name' => $action->getName(), 'iconPath' => $action->getIconPublicPath()]
                 )->toArray(),
             ],
-            $this->collectiveRepository->findAll()
+            $this->collectiveRepository->findBy(['isCreating' => false])
         );
     }
 }
