@@ -3,13 +3,13 @@
 namespace App\Domain\Moderation;
 
 use App\Entity\Track;
-use App\Helper\EmailHelper;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Track::class)]
-readonly class TrackModerationSubscriber {
+readonly class TrackModerationSubscriber
+{
     public function __construct(private ModerationMailer $mailer)
     {
     }
@@ -23,7 +23,7 @@ readonly class TrackModerationSubscriber {
     public function handleValidation(PreUpdateEventArgs $event, Track $track): void
     {
         if ($event->hasChangedField('validated')) {
-            if($track->isValidated()) {
+            if ($track->isValidated()) {
                 $this->mailer->validate($track);
             }
         }
@@ -32,7 +32,7 @@ readonly class TrackModerationSubscriber {
     public function handleRejection(PreUpdateEventArgs $event, Track $track): void
     {
         if ($event->hasChangedField('rejected')) {
-            if($track->isRejected()) {
+            if ($track->isRejected()) {
                 $this->mailer->reject($track);
             }
         }

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,9 +21,8 @@ class CollectiveType extends AbstractType
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $step = $options['step'];
-
-        match ($step) {
+        match ($options['step']) {
+            3 => $this->buildStep3($builder),
             2 => $this->buildStep2($builder),
             default => $this->buildStep1($builder),
         };
@@ -76,5 +76,15 @@ class CollectiveType extends AbstractType
             ->add('country', HiddenType::class)
             ->add('postcode', HiddenType::class)
             ->add('state', HiddenType::class);
+    }
+
+    private function buildStep3(FormBuilderInterface $builder): void
+    {
+        $builder->add('checkDisclaimerAcknowledged', CheckboxType::class, [
+            'label' => 'IUnderstand',
+            'mapped' => false,
+            'attr' => ['class' => 'btn-check'],
+            'label_attr' => ['class' => 'btn btn-outline-secondary'],
+        ]);
     }
 }

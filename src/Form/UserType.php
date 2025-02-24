@@ -17,7 +17,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('username', TextType::class, ['required' => false, 'label' => 'UsernameLabel'])
             ->add('plainPassword', RepeatedPasswordType::class, ['required' => $options['isCreating']]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

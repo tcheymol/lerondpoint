@@ -10,7 +10,7 @@ use Symfony\Component\Mime\Address;
 readonly class EmailHelper
 {
     private const string FROM = 'contact@le-rondpoint.org';
-    private const string FROM_NAME ='Le Rond-point';
+    private const string FROM_NAME = 'Le Rond-point';
 
     public function __construct(private MailerInterface $mailer)
     {

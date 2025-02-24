@@ -10,7 +10,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class ModerationMailer
 {
-
     public function __construct(private EmailHelper $emailHelper, private TranslatorInterface $translator)
     {
     }

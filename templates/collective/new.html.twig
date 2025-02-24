@@ -1,6 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{{ 'CreateCollective'|trans }}{% endblock %}
+{% block title %}
+    {% if 2 == step %}
+        {{ 'CreateCollectiveSearchAddress'|trans }}
+    {% else %}
+        {{ 'CreateCollective'|trans }}
+    {% endif %}
+{% endblock %}
+
 {% block bodybg %}secondary{% endblock %}
 
 {% block stylesheets %}
@@ -8,12 +15,14 @@
     <link href="https://cdn.jsdelivr.net/npm/@geoapify/geocoder-autocomplete@2.0.3/styles/minimal.min.css" rel="stylesheet">
 {% endblock %}
 
-{% block content %}
+
+{% block cardContent %}
     <div class="row d-flex justify-content-between flex-grow-1">
-        <h1 class="col-12 text-center text-dark mt-3">{{ 'CreateCollective'|trans }}</h1>
-        <div class="col-12 px-1 px-sm-3 px-md-5">
-            <div class="p-3 text-dark">
-                {% if 2 == step %}
+        <div class="col-12 {% if 2 != step %}px-1 px-sm-3 px-md-5{% endif %}">
+            <div class="{% if 2 != step %}p-3{% endif %} text-dark">
+                {% if 3 == step %}
+                    {{ include('collective/create/_step_3.html.twig', {form}) }}
+                {% elseif 2 == step %}
                     {{ include('collective/create/_step_2.html.twig', {form}) }}
                 {% else %}
                     {{ include('collective/create/_step_1.html.twig', {form}) }}

@@ -22,6 +22,7 @@ Collective: Groupe
 CollectiveName: Nom du collectif
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
+ConfirmCreation: Confirmer la création
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
@@ -30,6 +31,7 @@ Corse: Corse
 Create: Créer
 CreateAccount: Pas de compte ? Créez en un ici
 CreateCollective: Ajoute ton groupe à la carte
+CreateCollectiveDisclaimer: Je confirme que ce groupe est informé et souhaite être inscrit sur cette carte et ce site internet
 CreateCollectiveSearchAddress: Recherchez une adresse ou déposez un point sur la carte
 CreateTrack: Ajouter une trace
 CreateTrackAnonymous: Ajoute une trace sans connexion
@@ -65,6 +67,7 @@ Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE <br/> ROND-POINT
+IUnderstand: Je comprends
 Icon: Icone
 IleDeFrance: Île-de-France
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?

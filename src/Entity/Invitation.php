@@ -19,9 +19,8 @@ class Invitation
         private ?Collective $collective = null,
         #[ORM\ManyToOne(inversedBy: 'invitations')]
         #[ORM\JoinColumn(nullable: false)]
-        private ?User $user = null
-    )
-    {
+        private ?User $user = null,
+    ) {
     }
 
     public function getId(): ?int

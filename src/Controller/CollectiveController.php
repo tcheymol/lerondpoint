@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Domain\Collective\CollectivePersister;
 use App\Domain\Map\MapDataBuilder;
 use App\Entity\Collective;
 use App\Form\CollectiveType;
@@ -20,37 +21,23 @@ class CollectiveController extends AbstractController
         return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build()]);
     }
 
-    #[Route('/new/choose_location/{id<\d+>}', name: 'collective_new_choose_location', methods: ['GET', 'POST'])]
-    public function chooseLocation(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, CollectivePersister $persister, int $step = 1): Response
     {
-        $form = $this->createForm(CollectiveType::class, $collective, ['step' => 2])
+        $collective = $persister->fetchSessionCollective();
+        $form = $this->createForm(CollectiveType::class, $collective, ['step' => $step])
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($collective);
-            $entityManager->flush();
+            $isLastStep = 3 === $step;
+            $persister->persist($collective, $isLastStep);
 
-            return $this->redirectToRoute('collective_index');
+            return $isLastStep
+                ? $this->redirectToRoute('collective_index')
+                : $this->redirectToRoute('collective_new', ['step' => $step + 1]);
         }
 
-        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => 2]);
-    }
-
-    #[Route('/new', name: 'collective_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $collective = new Collective();
-        $form = $this->createForm(CollectiveType::class, $collective, ['step' => 1])
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($collective);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('collective_new_choose_location', ['id' => $collective->getId()]);
-        }
-
-        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => 1]);
+        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => $step]);
     }
 
     #[Route('/{id<\d+>}', name: 'collective_show', methods: ['GET'])]

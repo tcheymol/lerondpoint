@@ -1,5 +1,4 @@
 {{ form_start(form) }}
-    <h3 class="text-center mt-2">{{ 'CreateCollectiveSearchAddress'|trans }}</h3>
     <div {{ stimulus_controller('map', {
         addressFieldsFormName: 'collective',
         enableClickToCenter: true,
@@ -8,6 +7,6 @@
         {{ include('map/_autocomplete.html.twig') }}
     </div>
     <div class="text-end mt-4">
-        <button type="submit" class="btn btn-light bg-white">{{ 'Validate'|trans }}</button>
+        <button type="submit" class="btn btn-secondary">{{ 'Validate'|trans }}</button>
     </div>
 {{ form_end(form) }}

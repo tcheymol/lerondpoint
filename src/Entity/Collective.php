@@ -78,6 +78,9 @@ class Collective implements OwnableInterface, BlameableInterface
     #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'collective', cascade: ['persist'], orphanRemoval: true)]
     private Collection $invitations;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isCreating = true;
+
     public function __construct(
         #[ORM\Column(length: 255)]
         private ?string $name = null,
@@ -358,6 +361,25 @@ class Collective implements OwnableInterface, BlameableInterface
     {
         $invitation = new Invitation($this, $user);
         $this->addInvitation($invitation);
+
+        return $this;
+    }
+
+    public function isCreating(): ?bool
+    {
+        return $this->isCreating;
+    }
+
+    public function setIsCreating(?bool $isCreating): static
+    {
+        $this->isCreating = $isCreating;
+
+        return $this;
+    }
+
+    public function finishCreation(): static
+    {
+        $this->isCreating = false;
 
         return $this;
     }

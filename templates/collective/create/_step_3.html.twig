@@ -1,0 +1,15 @@
+<div>
+    <p class="fs-3">{{ 'CreateCollectiveDisclaimer'|trans }}</p>
+
+    {{ form_start(form) }}
+
+    <div class="text-center">
+        {{ form_widget(form.checkDisclaimerAcknowledged) }}
+    </div>
+
+    <div class="text-end mt-4">
+        <button type="submit" class="btn btn-secondary">{{ 'ConfirmCreation'|trans }}</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
