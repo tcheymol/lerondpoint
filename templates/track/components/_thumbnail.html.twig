@@ -31,7 +31,7 @@
             {% if track.year is not null %}
                 <span><br/>{{ 'Year'|trans }} : {{ track.year }}</span>
             {% endif %}
-            {% if track.collective is not null %}
+            {% if track.collective is not empty and track.collective is not null and track.collective.id is defined %}
                 <span><br/>{{ 'Collective'|trans }} : {{ track.collective.name }}</span>
             {% endif %}
         </p>

@@ -1,7 +1,11 @@
 {% set thumbUrl = track.thumbnailUrl %}
 {% set objectUrl = track.objectUrl %}
 {% set mimeType = track.mime %}
-{% if thumbUrl is defined %}
+{% set mediaType = track.mediaType %}
+
+{% if mediaType == 'video' %}
+    {{ include('track/components/_track_video.html.twig', {track}) }}
+{% elseif thumbUrl is defined %}
     <a class="btn btn-link w-100" href="{{ path('track_carousel', {id: track.id}) }}">
         <div class="border-default h-100 w-100">
             {% if mimeType =='application/pdf' and objectUrl is defined %}
@@ -10,6 +14,8 @@
                 </object>
             {% elseif thumbUrl is defined %}
                 <img src="{{ thumbUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
+            {% elseif mediaType == 'video' %}
+                {{ include('track/components/_track_video.html.twig', {track}) }}
             {% elseif mimeType is defined %}
                 {{ include('attachment/_attachment_icon.html.twig', {mimeType}) }}
             {% else %}

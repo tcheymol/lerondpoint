@@ -12,14 +12,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Order;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Embed\Embed;
+use Embed\Extractor;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track implements BlameableInterface
 {
     use BlameableTrait;
-
-    public const string YOUTUBE_PREVIEW_URL_SCHEME = 'https://img.youtube.com/vi/%s/hqdefault.jpg';
-    public const string YOUTUBE_EMBED_URL_SCHEME = 'https://www.youtube.com/embed/%s';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,7 +28,7 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(fetch: 'EAGER', inversedBy: 'tracks')]
+    #[ORM\ManyToOne(targetEntity: Collective::class, fetch: 'EAGER', inversedBy: 'tracks')]
     private ?Collective $collective = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]
@@ -285,46 +284,19 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    private function getVideoIdFromYoutubeUrl(): ?string
+    public function getVideoData(): ?Extractor
     {
-        if (!$this->url) {
-            return null;
-        }
-
-        /** @var array<string, string> $url_components */
-        $url_components = parse_url($this->url);
-        $query = $url_components['query'] ?? null;
-
-        if (!$query) {
-            return null;
-        }
-
-        parse_str($query, $params);
-
-        $videoId = $params['v'];
-
-        if (!is_array($videoId)) {
-            return $videoId;
-        }
-
-        return null;
-    }
-
-    private function buildYoutubeUrl(string $urlScheme): ?string
-    {
-        $videoId = $this->getVideoIdFromYoutubeUrl();
-
-        return !$videoId ? null : sprintf($urlScheme, $videoId);
+        return $this->url ? (new Embed())->get($this->url) : null;
     }
 
     public function getVideoPreview(): ?string
     {
-        return $this->buildYoutubeUrl(self::YOUTUBE_PREVIEW_URL_SCHEME);
+        return $this->getVideoData()->image ?? null;
     }
 
     public function getVideoEmbed(): ?string
     {
-        return $this->buildYoutubeUrl(self::YOUTUBE_EMBED_URL_SCHEME);
+        return $this->getVideoData()->code->html ?? null;
     }
 
     public function getObjectUrl(): ?string

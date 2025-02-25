@@ -30,9 +30,6 @@ class Attachment implements BlameableInterface
     private ?int $size = null;
 
     #[ORM\ManyToOne(inversedBy: 'attachments')]
-    private ?Action $action = null;
-
-    #[ORM\ManyToOne(inversedBy: 'attachments')]
     private ?Track $track = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -150,18 +147,6 @@ class Attachment implements BlameableInterface
     public function setSize(int $size): static
     {
         $this->size = $size;
-
-        return $this;
-    }
-
-    public function getAction(): ?Action
-    {
-        return $this->action;
-    }
-
-    public function setAction(?Action $action): static
-    {
-        $this->action = $action;
 
         return $this;
     }

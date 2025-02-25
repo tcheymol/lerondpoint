@@ -62,6 +62,8 @@ class TrackRepository extends ServiceEntityRepository
     {
         /** @var Track[] $tracks */
         $tracks = $this->createQueryBuilder('t')
+            ->addSelect('c')
+            ->leftJoin('t.collective', 'c')
             ->andWhere('t.validated = 0 AND t.rejected = 0')
             ->andWhere('t.isDraft = 0')
             ->getQuery()
