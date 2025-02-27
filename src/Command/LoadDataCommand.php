@@ -2,12 +2,7 @@
 
 namespace App\Command;
 
-use App\Domain\Images\AttachmentHelper;
-use App\Domain\Track\TrackPersister;
 use App\Entity\Action;
-use App\Entity\Attachment;
-use App\Entity\Collective;
-use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use App\Entity\User;
@@ -16,7 +11,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[AsCommand(name: 'app:load-data', description: 'Load some necessary data')]
 class LoadDataCommand extends Command
@@ -73,82 +67,28 @@ class LoadDataCommand extends Command
         ],
         User::class => [
             ['email' => 't@g.c'],
+            ['email' => 'thibaut.cheymol@protonmail.com'],
             ['email' => 'thibaut@le-rondpoint.com'],
             ['email' => 'djo@le-rondpoint.com'],
             ['email' => 'adrien@le-rondpoint.com'],
         ],
-        Track::class => [
-            ['name' => "L'assemblée des assemblées de Commercy", 'file' => 'adac.jpg'],
-            ['name' => 'Appel de la première « assemblée des assemblées » des Gilets Jaunes', 'file' => 'aaagj.pdf'],
-            ['name' => 'Appel des gilets jaunes de la maison du peuple de Saint Nazaire', 'file' => 'agj.mp4'],
-            ['name' => 'Banderole Saint Nazaire', 'file' => 'banderole.jpg'],
-            ['name' => 'Banderole Saint Nazaire 2', 'file' => 'banderole2.jpg'],
-            ['name' => 'Calendrier Saint Nazaire', 'file' => 'calendrier.pdf'],
-            ['name' => 'Chanson enfile ton gilet', 'file' => 'chanson.pdf'],
-            ['name' => 'Cabane des gilets Jaune du rond-point Necker à Saint Etienne', 'file' => 'cabane.jpg'],
-            ['name' => 'Témoignage mutilée Vanessa', 'file' => 'vanessa.png'],
-            ['name' => 'Tract Acte X', 'file' => 'actex.pdf'],
-        ],
-        Collective::class => [
-            [
-                'name' => 'Groupe Beliard',
-                'lat' => '48.8958803',
-                'lon' => '2.3330117',
-                'address_line1' => '20 Rue Georgette Agutte',
-                'city' => 'Paris',
-                'country' => 'France',
-                'postcode' => '75018',
-                'state' => 'Ile-de-France',
-            ],
-        ],
     ];
 
-    public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly TrackPersister $trackPersister,
-        private readonly string $kernelProjectDir,
-        private readonly AttachmentHelper $attachmentHelper,
-    ) {
-        parent::__construct();
-    }
-
-    public function createAttachment(string $fileName): ?Attachment
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $originalFilePath = sprintf('%s/var/tracks_samples/%s', $this->kernelProjectDir, $fileName);
-        $tmpFilePath = sprintf('%s/var/tmp/%s', $this->kernelProjectDir, $fileName);
-        copy($originalFilePath, $tmpFilePath);
-
-        return $this->attachmentHelper->createAttachment(new UploadedFile($tmpFilePath, $fileName));
+        parent::__construct();
     }
 
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->emptyTable(Attachment::class);
-
         $this->loadEntityData(TrackKind::class);
         $this->loadEntityData(TrackTag::class);
-
-        $this->loadEntityData(User::class);
-        $this->loadEntityData(Track::class);
-
-        $this->loadEntityData(Collective::class);
         $this->loadEntityData(Action::class);
 
+        $this->loadEntityData(User::class);
+
         return Command::SUCCESS;
-    }
-
-    /** @param array<string, string> $trackData */
-    private function createTrack(array $trackData): Track
-    {
-        $track = (new Track())->setName($trackData['name']);
-        $attachment = $this->createAttachment($trackData['file']);
-        if ($attachment && $attachment->getId()) {
-            $track->attachmentsIds[] = (string) $attachment->getId();
-        }
-        $this->trackPersister->persist($track);
-
-        return $track;
     }
 
     private function emptyTable(string $entityName): void
@@ -179,25 +119,8 @@ class LoadDataCommand extends Command
             TrackKind::class => new TrackKind($datum['name']),
             TrackTag::class => new TrackTag($datum['name']),
             Action::class => new Action($datum['name'], $datum['iconPath']),
-            Collective::class => $this->createCollective($datum),
-            User::class => (new User($datum['email']))->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
-            Track::class => $this->createTrack($datum),
+            User::class => (new User($datum['email']))->validateEmail()->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             default => null,
         };
-    }
-
-    /** @param array<string, string> $datum */
-    private function createCollective(array $datum): Collective
-    {
-        $owner = $this->em->getRepository(User::class)->findOneBy([]);
-
-        return (new Collective($datum['name']))
-            ->setLat((float) $datum['lat'])
-            ->setLon((float) $datum['lon'])
-            ->setAddressLine1($datum['address_line1'])
-            ->setCity($datum['city'])
-            ->setCountry($datum['country'])
-            ->setPostcode($datum['postcode'])
-            ->setState($datum['state']);
     }
 }

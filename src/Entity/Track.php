@@ -12,8 +12,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Order;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Embed\Embed;
-use Embed\Extractor;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track implements BlameableInterface
@@ -80,6 +78,12 @@ class Track implements BlameableInterface
 
     #[ORM\Column(nullable: true)]
     private ?bool $isDraft = true;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $previewUrl = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $videoEmbed = null;
 
     public function __construct()
     {
@@ -284,25 +288,10 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function getVideoData(): ?Extractor
-    {
-        return $this->url ? (new Embed())->get($this->url) : null;
-    }
-
-    public function getVideoPreview(): ?string
-    {
-        return $this->getVideoData()->image ?? null;
-    }
-
-    public function getVideoEmbed(): ?string
-    {
-        return $this->getVideoData()->code->html ?? null;
-    }
-
     public function getObjectUrl(): ?string
     {
-        if ($this->url) {
-            return $this->getVideoPreview();
+        if ($this->previewUrl) {
+            return $this->getPreviewUrl();
         }
 
         return $this->getThumbnailUrl(ThumbSize::Full);
@@ -310,8 +299,8 @@ class Track implements BlameableInterface
 
     public function getThumbnailUrl(?ThumbSize $thumbSize = null): ?string
     {
-        if ($this->url) {
-            return $this->getVideoPreview();
+        if ($this->previewUrl) {
+            return $this->getPreviewUrl();
         }
 
         return $this->attachments
@@ -367,5 +356,29 @@ class Track implements BlameableInterface
     public function needsModeration(): bool
     {
         return !$this->isDraft && !$this->rejected && !$this->validated;
+    }
+
+    public function getPreviewUrl(): ?string
+    {
+        return $this->previewUrl;
+    }
+
+    public function setPreviewUrl(?string $previewUrl): static
+    {
+        $this->previewUrl = $previewUrl;
+
+        return $this;
+    }
+
+    public function getVideoEmbed(): ?string
+    {
+        return $this->videoEmbed;
+    }
+
+    public function setVideoEmbed(?string $videoEmbed): static
+    {
+        $this->videoEmbed = $videoEmbed;
+
+        return $this;
     }
 }

@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import axios from 'axios';
+import { hideImageContainer } from './helper/captchaHelper.js';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -17,6 +18,8 @@ export default class extends Controller {
 
             this.handleYoutube(url);
             this.handleVimeo(url);
+
+            hideImageContainer();
 
             button.classList.remove('disabled');
         } catch (e) {

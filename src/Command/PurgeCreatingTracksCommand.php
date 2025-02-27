@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Repository\CollectiveRepository;
+use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -14,9 +14,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:purge-creating-collectives',
     description: 'Add collective not created',
 )]
-class PurgeCreatingCollectivesCommand extends Command
+class PurgeCreatingTracksCommand extends Command
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly CollectiveRepository $repository)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly TrackRepository $repository)
     {
         parent::__construct();
     }
@@ -25,18 +25,18 @@ class PurgeCreatingCollectivesCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->note('Purging all collective being created');
+        $io->note('Purging all tracks being created');
 
-        $collectives = $this->repository->findBy(['isCreating' => true]);
+        $tracks = $this->repository->findBy(['isDraft' => true]);
 
-        $io->note(sprintf('%s Collective will be deleted, continue ?', count($collectives)));
+        $io->note(sprintf('%s tracks will be deleted, continue ?', count($tracks)));
 
-        foreach ($collectives as $collective) {
-            $this->em->remove($collective);
+        foreach ($tracks as $track) {
+            $this->em->remove($track);
         }
         $this->em->flush();
 
-        $io->success('Successfully deleted all collective being created');
+        $io->success('Successfully deleted all tracks being created');
 
         return Command::SUCCESS;
     }

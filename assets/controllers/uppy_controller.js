@@ -6,6 +6,7 @@ import French from '@uppy/locales/lib/fr_FR';
 
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
+import { hideVideoContainer } from './helper/captchaHelper.js';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -20,12 +21,10 @@ export default class extends Controller {
 
     connect() {
         const uppy  = new Uppy({ locale: French })
-        .use(Dashboard, {
-                inline: true,
-                target: '#uppy-dashboard',
-            })
+        .use(Dashboard, { inline: true, target: '#uppy-dashboard' })
             .use(XHR, {
                 endpoint: this.endpointValue,
+                async onBeforeRequest() { hideVideoContainer() },
                 async onAfterResponse(xhr) {
                     if (xhr.status !== 200) {
                         return;
@@ -39,15 +38,12 @@ export default class extends Controller {
                     if (attachmentsIdsInput) {
                         attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
                     }
-
-                    const button = document.getElementById('track_next');
-                    button.classList.remove('disabled');
                 },
             });
 
         uppy.on('file-added', (file) => {
             const button = document.getElementById('track_next');
-            button.classList.add('disabled');
+            button.classList.remove('disabled');
 
             const name = file.name;
             const nameInput = document.getElementById('track_name');
