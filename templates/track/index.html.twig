@@ -10,7 +10,7 @@
            {{ include('track/components/_search_form.html.twig', {form}) }}
         </div>
         <div class="col-12 col-md-10 offset-md-1 h-100" {{ stimulus_target('async_search', 'container') }}>
-            {{include('track/components/_tracks_list.html.twig', {tracks}) }}
+            {{ include('track/components/_tracks_list.html.twig', {tracks}) }}
         </div>
     </div>
 {% endblock %}

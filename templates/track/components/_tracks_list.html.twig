@@ -1,5 +1,14 @@
+{{ include('components/_loader.html.twig') }}
 <div class="row px-3">
-    {% for track in tracks %}
-        {{ include('track/components/_thumbnail.html.twig', {track}) }}
-    {% endfor %}
+    {% if tracks|length > 0 %}
+        {% for track in tracks %}
+            {{ include('track/components/_thumbnail.html.twig', {track}) }}
+        {% endfor %}
+    {% else %}
+        <div class="p-3">
+            <div class="alert alert-warning" role="alert">
+                {{ 'NoTracksMessage'|trans }}
+            </div>
+        </div>
+    {% endif %}
 </div>

@@ -34,3 +34,15 @@ export const appendText = (action, item) => {
     const text = generateText(action);
     item.appendChild(text);
 }
+
+export const showElement = (element) => {
+    if (!element) return;
+
+    element.classList.remove('hidden');
+}
+
+export const hideElement = (element) => {
+    if (!element) return;
+
+    element.classList.add('hidden');
+}
