@@ -3,6 +3,7 @@
 namespace App\Domain\Search;
 
 use App\Domain\Location\Region;
+use App\Entity\Collective;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\ORM\EntityRepository;
@@ -57,6 +58,19 @@ class SearchType extends AbstractType
                     'data-controller' => 'tomselect',
                     'data-action' => 'async-search#search',
                 ],
+                'required' => false,
+            ])
+            ->add('collective', EntityType::class, [
+                'class' => Collective::class,
+                'attr' => [
+                    'placeholder' => 'Collective',
+                    'data-controller' => 'tomselect',
+                    'data-action' => 'async-search#search',
+                ],
+                'query_builder' => fn (EntityRepository $repository) => $repository
+                    ->createQueryBuilder('t')
+                    ->andWhere('t.isCreating = false')
+                    ->orderBy('t.name', 'ASC'),
                 'required' => false,
             ])
             ->add('year', ChoiceType::class, [
