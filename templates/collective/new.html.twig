@@ -19,7 +19,7 @@
 {% block cardContent %}
     <div class="row d-flex justify-content-between flex-grow-1">
         <div class="col-12 {% if 2 != step %}px-1 px-sm-3 px-md-5{% endif %}">
-            <div class="{% if 2 != step %}p-3{% endif %} text-dark">
+            <div class="{% if 2 != step %}p-1{% endif %} text-dark">
                 {% if 3 == step %}
                     {{ include('collective/create/_step_3.html.twig', {form}) }}
                 {% elseif 2 == step %}
@@ -29,8 +29,8 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-6 offset-3 col-sm-4 offset-sm-4 col-md-2 offset-md-5 ">
-            {{ include('components/_progress.html.twig', {step, total: 2, label: 'Step'}) }}
+        <div class="col-12 text-center">
+            {{ include('components/_progress.html.twig', {step, total: 3, label: 'Step'}) }}
         </div>
     </div>
 {% endblock %}

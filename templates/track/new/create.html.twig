@@ -1,8 +1,10 @@
 {% extends 'track/new/step_template.html.twig' %}
 
 {% block step %}1{% endblock %}
+
 {% block innerContent %}
     {{ form_start(form) }}
+        {{ include('track/components/_form_errors.html.twig', { form }) }}
         {{ form_row(form.attachmentsIds) }}
         <div class="row text-start fs-3">
             {{ form_label(form.name) }}
