@@ -11,7 +11,7 @@
 ] %}
 
 <div class="mt-4">
-    {% for field in fields|filter(f => f.value is not null) %}
+    {% for field in fields|filter(f => f.value is not null and f.value != '') %}
         {{ include('track/components/_information_row.html.twig', {
             label: field.label,
             value: field.value,

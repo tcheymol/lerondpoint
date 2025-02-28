@@ -5,7 +5,8 @@
     height: 15px !important;
     border-radius: 15px !important;
     width: 15px;
-    border: none;
     background-clip: unset;
+    background: $secondary;
+    border: 2px solid $dark;
   }
 }

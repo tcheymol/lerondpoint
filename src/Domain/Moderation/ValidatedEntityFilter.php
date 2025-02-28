@@ -16,6 +16,6 @@ class ValidatedEntityFilter extends SQLFilter
             return '';
         }
 
-        return sprintf('%s.validated = 1', $targetTableAlias);
+        return sprintf('%s.validated = 1 AND %s.is_draft = 0', $targetTableAlias, $targetTableAlias);
     }
 }
