@@ -1,0 +1,24 @@
+{% set collectives = app.user.collectives %}
+
+{% if collectives|length > 0 %}
+    {% for collective in collectives %}
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h3 class="fs-3">{{ collective.name }}</h3>
+            </div>
+            {% if collective.iconPath %}
+                <div class="col align-items-end d-flex">
+                    <img style="width: 50px" class="ms-auto" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
+                </div>
+            {% endif %}
+        </div>
+        <span> {{ collective.shortDescription }} </span>
+        <br/>
+        <a href="{{ path('track_list', { collective: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
+        <br/>
+        <a href="{{ path('collective_show', { id: collective.id }) }}">{{ 'KnowMore'|trans }}</a>
+
+    {% endfor %}
+{% else %}
+
+{% endif %}

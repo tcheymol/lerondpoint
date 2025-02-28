@@ -1,0 +1,45 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'MyAccount'|trans }}{% endblock %}
+
+{% block beforeCard %}
+    <div class="row">
+        <div class="col-6">
+            {{ include('components/_browser_back.html.twig') }}
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-danger" href="{{ path('app_logout') }}">
+                {{ 'SignOut'|trans }}
+                <i class="fa fa-sign-out-alt me-2"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block cardContent %}
+    {% set tabs = {
+        'profile': { label: 'Profile'|trans, include: 'user/_form.html.twig' },
+        'collectives': { label: 'MyCollectives'|trans, include: 'user/account/_collectives.html.twig' },
+        'tracks': { label: 'MyTracks'|trans, include: 'user/account/_tracks.html.twig' }
+    } %}
+    <div class="nav nav-tabs d-flex">
+        {% for name, tab in tabs %}
+            <a
+                class="flex-grow-1 text-dark text-center nav-link hover-underline rounded-0 {{ page == name ? 'active bg-light-subtle' : '' }}"
+                {{ page == name ? 'aria-current="page"' : '' }}
+                href="{{ path('user_account', { page: name }) }}"
+            >{{ tab.label }}</a>
+        {% endfor %}
+    </div>
+    <div class="p-3 border border-1 border-opacity-25 border-top-0 bg-light-subtle">
+        {% if tabs[page] is defined and tabs[page].include is defined  %}
+            {{ include(tabs[page].include) }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block afterCard %}
+    <div class="mt-5 text-end">
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

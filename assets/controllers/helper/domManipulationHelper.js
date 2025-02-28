@@ -1,5 +1,7 @@
 export const updateElementHtml = (id, content) => document.getElementById(id).innerHTML = content ?? '';
 
+export const updateElementHref = (id, content) => document.getElementById(id).href = content ?? '';
+
 export const generateDiv = () => {
     const item = document.createElement('div');
     item.style.textAlign = 'center';

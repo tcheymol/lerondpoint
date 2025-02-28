@@ -23,17 +23,19 @@
     {{ collective.description }}
     <br/>
     <br/>
+    <u> {{ 'ContactUs'|trans }} :</u>
     {% if is_email(collective.contactUs) %}
-        <a href="{{ collective.contactUs }}">{{ collective.contactUs }}</a>
+       <a href="{{ collective.contactUs }}">{{ collective.contactUs }}</a>
     {% else %}
-        <p>{{ collective.contactus }}</p>
+        <span>{{ collective.contactus }}</span>
     {% endif %}
 
     <br/>
+    <u> {{ 'FollowUs'|trans }} :</u>
     {% if is_url(collective.followUs) %}
         <a href="{{ collective.followUs }}">{{ collective.followUs }}</a>
     {% else %}
-        <p>{{ collective.followUs }}</p>
+        <span>{{ collective.followUs }}</span>
     {% endif %}
     <br/>
 {% endblock %}

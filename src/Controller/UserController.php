@@ -15,8 +15,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/user')]
 final class UserController extends AbstractController
 {
-    #[Route('/profile', name: 'app_user_profile', methods: ['GET', 'POST'])]
-    public function profile(Request $request, UserPersister $persister): Response
+    #[Route('/account/{page<[\w-]+>}', name: 'user_account', methods: ['GET', 'POST'])]
+    public function account(Request $request, UserPersister $persister, ?string $page = 'profile'): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -28,14 +28,18 @@ final class UserController extends AbstractController
             $persister->update($user);
             $this->addFlash('success', 'ProfileSuccessfullyUpdated');
 
-            return $this->redirectToRoute('app_user_profile', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_account', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('user/profile.html.twig', ['user' => $user, 'form' => $form]);
+        return $this->render('user/account.html.twig', [
+            'user' => $user,
+            'form' => $form,
+            'page' => $page,
+        ]);
     }
 
     #[IsGranted(Constants::EDIT, subject: 'user')]
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{<\d+>}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {

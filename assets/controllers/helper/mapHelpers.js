@@ -1,5 +1,5 @@
 import { Modal } from 'bootstrap';
-import {appendImg, appendText, generateDiv, updateElementHtml} from './domManipulationHelper.js';
+import {appendImg, appendText, generateDiv, updateElementHref, updateElementHtml} from './domManipulationHelper.js';
 
 export const fillAddressFields = (location, formName) => {
     if (!formName) return;
@@ -47,6 +47,7 @@ function onCollectiveClick(collective, e) {
         updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
         updateElementHtml('collectiveDetailsModalFollowUs', collective.followUs);
         updateElementHtml('collectiveDetailsModalDescription', collective.description);
+        updateElementHref('collectiveDetailsModalShowUrl', collective.showUrl);
     } catch (e) {
         console.error('Failed to display collective details', e);
     }

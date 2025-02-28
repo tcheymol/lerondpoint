@@ -13,7 +13,7 @@
     {{ form_errors(form.plainPassword.second) }}
     <div class="text-end">
         <button class="btn btn-lg btn-success mt-3" type="submit">
-            {{ button_label|default('Save') }}
+            {{ button_label|default('Update'|trans) }}
         </button>
     </div>
 {{ form_end(form) }}
