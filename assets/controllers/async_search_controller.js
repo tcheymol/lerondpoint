@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 import axios from 'axios';
 import debounce from 'lodash/debounce';
 import { showElement, hideElement } from './helper/domManipulationHelper.js';
+import { updateQueryParams } from './helper/browserHelpers.js';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -22,7 +23,7 @@ export default class extends Controller {
             const input = event.target;
             const form = input.form;
             const params = new FormData(form);
-            showElement(this.hasLoaderTarget ? this.loaderTarget : null);
+            this.showLoader();
 
             axios({
                 method: "post",
@@ -31,14 +32,27 @@ export default class extends Controller {
                 headers: {"Content-Type": "multipart/form-data"},
             })
                 .then((response) => {
-                    this.containerTarget.innerHTML = response.data;
-                    hideElement(this.hasLoaderTarget ? this.loaderTarget : null);
+                    this.containerTarget.innerHTML = response.data.html;
+                    updateQueryParams(response.data.queryParams);
+                    this.hideLoader()
                 })
-                .catch(function (response) {
-                    hideElement(this.hasLoaderTarget ? this.loaderTarget : null);
+                .catch(() => {
+                    this.hideLoader()
                 });
         } catch (error) {
-            hideElement(this.hasLoaderTarget ? this.loaderTarget : null);
+            this.hideLoader()
         }
     };
+
+    hideLoader() {
+        hideElement(this.getLoaderTarget());
+    }
+
+    showLoader() {
+        showElement(this.getLoaderTarget());
+    }
+
+    getLoaderTarget() {
+        return this.hasLoaderTarget ? this.loaderTarget : null;
+    }
 }

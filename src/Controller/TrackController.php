@@ -44,9 +44,12 @@ class TrackController extends AbstractController
         $search = $factory->create($request->query->all());
         $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
 
-        return $form->isSubmitted() && $form->isValid()
-            ? $this->render('track/components/_tracks_list.html.twig', ['tracks' => $provider->provide($search)])
-            : $this->render('components/_empty.html.twig');
+        $tracks = $form->isSubmitted() && $form->isValid() ? $provider->provide($search) : [];
+
+        return $this->json([
+            'html' => $this->renderView('track/components/_tracks_list.html.twig', ['tracks' => $tracks]),
+            'queryParams' => $search->toParamsArray(),
+        ]);
     }
 
     #[Route('/{id<\d+>}', name: 'track_show', methods: ['GET'])]
