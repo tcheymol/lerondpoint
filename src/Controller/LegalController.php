@@ -6,11 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
+#[Route('/legal')]
 class LegalController extends AbstractController
 {
-    #[Route('/legal', name: 'app_legal')]
-    public function index(): Response
+    #[Route('/privacy', name: 'app_privacy')]
+    public function privacy(): Response
     {
-        return $this->render('legal/index.html.twig');
+        return $this->render('legal/privacy.html.twig');
+    }
+
+    #[Route('/terms', name: 'app_terms')]
+    public function terms(): Response
+    {
+        return $this->render('legal/terms.html.twig');
     }
 }

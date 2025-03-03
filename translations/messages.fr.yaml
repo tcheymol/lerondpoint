@@ -22,6 +22,7 @@ Collective: Groupe
 CollectiveName: Nom du collectif
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
+PrivacyPolicy: Politique de confidentialité
 ConfirmCreation: Confirmer la création
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
@@ -142,7 +143,7 @@ Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
 Tags: Sous catégories
-TermsOfUse: Conditions générales d'utilisation
+TermsOfUse: Conditions générales d'utilisation (CGU)
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"

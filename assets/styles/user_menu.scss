@@ -1,0 +1,16 @@
+#user_menu_container {
+  position: relative;
+  #user_menu {
+    display: none;
+    position: absolute;
+    min-width: 360px;
+  }
+  &:hover {
+    #user_menu {
+      display: flex;
+      top: 100%;
+      left: auto;
+      right: 0;
+    }
+  }
+}
