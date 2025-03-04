@@ -54,7 +54,7 @@ function onCollectiveClick(collective, e) {
 
 }
 
-export const addCollectiveToMap = (map, collective) => {
+export const addCollective = (map, collective) => {
     const iconPath = collective.iconPath ?? '/hut.png';
     if (collective.lat && collective.lon) {
         L.marker([collective.lat, collective.lon], {icon: createIcon(iconPath)})
@@ -66,20 +66,22 @@ export const addCollectiveToMap = (map, collective) => {
 export const addLayer = (map) =>
     L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {maxZoom: 18}).addTo(map);
 
-
 export const addDroms = () => {
-    try {
-        return getDromLocations().map(location => L.map(location.id, {
+    const maps = [];
+    getDromLocations().forEach(location => {
+        const mapContainer = document.getElementById(location.id);
+        if (!mapContainer) return;
+
+        const map = L.map(location.id, {
             center: location.coords,
             zoom: location.zoom,
             zoomControl: false,
             attributionControl: false
-        }));
-    } catch (e) {
-        console.error('Failed adding map for drom', e);
+        });
+        maps.push(map);
+    });
 
-        return [];
-    }
+    return maps
 }
 
 export const centerMapOnClickLocation = (map, latlng, addressFieldsFormName) => {
@@ -90,6 +92,8 @@ export const centerMapOnClickLocation = (map, latlng, addressFieldsFormName) => 
 };
 
 export const addMainMap = () => {
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) return;
     const map = L.map('map')
     resetView(map)
 
@@ -107,9 +111,3 @@ export const recenterMap = (map, location, positionPinMarker, zoom) => {
 }
 
 const resetView = (map) => map.setView([46.603354, 1.888334], 6);
-
-export const addLayers = (maps) => maps.forEach(map => addLayer(map));
-
-export const addCollectives = (maps, collectives) => maps.forEach(map => {
-    collectives.forEach(collective => addCollectiveToMap(map, collective))
-});

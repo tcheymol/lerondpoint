@@ -1,6 +1,5 @@
 const showCaptcha = () => {
     const container = document.getElementById('captcha_container');
-    console.log(container);
     if (container) {
         container.classList.remove('d-none');
     }

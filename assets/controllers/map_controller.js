@@ -5,8 +5,8 @@ import {
     addDroms,
     fillAddressFields,
     recenterMap,
-    addLayers,
-    addCollectives,
+    addLayer,
+    addCollective,
     centerMapOnClickLocation,
 } from './helper/mapHelpers.js';
 
@@ -32,30 +32,34 @@ export default class extends Controller {
         const mainMap = addMainMap();
         const geocoder = createGeocoder(this.geoapifyKeyValue);
 
-        const allMaps = this.addDroms(mainMap);
-        this.enableClickToCenter(mainMap);
-        this.enableCenterOnAutocomplete(mainMap, geocoder);
-        this.enableFillFieldsOnAutocomplete(mainMap, geocoder);
+        const dromsMaps = addDroms();
+        const allMaps = !mainMap ? dromsMaps : [mainMap, ...dromsMaps];
 
-        addLayers(allMaps);
-        addCollectives(allMaps, this.collectivesValue);
+        allMaps.forEach((map) => {
+            this.enableClickToCenter(map);
+            this.enableCenterOnAutocomplete(map, geocoder);
+            this.enableFillFieldsOnAutocomplete(geocoder);
+            addLayer(map);
+            addCollective(map, this.collectivesValue);
+        });
+
     }
 
-    enableFillFieldsOnAutocomplete(mainMap, geocoder) {
+    enableFillFieldsOnAutocomplete(geocoder) {
         if (this.hasAddressFieldsFormNameValue) {
-            geocoder.on('select', this.onSelectAutocompleteLocation(mainMap));
+            geocoder.on('select', this.onSelectAutocompleteLocation());
         }
     }
 
-    enableCenterOnAutocomplete(mainMap, geocoder) {
-        geocoder.on('select', this.centerOnSelectAutocompleteLocation(mainMap));
+    enableCenterOnAutocomplete(map, geocoder) {
+        geocoder.on('select', this.centerOnSelectAutocompleteLocation(map));
     }
 
-    enableClickToCenter(mainMap) {
-        if (this.hasEnableClickToCenterValue) {
-            mainMap.on('click', (e) => {
-                if (this.positionPinMarker) mainMap.removeLayer(this.positionPinMarker);
-                this.positionPinMarker = centerMapOnClickLocation(mainMap, e.latlng, this.addressFieldsFormNameValue);
+    enableClickToCenter(map) {
+        if (this.hasEnableClickToCenterValue && map) {
+            map.on('click', (e) => {
+                if (this.positionPinMarker) map.removeLayer(this.positionPinMarker);
+                this.positionPinMarker = centerMapOnClickLocation(map, e.latlng, this.addressFieldsFormNameValue);
             });
         }
     }
@@ -64,9 +68,7 @@ export default class extends Controller {
         this.positionPinMarker = recenterMap(map, location, this.positionPinMarker, 8);
     }
 
-    onSelectAutocompleteLocation = (map) => (location) =>{
+    onSelectAutocompleteLocation = () => (location) =>{
         fillAddressFields(location, this.addressFieldsFormNameValue);
     }
-
-    addDroms = (mainMap) => !this.enableDromsValue ? [mainMap] : [mainMap, ...addDroms()];
 }

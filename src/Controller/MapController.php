@@ -9,9 +9,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MapController extends AbstractController
 {
-    #[Route('/map', name: 'app_map')]
-    public function index(MapDataBuilder $mapDataBuilder): Response
+    #[Route('/map/{map<[\w-]+>}', name: 'app_map')]
+    public function index(MapDataBuilder $mapDataBuilder, ?string $map = 'metropolis'): Response
     {
-        return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build()]);
+        return $this->render('map/index.html.twig', [
+            'collectives' => $mapDataBuilder->build(),
+            'map' => $map,
+        ]);
     }
 }

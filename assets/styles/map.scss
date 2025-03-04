@@ -9,7 +9,7 @@
 .autocomplete-container {
   min-width: 250px;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(lg) {
     min-width: 400px;
   }
 }
@@ -25,9 +25,23 @@
   width: 180px;
 }
 
+#dromsMapsContainer {
+  @include media-breakpoint-down(lg) {
+    width: 95%;
+    bottom: auto !important;
+    > div {
+        min-height: 200px;
+        width: 100% !important;
+    }
+  }
+}
+
 .map-autocomplete-container {
   left: 50px;
-  top: 5px;
+  top: 50px;
+  @include media-breakpoint-up(lg) {
+    top: 5px;
+  }
   z-index: 1000;
   border-style: solid;
 }
