@@ -1,0 +1,11 @@
+<div class="card text-bg-white mt-3">
+    <div class="card-header">{{track.name}}</div>
+    <div class="card-body pt-0">
+        {{ include('track/components/_information_rows.html.twig', {track, noName: true}) }}
+        <div class="row d-flex justify-content-between">
+            <div class="col text-end">
+                <a class="btn btn-link" href="{{ path('track_show', {id: track.id}) }}">{{ 'KnowMore'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>

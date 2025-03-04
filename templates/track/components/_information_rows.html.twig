@@ -1,6 +1,6 @@
 {% set collectiveUrl = track.collective is null ? null : path('collective_show', { id: track.collective.id }) %}
-{% set fields = [
-    { label: null, value: track.name },
+{% set fields = noName is defined ? [] : [{ label: null, value: track.name }] %}
+{% set fields = fields|merge([
     { label: 'Category'|trans, value: track.kindName },
     { label: 'Tags'|trans, value: track.tagsAsString },
     { label: 'Region'|trans, value: track.regionName },
@@ -8,7 +8,7 @@
     { label: 'Year'|trans, value: track.year },
     { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
     { label: 'Description'|trans, value: track.description },
-] %}
+]) %}
 
 <div class="mt-4">
     {% for field in fields|filter(f => f.value is not null and f.value != '') %}

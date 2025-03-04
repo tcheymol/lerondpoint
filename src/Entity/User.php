@@ -56,11 +56,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
-    /**
-     * @var Collection<int, Invitation>
-     */
+    /** @var Collection<int, Invitation> */
     #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $invitations;
+
+    /** @var Collection<int, Track> */
+    #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'createdBy')]
+    private Collection $tracks;
 
     public function __construct(
         #[ORM\Column(length: 180)]
@@ -68,6 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     ) {
         $this->collectives = new ArrayCollection();
         $this->invitations = new ArrayCollection();
+        $this->tracks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,9 +243,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
-    /**
-     * @return Collection<int, Invitation>
-     */
+    /** @return Collection<int, Invitation> */
     public function getInvitations(): Collection
     {
         return $this->invitations;
@@ -264,6 +265,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
             // set the owning side to null (unless already changed)
             if ($invitation->getUser() === $this) {
                 $invitation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, Track> */
+    public function getTracks(): Collection
+    {
+        return $this->tracks;
+    }
+
+    public function addTrack(Track $track): static
+    {
+        if (!$this->tracks->contains($track)) {
+            $this->tracks->add($track);
+            $track->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrack(Track $track): static
+    {
+        if ($this->tracks->removeElement($track)) {
+            if ($track->getCreatedBy() === $this) {
+                $track->setCreatedBy(null);
             }
         }
 

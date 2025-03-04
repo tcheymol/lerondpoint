@@ -85,6 +85,9 @@ class Track implements BlameableInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $videoEmbed = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tracks')]
+    private ?User $createdBy = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <div class="row d-flex align-content-between h-100 p-3 text-dark">
+    <div class="row d-flex align-content-{% block cardAlign %}between{% endblock %} h-100 p-3 text-dark">
         <div class="col-12">
             {% block beforeCard %}
                 {{ include('components/_browser_back.html.twig') }}
@@ -9,8 +9,11 @@
         </div>
         <div>
             <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-                <div class="bg-white border border-dark border-4 p-{% block cardPadding %}4{% endblock %}">
-                    <h1 class="fs-1">{{ block('title') }}</h1>
+                <div class="bg-{% block cardColor %}white{% endblock %} border border-dark border-4 p-{% block cardPadding %}4{% endblock %}">
+                    {% if block('title') != '' %}
+                        <h1 class="fs-1">{{ block('title') }}</h1>
+                    {% else %}
+                    {% endif %}
                     <div class="text-start">
                         {% block cardContent %}{% endblock %}
                     </div>
