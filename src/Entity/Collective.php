@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
-class Collective implements OwnableInterface, BlameableInterface
+class Collective implements OwnableInterface, BlameableInterface, \Stringable
 {
     use BlameableTrait;
 

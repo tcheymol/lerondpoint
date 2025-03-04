@@ -1,10 +1,8 @@
 import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
 
-const placesKey = '089c0bbf75be49b483de4a7fa4b64007';
-
-export const createGeocoder = () =>
+export const createGeocoder = (key) =>
     new GeocoderAutocomplete(
         document.getElementById("autocomplete"),
-        placesKey,
+        key,
         { debounceDelay: 300 },
     );

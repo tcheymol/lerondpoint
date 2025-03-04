@@ -17,6 +17,7 @@ import {
 export default class extends Controller {
     static values = {
         collectives: Array,
+        geoapifyKey: String,
         addressFieldsFormName: String,
         enableDroms: Boolean,
         enableClickToCenter: Boolean,
@@ -29,7 +30,7 @@ export default class extends Controller {
 
     initMap() {
         const mainMap = addMainMap();
-        const geocoder = createGeocoder();
+        const geocoder = createGeocoder(this.geoapifyKeyValue);
 
         const allMaps = this.addDroms(mainMap);
         this.enableClickToCenter(mainMap);

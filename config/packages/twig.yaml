@@ -6,6 +6,8 @@ twig:
         timezone: Europe/Paris
     paths:
         '%kernel.project_dir%/assets/styles': styles
+    globals:
+        geoapify_key: '%geoapify_key%'
 when@test:
     twig:
         strict_variables: true
