@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { createGeocoder } from "./helpers.js";
+import { createGeocoder } from './helper/geocoder.js';
 import {
     addMainMap,
     addDroms,
