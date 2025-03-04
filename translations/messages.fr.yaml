@@ -22,7 +22,6 @@ Collective: Groupe
 CollectiveName: Nom du collectif
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-PrivacyPolicy: Politique de confidentialité
 ConfirmCreation: Confirmer la création
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
@@ -81,6 +80,7 @@ Login: Connexion
 Logout: Déconnexion
 LongDescription: Description longue
 Memory: Mémoire
+Menu: Menu
 Misc: Divers
 Moderation: Modération
 ModerationTitle: Traces en attente de modération
@@ -92,6 +92,7 @@ NewPassword: Nouveau mot de passe
 Next: Suivant
 NextTrack: Trace suivante
 No: Non
+NoCollectives: Vous n'avez pas de groupe actuellement
 NoTrack: Pas de trace
 NoTracksMessage: Aucune trace n'a été trouvée avec ces critères de rechercher, veuillez effectuer une nouvelle recherche
 Normandie: Normandie
@@ -109,6 +110,7 @@ PaysDeLaLoire: Pays de la Loire
 Preview: "Partager une archive du mouvement : Aperçu"
 Previous: Précédent
 PreviousTrack: Trace précédente
+PrivacyPolicy: Politique de confidentialité
 Profile: Profil
 ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les données qui y étaient associées ont été supprimé·es avec succès
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
@@ -180,4 +182,3 @@ WhoAreWe: Qui sommes-nous ?
 Year: Année
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
-Menu: Menu

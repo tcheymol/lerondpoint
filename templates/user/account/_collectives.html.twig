@@ -2,31 +2,10 @@
 
 {% if collectives|length > 0 %}
     {% for collective in collectives %}
-        <div class="card text-bg-secondary text-white">
-            <div class="card-header">{{ collective.name }}</div>
-            <div class="card-body">
-                <div class="row d-flex justify-content-between">
-                    <div class="col">
-                        <span> {{ collective.shortDescription }} </span>
-                    </div>
-                    {% if collective.iconPath %}
-                        <div class="col align-items-end d-flex">
-                            <img style="width: 50px" class="ms-auto" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="row d-flex justify-content-between mt-3">
-                    <div class="col">
-                        <a class="btn btn-link text-white" href="{{ path('track_list', { collective: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
-                    </div>
-                    <div class="col text-end">
-                        <a class="btn btn-link text-white" href="{{ path('collective_show', { id: collective.id }) }}">{{ 'KnowMore'|trans }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+       {{ include('user/account/_collective.html.twig', { collective }) }}
     {% endfor %}
 {% else %}
-
+    <div class="alert alert-info" role="alert">
+        {{ 'NoCollectives'|trans }}
+    </div>
 {% endif %}
