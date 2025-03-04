@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block content %}
-    <div {{ stimulus_controller('map', { collectives, enableDroms: true, geoapifyKey: geoapify_key }) }}
+    <div {{ stimulus_controller('map', {
+        collectives,
+        enableDroms: true,
+        enableClickToCenter: true,
+        geoapifyKey: geoapify_key
+    }) }}
             class="position-relative h-100 w-100">
         <div id="map" class="h-100 w-100"></div>
         {{ include('map/_autocomplete.html.twig') }}

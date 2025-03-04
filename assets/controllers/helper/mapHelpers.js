@@ -96,12 +96,12 @@ export const addMainMap = () => {
     return map;
 }
 
-export const recenterMap = (map, location, positionPinMarker) => {
+export const recenterMap = (map, location, positionPinMarker, zoom) => {
     if (positionPinMarker) map.removeLayer(positionPinMarker);
     if (!location || !location.properties) return;
 
     const { lon, lat } = location.properties;
-    map.setView([lat, lon]);
+    map.setView([lat, lon], zoom);
 
     return L.marker([lat, lon], {icon: createIcon('/pin.png')}).addTo(map);
 }

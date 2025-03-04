@@ -34,6 +34,7 @@ export default class extends Controller {
 
         const allMaps = this.addDroms(mainMap);
         this.enableClickToCenter(mainMap);
+        this.enableCenterOnAutocomplete(mainMap, geocoder);
         this.enableFillFieldsOnAutocomplete(mainMap, geocoder);
 
         addLayers(allMaps);
@@ -46,6 +47,10 @@ export default class extends Controller {
         }
     }
 
+    enableCenterOnAutocomplete(mainMap, geocoder) {
+        geocoder.on('select', this.centerOnSelectAutocompleteLocation(mainMap));
+    }
+
     enableClickToCenter(mainMap) {
         if (this.hasEnableClickToCenterValue) {
             mainMap.on('click', (e) => {
@@ -55,9 +60,12 @@ export default class extends Controller {
         }
     }
 
+    centerOnSelectAutocompleteLocation = (map) => (location) =>{
+        this.positionPinMarker = recenterMap(map, location, this.positionPinMarker, 8);
+    }
+
     onSelectAutocompleteLocation = (map) => (location) =>{
         fillAddressFields(location, this.addressFieldsFormNameValue);
-        this.positionPinMarker = recenterMap(map, location, this.positionPinMarker);
     }
 
     addDroms = (mainMap) => !this.enableDromsValue ? [mainMap] : [mainMap, ...addDroms()];
