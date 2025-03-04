@@ -1,0 +1,15 @@
+<div class="modal fade" id="navbarModal" tabindex="-1" aria-labelledby="navbarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-dark" id="navbarModalLabel">{{ 'Menu'|trans }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ include('components/header/_header_actions.html.twig', { actions }) }}
+                <div class="mt-5"></div>
+                {{ include('components/header/_header_actions.html.twig', { actions: userActions }) }}
+            </div>
+        </div>
+    </div>
+</div>

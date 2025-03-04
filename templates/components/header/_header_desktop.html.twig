@@ -1,0 +1,7 @@
+<div class="collapse navbar-collapse bg-dark" id="navbarNav">
+    <div class="h-100 px-1 flex-grow-1 d-flex align-items-stretch fs-4 justify-content-between d-flex flex-column flex-lg-row position-relative">
+        {{ include('components/header/_header_actions.html.twig', { actions } ) }}
+        <div class="d-flex flex-grow-1"></div>
+        {{ include('components/header/_header_actions.html.twig', { actions: userActions } ) }}
+    </div>
+</div>

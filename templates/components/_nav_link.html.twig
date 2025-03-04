@@ -2,4 +2,7 @@
             nav-link hover-underline bg-{{ color }} fs-5 hoverable-{{ color }}
             "
    href="{{ url }}"
->{{ label }}</a>
+>
+    {% if icon is defined %}<i class="fa fa-{{ icon }} me-2"></i>{% endif %}
+    {{ label }}
+</a>

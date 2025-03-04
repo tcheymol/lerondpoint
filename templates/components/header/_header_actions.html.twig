@@ -1,0 +1,12 @@
+{% for action in actions|filter(action => action.show == true) %}
+    {% if action.children is defined %}
+        <div class="hoverable-submenu flex-grow-1">
+            {{ include('components/_nav_link.html.twig', { url: action.path, label: action.label, color: action.color, icon: action.icon is defined ? action.icon : null }) }}
+            <div class="submenu flex-column">
+                {{ include('components/header/_header_actions.html.twig', { actions: action.children }) }}
+            </div>
+        </div>
+    {% else %}
+        {{ include('components/_nav_link.html.twig', { url: action.path, label: action.label, color: action.color, icon: action.icon is defined ? action.icon : null }) }}
+    {% endif %}
+{% endfor %}

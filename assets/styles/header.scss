@@ -1,57 +1,48 @@
+.nav-link {
+  height: 50px;
+  color: $dark !important;
+  &:hover {
+    color: $dark !important;
+  }
+  border-color: $dark;
+  border-style: solid;
+  border-width: 3px 0 3px 3px;
+  @include media-breakpoint-down(lg) {
+    border-width: 0 3px 3px 3px;
+    &:first-of-type {
+      border-width: 3px 3px 3px 3px;
+    }
+  }
+}
+
 nav.navbar {
-  min-height: 50px;
-  @include media-breakpoint-up(md) {
+  height: 50px;
+  .hoverable-submenu {
     height: 50px;
   }
 
-  .nav-link {
-    text-transform: uppercase;
-    margin: 2px 0 2px 0;;
-    color: $dark !important;
-
-    @include media-breakpoint-up(lg) {
-      margin: 4px 0 4px 4px;
-    }
-    &:hover {
-      color: $dark !important;
-    }
-  }
-
-  #contributeButton {
-    &:hover {
-      .contribute-modal{
-        display: flex;
-      }
-    }
-
-    .nav-link {
-      display: flex;
-    }
-    .contribute-modal{
+  .hoverable-submenu {
+    .submenu {
       display: none;
-      position: relative;
-      width: 100%;
-      z-index: 1;
-      border-color: $dark;
-      border-style: solid;
-      border-width: 0 3px 0 3px;
-      .btn {
-        height: 50px;
+
+      .nav-link {
+        display: flex;
+        margin: 0;
         border-color: $dark;
         border-style: solid;
-        border-width: 1px 0 1px 0;
-        line-height: 40px;
-        @include media-breakpoint-up(lg) {
-        border-collapse: collapse;
-          border-width: 0 0 3px 0;
+        border-width: 3px 3px 0 3px;
+        &:first-of-type {
+          border-width: 0 3px 0 3px;
+        }
+        &:last-of-type {
+          border-width: 3px 3px 3px 3px
         }
       }
     }
 
-    .nav-link {
-      height: 40px;
-      @include media-breakpoint-up(lg) {
-        height: 42px;
+    &:hover {
+      .submenu {
+        display: flex;
       }
     }
   }
@@ -63,18 +54,14 @@ nav.navbar {
     background: $dark;
     width: 100%;
     max-width: 576px;
-  }
 
-  .collapse.show {
-    width: 100%;
-    max-width: 576px;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: $dark;
-  }
-
-  a {
-    min-height: 40px;
+    &.show {
+      width: 100%;
+      max-width: 576px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: $dark;
+    }
   }
 }
