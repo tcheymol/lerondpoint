@@ -1,8 +1,8 @@
 const showCaptcha = () => {
-    const container = document.getElementById('captcha_container');
-    if (container) {
-        container.classList.remove('d-none');
-    }
+    // const container = document.getElementById('captcha_container');
+    // if (container) {
+    //     container.classList.remove('d-none');
+    // }
 }
 
 export const hideImageContainer = () => {
