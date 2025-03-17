@@ -47,9 +47,6 @@
             ".php-cs-fixer.dist.php"
         ]
     },
-    "gregwar/captcha-bundle": {
-        "version": "v2.3.0"
-    },
     "phpstan/phpstan": {
         "version": "1.12",
         "recipe": {
