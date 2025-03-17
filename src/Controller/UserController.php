@@ -12,10 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/user')]
 final class UserController extends AbstractController
 {
-    #[Route('/account/{page<[\w-]+>}', name: 'user_account', methods: ['GET', 'POST'])]
+    #[Route('/user/account/{page<[\w-]+>}', name: 'user_account', methods: ['GET', 'POST'])]
     public function account(Request $request, UserPersister $persister, ?string $page = 'profile'): Response
     {
         $user = $this->getUser();
@@ -39,7 +38,7 @@ final class UserController extends AbstractController
     }
 
     #[IsGranted(Constants::EDIT, subject: 'user')]
-    #[Route('/{<\d+>}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/user/{<\d+>}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {

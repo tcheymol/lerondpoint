@@ -34,7 +34,7 @@
             >{{ tab.label }}</a>
         {% endfor %}
     </div>
-    <div class="p-3 border border-1 border-opacity-25 border-top-0 bg-light-subtle">
+    <div class="p-3 border border-1 border-opacity-25 border-top-0 bg-white">
         {% if tabs[page] is defined and tabs[page].include is defined  %}
             {{ include(tabs[page].include) }}
         {% endif %}

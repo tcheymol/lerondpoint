@@ -64,6 +64,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'createdBy')]
     private Collection $tracks;
 
+    /**
+     * @var Collection<int, Invitation>
+     */
+    #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'invitedBy', orphanRemoval: true)]
+    private Collection $invitationsSent;
+
     public function __construct(
         #[ORM\Column(length: 180)]
         private ?string $email = null,
@@ -71,6 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         $this->collectives = new ArrayCollection();
         $this->invitations = new ArrayCollection();
         $this->tracks = new ArrayCollection();
+        $this->invitationsSent = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,6 +299,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         if ($this->tracks->removeElement($track)) {
             if ($track->getCreatedBy() === $this) {
                 $track->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Invitation>
+     */
+    public function getInvitationsSent(): Collection
+    {
+        return $this->invitationsSent;
+    }
+
+    public function addInvitationsSent(Invitation $invitationsSent): static
+    {
+        if (!$this->invitationsSent->contains($invitationsSent)) {
+            $this->invitationsSent->add($invitationsSent);
+            $invitationsSent->setInvitedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvitationsSent(Invitation $invitationsSent): static
+    {
+        if ($this->invitationsSent->removeElement($invitationsSent)) {
+            // set the owning side to null (unless already changed)
+            if ($invitationsSent->getInvitedBy() === $this) {
+                $invitationsSent->setInvitedBy(null);
             }
         }
 

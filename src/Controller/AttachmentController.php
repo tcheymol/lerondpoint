@@ -9,10 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/attachment')]
 class AttachmentController extends AbstractController
 {
-    #[Route('', name: 'upload_attachment', methods: ['POST'])]
+    #[Route('/attachment', name: 'upload_attachment', methods: ['POST'])]
     public function index(Request $request, AttachmentHelper $helper): Response
     {
         /** @var UploadedFile $file */

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Action;
 use App\Entity\Attachment;
 use App\Entity\Collective;
+use App\Entity\Invitation;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
@@ -51,6 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Collectives');
         yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
         yield MenuItem::linkToCrud('Actions', 'fas fa-location-crosshairs', Action::class);
+        yield MenuItem::linkToCrud('Invitations', 'fas fa-envelope', Invitation::class);
 
         yield MenuItem::section('Tracks');
         yield MenuItem::linkToCrud('Tracks', 'fas fa-clipboard', Track::class);

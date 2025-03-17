@@ -1,5 +1,5 @@
-<div class="card text-bg-white mt-3">
-    <div class="card-header">{{track.name}}</div>
+<div class="card text-bg-white mt-3 rounded-0 shadow">
+    <div class="card-header rounded-0 bg-primary border-bottom-0 plaine">{{ track.name }}</div>
     <div class="card-body pt-0">
         {{ include('track/components/_information_rows.html.twig', {track, noName: true}) }}
         <div class="row d-flex justify-content-between">

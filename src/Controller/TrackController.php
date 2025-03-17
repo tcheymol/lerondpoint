@@ -14,10 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/track')]
 class TrackController extends AbstractController
 {
-    #[Route('', name: 'track_list', methods: ['GET', 'POST'])]
+    #[Route('/track', name: 'track_list', methods: ['GET', 'POST'])]
     public function index(Request $request, TrackProvider $provider, SearchFactory $factory): Response
     {
         $search = $factory->create($request->query->all());
@@ -38,7 +37,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'track_async_search', methods: ['POST'])]
+    #[Route('/track/search', name: 'track_async_search', methods: ['POST'])]
     public function asyncSearch(Request $request, TrackProvider $provider, SearchFactory $factory): Response
     {
         $search = $factory->create($request->query->all());
@@ -52,7 +51,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<\d+>}', name: 'track_show', methods: ['GET'])]
+    #[Route('/track/{id<\d+>}', name: 'track_show', methods: ['GET'])]
     public function show(Track $track, TrackAttachmentHelper $helper, TrackProvider $provider): Response
     {
         $track = $helper->hydrateTrackWithUrl($track, ThumbSize::Full);
@@ -61,7 +60,7 @@ class TrackController extends AbstractController
         return $this->render('track/show.html.twig', ['track' => $track]);
     }
 
-    #[Route('/{id<\d+>}/carousel', name: 'track_carousel', methods: ['GET'])]
+    #[Route('/track/{id<\d+>}/carousel', name: 'track_carousel', methods: ['GET'])]
     public function carousel(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/carousel.html.twig', [
@@ -69,7 +68,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<\d+>}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
+    #[Route('/track/{id<\d+>}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
@@ -85,7 +84,7 @@ class TrackController extends AbstractController
         ]);
     }
 
-    #[Route('/{id<\d+>}', name: 'track_delete', methods: ['POST'])]
+    #[Route('/track/{id<\d+>}', name: 'track_delete', methods: ['POST'])]
     public function delete(Request $request, Track $track, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$track->getId(), $request->getPayload()->getString('_token'))) {

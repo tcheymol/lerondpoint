@@ -1,0 +1,13 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'InviteUser'|trans }} {{ collective.name }}{% endblock %}
+{% block bodybg %}light{% endblock %}
+
+{% block cardContent %}
+    <div>
+        {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ include('components/button.html.twig', { label: 'Invite'|trans }) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

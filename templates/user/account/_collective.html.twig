@@ -1,6 +1,11 @@
-<div class="card text-bg-white mt-3">
-    <div class="card-header">{{ collective.name }}</div>
-    <div class="card-body">
+<div class="card text-bg-white mt-3 rounded-0 shadow">
+    <div class="card-header rounded-0 bg-secondary border-bottom-0 d-flex align-items-center">
+        <span class="plaine">{{ collective.name }} </span>
+        <span class="ms-auto">
+            <a class="btn btn-link" href="{{ path('collective_show', { id: collective.id }) }}">{{ 'KnowMore'|trans }}</a>
+        </span>
+    </div>
+    <div class="card-body border-0">
         <div class="row d-flex justify-content-between">
             <div class="col">
                 <span> {{ collective.shortDescription }} </span>
@@ -15,8 +20,8 @@
             <div class="col">
                 <a class="btn btn-link" href="{{ path('track_list', { collective: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
             </div>
-            <div class="col text-end">
-                <a class="btn btn-link" href="{{ path('collective_show', { id: collective.id }) }}">{{ 'KnowMore'|trans }}</a>
+            <div class="col">
+                <a class="btn btn-link" href="{{ path('collective_invite', { id: collective.id }) }}">{{ 'InviteUser'|trans }}</a>
             </div>
         </div>
     </div>

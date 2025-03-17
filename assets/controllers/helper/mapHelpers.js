@@ -54,7 +54,9 @@ function onCollectiveClick(collective, e) {
 
 }
 
-export const addCollective = (map, collective) => {
+export const addCollectives = (map, collectives) => collectives.forEach(collective => addCollective(map, collective));
+
+const addCollective = (map, collective) => {
     const iconPath = collective.iconPath ?? '/hut.png';
     if (collective.lat && collective.lon) {
         L.marker([collective.lat, collective.lon], {icon: createIcon(iconPath)})

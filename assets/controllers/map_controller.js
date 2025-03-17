@@ -6,7 +6,7 @@ import {
     fillAddressFields,
     recenterMap,
     addLayer,
-    addCollective,
+    addCollectives,
     centerMapOnClickLocation,
 } from './helper/mapHelpers.js';
 
@@ -35,12 +35,14 @@ export default class extends Controller {
         const dromsMaps = addDroms();
         const allMaps = !mainMap ? dromsMaps : [mainMap, ...dromsMaps];
 
+        console.log(this.collectivesValue);
+
         allMaps.forEach((map) => {
             this.enableClickToCenter(map);
             this.enableCenterOnAutocomplete(map, geocoder);
             this.enableFillFieldsOnAutocomplete(geocoder);
             addLayer(map);
-            addCollective(map, this.collectivesValue);
+            addCollectives(map, this.collectivesValue);
         });
 
     }

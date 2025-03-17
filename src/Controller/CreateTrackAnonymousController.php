@@ -9,10 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/anonymous/track/new')]
 class CreateTrackAnonymousController extends AbstractController
 {
-    #[Route('/index', name: 'track_new_index', methods: ['GET', 'POST'])]
+    #[Route('/anonymous/track/new/index', name: 'track_new_index', methods: ['GET', 'POST'])]
     public function newIndex(): Response
     {
         return $this->getUser()
@@ -20,7 +19,7 @@ class CreateTrackAnonymousController extends AbstractController
             : $this->redirectToRoute('track_new_anonymous');
     }
 
-    #[Route('/', name: 'track_new_anonymous', methods: ['GET', 'POST'])]
+    #[Route('/anonymous/track/new/', name: 'track_new_anonymous', methods: ['GET', 'POST'])]
     public function newAnonymous(Request $request, TrackPersister $persister): Response
     {
         $track = new Track();

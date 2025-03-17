@@ -3,25 +3,28 @@
 namespace App\Domain\Moderation;
 
 use App\Entity\Track;
+use App\Helper\AbstractMailer;
 use App\Helper\EmailHelper;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mime\Address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-readonly class ModerationMailer
+readonly class ModerationMailer extends AbstractMailer
 {
     public function __construct(private EmailHelper $emailHelper, private TranslatorInterface $translator)
     {
+        parent::__construct($emailHelper);
     }
 
     public function validate(Track $track): void
     {
-        $this->sendEmail($this->createValidationEmail($track), $track);
+        $email = $this->createValidationEmail($track);
+        $this->sendEmail($email, $track->getCreatedBy()?->getEmail());
     }
 
     public function reject(Track $track): void
     {
-        $this->sendEmail($this->createRejectionEmail($track), $track);
+        $email = $this->createRejectionEmail($track);
+        $this->sendEmail($email, $track->getCreatedBy()?->getEmail());
     }
 
     private function createValidationEmail(Track $track): TemplatedEmail
@@ -40,17 +43,5 @@ readonly class ModerationMailer
             ->htmlTemplate('moderation/track_rejected.html.twig')
             ->context(['track' => $track])
         ;
-    }
-
-    private function sendEmail(TemplatedEmail $email, Track $track): void
-    {
-        $recipient = $track->getCreatedBy()?->getEmail() ?? null;
-        if (!$recipient) {
-            return;
-        }
-
-        $email->to(new Address($recipient));
-
-        $this->emailHelper->send($email);
     }
 }

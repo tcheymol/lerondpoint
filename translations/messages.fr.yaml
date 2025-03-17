@@ -70,6 +70,8 @@ HomeTitleMultiline: LE <br/> ROND-POINT
 IUnderstand: Je comprends
 Icon: Icone
 IleDeFrance: Île-de-France
+Invite: Inviter
+InviteUser: Inviter un utilisateur à rejoindre le collectif
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
 Kind: Type
 Kinds: Types
@@ -165,6 +167,8 @@ UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
+UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
+UserInvited: Si l'adresse email est correcte, l'utilisateur a été invité à rejoindre le collectif, s'il n'a pas de compte, un email lui a été envoyé
 UsernameLabel: Nom d'utilisateur (Optionnel)
 Users: Utilisateurs
 Validate: Valider
@@ -183,3 +187,5 @@ WhoAreWe: Qui sommes-nous ?
 Year: Année
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
+YouHaveBeenInvited: Vous avez été invité à rejoindre un groupe
+YouHaveBeenInvitedToJoinCollective: Vous avez été invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org

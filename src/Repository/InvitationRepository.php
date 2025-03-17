@@ -16,28 +16,23 @@ class InvitationRepository extends ServiceEntityRepository
         parent::__construct($registry, Invitation::class);
     }
 
-    //    /**
-    //     * @return Invitation[] Returns an array of Invitation objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('i.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findExistingInvitation(Invitation $invitation): ?Invitation
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->andWhere('i.collective = :collective')
+            ->setParameter('collective', $invitation->getCollective());
 
-    //    public function findOneBySomeField($value): ?Invitation
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if ($invitation->getUser()) {
+            $qb->andWhere('i.user = :user')
+                ->setParameter('user', $invitation->getUser());
+        } elseif ($invitation->getUnregisteredEmail()) {
+            $qb->andWhere('i.unregisteredEmail = :email')
+                ->setParameter('email', $invitation->getUnregisteredEmail());
+        }
+
+        /** @var ?Invitation $invitation */
+        $invitation = $qb->getQuery()->getOneOrNullResult();
+
+        return $invitation;
+    }
 }
