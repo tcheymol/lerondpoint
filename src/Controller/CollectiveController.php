@@ -16,9 +16,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class CollectiveController extends AbstractController
 {
     #[Route('', name: 'collective_index', methods: ['GET'])]
-    public function index(MapDataBuilder $mapDataBuilder): Response
+    public function index(MapDataBuilder $mapDataBuilder, ?string $map = 'metropolis'): Response
     {
-        return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build()]);
+        return $this->render('map/index.html.twig', [
+            'collectives' => $mapDataBuilder->build(),
+            'map' => $map,
+        ]);
     }
 
     #[Route('/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
