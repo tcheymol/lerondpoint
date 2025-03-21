@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     /** @var Collection<int, Collective> */
     #[ORM\OneToMany(targetEntity: Collective::class, mappedBy: 'owner')]
-    private Collection $collectives;
+    private Collection $collectivesOwned;
 
     #[ORM\Column(nullable: true)]
     private ?bool $validatedEmail = null;
@@ -70,14 +70,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\OneToMany(targetEntity: Invitation::class, mappedBy: 'invitedBy', orphanRemoval: true)]
     private Collection $invitationsSent;
 
+    /**
+     * @var Collection<int, Collective>
+     */
+    #[ORM\ManyToMany(targetEntity: Collective::class, inversedBy: 'members')]
+    private Collection $collectives;
+
     public function __construct(
         #[ORM\Column(length: 180)]
         private ?string $email = null,
     ) {
-        $this->collectives = new ArrayCollection();
+        $this->collectivesOwned = new ArrayCollection();
         $this->invitations = new ArrayCollection();
         $this->tracks = new ArrayCollection();
         $this->invitationsSent = new ArrayCollection();
+        $this->collectives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,24 +189,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     }
 
     /** @return Collection<int, Collective> */
-    public function getCollectives(): Collection
+    public function getCollectivesOwned(): Collection
     {
-        return $this->collectives;
+        return $this->collectivesOwned;
     }
 
-    public function addCollective(Collective $collective): static
+    public function addCollectiveOwned(Collective $collective): static
     {
-        if (!$this->collectives->contains($collective)) {
-            $this->collectives->add($collective);
+        if (!$this->collectivesOwned->contains($collective)) {
+            $this->collectivesOwned->add($collective);
             $collective->setOwner($this);
         }
 
         return $this;
     }
 
-    public function removeCollective(Collective $collective): static
+    public function removeCollectiveOwned(Collective $collective): static
     {
-        if ($this->collectives->removeElement($collective)) {
+        if ($this->collectivesOwned->removeElement($collective)) {
             // set the owning side to null (unless already changed)
             if ($collective->getOwner() === $this) {
                 $collective->setOwner(null);
@@ -331,6 +338,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
                 $invitationsSent->setInvitedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Collective>
+     */
+    public function getCollectives(): Collection
+    {
+        return $this->collectives;
+    }
+
+    public function addCollective(Collective $collective): static
+    {
+        if (!$this->collectives->contains($collective)) {
+            $this->collectives->add($collective);
+        }
+
+        return $this;
+    }
+
+    public function removeCollective(Collective $collective): static
+    {
+        $this->collectives->removeElement($collective);
 
         return $this;
     }

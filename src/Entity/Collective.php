@@ -81,6 +81,12 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
     #[ORM\Column(nullable: true)]
     private ?bool $isCreating = true;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'collectives')]
+    private Collection $members;
+
     public function __construct(
         #[ORM\Column(length: 255)]
         private ?string $name = null,
@@ -88,6 +94,7 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
         $this->actions = new ArrayCollection();
         $this->tracks = new ArrayCollection();
         $this->invitations = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -385,6 +392,33 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
     public function finishCreation(): static
     {
         $this->isCreating = false;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(User $member): static
+    {
+        if (!$this->members->contains($member)) {
+            $this->members->add($member);
+            $member->addCollective($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(User $member): static
+    {
+        if ($this->members->removeElement($member)) {
+            $member->removeCollective($this);
+        }
 
         return $this;
     }

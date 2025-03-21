@@ -64,6 +64,10 @@ readonly class CollectivePersister
 
         if ($invitation->isUnregistered()) {
             $this->mailer->sentInviteMail($invitation);
+        } elseif ($user->getCollectives()->contains($collective)) {
+            $this->addFlash('success', 'UserAlreadyInCollective');
+
+            return;
         }
 
         $this->em->persist($invitation);

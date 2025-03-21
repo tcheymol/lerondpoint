@@ -73,9 +73,9 @@ class TrackType extends AbstractType
                 'attr' => ['placeholder' => 'https://example.com'],
             ])
             ->add('attachmentsIds', HiddenType::class)
-            ->add('captcha', CaptchaType::class, [
-                'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
-            ])
+//            ->add('captcha', CaptchaType::class, [
+//                'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
+//            ])
         ;
 
         $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
