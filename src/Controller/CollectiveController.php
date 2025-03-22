@@ -24,30 +24,10 @@ class CollectiveController extends AbstractController
         ]);
     }
 
-    #[Route('/collective/invite/{id<\d+>}', name: 'collective_invite', methods: ['GET', 'POST'])]
-    public function invite(Request $request, Collective $collective, CollectivePersister $persister): Response
-    {
-        $form = $this->createFormBuilder()->add('email', EmailType::class)->getForm()->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $email */
-            $email = $form->get('email')->getData();
-            $persister->inviteUser($collective, $email);
-
-            return $this->redirectToRoute('collective_invite', ['id' => $collective->getId()]);
-        }
-
-        return $this->render('collective/invite.html.twig', [
-            'collective' => $collective,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/collective/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CollectivePersister $persister, int $step = 1): Response
     {
         $collective = $persister->fetchSessionCollective();
-        dump($collective);
         $form = $this->createForm(CollectiveType::class, $collective, ['step' => $step])
             ->handleRequest($request);
 

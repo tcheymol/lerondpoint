@@ -1,0 +1,22 @@
+{% set invitations = app.user.invitations %}
+
+{% if invitations|length > 0 %}
+    {% for invitation in invitations %}
+        <div class="alert alert-warning" role="alert">
+            {{ 'YouHaveBeenInvitedToJoinCollective'|trans({ '%collectiveName%': invitation.collective.name }) }}
+
+            <div class="row d-flex justify-content-center">
+                <div class="col">
+                    <a href="{{ path('moderate_track_reject', { 'id': invitation.collective.id }) }}" class="btn btn-danger">
+                        {{ 'Refuse'|trans }}
+                    </a>
+                </div>
+                <div class="col text-end">
+                    <a href="{{ path('collective_invitation_accept', { 'id': invitation.collective.id }) }}" class="btn btn-success">
+                        {{ 'Accept'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -95,4 +95,20 @@ readonly class CollectivePersister
         $collective->finishCreation();
         $this->em->flush();
     }
+
+    public function acceptInvitation(Invitation $invitation): void
+    {
+        if ($invitation->getUser() && $invitation->getCollective()) {
+            $invitation->getUser()->addCollective($invitation->getCollective());
+        }
+
+        $this->em->remove($invitation);
+        $this->em->flush();
+    }
+
+    public function rejectInvitation(Invitation $invitation): void
+    {
+        $this->em->remove($invitation);
+        $this->em->flush();
+    }
 }

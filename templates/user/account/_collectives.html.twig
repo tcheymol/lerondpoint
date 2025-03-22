@@ -1,5 +1,7 @@
 {% set collectives = app.user.collectives %}
 
+{{ include('user/account/_collectives_invitations.html.twig') }}
+
 {% if collectives|length > 0 %}
     {% for collective in collectives %}
        {{ include('user/account/_collective.html.twig', { collective }) }}

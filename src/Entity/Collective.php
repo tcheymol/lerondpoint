@@ -180,6 +180,8 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
     {
         $this->owner = $owner;
 
+        $owner?->addCollective($this);
+
         return $this;
     }
 
