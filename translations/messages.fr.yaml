@@ -19,7 +19,7 @@ Category: Catégorie
 CentreValDeLoire: Centre-Val de Loire
 Close: Fermer
 Collective: Groupe
-CollectiveName: Nom du collectif
+CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 ConfirmCreation: Confirmer la création
@@ -71,7 +71,7 @@ IUnderstand: Je comprends
 Icon: Icone
 IleDeFrance: Île-de-France
 Invite: Inviter
-InviteUser: Inviter un utilisateur à rejoindre le collectif
+InviteUser: Inviter un utilisateur à rejoindre le groupe
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
 Kind: Type
 Kinds: Types
@@ -169,7 +169,7 @@ Updated By: MAJ par
 UploadAFile: Téléverser un fichier
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
-UserInvited: Si l'adresse email est correcte, l'utilisateur a été invité à rejoindre le collectif, s'il n'a pas de compte, un email lui a été envoyé
+UserInvited: Si l'adresse email est correcte, l'utilisateur a été invité à rejoindre le groupe, s'il n'a pas de compte, un email lui a été envoyé
 UsernameLabel: Nom d'utilisateur (Optionnel)
 Users: Utilisateurs
 Validate: Valider
