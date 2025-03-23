@@ -4,12 +4,12 @@
                     {{ map == 'metropolis' ? 'active bg-light-subtle' : ''}}"
                     {{ map == 'metropolis' ? 'aria-current="page"' : ''}}
 
-            href="{{ path('app_map', { map: 'metropolis' }) }}"
+            href="{{ path('collective_index', { map: 'metropolis' }) }}"
     >{{ 'Metropolis'|trans }}</a>
     <a
             class="flex-grow-1 text-dark text-center nav-link hover-underline rounded-0
                     {{ map == 'droms' ? 'active bg-light-subtle' : ''}}"
                     {{ map == 'droms' ? 'aria-current="page"' : ''}}
-            href="{{ path('app_map', { map: 'droms' }) }}"
+            href="{{ path('collective_index', { map: 'droms' }) }}"
     >{{ 'Droms'|trans }}</a>
 </div>

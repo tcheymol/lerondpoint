@@ -17,10 +17,7 @@ class CollectiveController extends AbstractController
     #[Route('/collective{map<[\w-]+>}', name: 'collective_index', methods: ['GET'])]
     public function index(MapDataBuilder $mapDataBuilder, ?string $map = 'metropolis'): Response
     {
-        return $this->render('map/index.html.twig', [
-            'collectives' => $mapDataBuilder->build(),
-            'map' => $map,
-        ]);
+        return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build(), 'map' => $map]);
     }
 
     #[Route('/collective/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]

@@ -1,6 +1,6 @@
 {% set actions = [
     { label: 'Memory'|trans, path: path('track_list'), color: 'primary', show: true },
-    { label: 'AndNow'|trans, path: path('app_map'), color: 'secondary', show: true },
+    { label: 'AndNow'|trans, path: path('collective_index'), color: 'secondary', show: true },
     { label: 'AboutUs'|trans, path: path('about_us'), color: 'light', show: true },
     { label: 'Moderation'|trans, path: path('moderation_index'), color: 'warning', show: is_granted('ROLE_MODERATOR') },
     { label: 'Participate'|trans, path: path('app_contribute'), color: 'light', show: true, children: [
