@@ -8,6 +8,7 @@ AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
 Attachment: Document
 Attachments: Documents
+AutresTerritoiresDoutreMer: Autres territoires d'outre-mer
 AuvergneRhoneAlpes: Auvergne-Rhône-Alpes
 Back: Retour
 BackStep: Retour %step%/%total%
@@ -51,7 +52,7 @@ DropFiles: déposer vos documents
 Edit: Modifier
 Email: Email
 EmailNotVerified: Votre adresse email n'a pas encore été validée
-EmailOrUsername: Email ou nom d'utilisateur
+EmailOrUsername: Email ou nom d'utilisateur·ice
 EmailVerified: Votre email a été validé avec succès
 Enabled: Activé
 EnterUrl: Entrez une URL vers une vidéo Youtube
@@ -68,13 +69,13 @@ HomeSubtitle: La plateforme collaborative qui recueille les traces du movement d
 HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE <br/> ROND-POINT
 IUnderstand: Je comprends
-Icon: Icone
+Icon: Icône
 IleDeFrance: Île-de-France
 Invite: Inviter
-InviteUser: Inviter un utilisateur à rejoindre le groupe
+InviteUser: Inviter un utilisateur·ices à rejoindre le groupe
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
-Kind: Type
-Kinds: Types
+Kind: Catégorie
+Kinds: Catégories
 KnowMore: En savoir plus
 LinkExpiresIn: Ce lien expirera dans
 Location: Localisation
@@ -147,19 +148,20 @@ SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %
 Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
-Tags: Sous catégories
+Tags: Sous-catégories
 TermsOfUse: Conditions générales d'utilisation (CGU)
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
 TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
-TrackKind: Type de trace
+TrackKind: Catégorie de trace
 TrackNumber: Trace N°
 TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
 TrackRejectedSubtitle: Votre trace %trackName% n'a pas pu être acceptée, veuillez contacter nos équipes à l'adresse contact@le-rondpoint.org si vous désirez obtenir de plus amples informations sur les raisons qui justifient ce refus
 TrackTag: Label trace
 TrackTitle: Titre de la trace
 Tracks: Traces
+TracksListSubtitle: Retrouvez ici les traces du mouvement qui ont été déposées par des contributeur·ices
 TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
 Update: Mettre à jour
@@ -167,11 +169,11 @@ UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
-UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
-UserInvited: Si l'adresse email est correcte, l'utilisateur a été invité à rejoindre le groupe, s'il n'a pas de compte, un email lui a été envoyé
-UsernameLabel: Nom d'utilisateur (Optionnel)
-Users: Utilisateurs
+UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
+UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe, si elle n'a pas de compte, un email lui a été envoyé
+UsernameLabel: Nom d'utilisateur·ice (Optionnel)
+Users: Utilisateurs·ices
 Validate: Valider
 ValidateAndSend: Valider et envoyer
 ValidateSignUp: Valider mon inscription

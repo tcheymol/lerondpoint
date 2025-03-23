@@ -23,7 +23,9 @@ enum Region: string implements TranslatableInterface
     case Occitanie = 'Occitanie';
     case PaysDeLaLoire = 'Pays de la Loire';
     case ProvenceAlpesCoteDazur = "Provence-Alpes-Côte d'Azur";
-    case Réunion = 'Réunion';
+    case Reunion = 'Réunion';
+
+    case AutresTerritoiresDoutreMer = "Autres territoires d'outre-mer";
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
