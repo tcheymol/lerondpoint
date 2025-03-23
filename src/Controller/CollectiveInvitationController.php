@@ -3,11 +3,8 @@
 namespace App\Controller;
 
 use App\Domain\Collective\CollectivePersister;
-use App\Domain\Map\MapDataBuilder;
 use App\Entity\Collective;
 use App\Entity\Invitation;
-use App\Form\CollectiveType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Request;
