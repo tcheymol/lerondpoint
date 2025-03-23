@@ -3,13 +3,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="updateIconModalLabel">{{ 'UpdateIcon'|trans }}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'Close'|trans }}"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     {% for action in get_actions() %}
                         <div class="col-3">
                             <button class="btn btn-link p-0" style="width: 50px"
+                                    data-bs-dismiss="modal"
                                     {{
                                         stimulus_controller('update_collective_icon', {
                                             iconPath: action.iconPublicPath(true),
