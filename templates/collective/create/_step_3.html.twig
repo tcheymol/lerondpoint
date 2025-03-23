@@ -8,8 +8,8 @@
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
-        <a type="submit" href="{{ path('collective_new', {step: step - 1}) }}" class="btn btn-secondary">{{ 'BackStep'|trans({ '%step%': step - 1, '%total%': 3}) }}</a>
-        <button type="submit" class="btn btn-secondary">{{ 'ConfirmCreation'|trans }}</button>
+        <a type="submit" href="{{ path('collective_new', {step: step - 1}) }}" class="btn btn-light">{{ 'BackStep'|trans({ '%step%': step - 1, '%total%': 3}) }}</a>
+        <button type="submit" class="btn btn-light">{{ 'ConfirmCreation'|trans }}</button>
     </div>
 
     {{ form_end(form) }}

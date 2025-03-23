@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center">
-    <div id="autocompleteIconPreviewImage" class="{{ collective is null ? 'd-none' : '' }} position-relative" style="width: 200px;">
+    {% set collectiveIconPath = collective is not null ? collective.iconPath : null %}
+    <div id="autocompleteIconPreviewImage" class="{{ collectiveIconPath is null ? 'd-none' : '' }} position-relative" style="width: 200px;">
         <div class="d-flex justify-content-center">
             <button
                     type="button"
@@ -10,7 +11,7 @@
             >
                 {{ 'UpdateIcon'|trans }}
             </button>
-            <img src="{{ collective is null ? '' : collective.iconPath }}" class="mt-5" style="width: 150px;" alt="collective_icon" />
+            <img src="{{ collectiveIconPath is null ? '' : collectiveIconPath }}" class="mt-5" style="width: 150px;" alt="collective_icon" />
             {{ include('collective/create/_update_icon_modal.html.twig') }}
         </div>
     </div>
