@@ -108,12 +108,13 @@ export const recenterMap = (map, location, positionPinMarker, zoom) => {
     const { lon, lat } = location.properties;
     map.setView([lat, lon], zoom);
 
-    addPin(map, lat, lon);
+    return addPin(map, lat, lon);
 }
 
 export const addPin = (map, lat, lon) => {
     if (!map || !lat || !lon) return;
-    L.marker([lat, lon], {icon: createIcon('/pin.png')}).addTo(map);
+
+    return L.marker([lat, lon], {icon: createIcon('/pin.png')}).addTo(map);
 }
 
 const resetView = (map) => map.setView([46.603354, 1.888334], 6);
