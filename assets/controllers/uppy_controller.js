@@ -45,12 +45,6 @@ export default class extends Controller {
             const button = document.getElementById('track_next');
             button.classList.remove('disabled');
 
-            const name = file.name;
-            const nameInput = document.getElementById('track_name');
-            if (nameInput && !nameInput.value) {
-                nameInput.value = name;
-            }
-
             uppy.upload();
         });
     }
