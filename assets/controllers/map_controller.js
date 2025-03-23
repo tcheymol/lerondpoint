@@ -7,7 +7,7 @@ import {
     recenterMap,
     addLayer,
     addCollectives,
-    centerMapOnClickLocation,
+    centerMapOnClickLocation, addPin,
 } from './helper/mapHelpers.js';
 
 /*
@@ -21,6 +21,7 @@ export default class extends Controller {
         addressFieldsFormName: String,
         enableDroms: Boolean,
         enableClickToCenter: Boolean,
+        initialPinPosition: Object,
     }
     positionPinMarker = null;
 
@@ -35,12 +36,11 @@ export default class extends Controller {
         const dromsMaps = addDroms();
         const allMaps = !mainMap ? dromsMaps : [mainMap, ...dromsMaps];
 
-        console.log(this.collectivesValue);
-
         allMaps.forEach((map) => {
             this.enableClickToCenter(map);
             this.enableCenterOnAutocomplete(map, geocoder);
             this.enableFillFieldsOnAutocomplete(geocoder);
+            this.addInitialPin(map);
             addLayer(map);
             addCollectives(map, this.collectivesValue);
         });
@@ -51,6 +51,13 @@ export default class extends Controller {
         if (this.hasAddressFieldsFormNameValue) {
             geocoder.on('select', this.onSelectAutocompleteLocation());
         }
+    }
+
+    addInitialPin(map) {
+        if (!this.hasInitialPinPositionValue) return;
+        const { lat, lon } = this.initialPinPositionValue;
+
+        addPin(map, lat, lon);
     }
 
     enableCenterOnAutocomplete(map, geocoder) {

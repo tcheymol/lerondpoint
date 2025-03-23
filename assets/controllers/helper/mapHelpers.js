@@ -64,7 +64,6 @@ const addCollective = (map, collective) => {
             .on('click', (e) => onCollectiveClick(collective, e));
     }
 }
-
 export const addLayer = (map) =>
     L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {maxZoom: 18}).addTo(map);
 
@@ -109,7 +108,12 @@ export const recenterMap = (map, location, positionPinMarker, zoom) => {
     const { lon, lat } = location.properties;
     map.setView([lat, lon], zoom);
 
-    return L.marker([lat, lon], {icon: createIcon('/pin.png')}).addTo(map);
+    addPin(map, lat, lon);
+}
+
+export const addPin = (map, lat, lon) => {
+    if (!map || !lat || !lon) return;
+    L.marker([lat, lon], {icon: createIcon('/pin.png')}).addTo(map);
 }
 
 const resetView = (map) => map.setView([46.603354, 1.888334], 6);

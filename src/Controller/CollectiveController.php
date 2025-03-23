@@ -39,7 +39,7 @@ class CollectiveController extends AbstractController
                 : $this->redirectToRoute('collective_new', ['step' => $step + 1]);
         }
 
-        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => $step]);
+        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => $step, 'collective' => $collective]);
     }
 
     #[Route('/collective/{id<\d+>}', name: 'collective_show', methods: ['GET'])]

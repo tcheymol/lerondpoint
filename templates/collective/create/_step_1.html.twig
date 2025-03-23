@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <div id="autocompleteIconPreviewImage" class="d-none position-relative" style="width: 200px;">
+    <div id="autocompleteIconPreviewImage" class="{{ collective is null ? 'd-none' : '' }} position-relative" style="width: 200px;">
         <div class="d-flex justify-content-center">
             <button
                     type="button"
@@ -10,7 +10,7 @@
             >
                 {{ 'UpdateIcon'|trans }}
             </button>
-            <img src="" class="mt-5" style="width: 150px;" alt="collective_icon" />
+            <img src="{{ collective is null ? '' : collective.iconPath }}" class="mt-5" style="width: 150px;" alt="collective_icon" />
             {{ include('collective/create/_update_icon_modal.html.twig') }}
         </div>
     </div>
@@ -36,7 +36,7 @@
         </div>
         {{ form_widget(form.iconPath) }}
         <div class="text-end mt-4">
-            <button type="submit" class="btn btn-secondary">{{ 'Validate'|trans }}</button>
+            <button type="submit" class="btn btn-secondary">{{ 'ValidateStep'|trans({ '%step%': step + 1, '%total%': 3}) }}</button>
         </div>
     </div>
 {{ form_end(form) }}

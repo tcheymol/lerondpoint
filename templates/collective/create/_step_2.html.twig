@@ -3,11 +3,14 @@
         addressFieldsFormName: 'collective',
         enableClickToCenter: true,
         geoapifyKey: geoapify_key,
+        initialPinPosition: {lat: collective.lat, lon: collective.lon},
     })}}  class="position-relative w-100" style="height: 500px;">
         <div id="map" style="height: 500px; width: 100%"></div>
         {{ include('map/_autocomplete.html.twig') }}
     </div>
-    <div class="text-end mt-4">
-        <button type="submit" class="btn btn-secondary">{{ 'Validate'|trans }}</button>
+    <div class="mt-4 d-flex justify-content-between">
+        <a type="submit" href="{{ path('collective_new', {step: step - 1}) }}" class="btn btn-secondary">{{ 'BackStep'|trans({ '%step%': step - 1, '%total%': 3}) }}</a>
+        <button type="submit" class="btn btn-secondary">{{ 'ValidateStep'|trans({ '%step%': step + 1, '%total%': 3}) }}</button>
     </div>
+
 {{ form_end(form) }}

@@ -15,17 +15,18 @@
     <link href="https://cdn.jsdelivr.net/npm/@geoapify/geocoder-autocomplete@2.0.3/styles/minimal.min.css" rel="stylesheet">
 {% endblock %}
 
+{% set collective = collective is defined ? collective : null %}
 
 {% block cardContent %}
     <div class="row d-flex justify-content-between flex-grow-1">
         <div class="col-12 {% if 2 != step %}px-1 px-sm-3 px-md-5{% endif %}">
             <div class="{% if 2 != step %}p-1{% endif %} text-dark">
                 {% if 3 == step %}
-                    {{ include('collective/create/_step_3.html.twig', {form}) }}
+                    {{ include('collective/create/_step_3.html.twig', {form, step}) }}
                 {% elseif 2 == step %}
-                    {{ include('collective/create/_step_2.html.twig', {form}) }}
+                    {{ include('collective/create/_step_2.html.twig', {form, step, collective}) }}
                 {% else %}
-                    {{ include('collective/create/_step_1.html.twig', {form}) }}
+                    {{ include('collective/create/_step_1.html.twig', {form, step, collective}) }}
                 {% endif %}
             </div>
         </div>
