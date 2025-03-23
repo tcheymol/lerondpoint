@@ -12,9 +12,12 @@ readonly class ActionIconExtensionRuntime implements RuntimeExtensionInterface
     {
     }
 
-    /** @return Action[] */
-    public function getActions(): array
+    /** @return string[] */
+    public function getActionsIconsPaths(): array
     {
-        return $this->repository->findAll();
+        return array_unique(array_map(
+            fn (Action $action) => $action->getIconPublicPath(true),
+            $this->repository->findAll(),
+        ));
     }
 }

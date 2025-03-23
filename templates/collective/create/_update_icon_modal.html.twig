@@ -6,20 +6,20 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    {% for action in get_actions() %}
+                    {% for iconPath in get_actions_icon_paths() %}
                         <div class="col-3">
                             <button class="btn btn-link p-0" style="width: 50px"
                                     data-bs-dismiss="modal"
                                     {{
                                         stimulus_controller('update_collective_icon', {
-                                            iconPath: action.iconPublicPath(true),
+                                            iconPath,
                                             imagePreviewElementId: 'autocompleteIconPreviewImage',
                                             fieldElementId: 'collective_iconPath',
                                         })
                                         |stimulus_action('update_collective_icon', 'updateIcon')
                                     }}
                             >
-                                <img style="width: 50px" src="{{ action.iconPublicPath }}" alt="{{ action.name }}"/>
+                                <img style="width: 50px" src="{{ iconPath }}" alt="{{ iconPath }}"/>
                             </button>
                         </div>
                     {% endfor %}

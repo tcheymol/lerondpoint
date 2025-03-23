@@ -12,7 +12,7 @@ class ActionIconExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('get_actions', [ActionIconExtensionRuntime::class, 'getActions']),
+            new TwigFunction('get_actions_icon_paths', [ActionIconExtensionRuntime::class, 'getActionsIconsPaths']),
         ];
     }
 }
