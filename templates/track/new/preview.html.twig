@@ -13,6 +13,10 @@
                 </div>
                 <div class="col-12 col-sm-5 text-start">
                     {{ include('track/components/_information_rows.html.twig', {track}) }}
+
+                    <div class="alert alert-primary rounded-0">
+                        <span class="fs-6"><i class="fa fa-envelope me-2"></i>{{ 'PublishDisclaimer'|trans }}</span>
+                    </div>
                     <a href="{{ path('track_new_add_description', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'Back'|trans }} 3/3</a>
                     <a href="{{ path('track_publish', {id: track.id}) }}" class="btn btn-light bg-white hoverable-light btn-lg mt-3">{{ 'ValidateAndSend'|trans }}</a>
                 </div>

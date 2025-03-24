@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -119,6 +120,7 @@ class TrackType extends AbstractType
                 'label' => 'IAppliedRecommendations',
                 'label_attr' => ['class' => 'grotesk'],
                 'mapped' => false,
+                'data' => true,
             ])
             ->add('location', TextType::class, [
                 'required' => false,
@@ -148,6 +150,10 @@ class TrackType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'attr' => ['rows' => 5],
+            ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+                'attr' => ['placeholder' => 'Email'],
             ]);
     }
 

@@ -25,6 +25,8 @@ CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 ConfirmCreation: Confirmer la création
+ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
+ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
@@ -123,6 +125,7 @@ Profile: Profil
 ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les données qui y étaient associées ont été supprimé·es avec succès
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
+PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
 Refuse: Refuser
 Region: Région
 Rejected By: Refusé par

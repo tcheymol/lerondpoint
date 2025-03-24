@@ -10,7 +10,14 @@
             {{ form_start(form) }}
                 <div class="text-start">{{ form_label(form.description) }}</div>
                 {{ form_widget(form.description) }}
-                {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
+
+                <div class="mt-2 text-start">
+                    {{ 'ConfirmCreationLeaveEmail1'|trans }}
+                    {{ form_widget(form.email) }}
+                    {{ 'ConfirmCreationLeaveEmail2'|trans }}
+                </div>
+
+            {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
                 {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
                 {{ form_widget(form._token) }}
             {{ form_end(form, {render_rest: false}) }}
