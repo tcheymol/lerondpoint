@@ -1,21 +1,18 @@
 {% set actions = [
     { label: 'Memory'|trans, path: path('track_list'), color: 'primary', show: true },
     { label: 'AndNow'|trans, path: path('collective_index'), color: 'secondary', show: true },
+    { label: 'Participate'|trans, path: path('app_contribute'), color: 'light', show: true, children: [
+        { label: 'CreateTrack'|trans, path: path('track_new_index'), color: 'primary', show: true },
+        { label: 'CreateCollective'|trans, path: path('collective_new'), color: 'secondary', show: true },
+    ] },
     { label: 'AboutUs'|trans, path: path('about_us'), color: 'light', show: true },
     { label: 'Moderation'|trans, path: path('moderation_index'), color: 'warning', show: is_granted('ROLE_MODERATOR') },
-    { label: 'Participate'|trans, path: path('app_contribute'), color: 'light', show: true, children: [
-        { label: 'CreateTrack'|trans, path: path('track_new_index'), color: 'light', show: true },
-        { label: 'CreateCollective'|trans, path: path('collective_new'), color: 'light', show: true },
-        { label: 'Login'|trans, path: path('app_login'), color: 'light', show: true },
-    ] },
-] %}
-
-{% set userActions = [
-    { label: '', icon: 'user', path: path('user_account'), color: 'light', show: true, children: [
+    { label: 'Login'|trans, icon: 'user', path: path('app_login'), color: 'light', show: not is_granted('ROLE_USER') },
+    { label: '', icon: 'user', path: path('user_account'), color: 'light', show: is_granted('ROLE_USER'), children: [
         { label: 'Profile'|trans, path: path('user_account'), icon: 'user', color: 'light', show: app.user },
         { label: 'Admin'|trans, path: path('admin'), icon: 'tools', color: 'light', show: is_granted('ROLE_ADMIN') },
-        { label: 'TermsOfUse'|trans, path: path('app_terms'), icon: 'scroll', color: 'light', show: app.user },
-        { label: 'PrivacyPolicy'|trans, path: path('app_privacy'), icon: 'user-secret', color: 'light', show: app.user },
+        { label: 'TermsOfUse'|trans, path: path('app_terms'), color: 'light', show: app.user },
+        { label: 'PrivacyPolicy'|trans, path: path('app_privacy'), color: 'light', show: app.user },
         { label: 'Logout'|trans, path: path('app_logout'), icon: 'sign-out-alt', color: 'danger', show: app.user },
         { label: 'Login'|trans, path: path('app_login'), icon: 'user', color: 'light', show: app.user is null },
     ] },
@@ -23,16 +20,16 @@
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark p-0 align-items-stretch">
     <a href="{{ path('home') }}" class="d-flex align-items-center ps-3 bg-dark px-2">
-        <h1 class="float-md-start mb-0 text-white text-start fs-5">
+        <h1 class="float-md-start mb-0 text-white text-start fs-5 text-decoration-underline link-underline-primary">
             {{ 'HomeTitleMultiline'|trans|raw }}
         </h1>
     </a>
 
-    {{ include('components/header/_header_desktop.html.twig', { actions, userActions }) }}
+    {{ include('components/header/_header_desktop.html.twig', { actions }) }}
 
     <button class="navbar-toggler ms-auto bg-dark rounded-0" type="button" data-bs-toggle="modal" data-bs-target="#navbarModal" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
 
-{{ include('components/header/_header_mobile.html.twig', { actions, userActions }) }}
+{{ include('components/header/_header_mobile.html.twig', { actions }) }}

@@ -21,7 +21,7 @@ class SearchType extends AbstractType
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $years = array_reverse(range(2010, (int) date('Y') + 1));
+        $years = array_reverse(range(2018, (int) date('Y')));
         $builder
             ->add('text', TextType::class, [
                 'attr' => [

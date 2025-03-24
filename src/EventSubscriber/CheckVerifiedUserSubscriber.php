@@ -25,6 +25,10 @@ readonly class CheckVerifiedUserSubscriber implements EventSubscriberInterface
             throw new \Exception('Unexpected user type');
         }
 
+        if ($user->isDisabled()) {
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('UserDisabled'));
+        }
+
         if (!$user->isValidatedEmail()) {
             throw new CustomUserMessageAuthenticationException($this->translator->trans('EmailNotVerified'));
         }

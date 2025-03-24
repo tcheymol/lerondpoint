@@ -32,7 +32,6 @@ class UserCrudController extends AbstractCrudController
         yield TextField::new('plainPassword')->onlyOnForms();
         yield ChoiceField::new('roles', 'roles')->setChoices(User::ROLES)->allowMultipleChoices();
         yield BooleanField::new('disabled');
-        yield BooleanField::new('validated');
     }
 
     #[\Override]

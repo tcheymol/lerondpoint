@@ -2,13 +2,13 @@
 
 namespace App\Form;
 
+use App\Validator\PasswordStrength;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
-use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 class RepeatedPasswordType extends AbstractType
 {
@@ -22,6 +22,10 @@ class RepeatedPasswordType extends AbstractType
             ],
             'first_options' => [
                 'row_attr' => ['class' => 'col-12'],
+                'attr' => [
+                    'data-controller' => 'password-strength',
+                    'data-action' => 'password-strength#update',
+                ],
                 'constraints' => [
                     new Length([
                         'min' => 8,

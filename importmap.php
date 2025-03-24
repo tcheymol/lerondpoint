@@ -229,4 +229,7 @@ return [
     'lodash/debounce' => [
         'version' => '4.17.21',
     ],
+    'zxcvbn' => [
+        'version' => '4.4.2',
+    ],
 ];

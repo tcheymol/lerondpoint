@@ -86,7 +86,7 @@ class TrackType extends AbstractType
 
     private function buildStep2(FormBuilderInterface $builder): void
     {
-        $years = array_reverse(range(2018, (int) date('Y') + 1));
+        $years = array_reverse(range(2018, (int) date('Y')));
         $builder
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,

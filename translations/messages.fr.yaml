@@ -1,4 +1,4 @@
-AboutUs: Qui sommes nous ?
+AboutUs: À propos ?
 Accept: Accepter
 Action: Action
 Actions: Actions
@@ -31,7 +31,7 @@ CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
 Create: Créer
 CreateAccount: Pas de compte ? Créez en un ici
-CreateCollective: Ajoute ton groupe à la carte
+CreateCollective: Ajouter un groupe actif
 CreateCollectiveDisclaimer: Je confirme que mon groupe est informé et souhaite être inscrit sur cette carte et ce site internet
 CreateCollectiveSearchAddress: Recherchez une adresse ou déposez un point sur la carte
 CreateTrack: Ajouter une trace
@@ -82,6 +82,7 @@ Location: Localisation
 Login: Connexion
 Logout: Déconnexion
 LongDescription: Description longue
+MediumPassword: Mot de passe moyen
 Memory: Mémoire
 Menu: Menu
 Metropolis: Métropole
@@ -114,7 +115,7 @@ PaysDeLaLoire: Pays de la Loire
 Preview: "Partager une archive du mouvement : Aperçu"
 Previous: Précédent
 PreviousTrack: Trace précédente
-PrivacyPolicy: Politique de confidentialité
+PrivacyPolicy: Confidentialité et modération
 Profile: Profil
 ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les données qui y étaient associées ont été supprimé·es avec succès
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
@@ -148,6 +149,7 @@ SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %
 Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
+StrongPassword: 🔐 Mot de passe fort
 Tags: Sous-catégories
 TermsOfUse: Conditions générales d'utilisation (CGU)
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
@@ -171,6 +173,7 @@ Updated By: MAJ par
 UploadAFile: Téléverser un fichier
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
+UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
 UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe, si elle n'a pas de compte, un email lui a été envoyé
 UsernameLabel: Nom d'utilisateur·ice (Optionnel)
 Users: Utilisateurs·ices
@@ -186,7 +189,7 @@ VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
 VerifyEmailTitle: Bienvenue sur le-rondpoint.org
 ViewCollectiveTracks: Voir les traces de ce groupe
 WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
-WhoAreWe: Qui sommes-nous ?
+WeakPassword: ⚠️ Trop faible
 Year: Année
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici

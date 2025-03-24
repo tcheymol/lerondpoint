@@ -15,6 +15,19 @@
   }
 }
 
+.modal {
+  .hoverable-submenu > .nav-link {
+      border-width: 0 3px 0 3px;
+  }
+
+  .submenu {
+    .nav-link {
+      border-left: 8px solid black;
+      border-right: 8px solid black;
+    }
+  }
+}
+
 nav.navbar {
   height: 50px;
   .hoverable-submenu {

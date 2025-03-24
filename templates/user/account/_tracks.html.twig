@@ -1,5 +1,9 @@
 {% set tracks = app.user.tracks %}
 
+<div class="text-end">
+    <a href="{{ path('track_new') }}" class="btn btn-primary">{{ 'CreateTrack'|trans }}</a>
+</div>
+
 {% if tracks|length > 0 %}
     {% for track in tracks %}
         {{ include('user/account/_track.html.twig', { track }) }}
