@@ -27,6 +27,11 @@ form {
     }
   }
 
+  .form-check-input:checked {
+    background-color: $danger;
+    border-color: $danger;
+  }
+
   // TomSelect
   .ts-control {
       border: none;

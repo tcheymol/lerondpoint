@@ -1,7 +1,7 @@
 {% set actions = [
     { label: 'Memory'|trans, path: path('track_list'), color: 'primary', show: true },
     { label: 'AndNow'|trans, path: path('collective_index'), color: 'secondary', show: true },
-    { label: 'Participate'|trans, path: path('app_contribute'), color: 'light', show: true, children: [
+    { label: 'Participate'|trans, path: path('app_participate'), color: 'light', show: true, children: [
         { label: 'CreateTrack'|trans, path: path('track_new_index'), color: 'primary', show: true },
         { label: 'CreateCollective'|trans, path: path('collective_new'), color: 'secondary', show: true },
     ] },

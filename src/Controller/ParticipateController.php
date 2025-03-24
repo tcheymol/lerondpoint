@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ContributeController extends AbstractController
+class ParticipateController extends AbstractController
 {
-    #[Route('/contribute', name: 'app_contribute')]
+    #[Route('/participate', name: 'app_participate')]
     public function index(): Response
     {
-        return $this->render('contribute/index.html.twig');
+        return $this->render('participate/index.html.twig');
     }
 }

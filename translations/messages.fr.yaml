@@ -1,3 +1,4 @@
+
 AboutUs: À propos ?
 Accept: Accepter
 Action: Action
@@ -62,12 +63,14 @@ FollowUs: Nous suivre (page FB, site internet ou autre...)
 Follows: Suites
 ForgotPasswordResetPassword: Mot de passe oublié ? Réinitialisez le ici
 GrandEst: Grand Est
+HasFaces: Des visages apparaissent sur cette trace
 HautsDeFrance: Hauts-de-France
 Hello: Bonjour !
 Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE <br/> ROND-POINT
+IAppliedRecommendations: J'ai appliqué les recommandations
 IUnderstand: Je comprends
 Icon: Icône
 IleDeFrance: Île-de-France
@@ -152,6 +155,7 @@ Step: Étape
 StrongPassword: 🔐 Mot de passe fort
 Tags: Sous-catégories
 TermsOfUse: Conditions générales d'utilisation (CGU)
+ThisTrackHasFaces: Des personnes apparaissent sur cette page, le contributeur·ice déclare avoir leur accord ou avoir flouté les visages.
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
@@ -188,7 +192,7 @@ VerifyEmailCta: Valider mon email
 VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
 VerifyEmailTitle: Bienvenue sur le-rondpoint.org
 ViewCollectiveTracks: Voir les traces de ce groupe
-WeNeedYou: Gilets jaunes, nous avons besoin de vous pour vivre et renforcer nos liens !
+WeNeedYou: Ce site est participatif. Il a besoin de vous !
 WeakPassword: ⚠️ Trop faible
 Year: Année
 Yes: Oui

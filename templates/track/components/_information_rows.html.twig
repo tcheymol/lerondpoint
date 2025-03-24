@@ -18,4 +18,7 @@
             url: field.url ?? null,
         }) }}
     {% endfor %}
+    {% if track.hasFaces %}
+        {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
+    {% endif %}
 </div>

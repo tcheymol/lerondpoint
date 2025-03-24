@@ -3,13 +3,14 @@
 {% block step %}1{% endblock %}
 
 {% block innerContent %}
+    {{ include('track/component/_create_disclaimer.html.twig') }}
     {{ form_start(form) }}
         {{ include('track/components/_form_errors.html.twig', { form }) }}
         {{ form_row(form.attachmentsIds) }}
         <div class="row text-start fs-3">
             {{ form_label(form.name) }}
             {{ form_widget(form.name) }}
-            <p class=" mt-3 fs-5"> {{ 'ShareTrackWays'|trans }}</p>
+            <p class="fs-5 mt-3"> {{ 'ShareTrackWays'|trans }}</p>
         </div>
         <div class="row">
             <div class="col-12 col-sm-6 mt-4"  id="upload_files_container">

@@ -9,11 +9,11 @@ use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\ORM\EntityRepository;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -107,6 +107,18 @@ class TrackType extends AbstractType
                 'class' => Region::class,
                 'required' => false,
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Region'],
+            ])
+            ->add('hasFaces', ChoiceType::class, [
+                'label' => 'HasFaces',
+                'choices' => ['Yes' => true, 'No' => false],
+                'choice_attr' => fn ($choice, string $key, mixed $value) => ['data-action' => 'checkbox#toggle'],
+                'expanded' => true,
+                'data' => false,
+            ])
+            ->add('iAppliedRecommendations', CheckboxType::class, [
+                'label' => 'IAppliedRecommendations',
+                'label_attr' => ['class' => 'grotesk'],
+                'mapped' => false,
             ])
             ->add('location', TextType::class, [
                 'required' => false,

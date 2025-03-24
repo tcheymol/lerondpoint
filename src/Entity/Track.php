@@ -88,6 +88,9 @@ class Track implements BlameableInterface
     #[ORM\ManyToOne(inversedBy: 'tracks')]
     private ?User $createdBy = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $hasFaces = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -381,6 +384,18 @@ class Track implements BlameableInterface
     public function setVideoEmbed(?string $videoEmbed): static
     {
         $this->videoEmbed = $videoEmbed;
+
+        return $this;
+    }
+
+    public function hasFaces(): ?bool
+    {
+        return $this->hasFaces;
+    }
+
+    public function setHasFaces(?bool $hasFaces): static
+    {
+        $this->hasFaces = $hasFaces;
 
         return $this;
     }
