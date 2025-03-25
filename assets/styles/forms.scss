@@ -19,7 +19,7 @@ form {
   }
 
   input.form-control {
-    font-size: 13px;
+    font-size: 17px;
     padding-left: 16px;
     color: #757575;
     &::placeholder {
@@ -35,6 +35,9 @@ form {
   // TomSelect
   .ts-control {
       border: none;
+      input {
+        font-size: 17px;
+      }
   }
 
   .form-control {

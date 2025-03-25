@@ -7,18 +7,18 @@
   }
   border-color: $dark;
   border-style: solid;
-  border-width: 3px 0 3px 3px;
+  border-width: 4px 0 4px 4px;
   @include media-breakpoint-down(lg) {
-    border-width: 0 3px 3px 3px;
+    border-width: 0 4px 4px 4px;
     &:first-of-type {
-      border-width: 3px 3px 3px 3px;
+      border-width: 4px 4px 4px 4px;
     }
   }
 }
 
 .modal {
   .hoverable-submenu > .nav-link {
-      border-width: 0 3px 0 3px;
+      border-width: 0 4px 0 4px;
   }
 
   .submenu {
@@ -38,7 +38,7 @@ nav.navbar {
       display: none;
       word-wrap: break-word;
       white-space: normal;
-      width: calc(100% + 3px);
+      width: calc(100% + 4px);
       position: absolute;
 
       .nav-link {
@@ -46,16 +46,16 @@ nav.navbar {
         margin: 0;
         border-color: $dark;
         border-style: solid;
-        border-width: 3px 3px 0 3px;
+        border-width: 4px 4px 0 4px;
         height: auto;
         font-size: 1rem !important;
         line-height: 1.5rem;
         padding: 0.5rem 1rem;
         &:first-of-type {
-          border-width: 0 3px 0 3px;
+          border-width: 0 4px 0 4px;
         }
         &:last-of-type {
-          border-width: 3px 3px 3px 3px
+          border-width: 4px 4px 4px 4px
         }
       }
     }

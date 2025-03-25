@@ -1,6 +1,6 @@
 {% set url = track.thumbnailUrl %}
 {% if url %}
-    <div class="col-6 col-sm-4 col-md-3 p-1 mt-4 hover-rotate-5">
+    <div class="col-6 col-sm-4 col-md-3 p-1 mt-4">
         <a class="btn btn-link p-0 w-100 h-100 bg-dark overflow-hidden {{ track.mediaType == 'pdf' ? '' : 'border border-black border-4' }} "
            href="{{ track.needsModeration
             ? path('moderate_track', {id: track.id})
@@ -15,7 +15,7 @@
             />
         </a>
         <p class="fs-xs text-dark text-start">
-            <span>{{ track.name }}</span>
+            <span class="fs-5" style="word-wrap: break-word">{{ track.name }}</span>
             {% if track.kind is not null %}
                 <span><br/>{{ 'Category'|trans }} : {{ track.kind.name }}</span>
             {% endif %}

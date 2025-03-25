@@ -10,7 +10,7 @@
     { label: 'Description'|trans, value: track.description },
 ]) %}
 
-<div class="mt-4">
+<div class="mt-4" style="word-wrap: break-word">
     {% for field in fields|filter(f => f.value is not null and f.value != '') %}
         {{ include('track/components/_information_row.html.twig', {
             label: field.label,
