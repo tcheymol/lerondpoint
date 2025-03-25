@@ -1,5 +1,6 @@
 .nav-link {
-  height: 50px;
+  height: 42px;
+  min-width: 120px;
   color: $dark !important;
   &:hover {
     color: $dark !important;
@@ -29,14 +30,16 @@
 }
 
 nav.navbar {
-  height: 50px;
+  height: 42px;
   .hoverable-submenu {
-    height: 50px;
-  }
-
-  .hoverable-submenu {
+    height: 42px;
+    position: relative;
     .submenu {
       display: none;
+      word-wrap: break-word;
+      white-space: normal;
+      width: calc(100% + 3px);
+      position: absolute;
 
       .nav-link {
         display: flex;
@@ -44,6 +47,10 @@ nav.navbar {
         border-color: $dark;
         border-style: solid;
         border-width: 3px 3px 0 3px;
+        height: auto;
+        font-size: 1rem !important;
+        line-height: 1.5rem;
+        padding: 0.5rem 1rem;
         &:first-of-type {
           border-width: 0 3px 0 3px;
         }
