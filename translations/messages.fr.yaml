@@ -24,7 +24,6 @@ Collective: Groupe
 CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-ConfirmCreation: Confirmer la création
 ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
 ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
 ContactUs: Nous contacter (mail ou n°)
@@ -36,7 +35,7 @@ Create: Créer
 CreateAccount: Pas de compte ? Créez en un ici
 CreateCollective: Ajouter un groupe actif
 CreateCollectiveDisclaimer: Je confirme que mon groupe est informé et souhaite être inscrit sur cette carte et ce site internet
-CreateCollectiveSearchAddress: Recherchez une adresse ou déposez un point sur la carte
+CreateCollectiveSearchAddress: Entrez une adresse ou cliquez sur la carte pour localiser votre groupe
 CreateTrack: Ajouter une trace
 CreateTrackAnonymous: Ajoute une trace sans connexion
 Created At: Créé le
@@ -88,7 +87,7 @@ Login: Connexion
 Logout: Déconnexion
 LongDescription: Description longue
 MediumPassword: Mot de passe moyen
-Memory: Mémoire
+Memory: Traces
 Menu: Menu
 Metropolis: Métropole
 Misc: Divers

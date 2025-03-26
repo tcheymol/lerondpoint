@@ -87,6 +87,9 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'collectives')]
     private Collection $members;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $location = null;
+
     public function __construct(
         #[ORM\Column(length: 255)]
         private ?string $name = null,
@@ -421,6 +424,18 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
         if ($this->members->removeElement($member)) {
             $member->removeCollective($this);
         }
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): static
+    {
+        $this->location = $location;
 
         return $this;
     }

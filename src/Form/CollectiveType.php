@@ -45,6 +45,7 @@ class CollectiveType extends AbstractType
             ->add('shortDescription', TextType::class, ['label' => 'ShortDescription'])
             ->add('followUs', TextType::class, ['label' => 'FollowUs'])
             ->add('contactUs', TextType::class, ['label' => 'ContactUs'])
+            ->add('location', TextType::class, ['label' => 'Location', 'required' => false])
             ->add('description', TextareaType::class, ['label' => 'LongDescription'])
             ->add('actions', EntityType::class, [
                 'class' => Action::class,
@@ -83,7 +84,10 @@ class CollectiveType extends AbstractType
         $builder->add('checkDisclaimerAcknowledged', CheckboxType::class, [
             'label' => 'IUnderstand',
             'mapped' => false,
-            'attr' => ['class' => 'btn-check'],
+            'attr' => [
+                'class' => 'btn-check',
+                'data-action' => 'acknowledge-checkbox#check',
+            ],
             'label_attr' => ['class' => 'btn btn-outline-secondary'],
         ]);
     }
