@@ -1,18 +1,21 @@
 {% set url = track.thumbnailUrl %}
 {% if url %}
     <div class="col-6 col-sm-4 col-md-3 p-1 mt-4">
-        <a class="btn btn-link p-0 w-100 h-100 bg-dark overflow-hidden {{ track.mediaType == 'pdf' ? '' : 'border border-black border-4' }} "
+        <a class="btn btn-link p-0 overflow-hidden
+            "
            href="{{ track.needsModeration
             ? path('moderate_track', {id: track.id})
             : path('track_show', {id: track.id})
            }}"
-           style="max-height: 150px;">
-            <img
-                    style="max-width: 100%; overflow: hidden"
-                    src="{{ url }}"
-                    class="mnh-100 {{ track.mediaType == 'pdf' ? 'h-100' : 'w-100' }}"
-                    alt="{{ track.name }}"
-            />
+           style="height: 150px; width: 100%; min-width: 150px;
+            ">
+            <div
+                class="overflow-hidden mh-100 mw-100 {{ not track.pdf ? 'border border-dark border-4' : '' }}
+                    {{ track.vertical ? 'h-100' : 'w-100' }}
+                "
+            >
+                <img src="{{ url }}" class="{{ track.vertical ? 'h-100' : 'w-100' }}" alt="{{ track.name }}"/>
+            </div>
         </a>
         <p class="fs-xs text-dark text-start">
             <span class="fs-5" style="word-wrap: break-word">{{ track.name }}</span>

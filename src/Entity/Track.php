@@ -326,6 +326,52 @@ class Track implements BlameableInterface
         return $this->url ? 'video' : 'image';
     }
 
+    public function width(): ?int {
+        return (int) $this->attachments
+            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getWidth())
+            ?->getWidth();
+    }
+
+    public function height(): ?int {
+        return (int) $this->attachments
+            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getHeight())
+            ?->getHeight();
+    }
+
+    public function getHRatio(): ?int
+    {
+        if (!$this->width() || !$this->height()) {
+            return null;
+        }
+
+        return (int) $this->height() / $this->width() * 100;
+    }
+
+    public function getVRatio(): ?int
+    {
+        if (!$this->width() || !$this->height()) {
+            return null;
+        }
+
+        return (int) $this->width() / $this->height() * 100;
+    }
+
+    public function isPdf(): bool {
+        return $this->getMediaType() === 'pdf';
+    }
+
+    public function isVertical(): bool {
+        if ($this->getMediaType() === 'pdf') {
+            return true;
+        }
+
+        if (!$this->width() || !$this->height()) {
+            return false;
+        }
+
+        return $this->height() > $this->width();
+    }
+
     public function getMime(): ?string
     {
         return $this->attachments
