@@ -1,31 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
 {% block title %}{{ "AboutUs"|trans }}{% endblock %}
 
-{% block content %}
-    <div class="px-3 text-dark fw-bold">
-        <div class=" text-start bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 my-3">
-            <h2 class="fs-3">{{ 'AboutUs'|trans }}</h2>
-            <p class="fs-5">
-                <a href="{{ path('home') }}" class="link-dark">Le-rondpoint.org</a> est un site contributif lancé fin 2024, 6 ans après le début du mouvement et après un an de travail.
-                Le groupe a l’origine du site en assure également la médiation. Nous sommes X personnes, nous avons été investies dans les groupes GJ de St-Nazaire, Montreuil, ??????????? et nous sommes restées pleinement attachées au mouvement, à son histoire comme à son actualité. Aucun·e d’entre nous n’est membre d’un parti politique.
-                <br/><br/>
+{% block cardContent %}
+    <div>
+        <h3 class="mt-5">1 / Qui sommes-nous ?</h3>
+        <h5 class="mt-4">Notre collectif</h5>
+        Nous sommes un collectif, créé au début de l’année 2024, réunissant des Gilets jaunes issus des quatre coins de la France. Nous nous sommes rencontré.es au fil des mois et des années, sur un rond-point, dans la rue lors d’une manifestation, ou lors d’une Assemblée des assemblées. Nos expériences et ces liens construits avec le temps ont permis à ce projet de voir le jour.
+        <h5 class="mt-4">C'est quoi le-rondpoint.org ?</h5>
+        Ce site internet met en lumière une <b>mémoire vivante</b> du mouvement des Gilets jaunes, ainsi que ses <b>suites</b>. C’est un outil participatif, nourri par les personnes ayant participé au mouvement ou qui en ont été proches.
+        Ce site rassemble et organise des <b>Traces</b> produites lors du mouvement. Ce sont autant : les doléances qui nous ont été volées, les chansons que nous avons scandées, les tracts et les journaux que nous avons imprimés, les banderoles que nous avons brandies, et tant d’autres choses qui racontent ce mouvement.
+        Toutes ces traces sont dispersées, peu visibles, et vouées à se perdre avec le temps. Rassemblons-les et rendons-les visibles ! (lien hypertexte)
+        <b>Et maintenant ?</b> avec ou sans gilet, des groupes continuent de se retrouver sur des ronds-points, alors que d'autres ont évolué vers d'autres formes : actions de solidarité, animation d'un lieu, tractage, jardin partagé, etc. Ce site propose à ces groupes encore actifs d’apparaître sur une carte afin de mettre en lumière leur histoire et leurs actions.
+        Dans l’espoir que l’histoire des Gilets jaunes ne soit pas déformée ou détournée, nous souhaitons transmettre un peu de la puissance, de la joie, de la créativité et de l’inspiration que ce soulèvement a produit. La mémoire vivante des Gilets jaunes est un outil nécessaire pour renforcer nos luttes présentes et futures vers l’émancipation.
+        <h5 class="mt-4">Crédits et soutiens</h5>
+        Ce site a été conçu par notre collectif, accompagné d’Adrien Zammit (<a href="https://filloque- zammit.net" class="link-dark">https://filloque- zammit.net</a>) pour le dessin et la mise en page, et Thibaut Cheymol pour le développement technique. Il est hébergé en France par OVH.
+        En plus de l’investissement bénévole de notre collectif, ce site internet a pu voir le jour grâce à un soutien de la <i>Fondation Danielle Mitterrand - France Libertés</i> et un don de l’association <i>Les Lucioles du Doc</i>. Ces soutiens nous ont permis de rémunérer plusieurs personnes et de payer les différents frais inhérents à la fabrication et l’hébergement du site internet.
+        Notre collectif est totalement indépendant et n’est lié à aucune organisation politique ou de toute autre nature.
 
-                <span class="plaine">Traces</span>
-                <br/>
-                Il nous a semblé crucial de réunir une archive ambitieuse de ce mouvement extraordinaire, valorisant les mobilisations dans leurs diversités et les productions nombreuses que les Gilets Jaunes ont créé. C’est une mémoire des Gilets Jaunes par eux·elles-mêmes.
-                <br/><br/>
+        <h3 class="mt-5">2/ Nous soutenir</h3>
+        <h5 class="mt-4">Nous soutenir</h5>
+        > Ce site internet est participatif. Il ne vivra que si vous l’alimentez, en y déposant des traces ou en y inscrivant votre groupe actif.<br/>
+        > Il a aussi besoin d’être connu du plus grand nombre. N’hésitez donc pas à en parler autour de vous, à le relayer, partager, liker, etc.<br/>
 
-                <span class="plaine">Et maintenant ?</span>
-                <br/>
-                Nous sommes aussi les témoins enthousiastes de la prolongation du mouvement : de nombreux groupes ont poursuivi leurs actions à leur échelle, en inventant des actions de solidarité, de contestation citoyenne, de lien social... répertorier ces suites est important pour valoriser à la fois chacun de ces groupes encore actifs et la vivacité encore globale et forte du mouvement.
-                <br/><br/>
+        <h5 class="mt-4">Retrouvez-nous sur Facebook et Instagram.</h5>
+        > Vous pouvez rejoindre notre équipe et nous aider à faire vivre <a href="https://www.le-rondpoint.org" class="link-dark">www.le-rondpoint.org</a><br/>
+        > Vous pouvez également nous soutenir à travers une adhésion ou un don via la plateforme HelloAsso !
+        <a href="https://www.helloasso.com/associations/le-rond-point" class="link-dark">https://www.helloasso.com/associations/le-rond-point</a>
 
-                <span class="plaine">Crédits et soutiens</span>
-                <br/>
-                Le site a été conçu par notre groupe, accompagné d’Adrien Zammit pour le dessin et la mise en page et Thibaut Cheymol pour la
-                programmation informatique. Il est hébergé en France chez OVH et n’utilise pas de cookie de traçage
-            </p>
-        </div>
+        <h3 class="mt-5">3/ Nous contacter</h3>
+        <h5 class="mt-4">Nous contacter</h5>
+        Vous avez une question ou une suggestion ? Vous souhaitez signaler une erreur ? Du contenu vous semble inapproprié ? Ou vous souhaitez tout simplement nous rencontrer ?
+        Ecrivez-nous à : <a href="mailto:contact@le-rondpoint.org" class="link-dark">contact@le-rondpoint.org</a>
+
+        <h3 class="mt-5">4/ Autour du Rond-point</h3>
+        <h5 class="mt-4">Autour du Rond-point</h5>
+        Ces personnes, collectifs et associations nous sont proches, n’hésitez pas à leur rendre visite !
+        <b>Y'a plus qu'à</b> - Blog/JournalMural marginal de littérature sauvage intime éthique et politique
+        <a href="https://www.yaplusqua.org/" class="link-dark">https://www.yaplusqua.org/</a>
+
+        <h3 class="mt-5">5/ On parle de nous</h3>
+        <h5 class="mt-4">On parle de nous</h5>
+
+        <h3 class="mt-5">6/ A propos du mouvement des GJ</h3>
+        <h5 class="mt-4">A propos du mouvement des Gilets jaunes</h5>
+        Si vous souhaitez en savoir plus sur ce mouvement, ces ressources nous apparaissent fidèles et pertinentes :
     </div>
 {% endblock %}
