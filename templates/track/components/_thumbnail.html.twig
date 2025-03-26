@@ -11,10 +11,17 @@
             ">
             <div
                 class="overflow-hidden mh-100 mw-100 {{ not track.pdf ? 'border border-dark border-4' : '' }}
-                    {{ track.vertical ? 'h-100' : 'w-100' }}
+                    {{ track.vertical ? 'h-100' : '' }}
+                    {{ track.horizontal ? 'w-100' : '' }}
+                    {{ track.square ? 'h-100 w-100' }}
                 "
             >
-                <img src="{{ url }}" class="{{ track.vertical ? 'h-100' : 'w-100' }}" alt="{{ track.name }}"/>
+                <img class="
+                    {{ track.vertical ? 'h-100' : '' }}
+                    {{ track.horizontal ? 'w-100' : '' }}
+                    {{ track.square ? 'h-100 w-100' }}"
+                     src="{{ url }}"
+                 alt="{{ track.name }}"/>
             </div>
         </a>
         <p class="fs-xs text-dark text-start">

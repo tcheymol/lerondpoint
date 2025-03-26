@@ -360,6 +360,30 @@ class Track implements BlameableInterface
         return $this->getMediaType() === 'pdf';
     }
 
+    public function isHorizontal(): bool {
+        if ($this->getMediaType() === 'pdf') {
+            return false;
+        }
+
+        if (!$this->width() || !$this->height()) {
+            return false;
+        }
+
+        return $this->height() < $this->width();
+    }
+
+    public function isSquare(): bool {
+        if ($this->getMediaType() === 'pdf') {
+            return false;
+        }
+
+        if (!$this->width() || !$this->height()) {
+            return false;
+        }
+
+        return $this->height() === $this->width();
+    }
+
     public function isVertical(): bool {
         if ($this->getMediaType() === 'pdf') {
             return true;
