@@ -1,0 +1,21 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'CreateCollective'|trans }}{% endblock %}
+
+{% block cardContent %}
+    <div class="fs-5">
+        La carte collaborative <a href="{{ path('collective_index') }}" class="link-secondary">et maintenant ?</a>
+        met en lumière les groupes encore actifs à ce jour, issus du mouvement des Gilets jaunes. Elle permet à celles et ceux qui se mobilisent encore de partager leurs histoires, leurs évolutions et leurs luttes. C’est aussi un outil au service d’une mise en réseau entre les personnes et les groupes.
+        <br/>
+        La <a href="{{ path('app_sign_up') }}" class="link-dark">création d’un compte</a>
+        est obligatoire pour ajouter un <b>groupe actif</b> sur la carte, afin de pouvoir mettre à jour vos informations. C’est rapide et facile !
+        <br/><br/>
+        Si vous avez déjà un compte, <a href="{{ path('app_login') }}" class="link-dark">connectez-vous ici</a>.
+        <br/><br/>
+        C’est à vous de jouer !
+        <div class="text-center">
+            <a href="{{ path('collective_new') }}" class="btn btn-secondary btn-lg {{ app.user is defined ? '' : 'disabled' }}">{{ 'CreateCollective'|trans }}</a>
+        </div>
+    </div>
+{% endblock %}
+

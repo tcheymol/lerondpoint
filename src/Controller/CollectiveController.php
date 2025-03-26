@@ -20,6 +20,12 @@ class CollectiveController extends AbstractController
         return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build(), 'map' => $map]);
     }
 
+    #[Route('/collective/new/disclaimer', name: 'collective_new_disclaimer')]
+    public function newDisclaimer(): Response
+    {
+        return $this->render('collective/new_disclaimer.html.twig');
+    }
+
     #[Route('/collective/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CollectivePersister $persister, int $step = 1): Response
     {

@@ -1,27 +1,20 @@
 {% set url = track.thumbnailUrl %}
 {% if url %}
     <div class="col-6 col-sm-4 col-md-3 p-1 mt-4">
-        <a class="btn btn-link p-0 overflow-hidden
-            "
-           href="{{ track.needsModeration
-            ? path('moderate_track', {id: track.id})
-            : path('track_show', {id: track.id})
-           }}"
-           style="height: 150px; width: 100%; min-width: 150px;
+        <a class="btn btn-link p-0 overflow-hidden"
+           href="{{ track.needsModeration ? path('moderate_track', {id: track.id}) : path('track_show', {id: track.id}) }}"
+           style="height: 150px; width: 100%; min-width: 150px;">
+            <div  class="overflow-hidden mh-100 mw-100
+                {{ not track.pdf ? 'border border-dark border-4' : '' }}
+                {{ track.vertical ? 'h-100' : '' }}
+                {{ track.horizontal ? 'w-100' : '' }}
+                {{ track.square ? 'h-100 w-100' }}
             ">
-            <div
-                class="overflow-hidden mh-100 mw-100 {{ not track.pdf ? 'border border-dark border-4' : '' }}
-                    {{ track.vertical ? 'h-100' : '' }}
-                    {{ track.horizontal ? 'w-100' : '' }}
-                    {{ track.square ? 'h-100 w-100' }}
-                "
-            >
-                <img class="
+                <img src="{{ url }}" alt="{{ track.name }}" class="
                     {{ track.vertical ? 'h-100' : '' }}
                     {{ track.horizontal ? 'w-100' : '' }}
                     {{ track.square ? 'h-100 w-100' }}"
-                     src="{{ url }}"
-                 alt="{{ track.name }}"/>
+                 />
             </div>
         </a>
         <p class="fs-xs text-dark text-start">

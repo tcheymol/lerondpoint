@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CreateTrackController extends AbstractController
 {
-    #[Route('/track/new/', name: 'track_new', methods: ['GET', 'POST'])]
+    #[Route('/track/new', name: 'track_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrackPersister $persister): Response
     {
         $track = new Track();
