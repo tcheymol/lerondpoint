@@ -17,25 +17,17 @@ class LoadDataCommand extends Command
 {
     public const array ENTITIES = [
         Action::class => [
-            ['name' => "Animation d'un lieu", 'iconPath' => 'cabane'],
             ['name' => 'Rond-point', 'iconPath' => 'rondpoint'],
-            ['name' => 'Autre', 'iconPath' => 'giletsjaunes'],
-            ['name' => 'Réunion publique', 'iconPath' => 'reunionpublique'],
-            ['name' => 'Politique locale', 'iconPath' => 'reunion'],
-            ['name' => 'RIC', 'iconPath' => 'reunion'],
-            ['name' => 'Éducation populaire', 'iconPath' => 'reunion'],
-            ['name' => 'Jardin partagé', 'iconPath' => 'jardinpartage'],
             ['name' => 'Solidarité', 'iconPath' => 'solidarite'],
+            ['name' => "Animation d'un lieu", 'iconPath' => 'cabane'],
+            ['name' => 'Jardin partagé', 'iconPath' => 'jardinpartage'],
+            ['name' => 'Éducation populaire', 'iconPath' => 'animation'],
             ['name' => 'Manifestation', 'iconPath' => 'manifestation'],
-            ['name' => 'Information/Média', 'iconPath' => 'journal'],
             ['name' => 'Tractage', 'iconPath' => 'reunionpublique'],
-
-            ['name' => 'Animation', 'iconPath' => 'animation'],
-            ['name' => 'Permanence', 'iconPath' => 'permanence'],
-            ['name' => 'Distribution alimentaire', 'iconPath' => 'distributionalimentaire'],
-            ['name' => 'Épicerie', 'iconPath' => 'epicerie'],
-            ['name' => 'Radio', 'iconPath' => 'radio'],
-            ['name' => 'Ressourcerie', 'iconPath' => 'ressourcerie'],
+            ['name' => 'RIC', 'iconPath' => 'reunion'],
+            ['name' => 'Réunion publique', 'iconPath' => 'reunionpublique'],
+            ['name' => 'Information/Média', 'iconPath' => 'journal'],
+            ['name' => 'Politique locale', 'iconPath' => 'reunion'],
         ],
         TrackKind::class => [
             ['name' => 'AUDIO'],

@@ -10,7 +10,13 @@
         <div class="row text-start fs-3">
             {{ form_label(form.name) }}
             {{ form_widget(form.name) }}
-            <p class="fs-5 mt-3"> {{ 'ShareTrackWays'|trans }}</p>
+            <div class="fs-6 mt-3">
+                {{ 'ShareTrackWays'|trans }}
+                <ul>
+                    <li>{{ 'ShareTrackWay1'|trans }}</li>
+                    <li>{{ 'ShareTrackWay2'|trans }}</li>
+                </ul>
+            </div>
         </div>
         <div class="row">
             <div class="col-12 col-sm-6 mt-4"  id="upload_files_container">

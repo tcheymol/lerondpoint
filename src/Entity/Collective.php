@@ -30,7 +30,7 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable
     #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'collective')]
     private Collection $tracks;
 
-    #[ORM\ManyToOne(inversedBy: 'collectives')]
+    #[ORM\ManyToOne(inversedBy: 'collectivesOwned')]
     private ?User $owner = null;
 
     #[ORM\Column(nullable: true)]

@@ -91,8 +91,8 @@ class TrackType extends AbstractType
         $builder
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Category'],
-                'required' => false,
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'CategoryRequired'],
+                'placeholder' => 'CategoryRequired',
                 'choice_label' => 'name',
             ])
             ->add('tags', EntityType::class, [
@@ -136,10 +136,10 @@ class TrackType extends AbstractType
         if ($user && $user->hasCollective()) {
             $builder->add('collective', EntityType::class, [
                 'class' => Collective::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Location'],
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Collective'],
                 'choice_label' => 'name',
                 'required' => false,
-                'data' => $user->getFirstCollective(),
+                'data' => null
             ]);
         }
     }
