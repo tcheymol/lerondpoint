@@ -22,20 +22,22 @@ export default class extends Controller {
     lastScrollPosition = 0;
 
     connect() {
-            window.addEventListener("scroll", () => this.show());
+            window.addEventListener("scroll", (event) => this.show(event));
         }
 
-        show = () => {
-            const currentScrollPosition = document.documentElement.scrollTop;
-            const scrollDirection = currentScrollPosition >= this.lastScrollPosition ? 'down' : 'up';
-            this.lastScrollPosition = currentScrollPosition;
-            toggleHeader(scrollDirection);
+    show = (event) => {
+        console.log(event);
+        const currentScrollPosition = document.documentElement.scrollTop;
+        const scrollDirection = currentScrollPosition >= this.lastScrollPosition ? 'down' : 'up';
+        this.lastScrollPosition = currentScrollPosition;
+        toggleHeader(scrollDirection);
 
-            if ('down' === scrollDirection && 0 === this.lastScrollPosition) {
-                window.scrollTo({
-                    top: window.innerHeight,
-                    behavior: 'smooth'
-                });
-            }
+        const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if ('down' === scrollDirection && 0 === this.lastScrollPosition && !isMobile) {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
         }
+    }
 }

@@ -29,7 +29,7 @@ body {
     }
     background-size: cover;
     background-image: url('../images/bg.jpg');
-    transition: padding 2s ease-in-out;
+    transition: padding 3s ease-in-out;
 }
 
 @each $color, $value in $theme-colors {
