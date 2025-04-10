@@ -52,6 +52,6 @@ export default class extends Controller {
 
     show = () => {
         hideHeader();
-        window.scroll({ top: window.innerHeight, behavior: 'smooth' });
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     }
 }
