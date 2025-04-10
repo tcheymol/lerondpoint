@@ -34,7 +34,18 @@ export default class extends Controller {
     lastScrollPosition = 0;
 
     connect() {
-            window.addEventListener("scroll", () => this.scroll());
+            this.ticking = false;
+
+            window.addEventListener("scroll", () => {
+                if (!this.ticking) {
+                    window.requestAnimationFrame(() => {
+                        this.scroll();
+                        this.ticking = false;
+                    });
+
+                    this.ticking = true;
+                }
+            });
         }
 
     scroll = () => {
@@ -52,7 +63,8 @@ export default class extends Controller {
 
     show = () => {
         hideHeader();
-        document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
-        // window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        setTimeout(() => {
+            document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     }
 }
