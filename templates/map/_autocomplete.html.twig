@@ -1,3 +1,9 @@
 <div class="position-absolute border-3 border-success mt-2 map-autocomplete-container">
     <div id="autocomplete" class="autocomplete-container position-relative"></div>
+    {% if showDisclaimer is defined %}
+        <div class="alert alert-secondary text-left position-absolute rounded-0 alert-dismissible fade show" style="top: calc(100% + 4px)" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <span class="text-left fs-xs">{{ 'AndNowHint'|trans|nl2br }}</span>
+        </div>
+    {% endif %}
 </div>

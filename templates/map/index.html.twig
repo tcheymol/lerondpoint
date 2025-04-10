@@ -17,7 +17,7 @@
     }) }}
             class="position-relative h-100 w-100">
         {{ include('map/_tabs.html.twig', {map}) }}
-        {{ include('map/_autocomplete.html.twig') }}
+        {{ include('map/_autocomplete.html.twig', {showDisclaimer: true}) }}
         {% if map == 'metropolis' %}
             <div id="map" class="h-100 w-100"></div>
         {% else %}

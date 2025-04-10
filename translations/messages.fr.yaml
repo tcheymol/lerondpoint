@@ -7,6 +7,7 @@ Actus: Actualités
 Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
+AndNowHint: "Des groupes continuent aujourd'hui de se mobiliser, avec ou sans gilet. \n Retrouvez-les sur la carte pour découvrir leurs actions"
 Attachment: Document
 Attachments: Documents
 AutresTerritoiresDoutreMer: Autres territoires d'outre-mer
@@ -145,9 +146,9 @@ SeeYouSoon: À tout de suite sur Le Rond-point !
 SendPasswordRequestEmail: Envoyer un email de réinitialisation
 ShareArchive: Partager une archive du mouvement
 ShareTrack: Vous souhaitez partager une trace ?
-ShareTrackWays: "Vous avez le choix entre :"
 ShareTrackWay1: Importer un fichier (PDF ou image uniquement) depuis votre ordinateur ou votre téléphone.
 ShareTrackWay2: Copier un lien depuis un site internet pour tout type de traces (Audio, Vidéo, Texte, Image).
+ShareTrackWays: "Vous avez le choix entre :"
 ShortDescription: Courte description
 Show: Voir
 SignOut: Déconnexion
