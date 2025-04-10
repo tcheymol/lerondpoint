@@ -43,14 +43,15 @@ export default class extends Controller {
         this.lastScrollPosition = currentScrollPosition;
         toggleHeader(scrollDirection);
 
+        console.log('scroooolllllll', scrollDirection, currentScrollPosition, this.lastScrollPosition);
         const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if ('down' === scrollDirection && 0 === this.lastScrollPosition && !isMobile) {
+        if ('down' === scrollDirection && 0 < currentScrollPosition) {
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
         }
     }
 
     show = () => {
         hideHeader();
-        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        window.scroll({ top: window.innerHeight, behavior: 'smooth' });
     }
 }
