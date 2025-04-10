@@ -52,6 +52,7 @@ export default class extends Controller {
 
     show = () => {
         hideHeader();
-        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
+        // window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     }
 }
