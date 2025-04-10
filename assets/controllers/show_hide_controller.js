@@ -5,15 +5,27 @@ import { Controller } from '@hotwired/stimulus';
 * See https://github.com/symfony/stimulus-bridge#lazy-controllers
 */
 function toggleHeader(scrollDirection) {
+    if ('down' === scrollDirection && 50 < document.documentElement.scrollTop) {
+        hideHeader();
+    } else if ('up' === scrollDirection && 50 > document.documentElement.scrollTop) {
+        showHeader();
+    }
+}
+
+function showHeader() {
     Array.prototype.forEach.call(document.getElementsByClassName('navbar'),
         function(element) {
-            if ('down' === scrollDirection && 50 < document.documentElement.scrollTop) {
-                element.style.display = 'none';
-                document.getElementById('scrollDownButton').style.display = 'none';
-            } else if ('up' === scrollDirection && 50 > document.documentElement.scrollTop) {
-                element.style.display = 'flex';
-                document.getElementById('scrollDownButton').style.display = 'block';
-            }
+            element.style.display = 'flex';
+            document.getElementById('scrollDownButton').style.display = 'block';
+        }
+    );
+}
+
+function hideHeader() {
+    Array.prototype.forEach.call(document.getElementsByClassName('navbar'),
+        function(element) {
+            element.style.display = 'none';
+            document.getElementById('scrollDownButton').style.display = 'none';
         }
     );
 }
@@ -38,7 +50,7 @@ export default class extends Controller {
     }
 
     show = () => {
-        toggleHeader('down');
+        hideHeader();
         window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     }
 }

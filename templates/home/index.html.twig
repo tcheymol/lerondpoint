@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'HomeTitle'|trans }}{% endblock %}
 
-{% block bodyStyle %} margin-top: 80vh; padding-top: 0; {% endblock %}
+{% block bodyStyle %} margin-top: 75vh; padding-top: 0; {% endblock %}
 
 {% block content %}
     <div class="vh-100 vw-100 position-absolute top-0 z-1" id="scrollableHomeButtons" {{ stimulus_controller('show_hide') }}>
@@ -14,7 +14,7 @@
     <div class="vh-100 d-flex flex-column justify-content-around flex-grow-1" id="scrollableHome">
         <div
             class="d-flex align-items-center position-relative"
-            style="transform: rotate(-5deg);"
+            style="transform: rotate(-5deg); top: 5vh;"
         >
             <img class="home-title" src="{{ asset('images/le-rond-point.png') }}" alt="{{ 'HomeTitle'|trans }}">
         </div>
