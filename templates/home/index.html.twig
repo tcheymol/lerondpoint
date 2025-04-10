@@ -10,7 +10,7 @@
             {{ stimulus_action('show_hide', 'show', 'scroll') }}
     >
         <a class="h-100 w-100 d-block"{{ stimulus_action('show_hide', 'show') }}></a>
-            <a class="btn btn-lg btn-link position-absolute scroll-button" id="scrollDownButton" {{ stimulus_action('show_hide', 'show') }}>
+            <a class="btn btn-lg btn-link position-absolute scroll-button top-0" id="scrollDownButton" {{ stimulus_action('show_hide', 'show') }}>
             <img class="scroll-down-btn hover-rotate-10" src="{{ asset('images/panneau.gif') }}" alt="{{ 'scrollToStart'|trans }}">
         </a>
     </div>
