@@ -21,11 +21,7 @@ function showHeader() {
     );
 }
 
-
 function scrollToHome() {
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isMobile) return;
-
     setTimeout(() => {
         document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
     }, 100);
@@ -63,7 +59,8 @@ export default class extends Controller {
         this.lastScrollPosition = currentScrollPosition;
         toggleHeader(scrollDirection);
 
-        if ('down' === scrollDirection && 0 < currentScrollPosition) {
+        const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if ('down' === scrollDirection && 0 < currentScrollPosition && !isMobile) {
             scrollToHome();
         }
     }
