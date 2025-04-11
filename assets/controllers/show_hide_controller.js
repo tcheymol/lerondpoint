@@ -35,6 +35,9 @@ export default class extends Controller {
 
     connect() {
             this.ticking = false;
+            const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (isMobile) return;
+
 
             window.addEventListener("scroll", () => {
                 if (!this.ticking) {
@@ -54,7 +57,6 @@ export default class extends Controller {
         this.lastScrollPosition = currentScrollPosition;
         toggleHeader(scrollDirection);
 
-        // const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if ('down' === scrollDirection && 0 < currentScrollPosition) {
             setTimeout(() => {
                 document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
