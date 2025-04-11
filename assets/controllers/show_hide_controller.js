@@ -54,10 +54,11 @@ export default class extends Controller {
         this.lastScrollPosition = currentScrollPosition;
         toggleHeader(scrollDirection);
 
-        console.log('scroooolllllll', scrollDirection, currentScrollPosition, this.lastScrollPosition);
-        const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        // const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if ('down' === scrollDirection && 0 < currentScrollPosition) {
-            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+            setTimeout(() => {
+                document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         }
     }
 
