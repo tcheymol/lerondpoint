@@ -21,6 +21,16 @@ function showHeader() {
     );
 }
 
+
+function scrollToHome() {
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isMobile) return;
+
+    setTimeout(() => {
+        document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+}
+
 function hideHeader() {
     Array.prototype.forEach.call(document.getElementsByClassName('navbar'),
         function(element) {
@@ -35,10 +45,6 @@ export default class extends Controller {
 
     connect() {
             this.ticking = false;
-            const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            if (isMobile) return;
-
-
             window.addEventListener("scroll", () => {
                 if (!this.ticking) {
                     window.requestAnimationFrame(() => {
@@ -58,16 +64,12 @@ export default class extends Controller {
         toggleHeader(scrollDirection);
 
         if ('down' === scrollDirection && 0 < currentScrollPosition) {
-            setTimeout(() => {
-                document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            scrollToHome();
         }
     }
 
     show = () => {
         hideHeader();
-        setTimeout(() => {
-            document.querySelector('#scrollableHome').scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        scrollToHome();
     }
 }
