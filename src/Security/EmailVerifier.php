@@ -33,7 +33,7 @@ readonly class EmailVerifier
         if (!$userId || !$userEmail) {
             return;
         }
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from(new Address(self::SENDER_EMAIL, self::SENDER_NAME))
             ->to($userEmail)
             ->subject($this->translator->trans('VerifyEmailSubject'))

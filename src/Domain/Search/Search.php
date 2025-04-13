@@ -4,6 +4,7 @@ namespace App\Domain\Search;
 
 use App\Domain\Location\Region;
 use App\Entity\Collective;
+use App\Entity\Interface\PersistedEntityInterface;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,22 +12,33 @@ use Doctrine\Common\Collections\Collection;
 
 class Search
 {
-    public ?TrackKind $kind = null;
-    public ?Collective $collective = null;
+    /** @var Collection<int, TrackKind|PersistedEntityInterface> */
+    public Collection $kinds;
 
-    /** @var Collection<int, TrackTag> */
+    /** @var Collection<int, Collective|PersistedEntityInterface> */
+    public Collection $collectives;
+
+    /** @var Collection<int, TrackTag|PersistedEntityInterface> */
     public Collection $tags;
+
+    /** @var array<int, string> */
+    public array $years;
+
+    /** @var array<int, Region> */
+    public array $regions;
 
     /** @var array<string, string> */
     private array $params = [];
 
     public function __construct(
         public ?string $text = null,
-        public ?Region $region = null,
-        public ?int $year = null,
         public ?string $location = null,
     ) {
         $this->tags = new ArrayCollection();
+        $this->kinds = new ArrayCollection();
+        $this->collectives = new ArrayCollection();
+        $this->years = [];
+        $this->regions = [];
     }
 
     /** @return array<string, string> */
@@ -61,27 +73,26 @@ class Search
 
     private function addKindParam(): self
     {
-        if ($this->kind) {
-            $this->params['kind'] = (string) $this->kind->getId();
-        }
+        $this->params['kinds'] = self::collectionToIdsString($this->kinds);
 
         return $this;
     }
 
     private function addRegionParam(): self
     {
-        if ($this->region) {
-            $this->params['region'] = $this->region->value;
-        }
+        $this->params['regions'] = implode(',',
+            array_map(
+                fn (Region $region) => $region->value,
+                $this->regions
+            )
+        );
 
         return $this;
     }
 
     private function addYearParam(): self
     {
-        if ($this->year) {
-            $this->params['year'] = (string) $this->year;
-        }
+        $this->params['years'] = implode(',', $this->years);
 
         return $this;
     }
@@ -97,16 +108,14 @@ class Search
 
     private function addTagsParam(): self
     {
-        $this->params['tags'] = implode(',', $this->tags->map(fn (TrackTag $tag) => (string) $tag->getId())->toArray());
+        $this->params['tags'] = self::collectionToIdsString($this->tags);
 
         return $this;
     }
 
     private function addCollectiveParam(): self
     {
-        if ($this->collective) {
-            $this->params['$this->collective'] = (string) $this->collective->getId();
-        }
+        $this->params['collectives'] = self::collectionToIdsString($this->collectives);
 
         return $this;
     }
@@ -115,11 +124,32 @@ class Search
     {
         return
             !$this->text
-            && !$this->region
-            && !$this->year
             && !$this->location
-            && !$this->kind
-            && !$this->collective
-            && 0 === $this->tags->count();
+            && 0 === $this->tags->count()
+            && 0 === $this->kinds->count()
+            && 0 === count($this->regions)
+            && 0 === count($this->years)
+            && 0 === $this->collectives->count();
+    }
+
+    /**
+     * @param Collection<int, PersistedEntityInterface> $collection
+     *
+     * @return (int|null)[]
+     */
+    public static function collectionToIdsArray(Collection $collection): array
+    {
+        return $collection
+            ->map(fn (PersistedEntityInterface $entity) => $entity->getId())
+            ->filter(fn (?int $id) => null !== $id)
+            ->toArray();
+    }
+
+    /**
+     * @param Collection<int, PersistedEntityInterface> $collection
+     */
+    public static function collectionToIdsString(Collection $collection): string
+    {
+        return implode(',', self::collectionToIdsArray($collection));
     }
 }

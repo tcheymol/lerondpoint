@@ -14,7 +14,7 @@ class PasswordStrengthValidator extends ConstraintValidator
             return;
         }
 
-        $result = (new Zxcvbn())->passwordStrength($value);
+        $result = new Zxcvbn()->passwordStrength($value);
         $score = $result['score'];
 
         if ($score < $constraint->minScore) {

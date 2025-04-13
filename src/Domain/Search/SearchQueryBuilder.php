@@ -32,7 +32,7 @@ class SearchQueryBuilder
     public function search(Search $search): self
     {
         return $this->searchText($search)
-            ->searchKind($search)
+            ->searchKinds($search)
             ->searchRegion($search)
             ->searchYear($search)
             ->searchLocation($search)
@@ -61,12 +61,12 @@ class SearchQueryBuilder
         return $this;
     }
 
-    private function searchKind(Search $search): self
+    private function searchKinds(Search $search): self
     {
-        $kind = $search->kind;
-        if ($kind) {
-            $this->qb->andWhere('t.kind = :kind')
-                ->setParameter('kind', $kind);
+        $kinds = $search->kinds;
+        if ($kinds->count() > 0) {
+            $this->qb->andWhere('t.kind IN (:kinds)')
+                ->setParameter('kinds', $kinds);
         }
 
         return $this;
@@ -74,10 +74,10 @@ class SearchQueryBuilder
 
     private function searchRegion(Search $search): self
     {
-        $region = $search->region;
-        if ($region) {
-            $this->qb->andWhere('t.region = :region')
-                ->setParameter('region', $region->value);
+        $regions = $search->regions;
+        if (count($regions) > 0) {
+            $this->qb->andWhere('t.region IN (:regions)')
+                ->setParameter('regions', $regions);
         }
 
         return $this;
@@ -85,10 +85,10 @@ class SearchQueryBuilder
 
     private function searchYear(Search $search): self
     {
-        $year = $search->year;
-        if ($year) {
-            $this->qb->andWhere('t.year = :year')
-                ->setParameter('year', $year);
+        $years = $search->years;
+        if (count($years) > 0) {
+            $this->qb->andWhere('t.year IN (:years)')
+                ->setParameter('years', $years);
         }
 
         return $this;
@@ -118,10 +118,10 @@ class SearchQueryBuilder
 
     private function searchCollectives(Search $search): self
     {
-        $collective = $search->collective;
-        if ($collective) {
-            $this->qb->andWhere('t.collective = :collective')
-                ->setParameter('collective', $collective);
+        $collectives = $search->collectives;
+        if ($collectives->count() > 0) {
+            $this->qb->andWhere('t.collective IN (:collectives)')
+                ->setParameter('collectives', $collectives);
         }
 
         return $this;

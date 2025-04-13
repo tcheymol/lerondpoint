@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Interface\BlameableInterface;
+use App\Entity\Interface\PersistedEntityInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackKindRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +12,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackKindRepository::class)]
-class TrackKind implements BlameableInterface, \Stringable
+class TrackKind implements BlameableInterface, \Stringable, PersistedEntityInterface
 {
     use BlameableTrait;
 

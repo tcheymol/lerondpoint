@@ -139,7 +139,7 @@ class TrackType extends AbstractType
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Collective'],
                 'choice_label' => 'name',
                 'required' => false,
-                'data' => null
+                'data' => null,
             ]);
         }
     }

@@ -18,7 +18,7 @@ readonly class EmailHelper
 
     public function createTemplatedEmail(): TemplatedEmail
     {
-        return (new TemplatedEmail())->from(new Address(self::FROM, self::FROM_NAME));
+        return new TemplatedEmail()->from(new Address(self::FROM, self::FROM_NAME));
     }
 
     public function send(TemplatedEmail $email): void

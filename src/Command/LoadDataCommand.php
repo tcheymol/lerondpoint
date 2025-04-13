@@ -120,7 +120,7 @@ class LoadDataCommand extends Command
             TrackKind::class => new TrackKind($datum['name']),
             TrackTag::class => new TrackTag($datum['name']),
             Action::class => new Action($datum['name'], $datum['iconPath']),
-            User::class => (new User($datum['email']))->validateEmail()->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
+            User::class => new User($datum['email'])->validateEmail()->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             default => null,
         };
     }

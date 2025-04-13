@@ -30,7 +30,7 @@ class SearchType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('kind', EntityType::class, [
+            ->add('kinds', EntityType::class, [
                 'class' => TrackKind::class,
                 'attr' => [
                     'placeholder' => 'Kind',
@@ -38,6 +38,7 @@ class SearchType extends AbstractType
                     'data-action' => 'async-search#search',
                 ],
                 'required' => false,
+                'multiple' => true,
             ])
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
@@ -51,7 +52,7 @@ class SearchType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('region', EnumType::class, [
+            ->add('regions', EnumType::class, [
                 'class' => Region::class,
                 'attr' => [
                     'placeholder' => 'Region',
@@ -59,8 +60,9 @@ class SearchType extends AbstractType
                     'data-action' => 'async-search#search',
                 ],
                 'required' => false,
+                'multiple' => true,
             ])
-            ->add('collective', EntityType::class, [
+            ->add('collectives', EntityType::class, [
                 'class' => Collective::class,
                 'attr' => [
                     'placeholder' => 'Collective',
@@ -72,8 +74,9 @@ class SearchType extends AbstractType
                     ->andWhere('t.isCreating = false')
                     ->orderBy('t.name', 'ASC'),
                 'required' => false,
+                'multiple' => true,
             ])
-            ->add('year', ChoiceType::class, [
+            ->add('years', ChoiceType::class, [
                 'attr' => [
                     'placeholder' => 'Year',
                     'data-controller' => 'tomselect',
@@ -81,6 +84,7 @@ class SearchType extends AbstractType
                 ],
                 'choices' => array_combine($years, $years),
                 'required' => false,
+                'multiple' => true,
             ])
             ->add('location', TextType::class, [
                 'attr' => [

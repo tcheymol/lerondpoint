@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Interface\BlameableInterface;
+use App\Entity\Interface\PersistedEntityInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackTagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackTagRepository::class)]
-class TrackTag implements BlameableInterface, \Stringable
+class TrackTag implements BlameableInterface, \Stringable, PersistedEntityInterface
 {
     use BlameableTrait;
 

@@ -11,11 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @extends ServiceEntityRepository<User>
- *
- * @implements PasswordUpgraderInterface<User>
- */
+/** @extends ServiceEntityRepository<User> */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserLoaderInterface
 {
     public function __construct(ManagerRegistry $registry)
