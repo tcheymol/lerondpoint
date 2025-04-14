@@ -31,6 +31,7 @@ ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir 
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
+CopyLink: Copier un lien vidéo
 CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
 Create: Créer
@@ -77,6 +78,7 @@ IAppliedRecommendations: J'ai appliqué les recommandations
 IUnderstand: Je comprends
 Icon: Icône
 IleDeFrance: Île-de-France
+ImportFile: Importer un fichier
 Invite: Inviter
 InviteUser: Inviter un utilisateur·ices à rejoindre le groupe
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
