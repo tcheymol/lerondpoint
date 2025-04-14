@@ -76,6 +76,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\ManyToMany(targetEntity: Collective::class, inversedBy: 'members')]
     private Collection $collectives;
 
+    #[ORM\Column]
+    private ?bool $hasAcceptedTerms = null;
+
     public function __construct(
         #[ORM\Column(length: 180)]
         private ?string $email = null,
@@ -362,6 +365,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function removeCollective(Collective $collective): static
     {
         $this->collectives->removeElement($collective);
+
+        return $this;
+    }
+
+    public function hasAcceptedTerms(): ?bool
+    {
+        return $this->hasAcceptedTerms;
+    }
+
+    public function setHasAcceptedTerms(bool $hasAcceptedTerms): static
+    {
+        $this->hasAcceptedTerms = $hasAcceptedTerms;
 
         return $this;
     }
