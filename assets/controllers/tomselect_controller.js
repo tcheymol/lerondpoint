@@ -18,7 +18,13 @@ export default class extends Controller {
     }
     getConfig = () => {
         const config = {
-            plugins: ['remove_button'],
+            plugins: {
+                remove_button: {},
+                checkbox_options: {
+                    'checkedClassNames':   ['ts-checked'],
+                    'uncheckedClassNames': ['ts-unchecked'],
+                },
+            },
         }
 
         if (this.hasIconsValue) {
