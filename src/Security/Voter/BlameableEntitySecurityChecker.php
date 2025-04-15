@@ -31,12 +31,12 @@ readonly class BlameableEntitySecurityChecker
 
     public function canEdit(BlameableInterface $entity): bool
     {
-        if (!$this->canView($entity)) {
-            return false;
-        }
-
         if ($entity->getCreatedBy() === $this->security->getUser()) {
             return true;
+        }
+
+        if (!$this->canView($entity)) {
+            return false;
         }
 
         return $this->authorizationChecker->isGranted('ROLE_MODERATOR');
