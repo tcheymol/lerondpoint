@@ -80,4 +80,18 @@ class SecurityController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
+
+    #[Route(path: '/accept_terms', name: 'app_accept_terms', methods: ['GET'])]
+    public function acceptTerms(): Response
+    {
+        return $this->render('legal/accept_terms.html.twig');
+    }
+
+    #[Route(path: '/do_accept_terms', name: 'app_do_accept_terms', methods: ['GET'])]
+    public function doAcceptTerms(UserPersister $persister): Response
+    {
+        $persister->acceptTerms($this->getUser());
+
+        return $this->redirectToRoute('home');
+    }
 }

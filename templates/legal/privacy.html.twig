@@ -3,29 +3,5 @@
 {% block title %}{{ "PrivacyPolicy"|trans }}{% endblock %}
 
 {% block cardContent %}
-    <h2 class="mt-4">1. Préambule</h2>
-    <p>La présente Politique de Confidentialité a pour objectif d’informer les utilisateurs du site <strong>Le Rond-point</strong> sur les engagements de l’association <strong>Le Rond-point</strong> en matière de protection de la vie privée et des données personnelles.</p>
-
-    <h2>2. Absence de collecte de données personnelles</h2>
-    <p><strong>Le Rond-point</strong> ne collecte, ne stocke ni ne traite aucune donnée personnelle identifiable. Aucune information telle que le nom, l’adresse e-mail, ou l’adresse IP des utilisateurs n’est enregistrée ou utilisée à des fins commerciales ou analytiques.</p>
-
-    <h2>3. Utilisation des cookies</h2>
-    <p>Le site utilise uniquement des cookies strictement nécessaires à l’authentification des utilisateurs connectés. Aucune donnée de suivi, d’analyse ou de publicité n’est collectée via des cookies tiers.</p>
-
-    <h2>4. Publication et modération des contenus</h2>
-    <p>Les utilisateurs de <strong>Le Rond-point</strong> peuvent publier du contenu (documents, images, liens vidéo) sans qu’aucune donnée personnelle ne soit associée à ces publications. Une modération est assurée par l’équipe de <strong>Le Rond-point</strong> pour garantir le respect des règles en vigueur.</p>
-
-    <h2>5. Suppression des données</h2>
-    <p>Chaque utilisateur inscrit peut supprimer son compte à tout moment et demander la suppression de toutes ses contributions (traces et groupes créés). Ces demandes sont prises en charge dans un délai raisonnable par l’équipe de modération.</p>
-
-    <h2>6. Sécurité des données</h2>
-    <p>Bien que <strong>Le Rond-point</strong> ne collecte aucune donnée personnelle, toutes les mesures nécessaires sont prises pour garantir la sécurité des échanges et la protection des contenus publiés contre tout accès non autorisé.</p>
-
-    <h2>7. Modifications de la Politique de Confidentialité</h2>
-    <p>Cette Politique de Confidentialité peut être mise à jour en fonction de l’évolution des services de <strong>Le Rond-point</strong>. Toute modification sera publiée sur le site et consultable par les utilisateurs.</p>
-
-    <h2>8. Contact</h2>
-    <p>Pour toute question relative à cette Politique de Confidentialité, vous pouvez contacter l’association <strong>Le Rond-point</strong> via les coordonnées disponibles sur le site.</p>
-
-    <p><em>En utilisant <strong>Le Rond-point</strong>, vous acceptez cette Politique de Confidentialité. Bonne exploration ! 🚀</em></p>
+    {{ include('legal/_privacy.html.twig') }}
 {% endblock %}

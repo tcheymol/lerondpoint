@@ -380,4 +380,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
         return $this;
     }
+
+    public function acceptTerms(): static
+    {
+        return $this->setHasAcceptedTerms(true);
+    }
 }
