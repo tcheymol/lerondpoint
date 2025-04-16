@@ -4,6 +4,11 @@
             <columns>
                 <spacer size="16"></spacer>
                 <p class="text-center text-lg">{{ 'TrackRejectedSubtitle'|trans({ '%trackName%': track.name }) }}</p>
+                {% if track.rejectionCause %}
+                    <p class="text-center text-lg">
+                        {{ 'TrackRejectedCauseSubtitle'|trans({ '%rejectionCause%': track.rejectionCause.name }) }}
+                    </p>
+                {% endif %}
             </columns>
         </row>
         {{ include('moderation/signature.html.twig') }}

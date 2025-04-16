@@ -70,9 +70,6 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 2083, nullable: true)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $rejectionCause = null;
-
     public ?int $previousTrackId = null;
     public ?int $nextTrackId = null;
 
@@ -93,6 +90,9 @@ class Track implements BlameableInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
+
+    #[ORM\ManyToOne]
+    private ?RejectionCause $rejectionCause = null;
 
     public function __construct()
     {
@@ -409,18 +409,6 @@ class Track implements BlameableInterface
             ?->getKind();
     }
 
-    public function getRejectionCause(): ?string
-    {
-        return $this->rejectionCause;
-    }
-
-    public function setRejectionCause(?string $rejectionCause): static
-    {
-        $this->rejectionCause = $rejectionCause;
-
-        return $this;
-    }
-
     public function isDraft(): ?bool
     {
         return $this->isDraft;
@@ -487,6 +475,18 @@ class Track implements BlameableInterface
     public function setEmail(?string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getRejectionCause(): ?RejectionCause
+    {
+        return $this->rejectionCause;
+    }
+
+    public function setRejectionCause(?RejectionCause $rejectionCause): static
+    {
+        $this->rejectionCause = $rejectionCause;
 
         return $this;
     }

@@ -1,0 +1,12 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'RejectTrack'|trans }}{% endblock %}
+
+{% block cardContent %}
+    <h3 class="py-4">{{ 'Track'|trans }} : {{ track.name }}</h3>
+
+    {{ form_start(form) }}
+        {{ form_widget(form.rejectionCause) }}
+        {{ include('components/button.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}

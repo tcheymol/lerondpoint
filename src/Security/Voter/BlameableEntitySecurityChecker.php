@@ -22,6 +22,10 @@ readonly class BlameableEntitySecurityChecker
             return false;
         }
 
+        if ($entity->getCreatedBy() === $this->security->getUser()) {
+            return true;
+        }
+
         if ($this->authorizationChecker->isGranted('ROLE_VALIDATED_USER')) {
             return true;
         }

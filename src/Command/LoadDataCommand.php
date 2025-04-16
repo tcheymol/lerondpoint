@@ -3,14 +3,18 @@
 namespace App\Command;
 
 use App\Entity\Action;
+use App\Entity\RejectionCause;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'app:load-data', description: 'Load some necessary data')]
 class LoadDataCommand extends Command
@@ -73,6 +77,13 @@ class LoadDataCommand extends Command
             ['email' => 'djo@le-rondpoint.com'],
             ['email' => 'adrien@le-rondpoint.com'],
         ],
+        RejectionCause::class => [
+            ['name' => 'Contenu sans rapport avec le mouvement des Gilets jaunes'],
+            ['name' => 'Contenu ne respectant pas les règles et les conditions d’utilisation du site'],
+            ['name' => 'Contenu pouvant porter préjudice aux personnes'],
+            ['name' => 'Contenu présentant un problème technique'],
+            ['name' => 'Contenu incomplet'],
+        ],
     ];
 
     public function __construct(private readonly EntityManagerInterface $em)
@@ -83,13 +94,23 @@ class LoadDataCommand extends Command
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->loadEntityData(TrackKind::class);
-        $this->loadEntityData(TrackTag::class);
-        $this->loadEntityData(Action::class);
+        $io = new SymfonyStyle($input, $output);
+        /** @var QuestionHelper $helper */
+        $helper = $this->getHelper('question');
+        $question = new ChoiceQuestion('Entité :', array_keys(self::ENTITIES), 0);
+        $question->setErrorMessage('Option %s invalide.');
 
-        $this->loadEntityData(User::class);
+        $answer = $helper->ask($input, $output, $question);
 
-        return Command::SUCCESS;
+        if (is_string($answer) && in_array($answer, array_keys(self::ENTITIES))) {
+            $this->loadEntityData($answer, $io);
+
+            return Command::SUCCESS;
+        }
+
+        $io->error('Entity not found');
+
+        return Command::FAILURE;
     }
 
     private function emptyTable(string $entityName): void
@@ -97,14 +118,16 @@ class LoadDataCommand extends Command
         $this->em->createQuery(sprintf('DELETE %s e', $entityName))->execute();
     }
 
-    private function loadEntityData(string $entityName): void
+    private function loadEntityData(string $entityName, SymfonyStyle $io): void
     {
-        var_dump('Loading data for '.$entityName);
+        $io->info('Loading data for '.$entityName);
         $this->emptyTable($entityName);
         $data = self::ENTITIES[$entityName];
 
         foreach ($data as $datum) {
             $entity = $this->createEntity($entityName, $datum);
+            $io->text(sprintf('Creating data: %s', reset($datum)));
+
             if ($entity) {
                 $this->em->persist($entity);
             }
@@ -119,6 +142,7 @@ class LoadDataCommand extends Command
         return match ($entityName) {
             TrackKind::class => new TrackKind($datum['name']),
             TrackTag::class => new TrackTag($datum['name']),
+            RejectionCause::class => new RejectionCause($datum['name']),
             Action::class => new Action($datum['name'], $datum['iconPath']),
             User::class => new User($datum['email'])->validateEmail()->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
             default => null,

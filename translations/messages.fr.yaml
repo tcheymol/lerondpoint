@@ -132,6 +132,7 @@ ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
 Refuse: Refuser
 Region: Région
+RejectTrack: Refuser la trace
 Rejected By: Refusé par
 Rejected: Refusé
 RejectionCause: Raison du refus
@@ -172,6 +173,7 @@ TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infinime
 TrackKind: Catégorie de trace
 TrackNumber: Trace N°
 TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
+TrackRejectedCauseSubtitle: "Raison du refus : %rejectionCause%"
 TrackRejectedSubtitle: Votre trace %trackName% n'a pas pu être acceptée, veuillez contacter nos équipes à l'adresse contact@le-rondpoint.org si vous désirez obtenir de plus amples informations sur les raisons qui justifient ce refus
 TrackTag: Label trace
 TrackTitle: Titre de la trace

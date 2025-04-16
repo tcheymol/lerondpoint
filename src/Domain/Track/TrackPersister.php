@@ -2,6 +2,7 @@
 
 namespace App\Domain\Track;
 
+use App\Entity\RejectionCause;
 use App\Entity\Track;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -36,8 +37,9 @@ readonly class TrackPersister
         $this->em->flush();
     }
 
-    public function reject(Track $track): void
+    public function reject(Track $track, ?RejectionCause $rejectionCause): void
     {
+        $track->setRejectionCause($rejectionCause);
         $track->reject();
         $this->em->flush();
     }
