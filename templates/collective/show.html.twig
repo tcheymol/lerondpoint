@@ -15,7 +15,7 @@
 
     {{ include('collective/components/_actions.html.twig', { actions: collective.actions }) }}
     <br/>
-    <a href="{{ path('track_list', { collective: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
+    <a href="{{ path('track_list', { collectives: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
     <br/>
     <br/>
     <h5>{{ collective.shortDescription }}</h5>
