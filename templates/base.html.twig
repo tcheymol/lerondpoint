@@ -22,8 +22,9 @@
     </head>
     {% set _bodyBg = block('bodybg') is defined ? block('bodybg') : '' %}
     <body
-            class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }}"
-            style="{% block bodyStyle %}{% endblock %} {{ _bodyBg is not empty ? 'background-image: none;' }}"
+        data-controller="modal"
+        class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }}"
+        style="{% block bodyStyle %}{% endblock %} {{ _bodyBg is not empty ? 'background-image: none;' }}"
     >
         {{ include('components/_alerts.html.twig') }}
         {% block header %}

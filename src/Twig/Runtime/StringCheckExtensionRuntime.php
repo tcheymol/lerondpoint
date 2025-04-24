@@ -19,6 +19,6 @@ class StringCheckExtensionRuntime implements RuntimeExtensionInterface
     {
         return
             false !== filter_var($value, FILTER_VALIDATE_URL)
-            || false !== filter_var($value, FILTER_VALIDATE_DOMAIN);
+            && false !== filter_var($value, FILTER_VALIDATE_DOMAIN);
     }
 }

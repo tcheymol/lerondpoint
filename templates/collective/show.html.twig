@@ -5,37 +5,31 @@
 
 {% block cardContent %}
     <hr/>
-    {% if collective.iconPath %}
-        <div class="row">
-            <div class="col-12 col-sm-6 offset-sm-3 d-flex justify-content-center">
-                <img style="width: 150px" class="me-2" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
-            </div>
-        </div>
-    {% endif %}
+    {{ include('collective/components/_actions.html.twig', { actions: collective.actions }) }}<br/>
 
-    {{ include('collective/components/_actions.html.twig', { actions: collective.actions }) }}
-    <br/>
-    <a href="{{ path('track_list', { collectives: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
-    <br/>
-    <br/>
-    <h5>{{ collective.shortDescription }}</h5>
-    <br/>
-    {{ collective.description }}
-    <br/>
-    <br/>
-    <u> {{ 'ContactUs'|trans }} :</u>
-    {% if is_email(collective.contactUs) %}
-       <a href="{{ collective.contactUs }}">{{ collective.contactUs }}</a>
-    {% else %}
-        <span>{{ collective.contactus }}</span>
-    {% endif %}
+    <h5>{{ 'ShortDescription'|trans }}</h5>
+    <span>{{ collective.shortDescription }}</span>
 
-    <br/>
-    <u> {{ 'FollowUs'|trans }} :</u>
+    <h5 class="mt-3">{{ 'LongDescription'|trans }}</h5>
+    {{ collective.description|nl2br }}
+
+    <div class="mt-3">
+        <u class="mt-3"> {{ 'ContactUs'|trans }}</u> :
+        {% if is_email(collective.contactUs) %}
+           <a href="mailto:{{ collective.contactUs }}">{{ collective.contactUs }}</a>
+        {% else %}
+            <span>{{ collective.contactus }}</span>
+        {% endif %}
+    </div>
+
+    <u> {{ 'FollowUs'|trans }}</u> :
     {% if is_url(collective.followUs) %}
-        <a href="{{ collective.followUs }}">{{ collective.followUs }}</a>
+        <a target="_blank" href="{{ collective.followUs }}">{{ collective.followUs }}</a>
     {% else %}
         <span>{{ collective.followUs }}</span>
     {% endif %}
-    <br/>
+
+    <div class="d-flex justify-content-end mt-4">
+        <a class="btn btn-primary" href="{{ path('track_list', { collectives: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
+    </div>
 {% endblock %}

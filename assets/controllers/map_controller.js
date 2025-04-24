@@ -38,8 +38,10 @@ export default class extends Controller {
 
         allMaps.forEach((map) => {
             this.enableClickToCenter(map);
-            this.enableCenterOnAutocomplete(map, geocoder);
-            this.enableFillFieldsOnAutocomplete(geocoder);
+            if (geocoder) {
+                this.enableCenterOnAutocomplete(map, geocoder);
+                this.enableFillFieldsOnAutocomplete(geocoder);
+            }
             this.addInitialPin(map);
             addLayer(map);
             addCollectives(map, this.collectivesValue);
