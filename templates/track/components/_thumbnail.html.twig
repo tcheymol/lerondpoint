@@ -4,17 +4,16 @@
         <a class="btn btn-link p-0 overflow-hidden"
            href="{{ track.needsModeration ? path('moderate_track', {id: track.id}) : path('track_show', {id: track.id}) }}"
            style="height: 150px; width: 100%; min-width: 150px;">
-            <div  class="overflow-hidden mh-100 mw-100
-                {{ not track.pdf ? 'border border-dark border-4' : '' }}
-                {{ track.vertical ? 'h-100' : '' }}
-                {{ track.horizontal ? 'w-100' : '' }}
-                {{ track.square ? 'h-100 w-100' }}
-            ">
-                <img src="{{ url }}" alt="{{ track.name }}" class="
-                    {{ track.vertical ? 'h-100' : '' }}
-                    {{ track.horizontal ? 'w-100' : '' }}
-                    {{ track.square ? 'h-100 w-100' }}"
-                 />
+            <div  class="position-relative h-100 w-100 {{ not track.pdf ? 'border border-dark border-4' : '' }}            "
+                  style="background-image: url('{{ url }}');
+                         background-size: contain;
+                         background-position: center;
+                         background-repeat: no-repeat;
+                         "
+            >
+                {% if track.video %}
+                    <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
+                {% endif %}
             </div>
         </a>
         <p class="fs-xs text-dark text-start">

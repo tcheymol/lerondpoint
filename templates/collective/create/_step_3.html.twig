@@ -1,5 +1,5 @@
 <div {{ stimulus_controller('acknowledge-checkbox') }}>
-    <p class="fs-3">{{ 'CreateCollectiveDisclaimer'|trans }}</p>
+    <p class="fs-4">{{ 'CreateCollectiveDisclaimer'|trans }}</p>
 
     {{ form_start(form) }}
 
@@ -9,7 +9,7 @@
 
     <div class="mt-4 d-flex justify-content-between">
         <a href="{{ path('collective_new', {step: step - 1}) }}" class="btn btn-light">{{ 'BackStep'|trans({ '%step%': step - 1, '%total%': 3}) }}</a>
-        <button type="submit" disabled class="btn btn-light disabled"
+        <button type="submit" disabled class="btn btn-success disabled"
               {{ stimulus_target('acknowledge-checkbox', 'button') }}
         >{{ 'Validate'|trans }}</button>
     </div>
