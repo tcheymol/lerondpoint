@@ -18,7 +18,7 @@ class CreateTrackController extends AbstractController
     #[Route('/track/new', name: 'track_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrackPersister $persister): Response
     {
-        $track = new Track();
+        $track = $persister->fetchSessionTrack();
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $persister->persist($track);

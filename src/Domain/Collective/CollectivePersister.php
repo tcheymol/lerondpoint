@@ -37,12 +37,12 @@ readonly class CollectivePersister
         return !$collective ? new Collective() : $collective;
     }
 
-    public function updateSessionCollective(Collective $collective): void
+    private function updateSessionCollective(Collective $collective): void
     {
         $this->requestStack->getSession()->set('being-created-collective-id', $collective->getId());
     }
 
-    public function clearSessionCollective(): void
+    private function clearSessionCollective(): void
     {
         $this->requestStack->getSession()->remove('being-created-collective-id');
     }

@@ -457,7 +457,7 @@ class Track implements BlameableInterface
 
     public function isVideo(): bool
     {
-        return $this->getVideoEmbed() !== null;
+        return null !== $this->getVideoEmbed();
     }
 
     public function hasFaces(): ?bool
