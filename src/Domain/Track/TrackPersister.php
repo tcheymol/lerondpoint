@@ -8,6 +8,7 @@ use App\Entity\Track;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 readonly class TrackPersister
 {
@@ -19,6 +20,7 @@ readonly class TrackPersister
         private TrackVideoHelper $videoHelper,
         private RequestStack $requestStack,
         private TrackRepository $trackRepository,
+        private AuthorizationCheckerInterface $authorizationChecker,
     ) {
     }
 
@@ -68,6 +70,10 @@ readonly class TrackPersister
     {
         $trackId = $this->getSession()->get('being-created-track-id');
         $track = !$trackId ? null : $this->trackRepository->find($trackId);
+
+        if (!$this->authorizationChecker->isGranted('EDIT', $track)) {
+            $track = null;
+        }
 
         return !$track ? new Track() : $track;
     }

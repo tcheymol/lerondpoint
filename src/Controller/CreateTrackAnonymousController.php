@@ -19,17 +19,21 @@ class CreateTrackAnonymousController extends AbstractController
             : $this->redirectToRoute('track_new_anonymous');
     }
 
-    #[Route('/anonymous/track/new/', name: 'track_new_anonymous', methods: ['GET', 'POST'])]
+    #[Route('/anonymous/track/new', name: 'track_new_anonymous', methods: ['GET', 'POST'])]
     public function newAnonymous(Request $request, TrackPersister $persister): Response
     {
-        $track = new Track();
+        $step = 1;
+        $track = $persister->fetchSessionTrack();
         $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $persister->persist($track);
 
-            return $this->redirectToRoute('track_new_add_main_information', ['id' => $track->getId()]);
+            return $this->redirectToRoute('track_new', ['step' => ++$step]);
         }
 
-        return $this->render('track/new/create.html.twig', ['form' => $form]);
+        return $this->render('track/new/index.html.twig', [
+            'form' => $form,
+            'step' => $step,
+        ]);
     }
 }

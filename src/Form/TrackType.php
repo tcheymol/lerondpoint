@@ -30,8 +30,8 @@ class TrackType extends AbstractType
     use UserAwareTrait;
 
     /** @var int[] */
-    public const array steps = [1, 2, 3];
-    public const int stepsCount = 3;
+    public const array steps = [1, 2, 3, 4];
+    public const int stepsCount = 4;
 
     public function __construct(private readonly Security $security)
     {
@@ -169,8 +169,8 @@ class TrackType extends AbstractType
             ]);
         }
         $builder->add('next', SubmitType::class, [
-            'label' => 'ValidateStep',
-            'label_translation_parameters' => ['%step%' => $step, '%total%' => self::stepsCount],
+            'label' => $step >= self::stepsCount ? 'ValidateAndSend' : 'ValidateStep',
+            'label_translation_parameters' => ['%step%' => $step + 1, '%total%' => self::stepsCount],
             'attr' => [
                 'class' => sprintf('%s %s', $buttonClasses, $step > 1 ? '' : ' disabled '),
             ],

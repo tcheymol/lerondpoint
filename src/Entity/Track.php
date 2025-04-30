@@ -94,6 +94,9 @@ class Track implements BlameableInterface
     #[ORM\ManyToOne]
     private ?RejectionCause $rejectionCause = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $creationStep = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -492,6 +495,18 @@ class Track implements BlameableInterface
     public function setRejectionCause(?RejectionCause $rejectionCause): static
     {
         $this->rejectionCause = $rejectionCause;
+
+        return $this;
+    }
+
+    public function getCreationStep(): ?int
+    {
+        return $this->creationStep;
+    }
+
+    public function setCreationStep(?int $creationStep): static
+    {
+        $this->creationStep = $creationStep;
 
         return $this;
     }

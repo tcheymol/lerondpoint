@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 readonly class CollectivePersister
 {
@@ -26,6 +27,7 @@ readonly class CollectivePersister
         private InvitationRepository $invitationRepository,
         private Security $security,
         private CollectiveMailer $mailer,
+        private AuthorizationCheckerInterface $authorizationChecker,
     ) {
     }
 
@@ -33,6 +35,10 @@ readonly class CollectivePersister
     {
         $collectiveId = $this->getSession()->get('being-created-collective-id');
         $collective = !$collectiveId ? null : $this->collectiveRepository->find($collectiveId);
+
+        if (!$this->authorizationChecker->isGranted('EDIT', $collective)) {
+            $collective = null;
+        }
 
         return !$collective ? new Collective() : $collective;
     }

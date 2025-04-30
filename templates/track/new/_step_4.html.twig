@@ -1,0 +1,20 @@
+<div class="text-dark h-100 p-2 flex-column">
+    <div class="p-4">
+        <div class="row">
+            <div class="col-12 col-sm-7" id="trackPreviewIframeContainer">
+               {{ include('track/components/_track_image.html.twig', {track, noCarousel: true}) }}
+            </div>
+            <div class="col-12 col-sm-5 text-start">
+                {{ include('track/components/_information_rows.html.twig', {track}) }}
+
+                <div class="alert alert-primary rounded-0">
+                    <span class="fs-6"><i class="fa fa-envelope me-2"></i>{{ 'PublishDisclaimer'|trans }}</span>
+                </div>
+                {{ form_start(form) }}
+                    {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
+                    {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

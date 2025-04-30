@@ -1,0 +1,14 @@
+{% extends 'track/new/step_template.html.twig' %}
+
+{% block step %}{{ step }}{% endblock %}
+{% block innerContent %}
+    {% if step == 1 %}
+      {{ include('track/new/_step_1.html.twig') }}
+    {% elseif step == 2 %}
+      {{ include('track/new/_step_2.html.twig') }}
+    {% elseif step == 3 %}
+      {{ include('track/new/_step_3.html.twig') }}
+    {% elseif step == 4 %}
+      {{ include('track/new/_step_4.html.twig') }}
+    {% endif %}
+{% endblock %}
