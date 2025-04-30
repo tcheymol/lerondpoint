@@ -6,7 +6,38 @@ import French from '@uppy/locales/lib/fr_FR';
 
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
-import { hideVideoContainer } from './helper/captchaHelper.js';
+
+function updateTurboFrame(attachmentId) {
+    try {
+        const frame = document.getElementById("attachments_previews")
+        const framePathParts = frame.src.split('?ids=');
+        const framePath = framePathParts[0];
+        const existingIdsString = framePathParts[1] ?? '';
+        const existingIds = existingIdsString ? existingIdsString.split(',') : [];
+        existingIds.push(attachmentId);
+
+        frame.src = `${framePath}?ids=${existingIds.join(',')}`;
+    } catch (error) {
+        console.error('Error updating Turbo frame:', error);
+    }
+}
+
+function updateAttachmentsIdsInput(attachmentId) {
+    const attachmentsIdsInput = document.getElementById('track_attachmentsIds');
+    if (attachmentsIdsInput) {
+        attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
+    }
+}
+
+function disableFormButton() {
+    const button = document.getElementById('track_next');
+    button.classList.add('disabled');
+}
+
+function enableFormButton() {
+    const button = document.getElementById('track_next');
+    button.classList.remove('disabled');
+}
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -24,27 +55,23 @@ export default class extends Controller {
         .use(Dashboard, { inline: true, target: '#uppy-dashboard' })
             .use(XHR, {
                 endpoint: this.endpointValue,
-                async onBeforeRequest() { hideVideoContainer() },
+                async onBeforeRequest(xhr) {
+                    disableFormButton();
+                },
                 async onAfterResponse(xhr) {
-                    if (xhr.status !== 200) {
-                        return;
-                    }
+                    if (xhr.status !== 200) return;
                     const response = JSON.parse(xhr.response);
-                    if (!response || !response.id) {
-                        return;
-                    }
+                    if (!response || !response.id) return;
+
                     const attachmentId = response.id;
-                    const attachmentsIdsInput = document.getElementById('track_attachmentsIds');
-                    if (attachmentsIdsInput) {
-                        attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
-                    }
+
+                    updateAttachmentsIdsInput(attachmentId);
+                    updateTurboFrame(attachmentId);
+                    enableFormButton()
                 },
             });
 
-        uppy.on('file-added', (file) => {
-            const button = document.getElementById('track_next');
-            button.classList.remove('disabled');
-
+        uppy.on('file-added', () => {
             uppy.upload();
         });
     }

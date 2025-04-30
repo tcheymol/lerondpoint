@@ -5,13 +5,10 @@ namespace App\Controller;
 use App\Domain\Images\ThumbSize;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
-use App\Entity\Track;
 use App\Form\TrackType;
-use App\Security\Voter\Constants;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CreateTrackController extends AbstractController
 {
@@ -24,6 +21,8 @@ class CreateTrackController extends AbstractController
 
         if (0 === $step) {
             $persister->remove($track);
+
+            return $this->redirectToRoute('track_list');
         } elseif (5 === $step) {
             $persister->publish($track);
 
@@ -42,7 +41,7 @@ class CreateTrackController extends AbstractController
         return $this->render('track/new/index.html.twig', [
             'form' => $form,
             'step' => $step,
-            'track' => $helper->hydrateTrackWithUrl($track, $step === 4 ? ThumbSize::Full : ThumbSize::Medium),
+            'track' => $helper->hydrateTrackWithUrl($track, 4 === $step ? ThumbSize::Full : ThumbSize::Medium),
         ]);
     }
 }

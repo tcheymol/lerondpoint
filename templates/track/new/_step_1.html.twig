@@ -1,72 +1,25 @@
 {{ include('track/component/_create_disclaimer.html.twig') }}
-    {{ form_start(form) }}
-    {{ include('track/components/_form_errors.html.twig', { form }) }}
-    {{ form_row(form.attachmentsIds) }}
-    <div class="row text-start fs-3">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-        <div class="fs-6 mt-3">
-            {{ 'ShareTrackWays'|trans }}
-            <ul>
-                <li>{{ 'ShareTrackWay1'|trans }}</li>
-                <li>{{ 'ShareTrackWay2'|trans }}</li>
-            </ul>
-        </div>
+{{ form_row(form.attachmentsIds) }}
+<div class="row text-start fs-3">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    <div class="fs-6 mt-3">
+        {{ 'ShareTrackWays'|trans }}
+        <ul>
+            <li>{{ 'ShareTrackWay1'|trans }}</li>
+            <li>{{ 'ShareTrackWay2'|trans }}</li>
+        </ul>
     </div>
-    <div class="row" id="select_ways_buttons">
-        <div class="col-12 col-md-6 mt-4 d-flex">
-            <div class="row flex-grow-1">
-                <button type="button"
-                        class="btn btn-dark btn-lg col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3"
-                        style="min-height: 100px;"
-                        {{ stimulus_controller('toggle_element', {
-                            showElementId: 'upload_files_container',
-                            hideElementId: 'copy_video_url_container',
-                            hideSecondElementId: 'select_ways_buttons',
-                        })|stimulus_action('toggle_element', 'show') }}
-                >
-                    {{ 'ImportFile'|trans }}
-                </button>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 mt-4 d-flex">
-            <div class="row flex-grow-1">
-                <button type="button"
-                        class="btn btn-dark btn-lg col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3"
-                        style="min-height: 100px;"
-                        {{ stimulus_controller('toggle_element', {
-                            showElementId: 'copy_video_url_container',
-                            hideElementId: 'upload_files_container',
-                            hideSecondElementId: 'select_ways_buttons',
-                        })|stimulus_action('toggle_element', 'show') }}
-                >
-                    {{ 'CopyLink'|trans }}
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 mt-4 hidden d-flex align-items-center flex-column" id="upload_files_container">
-            <h5>{{ 'DropFiles'|trans }}</h5>
-            {{ include('components/upload/_uppy_widget.html.twig') }}
-        </div>
-        <div class="col-12 mt-4 hidden" id="copy_video_url_container">
-            <h5>{{ 'CopyResourceLink'|trans }}</h5>
-            {{ form_widget(form.url, {attr: {
-                'data-video-preview-target': 'input',
-                'data-action': 'video-preview#preview',
-            }}) }}
-            <img src="" class="w-100 mt-3" alt="" {{ stimulus_target('video-preview', 'preview') }} style="max-width: 90vw" />
-        </div>
-        {#            <div class="col-12 col-sm-6 d-none" id="captcha_container">#}
-        {#                {{ form_widget(form.captcha) }}#}
-        {#            </div>#}
-    </div>
-    <div class="row mt-3">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 ms-auto">
-            {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
-            {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
-        </div>
-    </div>
-    {{ form_widget(form._token) }}
-{{ form_end(form, {'render_rest': false}) }}
+</div>
+
+{% if not track.hasVideo and not track.hasAttachments %}
+    {{ include('track/new/_add_media_widget.html.twig') }}
+{% endif %}
+{{ include('track/new/_attachments_widget.html.twig', { track }) }}
+{{ include('track/new/_video_widget.html.twig', { track }) }}
+
+<div class="row">
+    {#            <div class="col-12 col-sm-6 d-none" id="captcha_container">#}
+    {#                {{ form_widget(form.captcha) }}#}
+    {#            </div>#}
+</div>

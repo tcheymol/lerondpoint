@@ -81,7 +81,7 @@ class Attachment implements BlameableInterface
     {
         return match ($size) {
             ThumbSize::Medium => $this->mediumThumbnailUrl,
-            ThumbSize::Big => $this->bigThumbnailObjectId,
+            ThumbSize::Big => $this->bigThumbnailUrl,
             ThumbSize::Full => $this->objectUrl,
             default => $this->smallThumbnailUrl,
         };

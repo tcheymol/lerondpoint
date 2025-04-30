@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Track\TrackPersister;
-use App\Entity\Track;
 use App\Form\TrackType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +33,7 @@ class CreateTrackAnonymousController extends AbstractController
         return $this->render('track/new/index.html.twig', [
             'form' => $form,
             'step' => $step,
+            'track' => $track,
         ]);
     }
 }

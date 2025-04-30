@@ -77,6 +77,7 @@ readonly class TrackPersister
 
         return !$track ? new Track() : $track;
     }
+
     private function updateSessionTrack(Track $track): void
     {
         $this->requestStack->getSession()->set('being-created-track-id', $track->getId());
@@ -86,5 +87,4 @@ readonly class TrackPersister
     {
         $this->requestStack->getSession()->remove('being-created-track-id');
     }
-
 }

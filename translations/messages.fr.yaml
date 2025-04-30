@@ -17,6 +17,7 @@ BackStep: Retour %step%/%total%
 BackToLogin: Retour à la page de connexion
 BourgogneFrancheComte: Bourgogne-Franche-Comté
 Bretagne: Bretagne
+CancelCreation: Annuler la création
 Captcha: Veuillez confirmer le code ci-dessus
 Category: Catégorie
 CategoryRequired: "* Catégorie (obligatoire)"
@@ -122,6 +123,7 @@ PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
 Preview: "Partager une archive du mouvement : Aperçu"
+PreviewsLoading: Chargement des aperçus...
 Previous: Précédent
 PreviousTrack: Trace précédente
 PrivacyPolicy: Confidentialité et modération
@@ -172,8 +174,8 @@ TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, 
 TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
 TrackKind: Catégorie de trace
 TrackNumber: Trace N°
-TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
 TrackRejectedCauseSubtitle: "Raison du refus : %rejectionCause%"
+TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
 TrackRejectedSubtitle: Votre trace %trackName% n'a pas pu être acceptée, veuillez contacter nos équipes à l'adresse contact@le-rondpoint.org si vous désirez obtenir de plus amples informations sur les raisons qui justifient ce refus
 TrackTag: Label trace
 TrackTitle: Titre de la trace

@@ -159,21 +159,20 @@ class TrackType extends AbstractType
 
     private function buildButtons(FormBuilderInterface $builder, int $step): void
     {
-        $buttonClasses = 'btn btn-light bg-white hoverable-light btn-lg mt-3';
-        if ($step > 1) {
-            $previousStep = $step - 1;
-            $builder->add('back', SubmitType::class, [
-                'label' => 'BackStep',
-                'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
-                'attr' => ['class' => $buttonClasses],
-            ]);
-        }
-        $builder->add('next', SubmitType::class, [
+        $buttonClasses = 'btn hoverable-light btn-lg mt-3';
+        $previousButtonClasses = 1 === $step ? ' btn-danger ' : ' btn-light bg-white ';
+        $nextButtonClasses = ' btn-light bg-white ';
+        $previousStep = $step - 1;
+        $nextStep = $step + 1;
+
+        $builder->add('back', SubmitType::class, [
+            'label' => 1 === $step ? 'CancelCreation' : 'BackStep',
+            'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
+            'attr' => ['class' => $buttonClasses.$previousButtonClasses],
+        ])->add('next', SubmitType::class, [
             'label' => $step >= self::stepsCount ? 'ValidateAndSend' : 'ValidateStep',
-            'label_translation_parameters' => ['%step%' => $step + 1, '%total%' => self::stepsCount],
-            'attr' => [
-                'class' => sprintf('%s %s', $buttonClasses, $step > 1 ? '' : ' disabled '),
-            ],
+            'label_translation_parameters' => ['%step%' => $nextStep, '%total%' => self::stepsCount],
+            'attr' => ['class' => $buttonClasses.$nextButtonClasses],
         ]);
     }
 }

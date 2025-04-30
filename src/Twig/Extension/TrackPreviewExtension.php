@@ -13,6 +13,7 @@ class TrackPreviewExtension extends AbstractExtension
     {
         return [
             new TwigFunction('preview_track', [TrackPreviewExtensionRuntime::class, 'computePreviewUrl']),
+            new TwigFunction('preview_attachment', [TrackPreviewExtensionRuntime::class, 'computeAttachmentPreviewUrl']),
         ];
     }
 }

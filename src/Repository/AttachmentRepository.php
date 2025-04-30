@@ -27,4 +27,21 @@ class AttachmentRepository extends ServiceEntityRepository
 
         return $attachments;
     }
+
+    /**
+     * @param List<string> $ids
+     *
+     * @return Attachment[]
+     */
+    public function findByIdIn(array $ids): array
+    {
+        /** @var Attachment[] $attachments */
+        $attachments = $this->createQueryBuilder('a')
+            ->andWhere('a.id IN(:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+
+        return $attachments;
+    }
 }

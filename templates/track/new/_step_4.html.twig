@@ -10,10 +10,6 @@
                 <div class="alert alert-primary rounded-0">
                     <span class="fs-6"><i class="fa fa-envelope me-2"></i>{{ 'PublishDisclaimer'|trans }}</span>
                 </div>
-                {{ form_start(form) }}
-                    {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
-                    {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
-                {{ form_end(form) }}
             </div>
         </div>
     </div>

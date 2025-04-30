@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-12 mt-4 {{ track.hasAttachments ? '' : 'hidden' }}" id="upload_files_container">
+        {{ include('components/upload/_uppy_widget.html.twig', { track }) }}
+    </div>
+</div>

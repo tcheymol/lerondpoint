@@ -3,38 +3,32 @@
         {{ include('track/components/_preview.html.twig', {track}) }}
     </div>
     <div class="col-12 col-sm-6">
-        {{ form_start(form) }}
-            <div class="p-2">{{ form_widget(form.kind) }}</div>
-            <div class="p-2">{{ form_widget(form.tags) }}</div>
-            <div class="p-2">{{ form_widget(form.location) }}</div>
-            <div class="p-2">{{ form_widget(form.region) }}</div>
-            <div class="p-2">{{ form_widget(form.year) }}</div>
-            {% if form.collective is defined %}
-                <div class="p-2">{{ form_widget(form.collective) }}</div>
-            {% endif %}
+        <div class="p-2">{{ form_widget(form.kind) }}</div>
+        <div class="p-2">{{ form_widget(form.tags) }}</div>
+        <div class="p-2">{{ form_widget(form.location) }}</div>
+        <div class="p-2">{{ form_widget(form.region) }}</div>
+        <div class="p-2">{{ form_widget(form.year) }}</div>
+        {% if form.collective is defined %}
+            <div class="p-2">{{ form_widget(form.collective) }}</div>
+        {% endif %}
 
-            <div {{ stimulus_controller('checkbox') }}>
+        <div {{ stimulus_controller('checkbox') }}>
+            <div class="p-2 d-flex">
+                <div class="flex-grow-1">{{ form_label(form.hasFaces) }}</div>
+                <div class="">{{ form_widget(form.hasFaces) }}</div>
+            </div>
+            <div {{ stimulus_target('checkbox', 'yesContent') }} class="hidden card bg-warning p-3">
+                Si des personnes réalisent une action et sont identifiables :<br/> VOUS DEVEZ FLOUTER LES VISAGES
+                <br/><br/>
+                Si des personnes identifiables apparaissent :<br/>
+                VOUS DEVEZ AVOIR LEUR ACCORD
+                OU
+                VOUS DEVEZ FLOUTER LEUR VISAGE
                 <div class="p-2 d-flex">
-                    <div class="flex-grow-1">{{ form_label(form.hasFaces) }}</div>
-                    <div class="">{{ form_widget(form.hasFaces) }}</div>
-                </div>
-                <div {{ stimulus_target('checkbox', 'yesContent') }} class="hidden card bg-warning p-3">
-                    Si des personnes réalisent une action et sont identifiables :<br/> VOUS DEVEZ FLOUTER LES VISAGES
-                    <br/><br/>
-                    Si des personnes identifiables apparaissent :<br/>
-                    VOUS DEVEZ AVOIR LEUR ACCORD
-                    OU
-                    VOUS DEVEZ FLOUTER LEUR VISAGE
-                    <div class="p-2 d-flex">
-                        <div class="flex-grow-1 grotesk">{{ form_label(form.iAppliedRecommendations) }}</div>
-                        <div class="">{{ form_widget(form.iAppliedRecommendations, {'attr' : {'data-checkbox-target' : 'yesConfirm'}}) }}</div>
-                    </div>
+                    <div class="flex-grow-1 grotesk">{{ form_label(form.iAppliedRecommendations) }}</div>
+                    <div class="">{{ form_widget(form.iAppliedRecommendations, {'attr' : {'data-checkbox-target' : 'yesConfirm'}}) }}</div>
                 </div>
             </div>
-
-            {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
-            {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
-            {{ form_widget(form._token) }}
-        {{ form_end(form, {render_rest: false}) }}
+        </div>
     </div>
 </div>

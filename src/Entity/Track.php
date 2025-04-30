@@ -7,6 +7,7 @@ use App\Domain\Location\Region;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
+use App\Validator\AttachmentOrUrl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Order;
@@ -14,6 +15,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
+#[AttachmentOrUrl]
 class Track implements BlameableInterface
 {
     use BlameableTrait;
@@ -458,9 +460,14 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function isVideo(): bool
+    public function hasVideo(): bool
     {
-        return null !== $this->getVideoEmbed();
+        return null !== $this->url;
+    }
+
+    public function hasAttachments(): bool
+    {
+        return $this->getAttachments()->count() > 0;
     }
 
     public function hasFaces(): ?bool

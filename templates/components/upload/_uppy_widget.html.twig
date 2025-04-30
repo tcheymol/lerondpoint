@@ -1,4 +1,10 @@
-<div id="uppy-dashboard"
-     {{ stimulus_controller('uppy', { endpoint: path('upload_attachment') }) }}
->
+<div class="row">
+    <div class="col-12 col-md-6">
+        {{ include('components/upload/_uppy_widget_uploader.html.twig') }}
+    </div>
+    <div class="col-12 col-md-6">
+        <turbo-frame id="attachments_previews" src="{{ path('attachments_previews', { ids: track.attachments|map(a => a.id)|join(',')  }) }}">
+            {{ 'PreviewsLoading'|trans }}
+        </turbo-frame>
+    </div>
 </div>
