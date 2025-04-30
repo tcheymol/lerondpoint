@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% for index, step in steps %}
+                {% set isCurrent = index == currentStep %}
+                <li class="breadcrumb-item {{ isCurrent ? 'active' : '' }}">
+                    <a href="{{ path('track_new', { step: index }) }}"
+                       class="{{ isCurrent ? 'text-dark underline' : 'text-black-50 not-underline' }}">
+                        {{ step|trans }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </nav>
+</div>

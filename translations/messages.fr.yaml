@@ -122,6 +122,7 @@ Password: Mot de passe
 PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
+PreviewTrack: Apercu
 Preview: "Partager une archive du mouvement : Aperçu"
 PreviewsLoading: Chargement des aperçus...
 Previous: Précédent
@@ -212,3 +213,5 @@ Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouHaveBeenInvited: Vous avez été invité à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org
+AddFiles: Ajout de fichiers
+MainInformations: Informations principales

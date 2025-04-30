@@ -13,11 +13,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class CreateTrackController extends AbstractController
 {
     #[Route('/track/new/{step<\d+>}', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrackPersister $persister, TrackAttachmentHelper $helper, int $step = 1): Response
+    public function new(Request $request, TrackPersister $persister, TrackAttachmentHelper $helper, ?int $step = null): Response
     {
         $track = $persister->fetchSessionTrack();
-
-        $step = $track->getCreationStep() ?? $step;
+        if (!$step) {
+            $step = $track->getCreationStep() ?? 1;
+        }
 
         if (0 === $step) {
             $persister->remove($track);
