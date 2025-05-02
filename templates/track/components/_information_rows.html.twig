@@ -7,7 +7,6 @@
     { label: 'Location'|trans, value: track.location },
     { label: 'Year'|trans, value: track.year },
     { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
-    { label: 'Description'|trans, value: track.description },
 ]) %}
 
 <div class="mt-4" style="word-wrap: break-word">
@@ -18,9 +17,15 @@
             url: field.url ?? null,
         }) }}
     {% endfor %}
-    {% if track.hasFaces %}
-        <div class="card bg-light-subtle mt-4 p-2">
-            {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
-        </div>
+    {% if hideDescription is not defined %}
+        {{ include('track/components/_information_row.html.twig', {
+            label: 'Description'|trans,
+            value: track.description,
+        }) }}
+        {% if track.hasFaces %}
+            <div class="card bg-light-subtle mt-4 p-2">
+                {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
+            </div>
+        {% endif %}
     {% endif %}
 </div>
