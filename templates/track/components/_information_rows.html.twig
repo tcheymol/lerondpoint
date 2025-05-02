@@ -19,6 +19,8 @@
         }) }}
     {% endfor %}
     {% if track.hasFaces %}
-        {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
+        <div class="card bg-light-subtle mt-4 p-2">
+            {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
+        </div>
     {% endif %}
 </div>

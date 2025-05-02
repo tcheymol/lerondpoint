@@ -26,14 +26,27 @@ class AttachmentController extends AbstractController
     }
 
     #[Route('/attachments/{id<\d+>}/delete', name: 'delete_attachment', methods: ['GET'])]
-    public function delete(Attachment $attachment, EntityManagerInterface $em): RedirectResponse
+    public function delete(Request $request, Attachment $attachment, EntityManagerInterface $em): RedirectResponse
     {
+        $removedAttachmentId = $attachment->getId();
+        $existingAttachmentIds = explode(',', (string) $request->query->get('attachmentIds'));
         $em->remove($attachment);
         $em->flush();
 
-        return $attachment->getTrack() ? $this->redirectToRoute('track_attachments_previews', [
-            'id' => $attachment->getTrack()->getId(),
-        ]) : $this->redirectToRoute('track_list');
+        if ($attachment->getTrack()) {
+            $existingAttachmentIds = array_unique([
+                ...$existingAttachmentIds,
+                ...$attachment->getTrack()->getAttachments()->map(
+                    static fn (Attachment $attachment) => (string) $attachment->getId()
+                )->toArray(),
+            ]);
+        }
+
+        $remainingAttachmentIds = array_filter($existingAttachmentIds, static fn ($id) => $id !== (string) $removedAttachmentId);
+
+        return $this->redirectToRoute('attachments_previews', [
+            'ids' => implode(',', $remainingAttachmentIds),
+        ]);
     }
 
     #[Route('/attachments/previews', name: 'attachments_previews', methods: ['GET'])]
@@ -44,14 +57,6 @@ class AttachmentController extends AbstractController
 
         return $this->render('components/upload/_attachments_previews.html.twig', [
             'attachments' => $attachments,
-        ]);
-    }
-
-    #[Route('/attachments/track/{id<\d+>}/previews', name: 'track_attachments_previews', methods: ['GET'])]
-    public function trackPreviews(Track $track): Response
-    {
-        return $this->render('components/upload/_attachments_previews.html.twig', [
-            'attachments' => $track->getAttachments(),
         ]);
     }
 }

@@ -1,11 +1,17 @@
 {% set actions = [
-    { label: 'Memory'|trans, path: path('track_list'), color: 'primary', show: true },
-    { label: 'AndNow'|trans, path: path('collective_index'), color: 'secondary', show: true },
-    { label: 'Participate'|trans, path: path('app_participate'), color: 'light', show: true, children: [
-        { label: 'CreateTrack'|trans, path: path('track_new_index'), color: 'primary', show: true },
-        { label: 'CreateCollective'|trans, path: path('collective_new_disclaimer'), color: 'secondary', show: true },
+    { label: 'Memory'|trans, path: path('track_list'), color: 'primary' },
+    { label: 'AndNow'|trans, path: path('collective_index'), color: 'secondary' },
+    { label: 'Participate'|trans, path: path('app_participate'), color: 'light', children: [
+        { label: 'CreateTrack'|trans, path: path('track_new_index'), color: 'primary' },
+        { label: 'CreateCollective'|trans, path: path('collective_new_disclaimer'), color: 'secondary' },
     ] },
-    { label: 'AboutUs'|trans, path: path('about_us'), color: 'light', show: true },
+    { label: 'AboutUs'|trans, path: path('about_us'), color: 'light', children: [
+        { label: 'WhoAreWe'|trans, path: path('about_us')~'#whoAreWe', color: 'light' },
+        { label: 'SupportUs'|trans, path: path('about_us')~'#supportUs', color: 'light' },
+        { label: 'AboutRP'|trans, path: path('about_us')~'#aboutRP', color: 'light' },
+        { label: 'WeTalkAboutUs'|trans, path: path('about_us')~'#weTalkAboutUs', color: 'light' },
+        { label: 'AboutTheMovement'|trans, path: path('about_us')~'#aboutTheMovement', color: 'light' },
+    ] },
     { label: 'Moderation'|trans, path: path('moderation_index'), color: 'warning', show: is_granted('ROLE_MODERATOR') },
     { label: 'Login'|trans, icon: 'user', path: path('app_login'), color: 'light', show: not is_granted('ROLE_USER') },
     { label: '', icon: 'user', path: path('user_account'), color: 'light', show: is_granted('ROLE_USER'), children: [

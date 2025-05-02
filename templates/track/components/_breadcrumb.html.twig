@@ -4,8 +4,16 @@
             {% for index, step in steps %}
                 {% set isCurrent = index == currentStep %}
                 <li class="breadcrumb-item {{ isCurrent ? 'active' : '' }}">
+                    {% if index < currentStep %}
+                        <i class="fa fa-check text-success"></i>
+                    {% endif %}
                     <a href="{{ path('track_new', { step: index }) }}"
-                       class="{{ isCurrent ? 'text-dark underline' : 'text-black-50 not-underline' }}">
+                       class="{{ isCurrent
+                            ? ' text-dark underline '
+                            : index < currentStep
+                                ? ' text-success not-underline '
+                                : ' text-muted not-underline disabled cursor-disabled'
+                       }}">
                         {{ step|trans }}</a>
                 </li>
             {% endfor %}

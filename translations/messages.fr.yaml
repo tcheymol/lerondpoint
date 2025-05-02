@@ -1,9 +1,12 @@
+AboutTheMovement: A propos du mouvement des gilets jaunes
+AboutRP: Autour du rond-point
 AboutUs: À propos ?
 Accept: Accepter
 AcceptTerms: Vous devez accepter les CGU et les règles de confidentialité de de modération
 Action: Action
 Actions: Actions
 Actus: Actualités
+AddFiles: Ajout de fichiers
 Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
@@ -82,7 +85,7 @@ Icon: Icône
 IleDeFrance: Île-de-France
 ImportFile: Importer un fichier
 Invite: Inviter
-InviteUser: Inviter un utilisateur·ices à rejoindre le groupe
+InviteUser: Inviter un utilisateur·ice à rejoindre le groupe
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
 Kind: Catégorie
 Kinds: Catégories
@@ -92,6 +95,7 @@ Location: Localisation
 Login: Connexion
 Logout: Déconnexion
 LongDescription: Description longue
+MainInformations: Informations principales
 MediumPassword: Mot de passe moyen
 Memory: Traces
 Menu: Menu
@@ -122,8 +126,8 @@ Password: Mot de passe
 PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
-PreviewTrack: Apercu
 Preview: "Partager une archive du mouvement : Aperçu"
+PreviewTrack: Apercu
 PreviewsLoading: Chargement des aperçus...
 Previous: Précédent
 PreviousTrack: Trace précédente
@@ -166,9 +170,10 @@ Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
 StrongPassword: 🔐 Mot de passe fort
+SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
 TermsOfUse: Conditions générales d'utilisation (CGU)
-ThisTrackHasFaces: Des personnes apparaissent sur cette page, le contributeur·ice déclare avoir leur accord ou avoir flouté les visages.
+ThisTrackHasFaces: Des personnes apparaissent sur cette page, le·a contributeur·ice déclare avoir leur accord ou avoir flouté leurs visages.
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
@@ -192,7 +197,7 @@ UploadAFile: Téléverser un fichier
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
-UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe, si elle n'a pas de compte, un email lui a été envoyé
+UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe. Si elle n'a pas de compte, un email lui a été envoyé
 UsernameLabel: Nom d'utilisateur·ice (Optionnel)
 Users: Utilisateurs·ices
 Validate: Valider
@@ -207,11 +212,11 @@ VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
 VerifyEmailTitle: Bienvenue sur le-rondpoint.org
 ViewCollectiveTracks: Voir les traces de ce groupe
 WeNeedYou: Ce site est participatif. Il a besoin de vous !
+WeTalkAboutUs: on parle de nous
 WeakPassword: ⚠️ Trop faible
+WhoAreWe: qui sommes-nous
 Year: Année
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouHaveBeenInvited: Vous avez été invité à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org
-AddFiles: Ajout de fichiers
-MainInformations: Informations principales

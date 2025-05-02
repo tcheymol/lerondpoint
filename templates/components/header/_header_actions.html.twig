@@ -1,4 +1,4 @@
-{% for action in actions|filter(action => action.show == true) %}
+{% for action in actions|filter(action => action.show is not defined or action.show == true) %}
     {% if action.children is defined %}
         <div class="hoverable-submenu flex-grow-1">
             {{ include('components/_nav_link.html.twig', { url: action.path, label: action.label, color: action.color, icon: action.icon is defined ? action.icon : null }) }}
