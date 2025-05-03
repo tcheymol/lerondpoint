@@ -45,7 +45,7 @@ function onCollectiveClick(collective, e) {
         updateElementHtml('collectiveDetailsModalTitle', `${collective.id} - ${collective.name}`);
         updateElementHtml('collectiveDetailsModalActions', generateActionsDom(collective));
         updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
-        updateElementHtml('collectiveDetailsModalFollowUs', collective.followUs);
+        updateElementHtml('collectiveDetailsModalLocation', collective.location);
         updateElementHref('collectiveDetailsModalShowUrl', collective.showUrl);
     } catch (e) {
         console.error('Failed to display collective details', e);

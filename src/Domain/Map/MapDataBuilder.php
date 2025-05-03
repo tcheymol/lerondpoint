@@ -26,7 +26,7 @@ readonly class MapDataBuilder
                 'name' => $collective->getName(),
                 'iconPath' => $collective->getIconPath(),
                 'shortDescription' => $collective->getShortDescription(),
-                'followUs' => $collective->getFollowUs(),
+                'location' => $collective->getLocation(),
                 'showUrl' => $this->router->generate('collective_show', ['id' => $collective->getId()]),
                 'actions' => $collective->getActions()->map(
                     fn (Action $action) => ['name' => $action->getName(), 'iconPath' => $action->getIconPublicPath()]

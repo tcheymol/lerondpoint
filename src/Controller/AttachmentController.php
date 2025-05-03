@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Domain\Images\AttachmentHelper;
 use App\Entity\Attachment;
-use App\Entity\Track;
 use App\Repository\AttachmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

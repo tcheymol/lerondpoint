@@ -32,7 +32,7 @@ class TrackType extends AbstractType
     /** @var int[] */
     public const array steps = [1, 2, 3, 4];
     public const int stepsCount = 4;
-   public const array STEPS = [
+    public const array STEPS = [
         1 => 'AddFiles',
         2 => 'MainInformations',
         3 => 'Description',
