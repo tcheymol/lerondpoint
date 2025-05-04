@@ -1,5 +1,5 @@
-AboutTheMovement: A propos du mouvement des gilets jaunes
 AboutRP: Autour du rond-point
+AboutTheMovement: A propos du mouvement des gilets jaunes
 AboutUs: À propos ?
 Accept: Accepter
 AcceptTerms: Vous devez accepter les CGU et les règles de confidentialité de de modération
@@ -23,7 +23,7 @@ Bretagne: Bretagne
 CancelCreation: Annuler la création
 Captcha: Veuillez confirmer le code ci-dessus
 Category: Catégorie
-CategoryRequired: "* Catégorie (obligatoire)"
+CategoryRequired: "* Catégorie"
 CentreValDeLoire: Centre-Val de Loire
 Close: Fermer
 Collective: Groupe de GJ
@@ -126,7 +126,7 @@ Password: Mot de passe
 PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
-Preview: "Partager une archive du mouvement : Aperçu"
+Preview: "Ajouter une trace : Aperçu"
 PreviewTrack: Apercu
 PreviewsLoading: Chargement des aperçus...
 Previous: Précédent
@@ -155,8 +155,8 @@ ScrollToStart: Scroller pour commencer
 Search: Rechercher...
 SeeYouSoon: À tout de suite sur Le Rond-point !
 SendPasswordRequestEmail: Envoyer un email de réinitialisation
-ShareArchive: Partager une archive du mouvement
-ShareTrack: Vous souhaitez partager une trace ?
+ShareArchive: Ajouter une trace
+ShareTrack: Vous souhaitez ajouter une trace ?
 ShareTrackWay1: Importer un fichier (PDF ou image uniquement) depuis votre ordinateur ou votre téléphone.
 ShareTrackWay2: Copier un lien depuis un site internet pour tout type de traces (Audio, Vidéo, Texte, Image).
 ShareTrackWays: "Vous avez le choix entre :"
@@ -172,6 +172,7 @@ Step: Étape
 StrongPassword: 🔐 Mot de passe fort
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
+TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace
 TermsOfUse: Conditions générales d'utilisation (CGU)
 ThisTrackHasFaces: Des personnes apparaissent sur cette page, le·a contributeur·ice déclare avoir leur accord ou avoir flouté leurs visages.
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes

@@ -154,6 +154,7 @@ class TrackType extends AbstractType
     {
         $builder
             ->add('description', TextareaType::class, [
+                'label' => 'TellUsTheHistoryOfYourTrack',
                 'required' => false,
                 'attr' => ['rows' => 5],
             ])

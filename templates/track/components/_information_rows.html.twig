@@ -21,6 +21,7 @@
         {{ include('track/components/_information_row.html.twig', {
             label: 'Description'|trans,
             value: track.description,
+            notUnderlined: true,
         }) }}
         {% if track.hasFaces %}
             <div class="card bg-light-subtle mt-4 p-2">

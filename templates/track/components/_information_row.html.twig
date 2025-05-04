@@ -4,13 +4,15 @@
             <span>{{ label }} :</span>
             {% if url is defined and url is not null %}
                 <a href="{{ url }}" class="text-dark"><u>{{ value }}</u></a>
+            {% elseif notUnderlined is defined %}
+                <span>{{ value|nl2br }}</span>
             {% else %}
-                <u>{{ value }}</u>
+                <u>{{ value|nl2br }}</u>
             {% endif %}
         {% elseif small is defined %}
-                <span class="fs-6">{{ value }}</span>
+                <span class="fs-6">{{ value|nl2br }}</span>
         {% else %}
-                <span class="fs-4">{{ value }}</span>
+                <span class="fs-4">{{ value|nl2br }}</span>
         {% endif %}
         <br/>
     </span>
