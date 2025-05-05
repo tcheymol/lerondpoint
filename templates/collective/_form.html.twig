@@ -1,8 +1,9 @@
 <div>
+    {% set buttonLabel = buttonLabel is defined ? buttonLabel : 'Validate'|trans %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <div class="text-end mt-3">
-            <button class="btn btn-success">{{ 'Create'|trans }}</button>
+            <button class="btn btn-success">{{ buttonLabel }}</button>
         </div>
     {{ form_end(form) }}
 </div>

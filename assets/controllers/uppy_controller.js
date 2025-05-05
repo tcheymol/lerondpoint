@@ -59,16 +59,26 @@ export default class extends Controller {
                     disableFormButton();
                 },
                 async onAfterResponse(xhr) {
-                    if (xhr.status !== 200) return;
+                    enableFormButton()
+                    if (xhr.status !== 200) {
+                        alert("Erreur lors de l'upload du fichier");
+                        return;
+                    }
                     const response = JSON.parse(xhr.response);
-                    if (!response || !response.id) return;
+                    if (!response || !response.id) {
+                        alert("Erreur lors de l'upload du fichier");
+                        return;
+                    }
 
                     const attachmentId = response.id;
-
                     updateAttachmentsIdsInput(attachmentId);
                     updateTurboFrame(attachmentId);
-                    enableFormButton()
                 },
+                async onError(error) {
+                    alert("Erreur lors de l'upload du fichier");
+                    console.error('Upload error:', error);
+                    enableFormButton();
+                }
             });
 
         uppy.on('file-added', () => {

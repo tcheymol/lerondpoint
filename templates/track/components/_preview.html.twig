@@ -1,8 +1,10 @@
-<div class="row" id="trackPreviewIframeContainer">
+<div class="row" id="trackPreviewIframeContainer" style="{{ size is defined ? 'height: '~size~'px;width: '~size~'px;' : '' }}">
     <div class="col-12">
         {{ include('track/components/_preview_thumb.html.twig', {track}) }}
     </div>
     <div class="col-12 text-start">
-        {{ include('track/components/_information_rows.html.twig', {track}) }}
+        {% if noRows is not defined %}
+            {{ include('track/components/_information_rows.html.twig', {track}) }}
+        {% endif %}
     </div>
 </div>

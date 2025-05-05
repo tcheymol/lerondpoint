@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Collective;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -22,7 +23,7 @@ readonly class BlameableEntitySecurityChecker
             return false;
         }
 
-        if ($entity->getCreatedBy() === $this->security->getUser()) {
+        if ($this->isOwnedBy($entity, $user)) {
             return true;
         }
 
@@ -35,7 +36,12 @@ readonly class BlameableEntitySecurityChecker
 
     public function canEdit(BlameableInterface $entity): bool
     {
-        if ($entity->getCreatedBy() === $this->security->getUser()) {
+        $user = $this->security->getUser();
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($this->isOwnedBy($entity, $user)) {
             return true;
         }
 
@@ -44,5 +50,14 @@ readonly class BlameableEntitySecurityChecker
         }
 
         return $this->authorizationChecker->isGranted('ROLE_MODERATOR');
+    }
+
+    private function isOwnedBy(BlameableInterface $entity, User $user): bool
+    {
+        if ($entity instanceof Collective && $entity->getOwner() === $user) {
+            return true;
+        }
+
+        return $entity->getCreatedBy() === $user;
     }
 }

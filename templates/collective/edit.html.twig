@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}Edit Collective{% endblock %}
+{% block title %}{{ collective.name|trans }}{% endblock %}
+{% block bodybg %}secondary{% endblock %}
 
-{% block content %}
-    <h1>Edit Collective</h1>
-
-    {{ include('collective/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('collective_index') }}">back to list</a>
+{% block cardContent %}
+    {{ include('collective/_form.html.twig', {buttonLabel: 'Update'|trans}) }}
 
     {{ include('collective/_delete_form.html.twig') }}
 {% endblock %}
