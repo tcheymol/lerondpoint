@@ -2,18 +2,28 @@
 
 namespace App\Tests\Smoke;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Abstract\AuthenticatedWebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class SmokeTest extends WebTestCase
+class SmokeTest extends AuthenticatedWebTestCase
 {
     /**
      * @dataProvider urlProvider
      */
     public function testPageIsSuccessful(string $url): void
     {
-        $client = self::createClient();
-        $client->request(Request::METHOD_GET, $url);
+        $this->request(Request::METHOD_GET, $url);
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    /**
+     * @dataProvider authenticatedUrlProvider
+     */
+    public function testAuthenticatedPageIsSuccessful(string $url): void
+    {
+        $this->login('t@g.c');
+        $this->request(Request::METHOD_GET, $url);
 
         $this->assertResponseIsSuccessful();
     }
@@ -21,5 +31,13 @@ class SmokeTest extends WebTestCase
     public function urlProvider(): \Generator
     {
         yield ['/maintenance'];
+        yield ['/home'];
+        yield ['/login'];
+    }
+
+    public function authenticatedUrlProvider(): \Generator
+    {
+        yield ['/sign_up'];
+        yield ['/track'];
     }
 }

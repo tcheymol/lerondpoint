@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     private Collection $collectives;
 
     #[ORM\Column]
-    private ?bool $hasAcceptedTerms = null;
+    private bool $hasAcceptedTerms = false;
 
     public function __construct(
         #[ORM\Column(length: 180)]
