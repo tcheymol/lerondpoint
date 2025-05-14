@@ -27,6 +27,7 @@
         style="{% block bodyStyle %}{% endblock %} {{ _bodyBg is not empty ? 'background-image: none;' }}"
     >
         {{ include('components/_alerts.html.twig') }}
+        {{ include('components/_fullscreen_loader.html.twig') }}
         {% block header %}
             {{ include('components/header/_header.html.twig') }}
         {% endblock %}

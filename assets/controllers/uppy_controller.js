@@ -44,8 +44,6 @@ function enableFormButton() {
 * See https://github.com/symfony/stimulus-bridge#lazy-controllers
 */
 export default class extends Controller {
-    static targets = [ 'button' ];
-
     static values = {
         endpoint: String,
     };

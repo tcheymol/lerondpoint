@@ -32,52 +32,52 @@ return [
         'version' => '2.11.8',
     ],
     '@uppy/core' => [
-        'version' => '4.2.2',
+        'version' => '4.4.4',
     ],
     '@uppy/utils/lib/Translator' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     'namespace-emitter' => [
         'version' => '2.0.1',
     ],
     'nanoid/non-secure' => [
-        'version' => '5.0.7',
+        'version' => '5.1.5',
     ],
     'lodash/throttle.js' => [
         'version' => '4.17.21',
     ],
     '@uppy/store-default' => [
-        'version' => '4.1.0',
+        'version' => '4.2.0',
     ],
     '@uppy/utils/lib/getFileType' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/utils/lib/getFileNameAndExtension' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/utils/lib/generateFileID' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/utils/lib/getTimeStamp' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@transloadit/prettier-bytes' => [
-        'version' => '0.3.4',
+        'version' => '0.3.5',
     ],
     'mime-match' => [
         'version' => '1.0.2',
     ],
     'preact' => [
-        'version' => '10.24.3',
+        'version' => '10.26.5',
     ],
     '@uppy/utils/lib/findDOMElement' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/utils/lib/getTextDirection' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/core/dist/style.min.css' => [
-        'version' => '4.2.2',
+        'version' => '4.4.4',
         'type' => 'css',
     ],
     'wildcard' => [
@@ -99,10 +99,10 @@ return [
         'version' => '6.0.3',
     ],
     '@uppy/utils/lib/toArray' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/utils/lib/getDroppedFiles' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     '@uppy/provider-views' => [
         'version' => '4.0.1',
@@ -120,7 +120,7 @@ return [
         'version' => '2.5.1',
     ],
     '@uppy/utils/lib/isDragDropSupported' => [
-        'version' => '6.0.3',
+        'version' => '6.1.3',
     ],
     'preact/hooks' => [
         'version' => '10.24.3',
@@ -217,10 +217,10 @@ return [
         'version' => '2.1.0',
     ],
     '@uppy/drag-drop' => [
-        'version' => '4.0.3',
+        'version' => '4.1.2',
     ],
     '@uppy/drag-drop/dist/style.min.css' => [
-        'version' => '4.0.3',
+        'version' => '4.1.2',
         'type' => 'css',
     ],
     'axios' => [

@@ -25,6 +25,7 @@ Captcha: Veuillez confirmer le code ci-dessus
 Category: Catégorie
 CategoryRequired: "* Catégorie"
 CentreValDeLoire: Centre-Val de Loire
+ChooseExistingIcon: Choisissez une icône existante
 Close: Fermer
 Collective: Groupe de GJ
 CollectiveName: Nom du groupe
@@ -196,6 +197,7 @@ UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
+UploadCustomIcon: Téléversez une image
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur

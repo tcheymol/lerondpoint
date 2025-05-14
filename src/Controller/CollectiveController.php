@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Domain\Collective\CollectivePersister;
+use App\Domain\Images\UploadFilesHelper;
 use App\Domain\Map\MapDataBuilder;
 use App\Entity\Collective;
 use App\Form\CollectiveType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -49,6 +51,15 @@ class CollectiveController extends AbstractController
     public function show(Collective $collective): Response
     {
         return $this->render('collective/show.html.twig', ['collective' => $collective]);
+    }
+
+    #[Route('/collective/upload_image', name: 'collective_upload_image', methods: ['POST'])]
+    public function uploadImage(Request $request, UploadFilesHelper $helper): JsonResponse
+    {
+        $fileThumbnailPath = $helper->uploadThumbnailToUploadDir($request->files);
+        $responseStatus = null === $fileThumbnailPath ? Response::HTTP_BAD_REQUEST : Response::HTTP_OK;
+
+        return $this->json(['publicImagePath' => $fileThumbnailPath], $responseStatus);
     }
 
     #[Route('/collective/{id<\d+>}/edit', name: 'collective_edit', methods: ['GET', 'POST'])]
