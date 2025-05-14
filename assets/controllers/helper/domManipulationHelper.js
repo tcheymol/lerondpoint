@@ -2,6 +2,8 @@ export const updateElementHtml = (id, content) => document.getElementById(id).in
 
 export const updateElementHref = (id, content) => document.getElementById(id).href = content ?? '';
 
+export const updateElementSrc = (id, content) => document.getElementById(id).src = content ?? '';
+
 export const generateDiv = () => {
     const item = document.createElement('div');
     item.style.textAlign = 'center';
@@ -13,7 +15,7 @@ export const generateImg = (action) => {
     const img = document.createElement('img');
     img.src = action.iconPath;
     img.alt = action.name;
-    img.style.width = '50px';
+    img.style.width = '32px';
 
     return img;
 }

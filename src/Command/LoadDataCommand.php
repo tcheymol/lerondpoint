@@ -35,7 +35,7 @@ class LoadDataCommand extends Command
         ],
         TrackKind::class => [
             ['name' => 'AUDIO'],
-            ['name' => 'TEXT'],
+            ['name' => 'TEXTE'],
             ['name' => 'IMAGE'],
             ['name' => 'VIDÉO'],
         ],

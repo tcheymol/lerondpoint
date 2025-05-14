@@ -4,6 +4,9 @@
 {% block bodybg %}secondary{% endblock %}
 
 {% block cardContent %}
+    <div class="row d-flex justify-content-center">
+        <img style="width: 150px" class="me-2" src="{{ collective.iconPath }}"  alt="{{ collective.name }}"/>
+    </div>
     <hr/>
     {{ include('collective/components/_actions.html.twig', { actions: collective.actions }) }}<br/>
 

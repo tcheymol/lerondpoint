@@ -8,6 +8,7 @@ import '@uppy/core/dist/style.min.css';
 import '@uppy/drag-drop/dist/style.min.css';
 import {hideLoader, showLoader} from "./helper/loaderHelper.js";
 import {displayPreviewImage, fillFieldUrl} from "./helper/imgHelper.js";
+import {hideAllModals} from "./helper/modalHelper.js";
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -48,6 +49,7 @@ export default class extends Controller {
 
                 fillFieldUrl(targetInputId, response.publicImagePath);
                 displayPreviewImage(previewElementId, response.publicImagePath);
+                hideAllModals();
             },
             async onError(error) {
                 alert("Erreur lors de l'upload du fichier");
