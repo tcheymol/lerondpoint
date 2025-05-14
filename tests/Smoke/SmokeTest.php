@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Smoke;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 
-class SmokeTests extends WebTestCase
+class SmokeTest extends WebTestCase
 {
     /**
      * @dataProvider urlProvider
@@ -12,7 +13,7 @@ class SmokeTests extends WebTestCase
     public function testPageIsSuccessful(string $url): void
     {
         $client = self::createClient();
-        $client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $url);
+        $client->request(Request::METHOD_GET, $url);
 
         $this->assertResponseIsSuccessful();
     }
