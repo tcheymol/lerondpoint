@@ -18,8 +18,9 @@
 {{ include('track/new/_attachments_widget.html.twig', { track }) }}
 {{ include('track/new/_video_widget.html.twig', { track }) }}
 
-<div class="row">
-    {#            <div class="col-12 col-sm-6 d-none" id="captcha_container">#}
-    {#                {{ form_widget(form.captcha) }}#}
-    {#            </div>#}
+<div class="row mt-4 justify-content-end">
+    <div class="col-12 col-sm-6" id="captcha_container">
+        {{ form_errors(form.captcha) }}
+        {{ form_widget(form.captcha) }}
+    </div>
 </div>

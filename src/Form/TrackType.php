@@ -9,6 +9,7 @@ use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use Doctrine\ORM\EntityRepository;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
@@ -80,9 +81,9 @@ class TrackType extends AbstractType
                 'attr' => ['placeholder' => 'https://example.com'],
             ])
             ->add('attachmentsIds', HiddenType::class)
-//            ->add('captcha', CaptchaType::class, [
-//                'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
-//            ])
+            ->add('captcha', CaptchaType::class, [
+                'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
+            ])
         ;
 
         $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
