@@ -1,14 +1,7 @@
-{% set previewUrl = preview_track(track) %}
-{% set mediaType = track.mediaType %}
-
-{% if mediaType == 'video' %}
-    {{ include('track/components/_track_video.html.twig', {track}) }}
-{% else %}
-    <div class="border-default h-100 w-100">
-        {% if previewUrl is defined %}
-            <img src="{{ previewUrl }}" alt="{{ 'Attachment'|trans }}" class="w-100 h-100"/>
-        {% elseif track.mime is defined %}
-            {{ include('attachment/_attachment_icon.html.twig', {mime}) }}
-        {% endif %}
-    </div>
-{% endif %}
+<div class="col-12">
+    {% if track.mediaType == 'video' %}
+        {{ include('track/components/_track_video.html.twig', {track}) }}
+    {% else %}
+        {{ include('track/components/_preview_image_thumb.html.twig', {track}) }}
+    {% endif %}
+</div>

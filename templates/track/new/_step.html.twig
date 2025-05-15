@@ -1,0 +1,9 @@
+{% if step == 1 %}
+    {{ include('track/new/_step_1.html.twig', { form, track }) }}
+{% elseif step == 2 %}
+    {{ include('track/new/_step_2.html.twig', { form, track }) }}
+{% elseif step == 3 %}
+    {{ include('track/new/_step_3.html.twig', { form, track }) }}
+{% elseif step == 4 %}
+    {{ include('track/new/_step_4.html.twig', { form, track }) }}
+{% endif %}

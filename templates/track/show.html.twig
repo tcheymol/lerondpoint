@@ -9,12 +9,8 @@
         <h1>{{ track.name }}</h1>
         <div class="p-4">
             <div class="row">
-                <div class="col-12 col-sm-7" id="trackPreviewIframeContainer" style="min-height: 400px;">
-                    {% if track.url %}
-                        {{ include('track/components/_track_video.html.twig', {track}) }}
-                    {% else %}
-                        {{ include('track/components/_track_image.html.twig', {track}) }}
-                    {% endif %}
+                <div class="col-12 col-sm-7">
+                    {{ include('track/components/_track_image.html.twig', {track}) }}
                 </div>
                 <div class="col-12 col-sm-5 text-start">
                     {{ include('track/components/_previous_next_track.html.twig', {track}) }}

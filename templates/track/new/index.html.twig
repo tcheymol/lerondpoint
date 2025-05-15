@@ -4,21 +4,8 @@
 {% block innerContent %}
     {{ form_start(form) }}
         {{ form_errors(form) }}
-        {% if step == 1 %}
-          {{ include('track/new/_step_1.html.twig', { form, track, step }) }}
-        {% elseif step == 2 %}
-          {{ include('track/new/_step_2.html.twig', { form, track, step }) }}
-        {% elseif step == 3 %}
-          {{ include('track/new/_step_3.html.twig', { form, track, step }) }}
-        {% elseif step == 4 %}
-          {{ include('track/new/_step_4.html.twig', { form, track, step }) }}
-        {% endif %}
-        <div class="row mt-3">
-            <div class="col-12 col-sm-6 ms-auto text-end ">
-                {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
-                {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
-            </div>
-        </div>
+        {{ include('track/new/_step.html.twig', { form, track, step }) }}
+        {{ include('track/components/form/_prev_next_buttons.html.twig', { form }) }}
         {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

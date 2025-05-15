@@ -181,11 +181,17 @@ class TrackType extends AbstractType
         $builder->add('back', SubmitType::class, [
             'label' => 1 === $step ? 'CancelCreation' : 'BackStep',
             'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
-            'attr' => ['class' => $buttonClasses.$previousButtonClasses],
+            'attr' => [
+                'class' => $buttonClasses.$previousButtonClasses,
+                'tabindex' => $step === 1 ? -1 : 0,
+            ],
         ])->add('next', SubmitType::class, [
             'label' => $step >= self::stepsCount ? 'ValidateAndSend' : 'ValidateStep',
             'label_translation_parameters' => ['%step%' => $nextStep, '%total%' => self::stepsCount],
-            'attr' => ['class' => $buttonClasses.$nextButtonClasses],
+            'attr' => [
+                'class' => $buttonClasses.$nextButtonClasses,
+                'tabindex' => 0,
+            ],
         ]);
     }
 }
