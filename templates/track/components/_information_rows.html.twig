@@ -3,9 +3,9 @@
 {% set fields = fields|merge([
     { label: 'Category'|trans, value: track.kindName },
     { label: 'Tags'|trans, value: track.tagsAsString },
-    { label: 'Region'|trans, value: track.regionName },
+    { label: 'Region'|trans, value: track.regionsAsString },
     { label: 'Location'|trans, value: track.location },
-    { label: 'Year'|trans, value: track.year },
+    { label: 'Year'|trans, value: track.yearsAsString },
     { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
 ]) %}
 

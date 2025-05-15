@@ -556,9 +556,12 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Region>
-     */
+    public function getYearsAsString(): string
+    {
+        return implode(', ', $this->years->map(fn (Year $year) => (string) $year)->toArray());
+    }
+
+    /** @return Collection<int, Region> */
     public function getRegions(): Collection
     {
         return $this->regions;
@@ -578,5 +581,10 @@ class Track implements BlameableInterface
         $this->regions->removeElement($region);
 
         return $this;
+    }
+
+    public function getRegionsAsString(): string
+    {
+        return implode(', ', $this->regions->map(fn (Region $region) => (string) $region)->toArray());
     }
 }

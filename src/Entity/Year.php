@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: YearRepository::class)]
-class Year
+class Year implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +24,11 @@ class Year
         private ?int $value = null,
     ) {
         $this->tracks = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->value;
     }
 
     public function getId(): ?int

@@ -8,16 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RegionRepository::class)]
-class Region
+class Region implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Track>
-     */
+    /** @var Collection<int, Track> */
     #[ORM\ManyToMany(targetEntity: Track::class, mappedBy: 'regions')]
     private Collection $tracks;
 
@@ -25,6 +23,11 @@ class Region
         private ?string $name = null)
     {
         $this->tracks = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name ?? '';
     }
 
     public function getId(): ?int

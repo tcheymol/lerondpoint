@@ -1,0 +1,15 @@
+{% set previewUrl = preview_track(track) %}
+
+<div class="border-default h-100 w-100">
+    {% if previewUrl is defined %}
+        <div  class="w-100"
+              style="background-image: url('{{ previewUrl }}');
+                      background-size: contain;
+                      background-position: center;
+                      background-repeat: no-repeat;
+              "
+        ></div>
+    {% elseif track.mime is defined %}
+        {{ include('attachment/_attachment_icon.html.twig', {mime}) }}
+    {% endif %}
+</div>

@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
-use App\Domain\Location\RegionEnum;
 use App\Domain\Security\UserAwareTrait;
 use App\Entity\Collective;
+use App\Entity\Region;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
+use App\Entity\Year;
 use Doctrine\ORM\EntityRepository;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,7 +18,6 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -111,15 +111,23 @@ class TrackType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'name',
             ])
-            ->add('region', EnumType::class, [
-                'class' => RegionEnum::class,
+            ->add('location', TextType::class, [
                 'required' => false,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Region'],
+                'attr' => ['placeholder' => 'Location'],
             ])
             ->add('regions', EntityType::class, [
-                'class' => RegionEnum::class,
+                'class' => Region::class,
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Regions'],
                 'required' => false,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Region'],
+                'multiple' => true,
+                'choice_label' => 'name',
+            ])
+            ->add('years', EntityType::class, [
+                'class' => Year::class,
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Years'],
+                'required' => false,
+                'multiple' => true,
+                'choice_label' => 'value',
             ])
             ->add('hasFaces', ChoiceType::class, [
                 'label' => 'HasFaces',
@@ -134,15 +142,7 @@ class TrackType extends AbstractType
                 'mapped' => false,
                 'data' => true,
             ])
-            ->add('location', TextType::class, [
-                'required' => false,
-                'attr' => ['placeholder' => 'Location'],
-            ])
-            ->add('year', ChoiceType::class, [
-                'choices' => array_combine($years, $years),
-                'required' => false,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Year'],
-            ]);
+        ;
 
         $user = $this->getUser();
         if ($user && $user->hasCollective()) {
