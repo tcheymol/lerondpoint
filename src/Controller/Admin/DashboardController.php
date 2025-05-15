@@ -6,10 +6,12 @@ use App\Entity\Action;
 use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Invitation;
+use App\Entity\Region;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use App\Entity\User;
+use App\Entity\Year;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -36,7 +38,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Gjaune')
+            ->setTitle('Interface administrateur Le Rond-point')
             ->setFaviconPath('jacket.png');
     }
 
@@ -58,6 +60,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Tracks', 'fas fa-clipboard', Track::class);
         yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', TrackKind::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', TrackTag::class);
+        yield MenuItem::linkToCrud('Regions', 'fas fa-map', Region::class);
+        yield MenuItem::linkToCrud('Years', 'fas fa-calendar-days', Year::class);
 
         yield MenuItem::section('Misc');
         yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);

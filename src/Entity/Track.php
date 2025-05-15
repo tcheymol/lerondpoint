@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Domain\Images\ThumbSize;
-use App\Domain\Location\Region as EnumRegion;
+use App\Domain\Location\RegionEnum as EnumRegion;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;

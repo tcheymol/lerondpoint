@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Domain\Location\Region;
+use App\Domain\Location\RegionEnum;
 use App\Domain\Security\UserAwareTrait;
 use App\Entity\Collective;
 use App\Entity\Track;
@@ -112,7 +112,12 @@ class TrackType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('region', EnumType::class, [
-                'class' => Region::class,
+                'class' => RegionEnum::class,
+                'required' => false,
+                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Region'],
+            ])
+            ->add('regions', EntityType::class, [
+                'class' => RegionEnum::class,
                 'required' => false,
                 'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Region'],
             ])

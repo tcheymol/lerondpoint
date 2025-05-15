@@ -5,7 +5,7 @@ namespace App\Domain\Location;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-enum Region: string implements TranslatableInterface
+enum RegionEnum: string implements TranslatableInterface
 {
     case AuvergneRhoneAlpes = 'Auvergne-Rhône-Alpes';
     case BourgogneFrancheComte = 'Bourgogne-Franche-Comté';

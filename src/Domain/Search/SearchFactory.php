@@ -2,7 +2,7 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\Region;
+use App\Domain\Location\RegionEnum;
 use App\Repository\CollectiveRepository;
 use App\Repository\TrackKindRepository;
 use App\Repository\TrackTagRepository;
@@ -64,11 +64,11 @@ readonly class SearchFactory
         ));
     }
 
-    /** @return Region[] */
+    /** @return RegionEnum[] */
     private function regionsStringToArray(string $stringValue): array
     {
         return array_map(
-            fn (string $region) => Region::from($region),
+            fn (string $region) => RegionEnum::from($region),
             explode(',', $stringValue)
         );
     }

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\Region;
+use App\Domain\Location\RegionEnum;
 use App\Entity\Collective;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
@@ -53,7 +53,7 @@ class SearchType extends AbstractType
                 'multiple' => true,
             ])
             ->add('regions', EnumType::class, [
-                'class' => Region::class,
+                'class' => RegionEnum::class,
                 'attr' => [
                     'placeholder' => 'Region',
                     'data-controller' => 'tomselect',

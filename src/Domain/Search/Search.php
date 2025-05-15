@@ -2,7 +2,7 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\Region;
+use App\Domain\Location\RegionEnum;
 use App\Entity\Collective;
 use App\Entity\Interface\PersistedEntityInterface;
 use App\Entity\TrackKind;
@@ -24,7 +24,7 @@ class Search
     /** @var array<int, string> */
     public array $years;
 
-    /** @var array<int, Region> */
+    /** @var array<int, RegionEnum> */
     public array $regions;
 
     /** @var array<string, string> */
@@ -82,7 +82,7 @@ class Search
     {
         $this->params['regions'] = implode(',',
             array_map(
-                fn (Region $region) => $region->value,
+                fn (RegionEnum $region) => $region->value,
                 $this->regions
             )
         );

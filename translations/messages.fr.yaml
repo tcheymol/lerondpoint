@@ -210,6 +210,7 @@ ValidateSignUp: Valider mon inscription
 ValidateStep: Valider %step%/%total%
 Validated By: Validé par
 Validated: Validé
+Value: Valeur
 VerifyEmailBody: Pour valider votre inscription, veuillez cliquer sur le lien ci-dessous
 VerifyEmailCta: Valider mon email
 VerifyEmailSubject: "Le rond-point : Veuillez valider votre email"
@@ -220,6 +221,7 @@ WeTalkAboutUs: on parle de nous
 WeakPassword: ⚠️ Trop faible
 WhoAreWe: qui sommes-nous
 Year: Année
+Years: Années
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouHaveBeenInvited: Vous avez été invité à rejoindre un groupe
