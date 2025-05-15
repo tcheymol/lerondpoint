@@ -3,10 +3,12 @@
 namespace App\Command;
 
 use App\Entity\Action;
+use App\Entity\Region;
 use App\Entity\RejectionCause;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
 use App\Entity\User;
+use App\Entity\Year;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -71,11 +73,16 @@ class LoadDataCommand extends Command
             ['name' => 'Tract'],
         ],
         User::class => [
-            ['email' => 't@g.c'],
-            ['email' => 'thibaut.cheymol@protonmail.com'],
-            ['email' => 'thibaut@le-rondpoint.com'],
-            ['email' => 'djo@le-rondpoint.com'],
-            ['email' => 'adrien@le-rondpoint.com'],
+            ['email' => 'thibaut.cheymol@protonmail.com', 'role' => 'ROLE_ADMIN'],
+            ['email' => 'thibaut.cheymol+user@protonmail.com', 'role' => 'ROLE_USER'],
+            ['email' => 'thibaut.cheymol+modo@protonmail.com', 'role' => 'ROLE_MODERATOR'],
+            ['email' => 'mil-an1871@protonmail.com', 'role' => 'ROLE_ADMIN'],
+            ['email' => 'jo_vaudey@riseup.net', 'role' => 'ROLE_ADMIN'],
+            ['email' => 'jo_vaudey+user@riseup.net', 'role' => 'ROLE_USER'],
+            ['email' => 'jo_vaudey+modo@riseup.net', 'role' => 'ROLE_MODERATOR'],
+            ['email' => 'sylvestre.meinzer@free.fr', 'role' => 'ROLE_MODERATOR'],
+            ['email' => 'adrienzammit@riseup.net', 'role' => 'ROLE_MODERATOR'],
+            ['email' => 'mathilde.fournols@outlook.fr', 'role' => 'ROLE_MODERATOR'],
         ],
         RejectionCause::class => [
             ['name' => 'Contenu sans rapport avec le mouvement des Gilets jaunes'],
@@ -83,6 +90,36 @@ class LoadDataCommand extends Command
             ['name' => 'Contenu pouvant porter préjudice aux personnes'],
             ['name' => 'Contenu présentant un problème technique'],
             ['name' => 'Contenu incomplet'],
+        ],
+        Year::class => [
+            ['value' => '2018'],
+            ['value' => '2019'],
+            ['value' => '2020'],
+            ['value' => '2021'],
+            ['value' => '2022'],
+            ['value' => '2023'],
+            ['value' => '2024'],
+            ['value' => '2025'],
+        ],
+        Region::class => [
+            ['name' => 'Auvergne-Rhône-Alpes'],
+            ['name' => 'Bourgogne-Franche-Comté'],
+            ['name' => 'Bretagne'],
+            ['name' => 'Centre-Val de Loire'],
+            ['name' => 'Corse'],
+            ['name' => 'Grand Est'],
+            ['name' => 'Guadeloupe'],
+            ['name' => 'Guyane'],
+            ['name' => 'Hauts-de-France'],
+            ['name' => 'Île-de-France'],
+            ['name' => 'Martinique'],
+            ['name' => 'Normandie'],
+            ['name' => 'Nouvelle-Aquitaine'],
+            ['name' => 'Occitanie'],
+            ['name' => 'Pays de la Loire'],
+            ['name' => "Provence-Alpes-Côte d'Azur"],
+            ['name' => 'Réunion'],
+            ['name' => "Autres territoires d'outre-mer"],
         ],
     ];
 
@@ -144,7 +181,9 @@ class LoadDataCommand extends Command
             TrackTag::class => new TrackTag($datum['name']),
             RejectionCause::class => new RejectionCause($datum['name']),
             Action::class => new Action($datum['name'], $datum['iconPath']),
-            User::class => new User($datum['email'])->validateEmail()->setRoles(['ROLE_ADMIN'])->setPassword('$2y$13$vE36jFVY2JpvV8nMR9ccd.14MEdiNvBBSsL/UNoBYBsyx/FUSJh3q'),
+            Region::class => new Region($datum['name']),
+            Year::class => new Year((int) $datum['value']),
+            User::class => new User($datum['email'])->validateEmail()->setRoles([$datum['role'] ?? 'ROLE_USER'])->setPassword('$2y$13$U.XY95jLXku4DLy24p.wcOcMh8KVftRrvMRm/vxDSeTH.iBOzmrgW'),
             default => null,
         };
     }

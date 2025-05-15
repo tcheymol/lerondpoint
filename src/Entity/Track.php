@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Domain\Images\ThumbSize;
-use App\Domain\Location\Region;
+use App\Domain\Location\Region as EnumRegion;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
 use App\Repository\TrackRepository;
@@ -67,7 +67,7 @@ class Track implements BlameableInterface
     private ?string $location = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?Region $region = null;
+    private ?EnumRegion $region = null;
 
     #[ORM\Column(length: 2083, nullable: true)]
     private ?string $url = null;
@@ -99,10 +99,24 @@ class Track implements BlameableInterface
     #[ORM\Column(nullable: true)]
     private ?int $creationStep = null;
 
+    /**
+     * @var Collection<int, Year>
+     */
+    #[ORM\ManyToMany(targetEntity: Year::class, inversedBy: 'tracks')]
+    private Collection $years;
+
+    /**
+     * @var Collection<int, Region>
+     */
+    #[ORM\ManyToMany(targetEntity: Region::class, inversedBy: 'tracks')]
+    private Collection $regions;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->years = new ArrayCollection();
+        $this->regions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -278,12 +292,12 @@ class Track implements BlameableInterface
         return $this->region?->value;
     }
 
-    public function getRegion(): ?Region
+    public function getRegion(): ?EnumRegion
     {
         return $this->region;
     }
 
-    public function setRegion(Region $region): static
+    public function setRegion(EnumRegion $region): static
     {
         $this->region = $region;
 
@@ -514,6 +528,54 @@ class Track implements BlameableInterface
     public function setCreationStep(?int $creationStep): static
     {
         $this->creationStep = $creationStep;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Year>
+     */
+    public function getYears(): Collection
+    {
+        return $this->years;
+    }
+
+    public function addYear(Year $year): static
+    {
+        if (!$this->years->contains($year)) {
+            $this->years->add($year);
+        }
+
+        return $this;
+    }
+
+    public function removeYear(Year $year): static
+    {
+        $this->years->removeElement($year);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Region>
+     */
+    public function getRegions(): Collection
+    {
+        return $this->regions;
+    }
+
+    public function addRegion(Region $region): static
+    {
+        if (!$this->regions->contains($region)) {
+            $this->regions->add($region);
+        }
+
+        return $this;
+    }
+
+    public function removeRegion(Region $region): static
+    {
+        $this->regions->removeElement($region);
 
         return $this;
     }
