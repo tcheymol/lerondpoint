@@ -2,10 +2,11 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\RegionEnum;
 use App\Repository\CollectiveRepository;
+use App\Repository\RegionRepository;
 use App\Repository\TrackKindRepository;
 use App\Repository\TrackTagRepository;
+use App\Repository\YearRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,12 +23,16 @@ readonly class SearchFactory
         TrackTagRepository $trackTagRepository,
         TrackKindRepository $trackKindRepository,
         CollectiveRepository $collectiveRepository,
+        YearRepository $yearRepository,
+        RegionRepository $regionRepository,
     ) {
         $this->propertyAccessor = new PropertyAccessor();
         $this->repositories = [
             'tags' => $trackTagRepository,
             'kinds' => $trackKindRepository,
             'collectives' => $collectiveRepository,
+            'regions' => $regionRepository,
+            'years' => $yearRepository,
         ];
     }
 
@@ -37,17 +42,15 @@ readonly class SearchFactory
         $search = new Search();
 
         foreach ($params as $key => $value) {
-            if (in_array($key, ['tags', 'kinds', 'collectives']) && is_string($value)) {
+            if (in_array($key, ['tags', 'kinds', 'collectives', 'regions', 'years']) && is_string($value)) {
                 $entities = $this->idsStringToEntityCollection($key, $value);
                 match ($key) {
                     'tags' => $search->tags = $entities,
                     'kinds' => $search->kinds = $entities,
                     'collectives' => $search->collectives = $entities,
+                    'regions' => $search->regions = $entities,
+                    'years' => $search->years = $entities,
                 };
-            } elseif ('regions' === $key && is_string($value)) {
-                $search->regions = $this->regionsStringToArray($value);
-            } elseif ('years' === $key && is_string($value)) {
-                $search->years = explode(',', $value);
             } elseif (!is_array($value)) {
                 $this->propertyAccessor->setValue($search, $key, (string) $value);
             }
@@ -62,14 +65,5 @@ readonly class SearchFactory
             fn (string $id) => $this->repositories[$key]->find((int) $id),
             explode(',', $stringValue)
         ));
-    }
-
-    /** @return RegionEnum[] */
-    private function regionsStringToArray(string $stringValue): array
-    {
-        return array_map(
-            fn (string $region) => RegionEnum::from($region),
-            explode(',', $stringValue)
-        );
     }
 }

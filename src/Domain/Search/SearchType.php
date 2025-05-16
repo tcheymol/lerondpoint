@@ -2,15 +2,14 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\RegionEnum;
 use App\Entity\Collective;
+use App\Entity\Region;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
+use App\Entity\Year;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +20,6 @@ class SearchType extends AbstractType
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $years = array_reverse(range(2018, (int) date('Y')));
         $builder
             ->add('text', TextType::class, [
                 'attr' => [
@@ -52,8 +50,8 @@ class SearchType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('regions', EnumType::class, [
-                'class' => RegionEnum::class,
+            ->add('regions', EntityType::class, [
+                'class' => Region::class,
                 'attr' => [
                     'placeholder' => 'Region',
                     'data-controller' => 'tomselect',
@@ -76,13 +74,13 @@ class SearchType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('years', ChoiceType::class, [
+            ->add('years', EntityType::class, [
+                'class' => Year::class,
                 'attr' => [
                     'placeholder' => 'Year',
                     'data-controller' => 'tomselect',
                     'data-action' => 'async-search#search',
                 ],
-                'choices' => array_combine($years, $years),
                 'required' => false,
                 'multiple' => true,
             ])

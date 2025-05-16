@@ -26,7 +26,7 @@ readonly class TrackProvider
 
         $allTracks = $search->isEmpty()
             ? $this->trackRepository->findAll()
-            : $this->searchPerformer->perform($search);
+            : $this->searchPerformer->search($search);
 
         return $this->hydrateTracks($allTracks, $thumbSize);
     }

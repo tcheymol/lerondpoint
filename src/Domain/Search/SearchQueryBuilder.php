@@ -19,7 +19,9 @@ class SearchQueryBuilder
             ->leftJoin('t.kind', 'k')
             ->leftJoin('t.collective', 'c')
             ->leftJoin('t.createdBy', 'u')
-            ->leftJoin('t.tags', 'tg');
+            ->leftJoin('t.tags', 'tg')
+            ->leftJoin('t.regions', 'r')
+            ->leftJoin('t.years', 'y');
 
         return $this;
     }
@@ -33,9 +35,9 @@ class SearchQueryBuilder
     {
         return $this->searchText($search)
             ->searchKinds($search)
-            ->searchRegion($search)
+            ->searchRegions($search)
             ->searchYear($search)
-            ->searchLocation($search)
+            ->searchLocations($search)
             ->searchTags($search)
             ->searchCollectives($search);
     }
@@ -72,11 +74,11 @@ class SearchQueryBuilder
         return $this;
     }
 
-    private function searchRegion(Search $search): self
+    private function searchRegions(Search $search): self
     {
         $regions = $search->regions;
-        if (count($regions) > 0) {
-            $this->qb->andWhere('t.region IN (:regions)')
+        if ($regions->count() > 0) {
+            $this->qb->andWhere('r.id IN (:regions)')
                 ->setParameter('regions', $regions);
         }
 
@@ -86,19 +88,19 @@ class SearchQueryBuilder
     private function searchYear(Search $search): self
     {
         $years = $search->years;
-        if (count($years) > 0) {
-            $this->qb->andWhere('t.year IN (:years)')
+        if ($years->count() > 0) {
+            $this->qb->andWhere('y.id IN (:years)')
                 ->setParameter('years', $years);
         }
 
         return $this;
     }
 
-    private function searchLocation(Search $search): self
+    private function searchLocations(Search $search): self
     {
         $location = $search->location;
         if ($location) {
-            $this->qb->andWhere('t.location LIKE :location')
+            $this->qb->andWhere('l.id LIKE :location')
                 ->setParameter('location', "%$location%");
         }
 

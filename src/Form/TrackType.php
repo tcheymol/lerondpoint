@@ -183,7 +183,7 @@ class TrackType extends AbstractType
             'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
             'attr' => [
                 'class' => $buttonClasses.$previousButtonClasses,
-                'tabindex' => $step === 1 ? -1 : 0,
+                'tabindex' => 1 === $step ? -1 : 0,
             ],
         ])->add('next', SubmitType::class, [
             'label' => $step >= self::stepsCount ? 'ValidateAndSend' : 'ValidateStep',

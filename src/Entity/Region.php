@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Interface\PersistedEntityInterface;
 use App\Repository\RegionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RegionRepository::class)]
-class Region implements \Stringable
+class Region implements \Stringable, PersistedEntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

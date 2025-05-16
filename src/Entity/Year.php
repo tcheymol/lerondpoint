@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Interface\PersistedEntityInterface;
 use App\Repository\YearRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: YearRepository::class)]
-class Year implements \Stringable
+class Year implements \Stringable, PersistedEntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -2,11 +2,12 @@
 
 namespace App\Domain\Search;
 
-use App\Domain\Location\RegionEnum;
 use App\Entity\Collective;
 use App\Entity\Interface\PersistedEntityInterface;
+use App\Entity\Region;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
+use App\Entity\Year;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -21,11 +22,11 @@ class Search
     /** @var Collection<int, TrackTag|PersistedEntityInterface> */
     public Collection $tags;
 
-    /** @var array<int, string> */
-    public array $years;
+    /** @var Collection<int, Year|PersistedEntityInterface> */
+    public Collection $years;
 
-    /** @var array<int, RegionEnum> */
-    public array $regions;
+    /** @var Collection<int, Region|PersistedEntityInterface> */
+    public Collection $regions;
 
     /** @var array<string, string> */
     private array $params = [];
@@ -37,8 +38,8 @@ class Search
         $this->tags = new ArrayCollection();
         $this->kinds = new ArrayCollection();
         $this->collectives = new ArrayCollection();
-        $this->years = [];
-        $this->regions = [];
+        $this->years = new ArrayCollection();
+        $this->regions = new ArrayCollection();
     }
 
     /** @return array<string, string> */
@@ -80,19 +81,14 @@ class Search
 
     private function addRegionParam(): self
     {
-        $this->params['regions'] = implode(',',
-            array_map(
-                fn (RegionEnum $region) => $region->value,
-                $this->regions
-            )
-        );
+        $this->params['regions'] = self::collectionToIdsString($this->regions);
 
         return $this;
     }
 
     private function addYearParam(): self
     {
-        $this->params['years'] = implode(',', $this->years);
+        $this->params['years'] = self::collectionToIdsString($this->years);
 
         return $this;
     }
@@ -127,8 +123,8 @@ class Search
             && !$this->location
             && 0 === $this->tags->count()
             && 0 === $this->kinds->count()
-            && 0 === count($this->regions)
-            && 0 === count($this->years)
+            && 0 === $this->regions->count()
+            && 0 === $this->years->count()
             && 0 === $this->collectives->count();
     }
 

@@ -12,7 +12,7 @@ readonly class SearchPerformer
     }
 
     /** @return Track[] */
-    public function perform(Search $search): array
+    public function search(Search $search): array
     {
         $qb = $this->queryBuilder
             ->init()
