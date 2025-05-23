@@ -24,17 +24,17 @@
     ] },
 ] %}
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark p-0 align-items-stretch">
-    <a href="{{ path('home') }}" class="d-flex align-items-center ps-3 bg-dark px-2">
-        <h1 class="float-md-start mb-0 text-white text-start fs-5 text-decoration-underline link-underline-primary">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark p-0 align-items-stretch d-flex justify-content-start">
+    <a href="{{ path('home') }}" class="d-flex align-items-center ps-3 bg-dark px-2 text-decoration-none">
+        <h1 class="float-md-start mb-0 text-white text-start fs-5">
             {{ 'HomeTitleMultiline'|trans|raw }}
         </h1>
     </a>
 
     {{ include('components/header/_header_desktop.html.twig', { actions }) }}
 
-    <button class="navbar-toggler ms-auto bg-dark rounded-0" type="button" data-bs-toggle="modal" data-bs-target="#navbarModal" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler bg-white rounded-0 plaine border-4 border-dark" type="button" data-bs-toggle="modal" data-bs-target="#navbarModal" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="text-dark">{{ 'Menu'|trans }}</span>
     </button>
 </nav>
 

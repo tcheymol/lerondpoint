@@ -5,9 +5,9 @@
 {% block bodyStyle %} margin-top: 75vh; padding-top: 0; {% endblock %}
 
 {% block main %}
-    <div class="vh-100 vw-100 position-absolute top-0 z-1" id="scrollableHomeButtons" {{ stimulus_controller('show_hide') }}>
+    <div class="vh-100 vw-100 position-absolute top-0 z-1" {{ stimulus_controller('show_hide') }}>
         <a class="h-100 w-100 d-block"{{ stimulus_action('show_hide', 'show') }}></a>
-            <a class="btn btn-lg btn-link position-absolute scroll-button top-0" id="scrollDownButton" {{ stimulus_action('show_hide', 'show') }}>
+        <a class="btn btn-lg btn-link position-absolute scroll-button top-0 d-none d-sm-block" id="scrollDownButton" {{ stimulus_action('show_hide', 'show') }}>
             <img class="scroll-down-btn hover-rotate-10" src="{{ asset('images/panneau.gif') }}" alt="{{ 'ScrollToStart'|trans }}">
         </a>
     </div>

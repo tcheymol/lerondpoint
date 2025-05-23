@@ -1,8 +1,9 @@
-<a class="d-flex flex-grow-1 align-items-center justify-content-center px-3
-            nav-link hover-underline bg-{{ color }} fs-5
+<a class="d-flex flex-grow-1 align-items-center justify-content-center px-3 custom-hover-underline
+            nav-link bg-{{ color }} fs-5
             "
+   {{ label != '' ? '' : 'style="min-width: auto;padding-left: 14px !important;padding-right: 6px !important;"' }}
    href="{{ url }}"
 >
     {% if icon is defined %}<i class="fa fa-{{ icon }} me-2"></i>{% endif %}
-    {{ label }}
+    <span style="line-height: 100%;">{{ label }}</span>
 </a>
