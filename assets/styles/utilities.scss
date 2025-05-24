@@ -81,13 +81,20 @@ h1, h2, h3, h4, h5, .btn, .nav-link, label {
   cursor: not-allowed;
 }
 
-.custom-hover-underline:hover {
-  span {
-    text-decoration: none;
-    border-bottom: 2px solid $black;
-  }
+.custom-hover-underline:hover span {
+  text-decoration: none;
+  border-bottom: 2px solid $black;
+}
+
+.custom-underline span {
+  text-decoration: none;
+  border-bottom: 2px solid $black;
 }
 
 .word-break {
   word-wrap: break-word;
+}
+
+.line-height-1 {
+  line-height: 1rem !important;
 }
