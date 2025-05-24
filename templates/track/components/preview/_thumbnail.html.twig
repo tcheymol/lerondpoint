@@ -1,0 +1,7 @@
+{% set url = track.thumbnailUrl %}
+{% if url %}
+    <div class="col-6 col-sm-4 col-md-3 p-1 mt-4">
+       {{ include('track/components/preview/_thumbnail_image.html.twig', {track, url}) }}
+       {{ include('track/components/preview/_thumbnail_information.html.twig', {track}) }}
+    </div>
+{% endif %}

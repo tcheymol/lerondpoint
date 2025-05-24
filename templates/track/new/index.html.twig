@@ -2,9 +2,11 @@
 
 {% block step %}{{ step }}{% endblock %}
 {% block innerContent %}
-    {{ form_start(form) }}
+    {{ form_start(form, { attr: { class: 'h-100 d-flex flex-column' }}) }}
         {{ form_errors(form) }}
-        {{ include('track/new/_step.html.twig', { form, track, step }) }}
+        <div class="flex-grow-1">
+            {{ include('track/new/_step.html.twig', { form, track, step }) }}
+        </div>
         {{ include('track/components/form/_prev_next_buttons.html.twig', { form }) }}
         {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
