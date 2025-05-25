@@ -19,7 +19,6 @@ export default class extends Controller {
         collectives: Array,
         geoapifyKey: String,
         addressFieldsFormName: String,
-        enableDroms: Boolean,
         enableClickToCenter: Boolean,
         initialPinPosition: Object,
     }
@@ -50,9 +49,7 @@ export default class extends Controller {
     }
 
     enableFillFieldsOnAutocomplete(geocoder) {
-        if (this.hasAddressFieldsFormNameValue) {
-            geocoder.on('select', this.onSelectAutocompleteLocation());
-        }
+        if (this.hasAddressFieldsFormNameValue) geocoder.on('select', this.onSelectAutocompleteLocation());
     }
 
     addInitialPin(map) {
@@ -75,11 +72,9 @@ export default class extends Controller {
         }
     }
 
-    centerOnSelectAutocompleteLocation = (map) => (location) =>{
+    centerOnSelectAutocompleteLocation = (map) => (location) => {
         this.positionPinMarker = recenterMap(map, location, this.positionPinMarker, 8);
     }
 
-    onSelectAutocompleteLocation = () => (location) =>{
-        fillAddressFields(location, this.addressFieldsFormNameValue);
-    }
+    onSelectAutocompleteLocation = () => (location) => fillAddressFields(location, this.addressFieldsFormNameValue);
 }

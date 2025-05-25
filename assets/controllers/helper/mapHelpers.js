@@ -30,7 +30,6 @@ const getDromLocations = () => [
 
 const createIcon = (iconUrl) => L.icon({ iconUrl,  iconSize: [35, 35] });
 
-
 const generateActionsDom = (collective) => {
     const container = generateDiv();
 
@@ -102,7 +101,7 @@ export const centerMapOnClickLocation = (map, latlng, addressFieldsFormName) => 
 export const addMainMap = () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
-    const map = L.map('map')
+    const map = L.map('map', {zoomControl: false, attributionControl: false});
     resetView(map)
 
     return map;

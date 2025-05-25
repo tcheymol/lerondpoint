@@ -1,0 +1,35 @@
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.top-right-corner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.top-left-corner {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.bottom-right-corner {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.z-1k {
+  z-index: 1000;
+}
+
+.z-1k1 {
+  z-index: 10000;
+}
+
+.z-max {
+  z-index: 10000000000000;
+}

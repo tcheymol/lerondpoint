@@ -26,3 +26,24 @@
 .grotesk {
   font-family: AkzidenzGrotesk-Medium, sans-serif;
 }
+
+h1, h2, h3, h4, h5, .btn, .nav-link, label {
+  font-family: plaine, sans-serif;
+}
+
+.fs-xs {
+  font-size: 0.75rem !important;
+}
+
+.fs-7 {
+  font-size: 0.95rem !important;
+  line-height: 1.1rem !important;
+}
+
+.word-break {
+  word-wrap: break-word;
+}
+
+.line-height-1 {
+  line-height: 1rem !important;
+}

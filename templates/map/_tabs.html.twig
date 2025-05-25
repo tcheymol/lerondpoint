@@ -1,15 +1,7 @@
-<div class="nav nav-tabs d-flex d-lg-none">
-    <a
-            class="flex-grow-1 text-dark text-center nav-link hover-underline rounded-0
-                    {{ map == 'metropolis' ? 'active bg-light-subtle' : ''}}"
-                    {{ map == 'metropolis' ? 'aria-current="page"' : ''}}
-
-            href="{{ path('collective_index', { map: 'metropolis' }) }}"
-    >{{ 'Metropolis'|trans }}</a>
-    <a
-            class="flex-grow-1 text-dark text-center nav-link hover-underline rounded-0
-                    {{ map == 'droms' ? 'active bg-light-subtle' : ''}}"
-                    {{ map == 'droms' ? 'aria-current="page"' : ''}}
-            href="{{ path('collective_index', { map: 'droms' }) }}"
-    >{{ 'Droms'|trans }}</a>
+{% set switchMap = map == 'droms' ? 'metropolis' : 'droms' %}
+<div class="position-absolute top-right z-1k1" style="top: -42px;">
+    <a href="{{ path('collective_index', {map: switchMap}) }}" class="btn btn-secondary border border-dark border-3">
+        <i class="fa fa-{{ switchMap == 'droms' ? 'globe' : 'earth-europe' }}"></i>
+        {{ switchMap == 'droms' ? 'ViewDroms'|trans : 'ViewMetropolis'|trans }}
+    </a>
 </div>

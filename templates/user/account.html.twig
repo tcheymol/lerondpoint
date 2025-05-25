@@ -1,21 +1,16 @@
 {% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ 'MyAccount'|trans }}{% endblock %}
+{% block cardTitle %}{% endblock %}
 {% block cardPadding %}0{% endblock %}
 {% block cardColor %}light{% endblock %}
-{% block cardAlign %}start{% endblock %}
 
 {% block beforeCard %}
-    <div class="row">
-        <div class="col-6">
-            {{ include('components/_browser_back.html.twig') }}
-        </div>
-        <div class="col-6 text-end">
-            <a class="btn btn-danger" href="{{ path('app_logout') }}">
-                {{ 'SignOut'|trans }}
-                <i class="fa fa-sign-out-alt me-2"></i>
-            </a>
-        </div>
+    <div class="text-end">
+        <a class="btn btn-danger" href="{{ path('app_logout') }}">
+            {{ 'SignOut'|trans }}
+            <i class="fa fa-sign-out-alt me-2"></i>
+        </a>
     </div>
 {% endblock %}
 
