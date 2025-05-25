@@ -31,7 +31,7 @@ class TrackController extends AbstractController
         $tracks = $provider->provide($search);
         shuffle($tracks);
 
-        return $this->render('track/index.html.twig', [ 'tracks' => $tracks,  'form' => $form ]);
+        return $this->render('track/index.html.twig', ['tracks' => $tracks,  'form' => $form]);
     }
 
     #[Route('/track/search', name: 'track_async_search', methods: ['POST'])]
