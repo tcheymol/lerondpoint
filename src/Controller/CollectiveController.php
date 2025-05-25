@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CollectiveController extends AbstractController
 {
-    #[Route('/collective/{map<[\w-]+>}', name: 'collective_index', methods: ['GET'])]
+    #[Route('/collective/map/{map<[\w-]+>}', name: 'collective_index', methods: ['GET'])]
     public function index(MapDataBuilder $mapDataBuilder, ?string $map = 'metropolis'): Response
     {
         return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build(), 'map' => $map]);
