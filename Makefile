@@ -7,7 +7,7 @@ RECTOR        = $(BIN)/rector
 PHPSTAN       = $(BIN)/phpstan
 PHP_CS_FIXER  = $(BIN)/php-cs-fixer
 DEPLOYER      = $(BIN)/dep
-PHP_UNIT      = $(BIN)/simple-phpunit
+PHP_UNIT      = $(BIN)/phpunit
 
 cs: rector fixer stan
 
@@ -24,4 +24,4 @@ deploy:
 	@$(DEPLOYER) deploy
 
 test:
-	@$(PHP_UNIT) tests
+	@$(PHP_UNIT)
