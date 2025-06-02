@@ -8,7 +8,11 @@
     <div class="h-100 text-dark d-flex flex-column" {{ stimulus_controller('video_preview') }}>
         <h3 class="mt-5">{{ 'ShareArchive'|trans }} <span class="d-sm-none">{{ step }}/4</span></h3>
         <h4 class="d-none d-sm-block">{{ step }}/4</h4>
-        {{ include('track/components/_breadcrumb.html.twig', { currentStep: step, steps: constant('App\\Form\\TrackType::STEPS') }) }}
+        {{ include('track/components/_breadcrumb.html.twig', {
+            maxStep: track.creationStep,
+            currentStep: step,
+            steps: constant('App\\Form\\TrackType::STEPS') })
+        }}
         <div class="col-12 col-sm-10 offset-sm-1 p-3 flex-grow-1">
             {% block innerContent %}
             {% endblock %}

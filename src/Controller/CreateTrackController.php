@@ -16,7 +16,7 @@ class CreateTrackController extends AbstractController
     public function new(Request $request, TrackPersister $persister, TrackAttachmentHelper $helper, ?int $step = null): Response
     {
         $track = $persister->fetchSessionTrack();
-        if (!$step || !$track->getCreationStep() || $step > $track->getCreationStep()) {
+        if (!$step && (!$track->getCreationStep() || $step > $track->getCreationStep())) {
             $step = $track->getCreationStep() ?? 1;
         }
 

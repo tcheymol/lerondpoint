@@ -32,7 +32,7 @@ class TrackType extends AbstractType
 
     /** @var int[] */
     public const array steps = [1, 2, 3, 4];
-    public const int stepsCount = 4;
+    public const int STEPS_COUNT = 4;
     public const array STEPS = [
         1 => 'AddFiles',
         2 => 'MainInformations',
@@ -82,6 +82,12 @@ class TrackType extends AbstractType
             ])
             ->add('attachmentsIds', HiddenType::class)
             ->add('captcha', CaptchaType::class, [
+                'expiration' => 300, // 5 minutes
+                'reload' => true,
+                'as_url' => true,
+                'width' => 200,
+                'height' => 100,
+                'length' => 4,
                 'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
             ])
         ;
@@ -173,21 +179,13 @@ class TrackType extends AbstractType
     private function buildButtons(FormBuilderInterface $builder, int $step): void
     {
         $buttonClasses = 'btn hoverable-light btn-lg mt-3';
-        $previousButtonClasses = 1 === $step ? ' btn-danger ' : ' btn-light bg-white ';
         $nextButtonClasses = ' btn-light bg-white ';
-        $previousStep = $step - 1;
         $nextStep = $step + 1;
 
-        $builder->add('back', SubmitType::class, [
-            'label' => 1 === $step ? 'CancelCreation' : 'BackStep',
-            'label_translation_parameters' => ['%step%' => $previousStep, '%total%' => self::stepsCount],
-            'attr' => [
-                'class' => $buttonClasses.$previousButtonClasses,
-                'tabindex' => 1 === $step ? -1 : 0,
-            ],
-        ])->add('next', SubmitType::class, [
-            'label' => $step >= self::stepsCount ? 'ValidateAndSend' : 'ValidateStep',
-            'label_translation_parameters' => ['%step%' => $nextStep, '%total%' => self::stepsCount],
+        $builder
+            ->add('next', SubmitType::class, [
+            'label' => $step >= self::STEPS_COUNT ? 'ValidateAndSend' : 'ValidateStep',
+            'label_translation_parameters' => ['%step%' => $nextStep, '%total%' => self::STEPS_COUNT],
             'attr' => [
                 'class' => $buttonClasses.$nextButtonClasses,
                 'tabindex' => 0,

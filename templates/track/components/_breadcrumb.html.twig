@@ -4,13 +4,13 @@
             {% for index, step in steps %}
                 {% set isCurrent = index == currentStep %}
                 <li class="breadcrumb-item {{ isCurrent ? 'active' : '' }}">
-                    {% if index < currentStep %}
+                    {% if index < maxStep and not isCurrent %}
                         <i class="fa fa-check text-success"></i>
                     {% endif %}
                     <a href="{{ path('track_new', { step: index }) }}"
                        class="{{ isCurrent
                             ? ' text-dark underline '
-                            : index < currentStep
+                            : index < maxStep
                                 ? ' text-success not-underline '
                                 : ' text-muted not-underline disabled cursor-disabled'
                        }}">

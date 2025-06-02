@@ -7,7 +7,7 @@
         <div class="flex-grow-1">
             {{ include('track/new/_step.html.twig', { form, track, step }) }}
         </div>
-        {{ include('track/components/form/_prev_next_buttons.html.twig', { form }) }}
+        {{ include('track/components/form/_prev_next_buttons.html.twig', { form, track, step }) }}
         {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

@@ -1,6 +1,20 @@
+{% set backButtonClasses = 1 == step ? ' btn-danger ' : ' btn-light bg-white ' %}
+{% set previousStep = step - 1 %}
+
+
+
 <div class="row mt-3">
     <div class="col-12 col-sm-6 ms-auto text-end ">
-        {% if form.back is defined %}{{ form_widget(form.back) }}{% endif %}
-        {% if form.next is defined %}{{ form_widget(form.next) }}{% endif %}
+        <a
+                class="btn hoverable-light btn-lg mt-3 {{ backButtonClasses }}"
+                href="{{ path('track_new', {step: previousStep} ) }}"
+                tabindex="-1"
+        >
+            {{ 0 == previousStep
+                ? 'CancelCreation'|trans
+                : 'BackStep'|trans({'%step%': previousStep, '%total%': constant('App\\Form\\TrackType::STEPS_COUNT') })
+            }}
+        </a>
+        {{ form_widget(form.next) }}
     </div>
 </div>
