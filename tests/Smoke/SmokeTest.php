@@ -3,13 +3,12 @@
 namespace App\Tests\Smoke;
 
 use App\Tests\Abstract\AuthenticatedWebTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 class SmokeTest extends AuthenticatedWebTestCase
 {
-    /**
-     * @dataProvider urlProvider
-     */
+    #[DataProvider('urlProvider')]
     public function testPageIsSuccessful(string $url): void
     {
         $this->request(Request::METHOD_GET, $url);
@@ -17,9 +16,7 @@ class SmokeTest extends AuthenticatedWebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    /**
-     * @dataProvider authenticatedUrlProvider
-     */
+    #[DataProvider('authenticatedUrlProvider')]
     public function testAuthenticatedPageIsSuccessful(string $url): void
     {
         $this->login('t@g.c');
@@ -28,14 +25,14 @@ class SmokeTest extends AuthenticatedWebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    public function urlProvider(): \Generator
+    public static function urlProvider(): \Generator
     {
         yield ['/maintenance'];
         yield ['/home'];
         yield ['/login'];
     }
 
-    public function authenticatedUrlProvider(): \Generator
+    public static function authenticatedUrlProvider(): \Generator
     {
         yield ['/sign_up'];
         yield ['/track'];

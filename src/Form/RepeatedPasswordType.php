@@ -27,11 +27,11 @@ class RepeatedPasswordType extends AbstractType
                     'data-action' => 'password-strength#update',
                 ],
                 'constraints' => [
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Veuillez entrer au moins {{ limit }} caractères',
-                        'max' => 4096,
-                    ]),
+                    new Length(
+                        min: 8,
+                        minMessage: 'Veuillez entrer au moins {{ limit }} caractères',
+                        max: 4096,
+                    ),
                     new PasswordStrength(),
                     new NotCompromisedPassword(),
                 ],
