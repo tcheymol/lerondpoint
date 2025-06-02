@@ -19,11 +19,14 @@
 {% endblock %}
 
 {% block afterCard %}
-    <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_sign_up') }}">
-        {{ 'CreateAccount'|trans }}
-    </a>
-    <br/>
-    <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
-        {{ 'ForgotPasswordResetPassword'|trans }}
-    </a>
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_sign_up') }}">
+            {{ 'CreateAccount'|trans }}
+        </a>
+    </div>
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <a class="btn btn-lg btn-primary text-muted mt-3" href="{{ path('app_forgot_password_request') }}">
+            {{ 'ForgotPasswordResetPassword'|trans }}
+        </a>
+    </div>
 {% endblock %}
