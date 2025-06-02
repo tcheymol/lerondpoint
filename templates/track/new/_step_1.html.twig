@@ -18,9 +18,11 @@
 {{ include('track/new/_attachments_widget.html.twig', { track }) }}
 {{ include('track/new/_video_widget.html.twig', { track }) }}
 
-<div class="row mt-4 justify-content-end">
-    <div class="col-12 col-sm-6" id="captcha_container">
-        {{ form_errors(form.captcha) }}
-        {{ form_widget(form.captcha) }}
+{% if form.captcha is defined %}
+    <div class="row mt-4 justify-content-end">
+        <div class="col-12 col-sm-6" id="captcha_container">
+            {{ form_errors(form.captcha) }}
+            {{ form_widget(form.captcha) }}
+        </div>
     </div>
-</div>
+{% endif %}

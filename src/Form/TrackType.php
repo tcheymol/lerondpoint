@@ -50,7 +50,7 @@ class TrackType extends AbstractType
         /** @var int $step */
         $step = $options['step'];
         if (1 === $step) {
-            $this->buildStep1($builder);
+            $this->buildStep1($builder, $options);
         } elseif (2 === $step) {
             $this->buildStep2($builder);
         } elseif (3 === $step) {
@@ -68,7 +68,8 @@ class TrackType extends AbstractType
         ]);
     }
 
-    private function buildStep1(FormBuilderInterface $builder): void
+    /** @param array<string, mixed> $options */
+    private function buildStep1(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
@@ -80,17 +81,20 @@ class TrackType extends AbstractType
                 'required' => false,
                 'attr' => ['placeholder' => 'https://example.com'],
             ])
-            ->add('attachmentsIds', HiddenType::class)
-            ->add('captcha', CaptchaType::class, [
-                'expiration' => 300, // 5 minutes
+            ->add('attachmentsIds', HiddenType::class);
+
+        $track = $options['data'] ?? null;
+        if (!($track instanceof Track && $track->getId())) {
+            $builder->add('captcha', CaptchaType::class, [
+                'expiration' => 300,
                 'reload' => true,
                 'as_url' => true,
                 'width' => 200,
                 'height' => 100,
                 'length' => 4,
                 'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
-            ])
-        ;
+            ]);
+        }
 
         $builder->get('attachmentsIds')->addModelTransformer(new CallbackTransformer(
             fn ($tagsAsArray) => implode(',', $tagsAsArray),
