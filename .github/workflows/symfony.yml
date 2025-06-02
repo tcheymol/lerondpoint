@@ -26,7 +26,7 @@ jobs:
         php-version: '8.4'
     - uses: actions/checkout@v4
     - name: Copy .env.test.local
-      run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+      run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.local');"
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -42,7 +42,7 @@ jobs:
     - name: Install Sass
       run: php bin/console sass:build
     - name: Migrate Database
-      run: php bin/console doctrine:mig:mig -n
+      run: php bin/console doctrine:mig:mig -n --env=test
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DATABASE_URL: sqlite:///%kernel.project_dir%/var/data.test.db
