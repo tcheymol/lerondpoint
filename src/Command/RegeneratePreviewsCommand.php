@@ -7,31 +7,35 @@ use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:regenerate-previews',
     description: 'Add a short description for your command',
 )]
-class RegeneratePreviewsCommand extends Command
+readonly class RegeneratePreviewsCommand
 {
     public function __construct(
-        private readonly TrackRepository $repository,
-        private readonly EntityManagerInterface $em,
-        private readonly AttachmentHelper $attachmentHelper,
+        private TrackRepository $repository,
+        private EntityManagerInterface $em,
+        private AttachmentHelper $attachmentHelper,
     ) {
-        parent::__construct();
     }
 
-    #[\Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
         $io->note('Generating previews');
-
         $io->note(sprintf('%s notes in db', $this->repository->count()));
+
+        $this->regeneratePreviews($io);
+
+        $io->success('Done');
+
+        return Command::SUCCESS;
+    }
+
+    public function regeneratePreviews(SymfonyStyle $io): void
+    {
         $tracks = $this->repository->findMissingPreviews();
         $io->note(sprintf('%s notes missing at least one preview', count($tracks)));
 
@@ -45,9 +49,5 @@ class RegeneratePreviewsCommand extends Command
             }
         }
         $this->em->flush();
-
-        $io->success('Done');
-
-        return Command::SUCCESS;
     }
 }

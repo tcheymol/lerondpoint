@@ -484,7 +484,7 @@ class Track implements BlameableInterface
         return implode(', ', $this->regions->map(fn (Region $region) => (string) $region)->toArray());
     }
 
-    public function getCover (): ?Attachment
+    public function getCover(): ?Attachment
     {
         if ($this->coverAttachment) {
             return $this->coverAttachment;

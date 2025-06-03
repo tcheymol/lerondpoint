@@ -12,14 +12,10 @@ use App\Entity\Year;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(name: 'app:load-data', description: 'Load some necessary data')]
-class LoadDataCommand extends Command
+readonly class LoadDataCommand
 {
     public const array ENTITIES = [
         Action::class => [
@@ -123,21 +119,13 @@ class LoadDataCommand extends Command
         ],
     ];
 
-    public function __construct(private readonly EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
-        parent::__construct();
     }
 
-    #[\Override]
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
-        /** @var QuestionHelper $helper */
-        $helper = $this->getHelper('question');
-        $question = new ChoiceQuestion('Entité :', array_keys(self::ENTITIES), 0);
-        $question->setErrorMessage('Option %s invalide.');
-
-        $answer = $helper->ask($input, $output, $question);
+        $answer = $io->choice('Entité : ', array_keys(self::ENTITIES), 0);
 
         if (is_string($answer) && in_array($answer, array_keys(self::ENTITIES))) {
             $this->loadEntityData($answer, $io);
