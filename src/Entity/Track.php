@@ -51,12 +51,6 @@ class Track implements BlameableInterface
     /** @var string[] */
     public array $attachmentsIds = [];
 
-    #[ORM\Column(nullable: true)]
-    private ?float $lat = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?float $lng = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -110,6 +104,9 @@ class Track implements BlameableInterface
      */
     #[ORM\ManyToMany(targetEntity: Region::class, inversedBy: 'tracks')]
     private Collection $regions;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Attachment $coverAttachment = null;
 
     public function __construct()
     {
@@ -227,30 +224,6 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function getLat(): ?float
-    {
-        return $this->lat;
-    }
-
-    public function setLat(?float $lat): static
-    {
-        $this->lat = $lat;
-
-        return $this;
-    }
-
-    public function getLng(): ?float
-    {
-        return $this->lng;
-    }
-
-    public function setLng(?float $lng): static
-    {
-        $this->lng = $lng;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -331,9 +304,7 @@ class Track implements BlameableInterface
             return $this->getPreviewUrl();
         }
 
-        return $this->attachments
-            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getBestFitUrl($thumbSize))
-            ?->getBestFitUrl($thumbSize);
+        return $this->getCover()?->getBestFitUrl($thumbSize);
     }
 
     public function getMediaType(): ?string
@@ -345,87 +316,14 @@ class Track implements BlameableInterface
         return $this->url ? 'video' : 'image';
     }
 
-    public function width(): ?int
-    {
-        return (int) $this->attachments
-            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getWidth())
-            ?->getWidth();
-    }
-
-    public function height(): ?int
-    {
-        return (int) $this->attachments
-            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getHeight())
-            ?->getHeight();
-    }
-
-    public function getHRatio(): ?int
-    {
-        if (!$this->width() || !$this->height()) {
-            return null;
-        }
-
-        return (int) ($this->height() / $this->width() * 100);
-    }
-
-    public function getVRatio(): ?int
-    {
-        if (!$this->width() || !$this->height()) {
-            return null;
-        }
-
-        return (int) ($this->width() / $this->height() * 100);
-    }
-
     public function isPdf(): bool
     {
         return 'pdf' === $this->getMediaType();
     }
 
-    public function isHorizontal(): bool
-    {
-        if ('pdf' === $this->getMediaType()) {
-            return false;
-        }
-
-        if (!$this->width() || !$this->height()) {
-            return false;
-        }
-
-        return $this->height() < $this->width();
-    }
-
-    public function isSquare(): bool
-    {
-        if ('pdf' === $this->getMediaType()) {
-            return false;
-        }
-
-        if (!$this->width() || !$this->height()) {
-            return false;
-        }
-
-        return $this->height() === $this->width();
-    }
-
-    public function isVertical(): bool
-    {
-        if ('pdf' === $this->getMediaType()) {
-            return true;
-        }
-
-        if (!$this->width() || !$this->height()) {
-            return false;
-        }
-
-        return $this->height() > $this->width();
-    }
-
     public function getMime(): ?string
     {
-        return $this->attachments
-            ->findFirst(fn (int $key, Attachment $attachment): bool => null !== $attachment->getKind())
-            ?->getKind();
+        return $this->getCover()?->getKind() ?: null;
     }
 
     public function isDraft(): ?bool
@@ -532,9 +430,7 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Year>
-     */
+    /** @return Collection<int, Year> */
     public function getYears(): Collection
     {
         return $this->years;
@@ -586,5 +482,26 @@ class Track implements BlameableInterface
     public function getRegionsAsString(): string
     {
         return implode(', ', $this->regions->map(fn (Region $region) => (string) $region)->toArray());
+    }
+
+    public function getCover (): ?Attachment
+    {
+        if ($this->coverAttachment) {
+            return $this->coverAttachment;
+        }
+
+        return $this->attachments->first() ?: null;
+    }
+
+    public function getCoverAttachment(): ?Attachment
+    {
+        return $this->coverAttachment;
+    }
+
+    public function setCoverAttachment(?Attachment $coverAttachment): static
+    {
+        $this->coverAttachment = $coverAttachment;
+
+        return $this;
     }
 }
