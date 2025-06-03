@@ -1,0 +1,24 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'UpdateCover'|trans }}{% endblock%}
+
+{% block cardContent %}
+        <div class="row d-flex justify-content-center">
+            {% for attachment in track.attachments %}
+                {% set previewUrl = preview_attachment(attachment) %}
+                {% set isCover = track.cover == attachment %}
+                <div class="col mt-2 d-flex justify-content-center flex-column align-items-center">
+                    <a class="btn btn-link" href="{{ path('track_update_cover', {id: track.id, newCoverId: attachment.id}) }}">
+                        <div
+                            class="img-thumbnail thumbnail position-relative {{ isCover ? 'border border-4 border-primary' : '' }}"
+                            style="background-image: url('{{ previewUrl }}');"></div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-end mt-2">
+            <a class="btn btn-primary" href="{{ path('track_new') }}">
+                {{ 'ResumeCreation'|trans }}
+            </a>
+        </div>
+{% endblock %}

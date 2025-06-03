@@ -53,9 +53,17 @@ class AttachmentController extends AbstractController
     {
         $ids = explode(',', $request->query->get('ids') ?? '');
         $attachments = $repository->findByIdIn($ids);
+        $cover = null;
+
+        if (count($attachments) > 0) {
+            $track = $attachments[0]->getTrack();
+
+            $cover = $track ? $track->getCover() : $attachments[0];
+        }
 
         return $this->render('components/upload/_attachments_previews.html.twig', [
             'attachments' => $attachments,
+            'cover' => $cover,
         ]);
     }
 }

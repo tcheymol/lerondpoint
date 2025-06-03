@@ -3,11 +3,17 @@
         <div class="row">
             {% for attachment in attachments %}
                 {% set previewUrl = preview_attachment(attachment) %}
+                {% set isCover = cover and cover.id == attachment.id %}
                 <div class="col mt-2">
                         <div class="img-thumbnail thumbnail position-relative" style="background-image: url('{{ previewUrl }}');">
-                                <a href="{{ path('delete_attachment', { id: attachment.id, attachmentIds }) }}" class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px;">
-                                    <i class="fa-solid fa-trash-alt"></i>
-                                </a>
+                            {% if isCover %}
+                                <div class="alert alert-primary bottom-left w-100 mb-0 p-1 rounded-1">
+                                    {{ 'Cover'|trans }}
+                                </div>
+                            {% endif %}
+                            <a href="{{ path('delete_attachment', { id: attachment.id, attachmentIds }) }}" class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px;">
+                                <i class="fa-solid fa-trash-alt"></i>
+                            </a>
                         </div>
                 </div>
             {% endfor %}

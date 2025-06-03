@@ -39,6 +39,7 @@ Coordinates Y: Coordonnées Y
 CopyLink: Copier un lien vidéo
 CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
+Cover: Couverture
 Create: Créer
 CreateAccount: Pas de compte ? Créez-en un ici
 CreateCollective: Ajouter un groupe actif
@@ -152,11 +153,13 @@ ResetPasswordEmailSentPitch: Si un compte avec correspondant à votre email exis
 ResetPasswordEmailSubject: "[Le Rond-point] Réinitialisation de mot de passe"
 ResetPasswordLinkPitch: Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien ci-dessous
 ResetPasswordRetryPitch: Si vous ne recevez pas d'email, veuillez vérifier votre dossier de courrier indésirable ou
+ResumeCreation: Reprendre la création
 Retry: réessayer
 ScrollToStart: Scroller pour commencer
 Search: Rechercher...
 SeeYouSoon: À tout de suite sur Le Rond-point !
 SendPasswordRequestEmail: Envoyer un email de réinitialisation
+SetAsCover: Définir comme couverture
 ShareArchive: Ajouter une trace
 ShareTrack: Vous souhaitez ajouter une trace ?
 ShareTrackWay1: Importer un fichier (PDF ou image uniquement) depuis votre ordinateur ou votre téléphone.
@@ -194,6 +197,7 @@ TracksListSubtitle: Retrouvez ici les traces du mouvement qui ont été déposé
 TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
 Update: Mettre à jour
+UpdateCover: Choisir l'image de couverture
 UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par

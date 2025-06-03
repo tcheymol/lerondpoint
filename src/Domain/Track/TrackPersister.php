@@ -5,6 +5,7 @@ namespace App\Domain\Track;
 use App\Domain\Security\SessionAwareTrait;
 use App\Entity\RejectionCause;
 use App\Entity\Track;
+use App\Repository\AttachmentRepository;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,6 +22,7 @@ readonly class TrackPersister
         private RequestStack $requestStack,
         private TrackRepository $trackRepository,
         private AuthorizationCheckerInterface $authorizationChecker,
+        private AttachmentRepository $attachmentRepository,
     ) {
     }
 
@@ -86,5 +88,18 @@ readonly class TrackPersister
     private function clearSessionTrack(): void
     {
         $this->requestStack->getSession()->remove('being-created-track-id');
+    }
+
+    public function updateCover(Track $track, ?int $newCoverId): void
+    {
+        if (!$newCoverId) {
+            return;
+        }
+
+        $cover = $this->attachmentRepository->find($newCoverId);
+        if ($cover) {
+            $track->setCoverAttachment($cover);
+            $this->em->flush();
+        }
     }
 }

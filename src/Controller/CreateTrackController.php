@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Domain\Images\ThumbSize;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
+use App\Entity\Track;
 use App\Form\TrackType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,7 @@ class CreateTrackController extends AbstractController
     public function new(Request $request, TrackPersister $persister, TrackAttachmentHelper $helper, ?int $step = null): Response
     {
         $track = $persister->fetchSessionTrack();
-        if (!$step && (!$track->getCreationStep() || $step > $track->getCreationStep())) {
+        if (!$step || $step > $track->getCreationStep()) {
             $step = $track->getCreationStep() ?? 1;
         }
 
@@ -44,5 +45,13 @@ class CreateTrackController extends AbstractController
             'step' => $step,
             'track' => $helper->hydrateTrackWithUrl($track, 4 === $step ? ThumbSize::Full : ThumbSize::Medium),
         ]);
+    }
+
+    #[Route('/track/{id<\d+>}/update_cover', name: 'track_update_cover', methods: ['GET'])]
+    public function updateCover(Request $request, Track $track, TrackPersister $persister): Response
+    {
+        $persister->updateCover($track, $request->query->getInt('newCoverId'));
+
+        return $this->render('track/new/update_preview.html.twig', ['track' => $track]);
     }
 }

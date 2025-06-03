@@ -194,9 +194,7 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Attachment>
-     */
+    /** @return Collection<int, Attachment> */
     public function getAttachments(): Collection
     {
         return $this->attachments;
