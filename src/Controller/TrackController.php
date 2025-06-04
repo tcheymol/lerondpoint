@@ -61,7 +61,7 @@ class TrackController extends AbstractController
     public function carousel(Track $track, TrackAttachmentHelper $helper): Response
     {
         return $this->render('track/carousel.html.twig', [
-            'track' => $helper->hydrateTrackWithUrl($track, ThumbSize::Big),
+            'track' => $helper->hydrateTrackWithUrl($track, ThumbSize::Full),
         ]);
     }
 
