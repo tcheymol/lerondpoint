@@ -232,4 +232,7 @@ return [
     'zxcvbn' => [
         'version' => '4.4.2',
     ],
+    '@glidejs/glide' => [
+        'version' => '3.7.1',
+    ],
 ];

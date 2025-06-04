@@ -1,0 +1,9 @@
+<div
+    class="position-relative bg-dark slide d-flex justify-content-center h-100"
+    style="z-index: 10001;"
+>
+    <div class="glide" {{ stimulus_controller('glide') }}>
+        {{ include('track/components/glider/_glider_images.html.twig', {track}) }}
+        {{ include('track/components/glider/_glider_controls.html.twig', {track}) }}
+    </div>
+</div>

@@ -5,8 +5,11 @@ import { Controller } from '@hotwired/stimulus';
 * See https://symfony.com/bundles/StimulusBundle/current/index.html#lazy-stimulus-controllers
 */
 export default class extends Controller {
+    static values = {
+        path: String,
+    };
+
     connect() {
-        this.handleKeyDown = this.handleKeyDown.bind(this)
         document.addEventListener("keydown", this.handleKeyDown)
     }
 
@@ -14,9 +17,11 @@ export default class extends Controller {
         document.removeEventListener("keydown", this.handleKeyDown)
     }
 
-    handleKeyDown(event) {
-        if (event.key === "Escape" || event.key === "Esc") {
-            window.history.back()
+    handleKeyDown = (event) => {
+        if (event.key === "Escape" || event.key === "Esc"|| event.key === "r") {
+            event.stopPropagation()
+            event.preventDefault()
+            window.location.replace(this.pathValue);
         }
     }
 }

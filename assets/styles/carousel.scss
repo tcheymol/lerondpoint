@@ -1,17 +1,4 @@
-.carousel-indicators {
-  top: 10px;
-
-  button[data-bs-target] {
-    height: 15px !important;
-    border-radius: 15px !important;
-    width: 15px;
-    background-clip: unset;
-    background: $secondary;
-    border: 2px solid $dark;
-  }
-}
-
-.carousel-item {
+.glide {
     object {
         height: 100%;
     }
