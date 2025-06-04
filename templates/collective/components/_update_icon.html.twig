@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center">
+    {% set collectiveIconPath = collective is not null ? collective.iconPath : null %}
+    <div id="autocompleteIconPreviewImage" class="{{ collectiveIconPath is null ? 'd-none' : '' }} position-relative" style="width: 200px;">
+        <div class="d-flex justify-content-center">
+            <button
+                    type="button"
+                    class="btn btn-link text-dark position-absolute start-0 w-100 btn"
+                    aria-label="Change icon"
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateIconModal"
+            >
+                {{ 'UpdateIcon'|trans }}
+            </button>
+            <img src="{{ collectiveIconPath is null ? '' : collectiveIconPath }}" class="mt-5" style="width: 150px;" alt="collective_icon" />
+            {{ include('collective/components/_update_icon_modal.html.twig') }}
+        </div>
+    </div>
+</div>

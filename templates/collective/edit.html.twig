@@ -4,7 +4,9 @@
 {% block bodybg %}secondary{% endblock %}
 
 {% block cardContent %}
-    {{ include('collective/_form.html.twig', {buttonLabel: 'Update'|trans}) }}
+    {{ include('collective/components/_update_icon.html.twig', {collective}) }}
+
+    {{ include('collective/_form.html.twig', {form, buttonLabel: 'Update'|trans}) }}
 
     {{ include('collective/_delete_form.html.twig') }}
 {% endblock %}
