@@ -3,7 +3,10 @@
 {% block title %}{{ 'Track'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="text-dark vw-100 vh-100 position-absolute top-0 start-0 z-1k1">
+    <div
+        class="text-dark vw-100 vh-100 position-absolute top-0 start-0 z-1k1"
+        {{ stimulus_controller('back_on_escape') }}
+    >
         {{ include('track/components/_carousel.html.twig', {track}) }}
     </div>
 {% endblock %}

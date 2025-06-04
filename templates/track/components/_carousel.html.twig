@@ -4,9 +4,6 @@
         data-bs-ride="carousel"
         data-bs-touch="true"
      style="z-index: 10001;">
-    <div class="position-absolute top-0 start-0 bg-dark p-2 ps-5" style="z-index: 10002;">
-        <a class="btn btn-dark" href="{{ path('track_show', { id: track.id }) }}"><i class="fa fa-xmark fs-1"></i></a>
-    </div>
     <div class="carousel-indicators">
         {% for attachment in track.attachments %}
             <button
@@ -19,7 +16,7 @@
             ></button>
         {% endfor %}
     </div>
-    <div class="carousel-inner d-flex align-items-center" style="padding-top: 50px;">
+    <div class="carousel-inner d-flex align-items-center">
         {% for attachment in track.attachments %}
             <div class="carousel-item {{ loop.first ? 'active' : '' }} ">
                 {{ include('attachment/_attachment.html.twig', {attachment}) }}
