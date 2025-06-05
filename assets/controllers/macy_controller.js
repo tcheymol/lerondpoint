@@ -1,9 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import Glide from '@glidejs/glide'
-
-import '../styles/glide.code.min.css';
-import '../styles/glide.theme.min.css';
-
+import Macy from "macy";
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -11,6 +7,14 @@ import '../styles/glide.theme.min.css';
 */
 export default class extends Controller {
     connect() {
-        new Glide('.glide').mount()
+        Macy({
+            container: this.element,
+            columns: 2,
+            margin: 16,
+            breakAt: {
+                768: 2,
+                480: 1
+            }
+        })
     }
 }

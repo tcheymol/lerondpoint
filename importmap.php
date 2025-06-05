@@ -232,7 +232,14 @@ return [
     'zxcvbn' => [
         'version' => '4.4.2',
     ],
-    '@glidejs/glide' => [
-        'version' => '3.7.1',
+    'photoswipe' => [
+        'version' => '5.4.4',
+    ],
+    'photoswipe/dist/photoswipe.min.css' => [
+        'version' => '5.4.4',
+        'type' => 'css',
+    ],
+    'macy' => [
+        'version' => '2.5.1',
     ],
 ];

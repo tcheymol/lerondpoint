@@ -1,9 +1,0 @@
-<div data-glide-el="track" class="glide__track">
-    <ul class="glide__slides">
-        {% for attachment in track.attachments %}
-            <li class="glide__slide">
-                {{ include('attachment/_attachment.html.twig', {attachment}) }}
-            </li>
-        {% endfor %}
-    </ul>
-</div>
