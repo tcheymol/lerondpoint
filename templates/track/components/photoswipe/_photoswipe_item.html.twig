@@ -1,0 +1,23 @@
+{% set isCover = track.cover == attachment and track.attachments|length > 1  %}
+{% set previewUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
+<a href="{{ previewUrl }}"
+   data-pswp-width="{{ attachment.width }}"
+   data-pswp-height="{{ attachment.height }}"
+   data-cropped="true"
+   target="_blank"
+   class="{{ isCover ? 'border border-black border-5 ' : '' }}"
+
+>
+    {% if attachment.url %}
+        <div class="track-preview-iframe-container w-100 h-100">
+            {{ attachment.videoEmbed|raw }}
+        </div>
+    {% else %}
+        <img src="{{ previewUrl }}" alt="Attachment" class="w-100" />
+    {% endif %}
+    {% if isCover%}
+        <div class="alert alert-primary bottom-left w-100 mb-0 p-1 rounded-1">
+            {{ 'Cover'|trans }}
+        </div>
+    {% endif %}
+</a>

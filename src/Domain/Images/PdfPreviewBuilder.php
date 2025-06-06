@@ -11,11 +11,10 @@ class PdfPreviewBuilder
                 if ('application/pdf' != \mime_content_type($source)) {
                     return null;
                 }
+                $size = $size * 4;
 
                 $separator = '/';
-                $target = dirname((string) $source).$separator.$target;
-                $size = intval($size);
-                $page = intval($page);
+                $target = dirname($source).$separator.$target;
 
                 --$page;
                 if ($page < 0) {
@@ -54,9 +53,7 @@ class PdfPreviewBuilder
                 }
 
                 $img->writeimage($target);
-
                 $img->clear();
-                $img->destroy();
 
                 if (file_exists($target)) {
                     return $target;

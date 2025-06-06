@@ -16,7 +16,7 @@ readonly class ThumbnailGenerator
         }
 
         if ('application/pdf' === $extension) {
-            return $this->buildPdfThumbnail($file);
+            return $this->buildPdfThumbnail($file, $size);
         } elseif (getimagesize($file->getPathname())) {
             return $this->buildImageThumbnail($file->getRealPath(), $size);
         } else {
@@ -24,14 +24,12 @@ readonly class ThumbnailGenerator
         }
     }
 
-    private function buildPdfThumbnail(File $file): ?string
+    private function buildPdfThumbnail(File $file, int $size = 256): ?string
     {
-        $originalFilename = $file instanceof UploadedFile
-            ? $file->getClientOriginalName()
-            : $file->getFilename();
-        $thumbnailName = 'thumbnail-'.$originalFilename;
+        $originalFilename = $file instanceof UploadedFile ? $file->getClientOriginalName() : $file->getFilename();
+        $thumbnailPath = sprintf('thumbnail-%s.png', $originalFilename);
 
-        return PdfPreviewBuilder::genPdfThumbnail($file->getPathname(), $thumbnailName.'.png');
+        return PdfPreviewBuilder::genPdfThumbnail($file->getPathname(), $thumbnailPath, $size);
     }
 
     private function buildImageThumbnail(string $imagePath, int $size = 255): ?string

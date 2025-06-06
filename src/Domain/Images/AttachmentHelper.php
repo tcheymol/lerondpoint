@@ -45,34 +45,9 @@ readonly class AttachmentHelper
         }
     }
 
-    public function hydrateWithUrl(Attachment $attachment, ?ThumbSize $thumbSize = ThumbSize::Small): void
+    public function getThumbUrl(Attachment $attachment, ThumbSize $size): ?string
     {
-        match ($thumbSize) {
-            ThumbSize::Medium => $this->hydrateMediumThumbnailUrl($attachment),
-            ThumbSize::Big => $this->hydrateBigThumbnailUrl($attachment),
-            ThumbSize::Full => $this->hydratePreSignedUrl($attachment),
-            default => $this->hydrateSmallThumbnailUrl($attachment),
-        };
-    }
-
-    private function hydratePreSignedUrl(Attachment $attachment): void
-    {
-        $attachment->objectUrl = $this->s3Adapter->getPreSignedUrl($attachment->getObjectId());
-    }
-
-    private function hydrateSmallThumbnailUrl(Attachment $attachment): void
-    {
-        $attachment->smallThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getThumbnailObjectId());
-    }
-
-    private function hydrateMediumThumbnailUrl(Attachment $attachment): void
-    {
-        $attachment->mediumThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getMediumThumbnailObjectId());
-    }
-
-    private function hydrateBigThumbnailUrl(Attachment $attachment): void
-    {
-        $attachment->bigThumbnailUrl = $this->s3Adapter->getPreSignedUrl($attachment->getBigThumbnailObjectId());
+        return $this->s3Adapter->getPreSignedUrl($attachment->getImageObjectId($size));
     }
 
     /** @throws \Exception */
@@ -85,9 +60,9 @@ readonly class AttachmentHelper
     /** @throws \Exception */
     private function uploadThumbnails(UploadedFile $file, Attachment $attachment): void
     {
-        $attachment->setThumbnailObjectId($this->uploadThumbnail($file, $attachment));
-        $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($file, $attachment, 512));
-        $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, $attachment, 1024));
+        $attachment->setThumbnailObjectId($this->uploadThumbnail($file));
+        $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($file, 512));
+        $attachment->setBigThumbnailObjectId($this->uploadThumbnail($file, 1024));
     }
 
     /** @throws \Exception */
@@ -102,18 +77,18 @@ readonly class AttachmentHelper
         $originalFile = new UploadedFile($tempFilePath, $tempFilePath);
 
         if (!$attachment->getThumbnailObjectId()) {
-            $attachment->setThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment));
+            $attachment->setThumbnailObjectId($this->uploadThumbnail($originalFile));
         }
         if (!$attachment->getMediumThumbnailObjectId()) {
-            $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment, 512));
+            $attachment->setMediumThumbnailObjectId($this->uploadThumbnail($originalFile, 512));
         }
         if (!$attachment->getBigThumbnailObjectId()) {
-            $attachment->setBigThumbnailObjectId($this->uploadThumbnail($originalFile, $attachment, 1024));
+            $attachment->setBigThumbnailObjectId($this->uploadThumbnail($originalFile, 1024));
         }
     }
 
     /** @throws \Exception */
-    private function uploadThumbnail(UploadedFile $file, Attachment $attachment, int $size = 255): ?string
+    private function uploadThumbnail(UploadedFile $file, int $size = 255): ?string
     {
         $thumbnailPath = $this->thumbnailGenerator->buildThumbnail($file, $size);
         if ($thumbnailPath) {
@@ -131,6 +106,8 @@ readonly class AttachmentHelper
         $imageInfo = getimagesize($file);
         if ($imageInfo) {
             $attachment->setWidth((string) $imageInfo[0])->setHeight((string) $imageInfo[1]);
+        } elseif ('application/pdf' === $attachment->getKind()) {
+            $attachment->setWidth('595')->setHeight('842');
         }
     }
 

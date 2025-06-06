@@ -58,12 +58,32 @@ class Attachment implements BlameableInterface
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $width = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $previewUrl = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $videoEmbed = null;
+
     public static function fromFile(UploadedFile $file): self
     {
         return new Attachment()
             ->setExtension((string) $file->guessExtension())
             ->setKind($file->getMimeType())
             ->setSize($file->getSize());
+    }
+
+    public static function fromVideoData(string $url, string $previewUrl, string $videoEmbed): self
+    {
+        return new Attachment()
+            ->setUrl($url)
+            ->setExtension('mp4')
+            ->setKind('video')
+            ->setSize(0)
+            ->setPreviewUrl($previewUrl)
+            ->setVideoEmbed($videoEmbed);
     }
 
     /** @return string[] */
@@ -77,18 +97,18 @@ class Attachment implements BlameableInterface
         ], fn (?string $objectId) => null !== $objectId);
     }
 
-    public function getUrl(?ThumbSize $size = ThumbSize::Small): ?string
+    public function getImageObjectId(?ThumbSize $size = ThumbSize::Small): ?string
     {
         return match ($size) {
-            ThumbSize::Medium => $this->mediumThumbnailUrl,
-            ThumbSize::Big => $this->bigThumbnailUrl,
-            ThumbSize::Full => $this->objectUrl,
-            default => $this->smallThumbnailUrl,
+            ThumbSize::Medium => $this->mediumThumbnailObjectId,
+            ThumbSize::Big => $this->bigThumbnailObjectId,
+            ThumbSize::Full => $this->objectId,
+            default => $this->thumbnailObjectId,
         };
     }
 
     /** @return array<string, ?string> */
-    private function getUrls(): array
+    private function getImageUrls(): array
     {
         return [
             ThumbSize::Small->value => $this->smallThumbnailUrl,
@@ -98,16 +118,38 @@ class Attachment implements BlameableInterface
         ];
     }
 
-    public function getBestFitUrl(?ThumbSize $size = null): ?string
+    public function getImageUrl(ThumbSize $size = ThumbSize::Small): ?string
+    {
+        if ($this->getPreviewUrl()) {
+            return $this->getVideoPreviewUrl($size);
+        }
+
+        return match ($size) {
+            ThumbSize::Medium => $this->mediumThumbnailUrl,
+            ThumbSize::Big => $this->bigThumbnailUrl,
+            ThumbSize::Full => $this->objectUrl,
+            default => $this->smallThumbnailUrl,
+        };
+    }
+
+    private function getVideoPreviewUrl(ThumbSize $size): ?string
+    {
+        return match ($size) {
+            ThumbSize::Full => $this->url,
+            default => $this->previewUrl,
+        };
+    }
+
+    public function getBestFitUrl(?ThumbSize $size = ThumbSize::Small): ?string
     {
         if ($size) {
-            $exactSizeUrl = $this->getUrl($size);
+            $exactSizeUrl = $this->getImageUrl($size);
             if (null === $exactSizeUrl) {
                 return $this->getBestFitUrl();
             }
         }
 
-        return array_find($this->getUrls(), fn ($url) => null !== $url);
+        return array_find($this->getImageUrls(), fn ($url) => null !== $url);
     }
 
     public function getId(): ?int
@@ -238,5 +280,41 @@ class Attachment implements BlameableInterface
     public function hasMissingThumbnail(): bool
     {
         return !$this->thumbnailObjectId || !$this->mediumThumbnailObjectId || !$this->bigThumbnailObjectId;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getPreviewUrl(): ?string
+    {
+        return $this->previewUrl;
+    }
+
+    public function setPreviewUrl(?string $previewUrl): static
+    {
+        $this->previewUrl = $previewUrl;
+
+        return $this;
+    }
+
+    public function getVideoEmbed(): ?string
+    {
+        return $this->videoEmbed;
+    }
+
+    public function setVideoEmbed(?string $videoEmbed): static
+    {
+        $this->videoEmbed = $videoEmbed;
+
+        return $this;
     }
 }

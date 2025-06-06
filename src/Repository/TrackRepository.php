@@ -17,20 +17,10 @@ class TrackRepository extends ServiceEntityRepository
         parent::__construct($registry, Track::class);
     }
 
-    public function findPreviousValidatedTrack(Track $track): ?Track
+    public function findAdjacentValidatedTrackId(Track $track, Order $order): ?int
     {
-        return $this->findAdjacentValidatedTrack($track, Order::Descending);
-    }
-
-    public function findNextValidatedTrack(Track $track): ?Track
-    {
-        return $this->findAdjacentValidatedTrack($track, Order::Ascending);
-    }
-
-    private function findAdjacentValidatedTrack(Track $track, Order $order): ?Track
-    {
-        /** @var ?Track $track */
-        $track = $this->createQueryBuilder('t')
+        /** @var Track|null $sibling */
+        $sibling = $this->createQueryBuilder('t')
             ->andWhere(sprintf('t.id %s :currentId', $order->value === Order::Ascending->value ? '>' : '<'))
             ->andWhere('t.validated = 1')
             ->setParameter('currentId', $track->getId())
@@ -39,7 +29,7 @@ class TrackRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
 
-        return $track;
+        return $sibling?->getId();
     }
 
     /** @return Track[] */

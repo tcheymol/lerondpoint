@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Domain\Images\ThumbSize;
 use App\Domain\Search\SearchFactory;
 use App\Domain\Search\SearchType;
-use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
 use App\Form\TrackType;
@@ -49,11 +47,8 @@ class TrackController extends AbstractController
     }
 
     #[Route('/track/{id<\d+>}', name: 'track_show', methods: ['GET'])]
-    public function show(Track $track, TrackAttachmentHelper $helper, TrackProvider $provider): Response
+    public function show(Track $track): Response
     {
-        $track = $helper->hydrateTrackWithUrl($track, ThumbSize::Full);
-        $track = $provider->hydrateWithPreviousAndNextIds($track);
-
         return $this->render('track/show.html.twig', ['track' => $track]);
     }
 

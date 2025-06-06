@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Domain\Images\ThumbSize;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Entity\Track;
@@ -43,7 +42,7 @@ class CreateTrackController extends AbstractController
         return $this->render('track/new/index.html.twig', [
             'form' => $form,
             'step' => $step,
-            'track' => $helper->hydrateTrackWithUrl($track, 4 === $step ? ThumbSize::Full : ThumbSize::Medium),
+            'track' => $track,
         ]);
     }
 

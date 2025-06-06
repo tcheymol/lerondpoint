@@ -1,4 +1,4 @@
-{% set previewUrl = preview_track(track) %}
+{% set previewUrl = get_track_preview_url(track) %}
 
 {% if previewUrl is defined %}
     <img src="{{ previewUrl }}" alt="track_preview" class="border-default w-100 h-auto" />

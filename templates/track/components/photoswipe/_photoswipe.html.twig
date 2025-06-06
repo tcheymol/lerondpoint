@@ -1,28 +1,12 @@
 <div
-    {{
-        stimulus_controller('photoswipe')
-        |stimulus_controller('macy')
+    {{ track.attachments|length > 1
+        ? stimulus_controller('photoswipe')|stimulus_controller('macy')
+        : stimulus_controller('photoswipe')
     }}
     id="trackPhotoswipe"
-    class="pswp-gallery pswp-gallery--single-column"
+    class="pswp-gallery pswp-gallery--single-column h-100"
 >
     {% for attachment in track.attachments %}
-        {% set isCover = track.cover == attachment %}
-        {% set previewUrl = preview_attachment(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
-        <a href="{{ previewUrl }}"
-           data-pswp-width="{{ attachment.width }}"
-           data-pswp-height="{{ attachment.height }}"
-           data-cropped="true"
-           target="_blank"
-           class="{{ isCover ? 'border border-black border-5 ' : '' }}"
-
-        >
-            <img src="{{ previewUrl }}" alt="Attachment" class="w-100" />
-            {% if isCover %}
-                <div class="alert alert-primary bottom-left w-100 mb-0 p-1 rounded-1">
-                    {{ 'Cover'|trans }}
-                </div>
-            {% endif %}
-        </a>
+        {{ include('track/components/photoswipe/_photoswipe_item.html.twig', {attachment}) }}
     {% endfor %}
 </div>

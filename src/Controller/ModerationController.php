@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Domain\Images\ThumbSize;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
@@ -26,10 +25,8 @@ class ModerationController extends AbstractController
     }
 
     #[Route('/moderation/{id<\d+>}', name: 'moderate_track', methods: ['GET'])]
-    public function moderate(Track $track, TrackAttachmentHelper $helper, TrackProvider $provider): Response
+    public function moderate(Track $track, TrackAttachmentHelper $helper): Response
     {
-        $track = $helper->hydrateTrackWithUrl($track, ThumbSize::Full);
-
         return $this->render('track/moderation/moderate.html.twig', ['track' => $track]);
     }
 

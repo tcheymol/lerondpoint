@@ -2,7 +2,7 @@
         {% set attachmentIds = attachments|map(a => a.id)|join(',') %}
         <div class="row">
             {% for attachment in attachments %}
-                {% set previewUrl = preview_attachment(attachment) %}
+                {% set previewUrl = get_preview_url(attachment) %}
                 {% set isCover = cover and cover.id == attachment.id %}
                 <div class="col mt-2">
                         <div class="img-thumbnail thumbnail position-relative" style="background-image: url('{{ previewUrl }}');">

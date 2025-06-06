@@ -4,38 +4,37 @@ namespace App\Twig\Runtime;
 
 use App\Domain\Images\AttachmentHelper;
 use App\Domain\Images\ThumbSize;
-use App\Domain\Track\TrackAttachmentHelper;
 use App\Entity\Attachment;
 use App\Entity\Track;
+use App\Repository\TrackRepository;
+use Doctrine\Common\Collections\Order;
 use Twig\Extension\RuntimeExtensionInterface;
 
 readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private TrackAttachmentHelper $trackHelper,
         private AttachmentHelper $attachmentHelper,
+        private TrackRepository $repository,
     ) {
     }
 
-    public function computePreviewUrl(Track $track, ThumbSize $size = ThumbSize::Small): string
+    public function getTrackPreviewUrl(Track $track, ThumbSize $size = ThumbSize::Small): ?string
     {
-        if ($track->getUrl()) {
-            return $track->getUrl();
-        }
-
-        $this->trackHelper->hydrateTrackWithUrl($track, $size);
-
-        return $track->getThumbnailUrl($size) ?? '';
+        return $track->getCover() ? $this->getPreviewUrl($track->getCover(), $size) : null;
     }
 
-    public function computeAttachmentPreviewUrl(Attachment $attachment, ThumbSize $size = ThumbSize::Small): string
+    public function getPreviewUrl(Attachment $attachment, ThumbSize $size = ThumbSize::Small): ?string
     {
-        if ($attachment->getUrl()) {
-            return $attachment->getUrl();
-        }
+        return $attachment->getImageUrl($size) ?: $this->attachmentHelper->getThumbUrl($attachment, $size);
+    }
 
-        $this->attachmentHelper->hydrateWithUrl($attachment, $size);
+    public function getPreviousTrackId(Track $track): ?int
+    {
+        return $this->repository->findAdjacentValidatedTrackId($track, Order::Descending);
+    }
 
-        return $attachment->getUrl($size) ?? '';
+    public function getNextTrackId(Track $track): ?int
+    {
+        return $this->repository->findAdjacentValidatedTrackId($track, Order::Ascending);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Track;
 
+use App\Entity\Attachment;
 use App\Entity\Track;
 use Embed\Embed;
 use Embed\Extractor;
@@ -15,10 +16,14 @@ readonly class TrackVideoHelper
     public function handleVideo(Track $track): void
     {
         $videoData = $this->getVideoData($track);
+        $preview = $this->getVideoPreview($videoData) ?? '';
+        $embed = $this->getVideoEmbed($videoData) ?? '';
 
+        $attachment = Attachment::fromVideoData($track->getUrl() ?? '', $preview, $embed);
         $track
-            ->setPreviewUrl($this->getVideoPreview($videoData))
-            ->setVideoEmbed($this->getVideoEmbed($videoData));
+            ->setPreviewUrl($preview)
+            ->setVideoEmbed($embed)
+            ->addAttachment($attachment);
     }
 
     private function getVideoData(Track $track): ?Extractor

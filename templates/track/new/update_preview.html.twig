@@ -6,7 +6,7 @@
 {% block cardContent %}
         <div class="row d-flex justify-content-center">
             {% for attachment in track.attachments %}
-                {% set previewUrl = preview_attachment(attachment) %}
+                {% set previewUrl = get_preview_url(attachment) %}
                 {% set isCover = track.cover == attachment %}
                 <div class="col mt-2 d-flex justify-content-center flex-column align-items-center">
                     <a class="btn btn-link" href="{{ path('track_update_cover', {id: track.id, newCoverId: attachment.id}) }}">
