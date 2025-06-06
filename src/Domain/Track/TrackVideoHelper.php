@@ -15,11 +15,14 @@ readonly class TrackVideoHelper
 
     public function handleVideo(Track $track): void
     {
+        if (!$track->getUrl()) {
+            return;
+        }
         $videoData = $this->getVideoData($track);
         $preview = $this->getVideoPreview($videoData) ?? '';
         $embed = $this->getVideoEmbed($videoData) ?? '';
 
-        $attachment = Attachment::fromVideoData($track->getUrl() ?? '', $preview, $embed);
+        $attachment = Attachment::fromVideoData($track->getUrl(), $preview, $embed);
         $track
             ->setPreviewUrl($preview)
             ->setVideoEmbed($embed)
