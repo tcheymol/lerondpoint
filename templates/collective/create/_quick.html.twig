@@ -1,0 +1,29 @@
+<div {{ stimulus_controller('reveal') }} class="alert alert-secondary mt-2 mb-0 p-2">
+    <div {{ stimulus_target('reveal', 'trigger') }}>
+        <span>{{ 'YouDontFindYourGroup'|trans }}</span><br/>
+        <button  class="btn btn-secondary mt-2"  type="button" {{ stimulus_action('reveal', 'reveal') }}>
+            {{ 'CreateCollectiveNow'|trans }}
+        </button>
+    </div>
+
+    <div
+        {{ stimulus_controller('get_form', {path: path('collective_quick_new')})
+        |stimulus_target('reveal', 'hidden') }}
+        class="hidden"
+    >
+        <label for="name" class="d-none"></label>
+        <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control mt-3"
+            placeholder="{{ 'CollectiveName'|trans }}"
+            {{ stimulus_target('get_form', 'input') }}
+        />
+        <div class="text-end">
+            <button class="btn btn-secondary mt-2" type="button" {{ stimulus_action('get_form', 'submit') }}>
+                {{ 'Create'|trans }}
+            </button>
+        </div>
+    </div>
+</div>

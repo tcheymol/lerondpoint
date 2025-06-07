@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Entity\Track;
 use App\Form\TrackType;
+use App\Repository\CollectiveRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,9 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class CreateTrackController extends AbstractController
 {
     #[Route('/track/new/{step<\d+>}', name: 'track_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrackPersister $persister, TrackAttachmentHelper $helper, ?int $step = null): Response
+    public function new(Request $request, TrackPersister $persister, CollectiveRepository $repository, ?int $step = null): Response
     {
         $track = $persister->fetchSessionTrack();
+        $createdCollectiveId = $request->query->getInt('createdCollectiveId');
+        if ($createdCollectiveId) {
+            $track->setCollective($repository->find($createdCollectiveId));
+        }
         if (!$step || $step > $track->getCreationStep()) {
             $step = $track->getCreationStep() ?? 1;
         }

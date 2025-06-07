@@ -1,6 +1,7 @@
 {% extends 'track/new/step_template.html.twig' %}
 
 {% block step %}{{ step }}{% endblock %}
+
 {% block innerContent %}
     {{ form_start(form, { attr: { class: 'h-100 d-flex flex-column' }}) }}
         {{ form_errors(form) }}

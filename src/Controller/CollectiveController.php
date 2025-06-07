@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CollectiveController extends AbstractController
 {
@@ -22,10 +23,27 @@ class CollectiveController extends AbstractController
         return $this->render('map/index.html.twig', ['collectives' => $mapDataBuilder->build(), 'map' => $map]);
     }
 
-    #[Route('/collective/new/disclaimer', name: 'collective_new_disclaimer')]
+    #[Route('/collective/quick_new', name: 'collective_quick_new', methods: ['GET'])]
+    public function quickNew(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    {
+        $name = $request->query->get('name');
+        if ($name) {
+            $collective = Collective::createQuick($name);
+            $em->persist($collective);
+            $em->flush();
+
+            $this->addFlash('success', $translator->trans('QuickGroupCreated', ['%groupName%' => $collective->getName()]));
+
+            return $this->redirectToRoute('track_new', ['createdCollectiveId' => $collective->getId()]);
+        }
+
+        return $this->render('collective/create/_quick.html.twig');
+    }
+
+    #[Route('/collective/new/disclaimer', name: 'collective_new_disclaimer', methods: ['GET'])]
     public function newDisclaimer(): Response
     {
-        return $this->render('collective/new_disclaimer.html.twig');
+        return $this->render('collective/create/new_disclaimer.html.twig');
     }
 
     #[Route('/collective/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
@@ -44,7 +62,7 @@ class CollectiveController extends AbstractController
                 : $this->redirectToRoute('collective_new', ['step' => $step + 1]);
         }
 
-        return $this->render('collective/new.html.twig', ['form' => $form, 'step' => $step, 'collective' => $collective]);
+        return $this->render('collective/create/new.html.twig', ['form' => $form, 'step' => $step, 'collective' => $collective]);
     }
 
     #[Route('/collective/{id<\d+>}', name: 'collective_show', methods: ['GET'])]

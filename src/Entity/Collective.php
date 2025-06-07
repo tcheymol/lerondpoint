@@ -101,6 +101,13 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
         $this->members = new ArrayCollection();
     }
 
+    public static function createQuick(string $name): Collective
+    {
+        return new Collective($name)
+            ->setShortDescription($name)
+            ->setIconPath('icone');
+    }
+
     public function __toString(): string
     {
         return $this->name ?? '';

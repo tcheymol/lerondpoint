@@ -44,6 +44,7 @@ Create: Créer
 CreateAccount: Pas de compte ? Créez-en un ici
 CreateCollective: Ajouter un groupe actif
 CreateCollectiveDisclaimer: Je confirme que mon groupe est informé et souhaite être inscrit sur cette carte et ce site internet
+CreateCollectiveNow: Créez le maintenant
 CreateCollectiveSearchAddress: Entrez une adresse ou cliquez sur la carte pour localiser votre groupe
 CreateTrack: Ajouter une trace
 CreateTrackAnonymous: Ajoute une trace sans connexion
@@ -140,6 +141,7 @@ ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les d
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
+QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. ⚠️ Attention, la création de ce groupe n'est pas terminée, il n'apparaitra ainsi pas sur la cartographie,nous vous invitons à terminer sa création depuis votre espace profil
 Refuse: Refuser
 Region: Région
 RejectTrack: Refuser la trace
@@ -230,5 +232,6 @@ Year: Année
 Years: Années
 Yes: Oui
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
+YouDontFindYourGroup: Vous ne trouvez pas votre groupe ?
 YouHaveBeenInvited: Vous avez été invité à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org

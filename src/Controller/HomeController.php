@@ -8,13 +8,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/maintenance', name: 'home_maintenance')]
+    #[Route('/maintenance', name: 'home_maintenance', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('maintenance/index.html.twig');
     }
 
-    #[Route('/home', name: 'home')]
+    #[Route('/home', name: 'home', methods: ['GET'])]
     public function home(): Response
     {
         if ($this->getUser()) {
@@ -24,7 +24,7 @@ class HomeController extends AbstractController
         return $this->render('maintenance/index.html.twig');
     }
 
-    #[Route('/', name: 'root')]
+    #[Route('/', name: 'root', methods: ['GET'])]
     public function root(): Response
     {
         return $this->redirectToRoute('home');

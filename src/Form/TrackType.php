@@ -104,7 +104,6 @@ class TrackType extends AbstractType
 
     private function buildStep2(FormBuilderInterface $builder): void
     {
-        $years = array_reverse(range(2018, (int) date('Y')));
         $builder
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,
@@ -152,18 +151,15 @@ class TrackType extends AbstractType
                 'mapped' => false,
                 'data' => true,
             ])
-        ;
-
-        $user = $this->getUser();
-        if ($user && $user->hasCollective()) {
-            $builder->add('collective', EntityType::class, [
+            ->add('collective', EntityType::class, [
                 'class' => Collective::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Collective'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'placeholder' => 'Collective',
+                ],
                 'choice_label' => 'name',
                 'required' => false,
-                'data' => null,
             ]);
-        }
     }
 
     private function buildStep3(FormBuilderInterface $builder): void

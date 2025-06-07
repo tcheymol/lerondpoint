@@ -11,14 +11,17 @@
         </div>
     </div>
     <div class="col-12 col-sm-6">
+        <div class="p-2">
+            {{ form_widget(form.collective) }}
+            {% if not track.collective %}
+                {{ include('collective/create/_quick.html.twig') }}
+            {% endif %}
+        </div>
         <div class="p-2">{{ form_widget(form.kind) }}</div>
         <div class="p-2">{{ form_widget(form.tags) }}</div>
         <div class="p-2">{{ form_widget(form.location) }}</div>
         <div class="p-2">{{ form_widget(form.regions) }}</div>
         <div class="p-2">{{ form_widget(form.years) }}</div>
-        {% if form.collective is defined %}
-            <div class="p-2">{{ form_widget(form.collective) }}</div>
-        {% endif %}
 
         <div {{ stimulus_controller('checkbox') }}>
             <div class="p-2 d-flex">

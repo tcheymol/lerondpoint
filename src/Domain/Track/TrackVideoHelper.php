@@ -15,7 +15,7 @@ readonly class TrackVideoHelper
 
     public function handleVideo(Track $track): void
     {
-        if (!$track->getUrl()) {
+        if (!$track->getUrl() || null !== $track->getId()) {
             return;
         }
         $videoData = $this->getVideoData($track);
@@ -38,19 +38,11 @@ readonly class TrackVideoHelper
 
     private function getVideoPreview(?Extractor $videoData): ?string
     {
-        if (!$videoData) {
-            return null;
-        }
-
-        return $videoData->image ? (string) $videoData->image : null;
+        return $videoData?->image ? (string) $videoData->image : null;
     }
 
     private function getVideoEmbed(?Extractor $videoData): ?string
     {
-        if (!$videoData) {
-            return null;
-        }
-
-        return $videoData->code->html ?? null;
+        return $videoData?->code->html ?? null;
     }
 }

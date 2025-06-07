@@ -4,6 +4,8 @@
 {% block bodybg %}primary{% endblock %}
 {% set step = block('step') %}
 
+{% block alerts %}{% endblock %}
+
 {% block content %}
     <div class="h-100 text-dark d-flex flex-column" {{ stimulus_controller('video_preview') }}>
         <h3 class="mt-5">{{ 'ShareArchive'|trans }} <span class="d-sm-none">{{ step }}/4</span></h3>
@@ -13,6 +15,7 @@
             currentStep: step,
             steps: constant('App\\Form\\TrackType::STEPS') })
         }}
+        {{ include('components/_alerts.html.twig') }}
         <div class="col-12 col-sm-10 offset-sm-1 p-3 flex-grow-1">
             {% block innerContent %}
             {% endblock %}

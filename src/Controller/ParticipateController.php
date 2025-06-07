@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ParticipateController extends AbstractController
 {
-    #[Route('/participate', name: 'app_participate')]
+    #[Route('/participate', name: 'app_participate', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('participate/index.html.twig');

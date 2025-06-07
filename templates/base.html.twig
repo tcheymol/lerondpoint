@@ -26,7 +26,7 @@
         class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }}"
         style="{% block bodyStyle %}{% endblock %} {{ _bodyBg is not empty ? 'background-image: none;' }}"
     >
-        {{ include('components/_alerts.html.twig') }}
+        {% block alerts %}{{ include('components/_alerts.html.twig') }}{% endblock %}
         {{ include('components/_fullscreen_loader.html.twig') }}
         {% block header %}
             {{ include('components/header/_header.html.twig') }}
