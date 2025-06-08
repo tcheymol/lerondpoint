@@ -1,7 +1,22 @@
 <div>
     {% set buttonLabel = buttonLabel is defined ? buttonLabel : 'Validate'|trans %}
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_label(form.iconPath) }}
+            {{ form_widget(form.iconPath) }}
+            {{ form_label(form.shortDescription) }}
+            {{ form_widget(form.shortDescription) }}
+            {{ form_label(form.followUs) }}
+            {{ form_widget(form.followUs) }}
+            {{ form_label(form.contactUs) }}
+            {{ form_widget(form.contactUs) }}
+            {{ form_label(form.location) }}
+            {{ form_widget(form.location) }}
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            {{ form_label(form.actions) }}
+            {{ form_widget(form.actions) }}
         <div class="text-end mt-3">
             <button class="btn btn-success">{{ buttonLabel }}</button>
         </div>

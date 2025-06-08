@@ -108,6 +108,11 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
             ->setIconPath('icone');
     }
 
+    public function isQuick(): bool
+    {
+        return null === $this->getLat() || null === $this->getLon();
+    }
+
     public function __toString(): string
     {
         return $this->name ?? '';
@@ -400,6 +405,11 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
         $this->isCreating = $isCreating;
 
         return $this;
+    }
+
+    public function isLastStep(int $step): bool
+    {
+        return 3 === $step || (2 === $step && !$this->isCreating());
     }
 
     public function finishCreation(): static

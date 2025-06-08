@@ -3,7 +3,10 @@
 {{ include('user/account/_collectives_invitations.html.twig') }}
 
 {% if collectives|length > 0 %}
-    {% for collective in collectives %}
+    {% for collective in collectives|filter(collective => collective.isQuick) %}
+       {{ include('user/account/_collective_draft.html.twig', { collective }) }}
+    {% endfor %}
+    {% for collective in collectives|filter(collective => not collective.isQuick) %}
        {{ include('user/account/_collective.html.twig', { collective }) }}
     {% endfor %}
 {% else %}

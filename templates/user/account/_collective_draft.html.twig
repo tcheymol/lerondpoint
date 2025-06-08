@@ -1,0 +1,17 @@
+<div class="card text-bg-white mt-3 rounded-0 shadow">
+    <div class="card-header rounded-0 bg-warning border-bottom-0 d-flex align-items-center">
+        <span class="plaine">{{ collective.name }} </span>
+        <span class="ms-auto">
+            {% if is_granted('EDIT', collective) %}
+                <a class="btn btn-link link-dark" href="{{ path('collective_complete', { id: collective.id }) }}">{{ 'Complete'|trans }}</a>
+            {% endif %}
+        </span>
+    </div>
+    <div class="card-body border-0">
+        <div class="row d-flex justify-content-between mt-3">
+            <div class="col">
+                <a class="btn btn-link link-secondary" href="{{ path('track_list', { collectives: collective.id }) }}">{{ 'ViewCollectiveTracks'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>

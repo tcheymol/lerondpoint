@@ -4,7 +4,7 @@
         <span class="ms-auto">
             <a class="btn btn-link link-dark" href="{{ path('collective_show', { id: collective.id }) }}">{{ 'KnowMore'|trans }}</a>
             {% if is_granted('EDIT', collective) %}
-                <a class="btn btn-link link-dark" href="{{ path('collective_edit', { id: collective.id }) }}">{{ 'Edit'|trans }}</a>
+                <a class="btn btn-link link-dark" href="{{ path('collective_complete', { id: collective.id }) }}">{{ 'Edit'|trans }}</a>
             {% endif %}
         </span>
     </div>

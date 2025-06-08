@@ -54,7 +54,7 @@ class CollectiveController extends AbstractController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $isLastStep = 3 === $step;
+            $isLastStep = $collective->isLastStep($step);
             $persister->persist($collective, $isLastStep);
 
             return $isLastStep
@@ -71,6 +71,14 @@ class CollectiveController extends AbstractController
         return $this->render('collective/show.html.twig', ['collective' => $collective]);
     }
 
+    #[Route('/collective/{id<\d+>}/complete', name: 'collective_complete', methods: ['GET'])]
+    public function complete(Collective $collective, CollectivePersister $persister): Response
+    {
+        $persister->updateSessionCollective($collective);
+
+        return $this->redirectToRoute('collective_new');
+    }
+
     #[Route('/collective/upload_image', name: 'collective_upload_image', methods: ['POST'])]
     public function uploadImage(Request $request, UploadFilesHelper $helper): JsonResponse
     {
@@ -78,24 +86,6 @@ class CollectiveController extends AbstractController
         $responseStatus = null === $fileThumbnailPath ? Response::HTTP_BAD_REQUEST : Response::HTTP_OK;
 
         return $this->json(['publicImagePath' => $fileThumbnailPath], $responseStatus);
-    }
-
-    #[Route('/collective/{id<\d+>}/edit', name: 'collective_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(CollectiveType::class, $collective);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('collective_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('collective/edit.html.twig', [
-            'collective' => $collective,
-            'form' => $form,
-        ]);
     }
 
     #[Route('/collective/{id<\d+>}', name: 'collective_delete', methods: ['POST'])]
