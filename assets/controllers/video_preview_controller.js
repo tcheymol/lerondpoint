@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
-import axios from 'axios';
+import embed from 'embed-video';
+import urlMetadata from 'url-metadata';
 import { hideImageContainer } from './helper/captchaHelper.js';
 
 /*
@@ -9,51 +10,39 @@ import { hideImageContainer } from './helper/captchaHelper.js';
 export default class extends Controller {
     static targets = [ 'input', 'preview' ];
 
-    preview() {
+    async preview() {
         try {
             const button = document.getElementById('track_next');
             button.classList.add('disabled');
             this.previewTarget.src = '';
-            const url = new URL(this.inputTarget.value);
+            const url = this.inputTarget.value;
 
-            this.handleYoutube(url);
-            this.handleVimeo(url);
+            const previewTarget = this.previewTarget;
+
+            console.log('Generating preview for', url);
+
+            embed.image(this.inputTarget.value, {image: 'mqdefault'}, (err, thumbnail) => {
+                if (err) throw err
+                console.log(thumbnail.src)
+                this.previewTarget.src = thumbnail.src;
+            })
+            // try {
+            //     const url = 'https://www.npmjs.com/package/url-metadata';
+            //     const metadata = await urlMetadata(url);
+            //     console.log(metadata);
+            // } catch (err) {
+            //     console.log(err);
+            // }h
 
             hideImageContainer();
 
             button.classList.remove('disabled');
         } catch (e) {
-            console.log(e);
+            console.log('error generating preview', e);
         }
     }
 
-    handleVimeo(url) {
-        if (!url.hostname.includes('vimeo.com')) {
-            return;
-        }
-
-        try {
-            const apiUrl = 'https://vimeo.com/api/oembed.json?url=' + encodeURI(url);
-            axios.get(apiUrl).then(response => {
-                const data = response.data;
-                if (data.thumbnail_url) {
-                    this.previewTarget.src = data.thumbnail_url;
-                }
-            });
-        } catch (e) {
-            return null;
-        }
-    }
-
-    handleYoutube(url) {
-        if (!url.hostname.includes('youtube.com')) {
-            return;
-        }
-
-        const urlParams = new URLSearchParams(url.search);
-        const videoId = urlParams.get('v');
-        if (videoId) {
-            this.previewTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-        }
+    previewUrl(url) {
+        this.previewTarget.src = url;
     }
 }

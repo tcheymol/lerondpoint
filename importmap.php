@@ -242,4 +242,67 @@ return [
     'macy' => [
         'version' => '2.5.1',
     ],
+    'embed-video' => [
+        'version' => '2.0.4',
+    ],
+    'promise-polyfill' => [
+        'version' => '6.1.0',
+    ],
+    'fetch-ponyfill' => [
+        'version' => '4.1.0',
+    ],
+    'lodash.escape' => [
+        'version' => '4.0.1',
+    ],
+    'url-metadata' => [
+        'version' => '5.2.1',
+    ],
+    'cheerio' => [
+        'version' => '1.0.0',
+    ],
+    'domutils' => [
+        'version' => '3.1.0',
+    ],
+    'domhandler' => [
+        'version' => '5.0.3',
+    ],
+    'cheerio-select' => [
+        'version' => '2.1.0',
+    ],
+    'parse5' => [
+        'version' => '7.1.2',
+    ],
+    'parse5-htmlparser2-tree-adapter' => [
+        'version' => '7.0.0',
+    ],
+    'dom-serializer' => [
+        'version' => '2.0.0',
+    ],
+    'htmlparser2' => [
+        'version' => '9.1.0',
+    ],
+    'domelementtype' => [
+        'version' => '2.3.0',
+    ],
+    'css-what' => [
+        'version' => '6.1.0',
+    ],
+    'css-select' => [
+        'version' => '5.1.0',
+    ],
+    'boolbase' => [
+        'version' => '1.0.0',
+    ],
+    'entities/lib/decode.js' => [
+        'version' => '4.5.0',
+    ],
+    'entities/lib/escape.js' => [
+        'version' => '4.4.0',
+    ],
+    'entities' => [
+        'version' => '4.2.0',
+    ],
+    'nth-check' => [
+        'version' => '2.0.1',
+    ],
 ];

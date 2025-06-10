@@ -9,7 +9,7 @@
 
 >
     {% if attachment.url %}
-        <div class="track-preview-iframe-container w-100 h-100">
+        <div class="track-preview-iframe-container w-100 h-100" style="min-height: 400px">
             {{ attachment.videoEmbed|raw }}
         </div>
     {% else %}

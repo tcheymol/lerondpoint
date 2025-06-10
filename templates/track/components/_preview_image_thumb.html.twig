@@ -1,7 +1,11 @@
 {% set previewUrl = get_track_preview_url(track) %}
 
 {% if previewUrl is defined %}
-    <img src="{{ previewUrl }}" alt="track_preview" class="border-default w-100 h-auto" />
+    <img
+        src="{{ previewUrl }}"
+        alt="track_preview" class="border-default w-100 h-auto"
+        style="max-height: 100%"
+    />
 {% elseif track.mime is defined %}
     {{ include('attachment/_attachment_icon.html.twig', {mime}) }}
 {% endif %}

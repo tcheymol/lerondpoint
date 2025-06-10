@@ -3,8 +3,8 @@
     <div class="card-body pt-0">
         <div class="row">
             <div class="col-12 col-sm-6 mt-2">
-                <div class="row" style="height: 100px; width: 100px">
-                    {{ include('track/components/_preview_thumb.html.twig', {track}) }}
+                <div class="row">
+                    {{ include('track/components/_preview_thumb.html.twig', {track, size: 100}) }}
                 </div>
             </div>
             <div class="col-12 col-sm-6 d-flex flex-column">
