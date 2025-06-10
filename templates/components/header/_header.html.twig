@@ -11,6 +11,7 @@
         { label: 'AboutLRP'|trans, path: path('about_lrp'), color: 'light' },
         { label: 'TheyTalkAboutUs'|trans, path: path('they_talk_about_us'), color: 'light' },
         { label: 'AboutTheMovement'|trans, path: path('about_the_movement'), color: 'light' },
+        { label: 'social'},
     ] },
     { label: 'Moderation'|trans, path: path('moderation_index'), color: 'warning', show: is_granted('ROLE_MODERATOR') },
     { label: 'Login'|trans, icon: 'user', path: path('app_login'), color: 'light', show: not is_granted('ROLE_USER') },

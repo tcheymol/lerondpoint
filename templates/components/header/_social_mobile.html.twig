@@ -1,0 +1,9 @@
+{% set icons = ['fa-brands fa-facebook-f', 'fa-brands fa-instagram', 'fa-envelope fa-regular'] %}
+
+<div class="bg-light d-flex flex-row justify-content-center align-items-center">
+    {% for icon in icons %}
+         <div class="p-2">
+             <i class="{{ icon }} fs-5 text-dark social-icon"></i>
+         </div>
+    {% endfor %}
+</div>
