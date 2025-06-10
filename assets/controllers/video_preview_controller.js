@@ -16,23 +16,16 @@ export default class extends Controller {
             button.classList.add('disabled');
             this.previewTarget.src = '';
             const url = this.inputTarget.value;
+            let previewUrl = null;
 
-            const previewTarget = this.previewTarget;
-
-            console.log('Generating preview for', url);
-
-            embed.image(this.inputTarget.value, {image: 'mqdefault'}, (err, thumbnail) => {
+            embed.image(url, {image: 'mqdefault'}, async (err, thumbnail) => {
                 if (err) throw err
-                console.log(thumbnail.src)
-                this.previewTarget.src = thumbnail.src;
+                if (!thumbnail) {
+                    alert("Nous n'avons pas pu trouver de miniature pour cette vidéo. Veuillez vérifier l'URL et réessayer.");
+                    return;
+                }
+                previewUrl = thumbnail.src;
             })
-            // try {
-            //     const url = 'https://www.npmjs.com/package/url-metadata';
-            //     const metadata = await urlMetadata(url);
-            //     console.log(metadata);
-            // } catch (err) {
-            //     console.log(err);
-            // }h
 
             hideImageContainer();
 
@@ -40,9 +33,5 @@ export default class extends Controller {
         } catch (e) {
             console.log('error generating preview', e);
         }
-    }
-
-    previewUrl(url) {
-        this.previewTarget.src = url;
     }
 }

@@ -20,7 +20,7 @@ class CreateTrackController extends AbstractController
         if ($createdCollectiveId) {
             $track->setCollective($repository->find($createdCollectiveId));
         }
-        if (!$step || $step > $track->getCreationStep()) {
+        if (null === $step || $step > $track->getCreationStep()) {
             $step = $track->getCreationStep() ?? 1;
         }
 

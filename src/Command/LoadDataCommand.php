@@ -41,6 +41,7 @@ readonly class LoadDataCommand
             ['name' => 'Accessoire'],
             ['name' => 'Action'],
             ['name' => 'Assemblée'],
+            ['name' => 'Anniversaire'],
             ['name' => 'Appel'],
             ['name' => 'Article'],
             ['name' => 'Arts plastiques'],
