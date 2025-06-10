@@ -26,3 +26,38 @@
   width: 100%;
   min-width: 150px;
 }
+
+.pswp__bullets-indicator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.pswp__bullet {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 5px;
+}
+
+.pswp__bullet--active {
+    background: $primary;
+}
+
+.pswp__zoom-level-indicator {
+    background: $primary;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: bold;
+    color: #fff;
+    height: auto;
+    align-self: center;
+    padding: 4px 6px 5px;
+    margin-right: 4px;
+}

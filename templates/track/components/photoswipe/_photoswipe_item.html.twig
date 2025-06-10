@@ -1,14 +1,20 @@
 {% set isCover = track.cover == attachment and track.attachments|length > 1  %}
-{% set previewUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
+{% set previewUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
+
 <a href="{{ previewUrl }}"
    data-pswp-width="{{ attachment.width }}"
    data-pswp-height="{{ attachment.height }}"
+{#   data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"#}
    data-cropped="true"
    target="_blank"
    class="{{ isCover ? 'border border-black border-5 ' : '' }}"
 
 >
-    {% if attachment.url %}
+    {% if attachment.kind =='application/pdf' %}
+    <object data="{{ previewUrl }}" type="application/pdf" width="100%" height="500px">
+        <p>Unable to display PDF file. <a href="{{ previewUrl }}">Download</a> instead.</p>
+    </object>
+    {% elseif attachment.url %}
         <div class="track-preview-iframe-container w-100 h-100" style="min-height: 400px">
             {{ attachment.videoEmbed|raw }}
         </div>
