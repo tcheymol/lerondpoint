@@ -105,7 +105,8 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
     {
         return new Collective($name)
             ->setShortDescription($name)
-            ->setIconPath('icone');
+            ->setIconPath('icone')
+            ->finishCreation();
     }
 
     public function isQuick(): bool
