@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'HomeTitle'|trans }}{% endblock %}
 
-{% block bodyStyle %} margin-top: 75vh; padding-top: 0; {% endblock %}
+{% block bodyClasses %} scrollable-home-container {% endblock %}
 
 {% block main %}
     <div class="vh-100 vw-100 position-absolute top-0 z-1" {{ stimulus_controller('show_hide') }}>

@@ -1,3 +1,11 @@
+.scrollable-home-container {
+
+    @include media-breakpoint-up(sm) {
+        margin-top: 75vh;
+        padding-top: 0;
+    }
+}
+
 .scroll-button {
   bottom: 10%;
   width: 40%;

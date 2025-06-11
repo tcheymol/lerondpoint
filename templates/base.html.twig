@@ -22,8 +22,8 @@
     {% set _bodyBg = block('bodybg') is defined ? block('bodybg') : '' %}
     <body
         data-controller="modal"
-        class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }}"
-        style="{% block bodyStyle %}{% endblock %} {{ _bodyBg is not empty ? 'background-image: none;' }}"
+        class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }} {% block bodyClasses %}{% endblock %} "
+        style="{{ _bodyBg is not empty ? 'background-image: none;' }}"
     >
         {% block alerts %}{{ include('components/_alerts.html.twig') }}{% endblock %}
         {{ include('components/_fullscreen_loader.html.twig') }}
