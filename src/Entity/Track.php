@@ -222,6 +222,11 @@ class Track implements BlameableInterface
         return $this;
     }
 
+    public function countAttachments(): int
+    {
+        return $this->attachments->count();
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -370,7 +375,7 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function hasVideo(): bool
+    public function isVideo(): bool
     {
         return null !== $this->url;
     }

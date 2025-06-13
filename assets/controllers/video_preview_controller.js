@@ -1,6 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
 import embed from 'embed-video';
-import urlMetadata from 'url-metadata';
 import { hideImageContainer } from './helper/captchaHelper.js';
 
 /*
@@ -14,18 +13,13 @@ export default class extends Controller {
         try {
             const button = document.getElementById('track_next');
             button.classList.add('disabled');
-            this.previewTarget.src = '';
             const url = this.inputTarget.value;
-            let previewUrl = null;
 
-            embed.image(url, {image: 'mqdefault'}, async (err, thumbnail) => {
-                if (err) throw err
-                if (!thumbnail) {
-                    alert("Nous n'avons pas pu trouver de miniature pour cette vidéo. Veuillez vérifier l'URL et réessayer.");
-                    return;
-                }
-                previewUrl = thumbnail.src;
-            })
+            const preview = await embed.image(url, {image: 'mqdefault'});
+            this.previewTarget.src = (new DOMParser())
+                .parseFromString(preview, 'text/html')
+                .querySelector('img')
+                ?.src;
 
             hideImageContainer();
 

@@ -23,7 +23,7 @@ readonly class TrackProvider
         $this->em->getFilters()->enable('validated_entity');
 
         return $search->isEmpty()
-            ? $this->trackRepository->findAll()
+            ? $this->trackRepository->findBy([], [], 50)
             : $this->searchPerformer->search($search);
     }
 

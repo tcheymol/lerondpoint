@@ -181,6 +181,16 @@ class Attachment implements BlameableInterface
         return $this;
     }
 
+    public function isPdf(): bool
+    {
+        return 'application/pdf' === $this->getKind();
+    }
+
+    public function isVideo(): bool
+    {
+        return $this->videoEmbed !== null;
+    }
+
     public function getSize(): ?int
     {
         return $this->size;
@@ -203,6 +213,11 @@ class Attachment implements BlameableInterface
         $this->track = $track;
 
         return $this;
+    }
+
+    public function isCover(): bool
+    {
+        return $this->track?->countAttachments() > 1 && $this === $this->track?->getCover();
     }
 
     public function getObjectId(): ?string

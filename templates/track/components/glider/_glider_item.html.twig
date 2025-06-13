@@ -1,0 +1,23 @@
+{% set previewUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
+
+<div class="position-relative h-100">
+    {% if attachment.isCover and is_granted('EDIT', track)%}
+        <div class="position-absolute alert alert-primary mb-0 p-1 rounded-1 ms-2"
+             style="left: calc(50% - 50px); bottom: 8px;"
+        >
+            {{ 'Cover'|trans }}
+        </div>
+    {% endif %}
+    {% if attachment.video %}
+        <div class="track-preview-iframe-container h-100 w-100" style="min-height: 400px">
+            {{ attachment.videoEmbed|raw }}
+        </div>
+    {% elseif attachment.pdf %}
+        {% set objectUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
+        <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80">
+            <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
+        </object>
+    {% else %}
+            <img src="{{ previewUrl }}" alt="Attachment" class="mw-100 mvh-90 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}" />
+    {% endif %}
+</div>

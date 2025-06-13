@@ -305,4 +305,7 @@ return [
     'nth-check' => [
         'version' => '2.0.1',
     ],
+    '@glidejs/glide' => [
+        'version' => '3.7.1',
+    ],
 ];
