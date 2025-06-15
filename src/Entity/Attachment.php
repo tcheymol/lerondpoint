@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
-class Attachment implements BlameableInterface
+class Attachment implements BlameableInterface, \Stringable
 {
     use BlameableTrait;
 

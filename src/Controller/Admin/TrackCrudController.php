@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Attachment;
 use App\Entity\Track;
+use Doctrine\Common\Collections\Collection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -26,6 +28,7 @@ class TrackCrudController extends AbstractCrudController
         return Track::class;
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         return $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
@@ -41,26 +44,25 @@ class TrackCrudController extends AbstractCrudController
         yield BooleanField::new('rejected');
         yield AssociationField::new('validatedBy')->hideOnForm();
         yield AssociationField::new('rejectedBy')->hideOnForm();
-        yield CollectionField::new('attachments')
-            ->formatValue(function ($value, $entity) {
-                $attachments = $entity->getAttachments(); // ou $value
-                if (count($attachments) === 0) {
-                    return 'Aucun document';
-                }
+        yield CollectionField::new('attachments')->hideOnForm()
+            ->formatValue(fn ($value, $track) => $this->formatAttachments($value, $track));
+    }
 
-                $links = [];
-                foreach ($attachments as $attachment) {
-                    $url = $this->adminUrlGenerator
-                        ->setController(AttachmentCrudController::class)
-                        ->setAction('detail')
-                        ->setEntityId($attachment->getId())
-                        ->generateUrl();
+    private function formatAttachments(Collection $value, Track $track): string
+    {
+        return implode('<br/>', $track->getAttachments()
+            ->map(fn (Attachment $attachment) => $this->formatAttachment($attachment))
+            ->toArray());
+    }
 
-                    $links[] = sprintf("<a href=\"%s\">%s</a>", $url, htmlspecialchars($attachment->getObjectId()));
-                }
+    private function formatAttachment(Attachment $attachment): string
+    {
+        $attachmentAdminUrl = $this->adminUrlGenerator
+            ->setController(AttachmentCrudController::class)
+            ->setAction('detail')
+            ->setEntityId($attachment->getId())
+            ->generateUrl();
 
-                return implode('<br>', $links);
-            })
-            ->onlyOnDetail();
+        return sprintf('<a href="%s">%s</a>', $attachmentAdminUrl, $attachment->getObjectId());
     }
 }
