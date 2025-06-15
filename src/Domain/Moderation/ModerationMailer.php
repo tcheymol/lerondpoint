@@ -15,16 +15,31 @@ readonly class ModerationMailer extends AbstractMailer
         parent::__construct($emailHelper);
     }
 
+    public function create(Track $track): void
+    {
+        $email = $this->createCreationEmail($track);
+        $this->sendEmail($email, $track->getContactEmail());
+    }
+
     public function validate(Track $track): void
     {
         $email = $this->createValidationEmail($track);
-        $this->sendEmail($email, $track->getCreatedBy()?->getEmail());
+        $this->sendEmail($email, $track->getContactEmail());
     }
 
     public function reject(Track $track): void
     {
         $email = $this->createRejectionEmail($track);
-        $this->sendEmail($email, $track->getCreatedBy()?->getEmail());
+        $this->sendEmail($email, $track->getContactEmail());
+    }
+
+    private function createCreationEmail(Track $track): TemplatedEmail
+    {
+        return $this->emailHelper->createTemplatedEmail()
+            ->subject($this->translator->trans('TrackCreatedEmailSubject'))
+            ->htmlTemplate('moderation/track_created.html.twig')
+            ->context(['track' => $track])
+        ;
     }
 
     private function createValidationEmail(Track $track): TemplatedEmail

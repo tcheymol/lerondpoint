@@ -142,7 +142,7 @@ ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les d
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
-QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. ⚠️ Attention, la création de ce groupe n'est pas terminée, il n'apparaitra ainsi pas sur la cartographie, nous vous invitons à terminer sa création depuis votre espace profil
+QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre groupe est encore actif et que vous souhaitez qu'il apparaisse sur la carte, nous vous invitons à compléter sa création depuis votre espace profil.
 Refuse: Refuser
 Region: Région
 RejectTrack: Refuser la trace
@@ -188,6 +188,8 @@ Title: La plateforme collaborative qui recueille les traces du movement des gile
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
 TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
+TrackCreatedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été créée, elle sera bientôt publiée"
+TrackCreatedSubtitle: Votre trace %trackName% a été créée, elle est actuellement en relecture par nos équipes et sera bientôt publiée publiquement.
 TrackKind: Catégorie de trace
 TrackNumber: Trace N°
 TrackRejectedCauseSubtitle: "Raison du refus : %rejectionCause%"
@@ -210,6 +212,7 @@ UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
 UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe. Si elle n'a pas de compte, un email lui a été envoyé
+UsernameDisclaimer: Votre email ne sera pas affichée publiquement, vous pouvez renseigner un nom d'utilisateur·ice afin de vous identifier sur le site
 UsernameLabel: Nom d'utilisateur·ice (Optionnel)
 Users: Utilisateurs·ices
 Validate: Valider

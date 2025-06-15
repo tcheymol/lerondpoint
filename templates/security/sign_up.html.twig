@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block afterCard %}
-    <a class="btn btn-lg btn-primary mt-3 text-muted" href="{{ path('app_login') }}">
-        {{ 'AlreadyHaveAccount'|trans }}
-    </a>
+    <div class="text-center">
+        <a class="btn btn-lg btn-primary mt-3 text-muted" href="{{ path('app_login') }}">
+            {{ 'AlreadyHaveAccount'|trans }}
+        </a>
+    </div>
 {% endblock %}

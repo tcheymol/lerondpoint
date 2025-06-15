@@ -1,14 +1,16 @@
 {{ include('track/components/_create_disclaimer.html.twig') }}
 {{ form_row(form.attachmentsIds) }}
 <div class="row text-start fs-3">
-    {{ form_label(form.name) }}
-    {{ form_widget(form.name) }}
-    <div class="fs-6 mt-3">
-        {{ 'ShareTrackWays'|trans }}
-        <ul>
-            <li>{{ 'ShareTrackWay1'|trans }}</li>
-            <li>{{ 'ShareTrackWay2'|trans }}</li>
-        </ul>
+    <div class="col-12">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        <div class="fs-6 mt-3">
+            {{ 'ShareTrackWays'|trans }}
+            <ul>
+                <li>{{ 'ShareTrackWay1'|trans }}</li>
+                <li>{{ 'ShareTrackWay2'|trans }}</li>
+            </ul>
+        </div>
     </div>
 </div>
 

@@ -8,10 +8,16 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Track::class)]
+#[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Track::class)]
 readonly class TrackModerationSubscriber
 {
     public function __construct(private ModerationMailer $mailer)
     {
+    }
+
+    public function postPersist(Track $track): void
+    {
+        $this->mailer->create($track);
     }
 
     public function preUpdate(Track $track, PreUpdateEventArgs $event): void

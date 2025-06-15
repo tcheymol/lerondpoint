@@ -188,7 +188,7 @@ class Attachment implements BlameableInterface
 
     public function isVideo(): bool
     {
-        return $this->videoEmbed !== null;
+        return null !== $this->videoEmbed;
     }
 
     public function getSize(): ?int

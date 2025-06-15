@@ -409,6 +409,15 @@ class Track implements BlameableInterface
         return $this;
     }
 
+    public function getContactEmail(): ?string
+    {
+        if ($this->createdBy?->getEmail()) {
+            return $this->createdBy->getEmail();
+        }
+
+        return $this->email;
+    }
+
     public function getRejectionCause(): ?RejectionCause
     {
         return $this->rejectionCause;
