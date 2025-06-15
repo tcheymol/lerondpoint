@@ -6,5 +6,7 @@
 {% endif %}
 {{ include('track/components/glider/_glider.html.twig', {track}) }}
 {% if showInformation %}
-    {{ include('track/components/_preview_information_rows.html.twig', {track}) }}
+    <div class="col-12 text-start">
+        {{ include('track/components/_information_rows.html.twig', {track}) }}
+    </div>
 {% endif %}

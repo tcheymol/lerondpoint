@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'templates/base.html.twig' %}
 
 {% block title %}{{ 'ModerationTitle'|trans }}{% endblock %}
 {% block bodybg %}warning{% endblock %}
@@ -7,7 +7,7 @@
     <div class="row h-100">
         <h1 class="col-12 text-center text-dark mt-3">{{ 'ModerationTitle'|trans }}</h1>
         <div class="col-12 col-md-10 offset-md-1 h-100">
-            {{include('track/components/_tracks_list.html.twig', {tracks}) }}
+            {{include('track/components/_list.html.twig', {tracks}) }}
         </div>
     </div>
 {% endblock %}

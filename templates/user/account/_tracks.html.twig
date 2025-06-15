@@ -6,7 +6,7 @@
 
 {% if tracks|length > 0 %}
     {% for track in tracks %}
-        {{ include('user/account/_track.html.twig', { track }) }}
+        {{ include('user/account/_track.html.twig', {track}) }}
     {% endfor %}
 {% else %}
     <div class="alert alert-info" role="alert">

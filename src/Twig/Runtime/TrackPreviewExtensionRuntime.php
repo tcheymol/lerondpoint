@@ -12,18 +12,16 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(
-        private AttachmentHelper $attachmentHelper,
-        private TrackRepository $repository,
-    ) {
-    }
-
-    public function getTrackPreviewUrl(Track $track, ThumbSize $size = ThumbSize::Small): ?string
+    public function __construct(private AttachmentHelper $attachmentHelper, private TrackRepository $repository)
     {
-        return $track->getCover() ? $this->getPreviewUrl($track->getCover(), $size) : null;
     }
 
-    public function getPreviewUrl(Attachment $attachment, ThumbSize $size = ThumbSize::Small): ?string
+    public function getTrackThumbUrl(Track $track, ThumbSize $size = ThumbSize::Small): ?string
+    {
+        return $track->getCover() ? $this->getThumbUrl($track->getCover(), $size) : null;
+    }
+
+    public function getThumbUrl(Attachment $attachment, ThumbSize $size = ThumbSize::Small): ?string
     {
         return $attachment->getImageUrl($size) ?: $this->attachmentHelper->getThumbUrl($attachment, $size);
     }

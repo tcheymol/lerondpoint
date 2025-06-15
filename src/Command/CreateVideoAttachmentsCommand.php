@@ -43,7 +43,7 @@ readonly class CreateVideoAttachmentsCommand
                 ->setKind('video')
                 ->setTrack($track)
                 ->setSize(0)
-                ->setUrl($track->getUrl())
+                ->setUrl($track->url)
                 ->setPreviewUrl($track->getPreviewUrl())
                 ->setVideoEmbed($track->getVideoEmbed())
             ;

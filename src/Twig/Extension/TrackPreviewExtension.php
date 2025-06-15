@@ -12,8 +12,8 @@ class TrackPreviewExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('get_track_preview_url', [TrackPreviewExtensionRuntime::class, 'getTrackPreviewUrl']),
-            new TwigFunction('get_preview_url', [TrackPreviewExtensionRuntime::class, 'getPreviewUrl']),
+            new TwigFunction('get_track_thumb_url', [TrackPreviewExtensionRuntime::class, 'getTrackThumbUrl']),
+            new TwigFunction('get_thumb_url', [TrackPreviewExtensionRuntime::class, 'getThumbUrl']),
             new TwigFunction('get_previous_track_id', [TrackPreviewExtensionRuntime::class, 'getPreviousTrackId']),
             new TwigFunction('get_next_track_id', [TrackPreviewExtensionRuntime::class, 'getNextTrackId']),
         ];

@@ -217,7 +217,7 @@ class Attachment implements BlameableInterface
 
     public function isCover(): bool
     {
-        return $this->track?->countAttachments() > 1 && $this === $this->track?->getCover();
+        return $this->track?->hasMultipleAttachments() && $this === $this->track->getCover();
     }
 
     public function getObjectId(): ?string

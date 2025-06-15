@@ -1,4 +1,4 @@
-{% set previewUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
+{% set thumbUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
 
 <div class="position-relative h-100">
     {% if attachment.isCover and is_granted('EDIT', track)%}
@@ -13,11 +13,11 @@
             {{ attachment.videoEmbed|raw }}
         </div>
     {% elseif attachment.pdf %}
-        {% set objectUrl = get_preview_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
+        {% set objectUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
         <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80">
             <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
         </object>
     {% else %}
-            <img src="{{ previewUrl }}" alt="Attachment" class="mw-100 mvh-90 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}" />
+            <img src="{{ thumbUrl }}" alt="Attachment" class="mw-100 mvh-90 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}" />
     {% endif %}
 </div>

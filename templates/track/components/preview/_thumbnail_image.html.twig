@@ -1,4 +1,5 @@
 {% set borderClasses = not track.pdf ? 'border border-dark border-4' : '' %}
+{% set url = get_track_preview_url(track) %}
 
 <a class="btn btn-link p-0 overflow-hidden position-relative thumbnail-image d-flex justify-content-center align-items-center"
    href="{{ track.needsModeration ? path('moderate_track', {id: track.id}) : path('track_show', {id: track.id}) }}"

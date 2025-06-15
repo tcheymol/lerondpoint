@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Domain\Images\ThumbSize;
 use App\Domain\Location\RegionEnum as EnumRegion;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
@@ -63,20 +62,10 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?EnumRegion $region = null;
 
-    #[ORM\Column(length: 2083, nullable: true)]
-    private ?string $url = null;
-
-    public ?int $previousTrackId = null;
-    public ?int $nextTrackId = null;
+    public ?string $url = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isDraft = true;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $previewUrl = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $videoEmbed = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]
     private ?User $createdBy = null;
@@ -227,6 +216,11 @@ class Track implements BlameableInterface
         return $this->attachments->count();
     }
 
+    public function hasMultipleAttachments(): bool
+    {
+        return $this->countAttachments() > 1;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -280,36 +274,6 @@ class Track implements BlameableInterface
         return $this;
     }
 
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(?string $url): static
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getObjectUrl(): ?string
-    {
-        if ($this->previewUrl) {
-            return $this->getPreviewUrl();
-        }
-
-        return $this->getThumbnailUrl(ThumbSize::Full);
-    }
-
-    public function getThumbnailUrl(?ThumbSize $thumbSize = null): ?string
-    {
-        if ($this->previewUrl) {
-            return $this->getPreviewUrl();
-        }
-
-        return $this->getCover()?->getBestFitUrl($thumbSize);
-    }
-
     public function getMediaType(): ?string
     {
         if ('application/pdf' === $this->getMime()) {
@@ -353,26 +317,12 @@ class Track implements BlameableInterface
 
     public function getPreviewUrl(): ?string
     {
-        return $this->previewUrl;
-    }
-
-    public function setPreviewUrl(?string $previewUrl): static
-    {
-        $this->previewUrl = $previewUrl;
-
-        return $this;
+        return $this->getCover()?->getPreviewUrl();
     }
 
     public function getVideoEmbed(): ?string
     {
-        return $this->videoEmbed;
-    }
-
-    public function setVideoEmbed(?string $videoEmbed): static
-    {
-        $this->videoEmbed = $videoEmbed;
-
-        return $this;
+        return $this->getCover()?->getVideoEmbed();
     }
 
     public function isVideo(): bool

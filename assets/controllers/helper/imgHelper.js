@@ -1,5 +1,4 @@
 export const displayPreviewImage = (previewImageId, path) => {
-    console.log(previewImageId, path);
         if (!previewImageId || !path) return;
 
         try {

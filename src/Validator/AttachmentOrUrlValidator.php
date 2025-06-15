@@ -22,7 +22,7 @@ final class AttachmentOrUrlValidator extends ConstraintValidator
             return;
         }
 
-        if ($value->getUrl() || $value->hasAttachments() || count($value->attachmentsIds) > 0) {
+        if ($value->url || $value->hasAttachments() || count($value->attachmentsIds) > 0) {
             return;
         }
 

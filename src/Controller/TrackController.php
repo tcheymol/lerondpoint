@@ -6,8 +6,6 @@ use App\Domain\Search\SearchFactory;
 use App\Domain\Search\SearchType;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Track;
-use App\Form\TrackType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -41,7 +39,7 @@ class TrackController extends AbstractController
         $tracks = $form->isSubmitted() && $form->isValid() ? $provider->provide($search) : [];
 
         return $this->json([
-            'html' => $this->renderView('track/components/_tracks_list.html.twig', ['tracks' => $tracks]),
+            'html' => $this->renderView('track/components/_list.html.twig', ['tracks' => $tracks]),
             'queryParams' => $search->toParamsArray(),
         ]);
     }
@@ -50,32 +48,5 @@ class TrackController extends AbstractController
     public function show(Track $track): Response
     {
         return $this->render('track/show.html.twig', ['track' => $track]);
-    }
-
-    #[Route('/track/{id<\d+>}/edit', name: 'track_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Track $track, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(TrackType::class, $track)->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('track_list', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('track/edit.html.twig', [
-            'track' => $track,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/track/{id<\d+>}', name: 'track_delete', methods: ['POST'])]
-    public function delete(Request $request, Track $track, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$track->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($track);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('track_list', [], Response::HTTP_SEE_OTHER);
     }
 }

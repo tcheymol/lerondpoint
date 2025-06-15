@@ -1,8 +1,0 @@
-{% set size = size is defined ? size : null %}
-<div class="col-12" style="{{ size ? 'height: '~size~'px' : '' }}">
-    {% if track.mediaType == 'video' %}
-        {{ include('track/components/_track_video.html.twig', {track, size}) }}
-    {% else %}
-        {{ include('track/components/_preview_image_thumb.html.twig', {track, size}) }}
-    {% endif %}
-</div>
