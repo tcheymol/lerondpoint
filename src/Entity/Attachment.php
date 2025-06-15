@@ -67,6 +67,11 @@ class Attachment implements BlameableInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $videoEmbed = null;
 
+    public function __toString(): string
+    {
+        return $this->objectId ?? '';
+    }
+
     public static function fromFile(UploadedFile $file): self
     {
         return new Attachment()

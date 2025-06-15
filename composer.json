@@ -14,7 +14,6 @@
         "deployer/deployer": "7.5.*",
         "doctrine/doctrine-bundle": "2.14.*",
         "doctrine/doctrine-migrations-bundle": "3.4.*",
-        "doctrine/orm": "3.3.*",
         "easycorp/easyadmin-bundle": "4.24.*",
         "embed/embed": "^4.4",
         "gregwar/captcha-bundle": "^2.3",
