@@ -327,7 +327,7 @@ class Track implements BlameableInterface
 
     public function isVideo(): bool
     {
-        return null !== $this->url;
+        return null !== $this->getPreviewUrl();
     }
 
     public function hasAttachments(): bool

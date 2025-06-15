@@ -15,11 +15,11 @@
 </div>
 
 <div class="row justify-content-end">
-    {% if not track.video and not track.hasAttachments %}
+    {% if not track.hasAttachments %}
         {{ include('track/new/_add_media_widget.html.twig') }}
     {% endif %}
-    {{ include('track/new/_attachments_widget.html.twig', { track }) }}
-    {{ include('track/new/_video_widget.html.twig', { track }) }}
+    {{ include('track/new/_attachments_widget.html.twig', {track}) }}
+    {{ include('track/new/_video_widget.html.twig', {track}) }}
 
     {% if form.captcha is defined %}
         <div class="col-12 col-sm-6 mt-3" id="captcha_container">

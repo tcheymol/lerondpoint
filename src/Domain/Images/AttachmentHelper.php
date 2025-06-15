@@ -47,7 +47,7 @@ readonly class AttachmentHelper
 
     public function getThumbUrl(Attachment $attachment, ThumbSize $size): ?string
     {
-        return $this->s3Adapter->getPreSignedUrl($attachment->getImageObjectId($size));
+        return $attachment->getPreviewUrl() ?: $this->s3Adapter->getPreSignedUrl($attachment->getImageObjectId($size));
     }
 
     /** @throws \Exception */

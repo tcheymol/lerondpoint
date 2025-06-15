@@ -8,12 +8,16 @@ use App\Entity\Attachment;
 use App\Entity\Track;
 use App\Repository\TrackRepository;
 use Doctrine\Common\Collections\Order;
+use Symfony\Component\Asset\Packages;
 use Twig\Extension\RuntimeExtensionInterface;
 
 readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private AttachmentHelper $attachmentHelper, private TrackRepository $repository)
-    {
+    public function __construct(
+        private AttachmentHelper $attachmentHelper,
+        private TrackRepository $repository,
+        private Packages $packages,
+    ) {
     }
 
     public function getTrackThumbUrl(Track $track, ThumbSize $size = ThumbSize::Small): ?string
@@ -23,7 +27,13 @@ readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
 
     public function getThumbUrl(Attachment $attachment, ThumbSize $size = ThumbSize::Small): ?string
     {
-        return $attachment->getImageUrl($size) ?: $this->attachmentHelper->getThumbUrl($attachment, $size);
+        if ($attachment->getImageUrl($size)) {
+            return $attachment->getImageUrl($size);
+        } elseif ($attachment->isVideo()) {
+            return $this->packages->getUrl('images/camera.png');
+        }
+
+        return $this->attachmentHelper->getThumbUrl($attachment, $size);
     }
 
     public function getPreviousTrackId(Track $track): ?int

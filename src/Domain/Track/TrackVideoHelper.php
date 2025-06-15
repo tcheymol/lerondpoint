@@ -28,7 +28,12 @@ readonly class TrackVideoHelper
 
     private function getVideoData(Track $track): ?Extractor
     {
-        return $track->url ? new Embed()->get($track->url) : null;
+        return $this->getUrlVideoData($track->url);
+    }
+
+    public function getUrlVideoData(?string $url): ?Extractor
+    {
+        return $url ? new Embed()->get($url) : null;
     }
 
     private function getVideoPreview(?Extractor $videoData): ?string

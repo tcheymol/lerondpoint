@@ -1,21 +1,13 @@
 <div class="card text-bg-white mt-3 rounded-0 shadow">
     <div class="card-header rounded-0 bg-primary border-bottom-0 plaine">{{ track.name }}</div>
     <div class="card-body pt-0">
-        <div class="row">
-            <div class="col-12 col-sm-6 mt-2">
-                <div class="row">
-                    {{ include('track/components/_preview_thumb.html.twig', {track, size: 100}) }}
-                </div>
+        <div class="d-flex flex-row">
+            <div class="mt-2 flex-grow-0">
+                {{ include('track/components/preview/_thumbnail_image.html.twig', {track}) }}
             </div>
-            <div class="col-12 col-sm-6 d-flex flex-column">
-                <div class="row flex-grow-1">
-                    {{ include('track/components/_information_rows.html.twig', {track, noName: true, hideDescription: true}) }}
-                </div>
-                <div class="row d-flex justify-content-between">
-                    <div class="col text-end">
-                        <a class="btn btn-link" href="{{ path('track_show', {id: track.id}) }}">{{ 'KnowMore'|trans }}</a>
-                    </div>
-                </div>
+            <div class="flex-grow-1 d-flex flex-column justify-content-between text-end pt-3">
+                <div>{{ include('track/components/_information_rows_partial.html.twig', {track}) }}</div>
+                <div><a class="btn btn-link" href="{{ path('track_show', {id: track.id}) }}">{{ 'KnowMore'|trans }}</a></div>
             </div>
         </div>
     </div>
