@@ -1,9 +1,0 @@
-<div
-    {{ stimulus_controller('photoswipe') }}
-    id="trackPhotoswipe"
-    class="pswp-gallery pswp-gallery--single-column h-100"
->
-    {% for attachment in track.attachments %}
-        {{ include('track/components/photoswipe/_photoswipe_item.html.twig', {attachment}) }}
-    {% endfor %}
-</div>
