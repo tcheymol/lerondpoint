@@ -4,11 +4,11 @@
         'data-video-preview-target': 'input',
         'data-action': 'video-preview#preview',
     }}) }}
-    <img src="" class="w-100 mt-3" alt="" {{ stimulus_target('video-preview', 'preview') }} style="max-width: 90vw" />
-    <div class="w-100 mt-3">
+    <div class="w-100 mt-3 d-none" {{ stimulus_target('video-preview', 'previewFailureDisclaimer') }}>
         <div class="alert alert-warning">
             <i class="fa fa-info-circle me-2"></i>
             {{ 'VideoPreviewGenerationFailed'|trans }}
         </div>
     </div>
+    <img src="" class="w-100 mt-3" alt="" {{ stimulus_target('video-preview', 'preview') }} style="max-width: 90vw" />
 </div>

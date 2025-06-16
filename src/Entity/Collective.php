@@ -10,8 +10,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CollectiveRepository::class)]
+#[UniqueEntity('name', message: 'CollectiveNameAlreadyExists')]
 class Collective implements OwnableInterface, BlameableInterface, \Stringable, PersistedEntityInterface
 {
     use BlameableTrait;
@@ -92,7 +94,7 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
     private ?string $location = null;
 
     public function __construct(
-        #[ORM\Column(length: 255)]
+        #[ORM\Column(length: 255, unique: true)]
         private ?string $name = null,
     ) {
         $this->actions = new ArrayCollection();

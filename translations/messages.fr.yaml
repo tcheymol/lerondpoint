@@ -143,6 +143,7 @@ ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
 QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre groupe est encore actif et que vous souhaitez qu'il apparaisse sur la carte, nous vous invitons à compléter sa création depuis votre espace profil.
+QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
 Region: Région
 RejectTrack: Refuser la trace

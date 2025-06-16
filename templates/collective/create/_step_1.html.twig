@@ -4,6 +4,7 @@
     <div class="row text-start">
         <div class="col-12 col-sm-6">
             {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
             {{ form_widget(form.name) }}
             {{ form_label(form.shortDescription) }}
             {{ form_widget(form.shortDescription) }}

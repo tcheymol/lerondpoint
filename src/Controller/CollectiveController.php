@@ -24,20 +24,23 @@ class CollectiveController extends AbstractController
     }
 
     #[Route('/collective/quick_new', name: 'collective_quick_new', methods: ['GET'])]
-    public function quickNew(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator): Response
     {
-        $name = $request->query->get('name');
-        if ($name) {
-            $collective = Collective::createQuick($name);
-            $em->persist($collective);
-            $em->flush();
-
-            $this->addFlash('success', $translator->trans('QuickGroupCreated', ['%groupName%' => $collective->getName()]));
-
-            return $this->redirectToRoute('track_new', ['createdCollectiveId' => $collective->getId()]);
+        $name = $request->query->getString('name');
+        if (!$name) {
+            return $this->render('collective/create/_quick.html.twig');
         }
 
-        return $this->render('collective/create/_quick.html.twig');
+        try {
+            $collective = $persister->createQuick($name);
+            $this->addFlash('success', $translator->trans('QuickGroupCreated', ['%groupName%' => $name]));
+
+            return $this->redirectToRoute('track_new', ['createdCollectiveId' => $collective->getId()]);
+        } catch (\Exception) {
+            $this->addFlash('danger', $translator->trans('QuickGroupFailure', ['%groupName%' => $name]));
+
+            return $this->redirectToRoute('track_new');
+        }
     }
 
     #[Route('/collective/new/disclaimer', name: 'collective_new_disclaimer', methods: ['GET'])]

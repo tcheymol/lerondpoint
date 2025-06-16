@@ -117,4 +117,13 @@ readonly class CollectivePersister
         $this->em->remove($invitation);
         $this->em->flush();
     }
+
+    public function createQuick(string $name): Collective
+    {
+        $collective = Collective::createQuick($name);
+        $this->em->persist($collective);
+        $this->em->flush();
+
+        return $collective;
+    }
 }
