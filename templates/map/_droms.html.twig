@@ -1,8 +1,31 @@
-{% set maps = [ 'mapGuadeloupe', 'mapMartinique', 'mapReunion', 'mapMayotte', 'mapGuyane' ] %}
+{% set dromMaps = [
+    {label: "Guadeloupe", id: 'mapGuadeloupe'},
+    {label: "Martinique", id: 'mapMartinique'},
+    {label: "La Réunion", id: 'mapReunion'},
+    {label: "Mayotte", id: 'mapMayotte'},
+    {label: "Guyane", id: 'mapGuyane'},
+] %}
+
+{% set displayedMaps = map and map != 'droms'
+    ? dromMaps|filter(dromMap => dromMap.id == map)
+    : dromMaps
+%}
+
 <div class="row d-flex justify-content-center">
-    {% for map in maps %}
+    <div class="d-block d-sm-none z-1">
+        <label for="select-drom"></label>
+        <select name="droms" id="select-drom" class="mt-2"
+            {{ stimulus_controller('select_drom', {url: path('collective_index')})
+            |stimulus_action('select_drom', 'update') }}
+        >
+            {% for dromMap in dromMaps %}
+                <option value="{{ dromMap.id }}" {{ dromMap.id == map ? 'selected="true"' : '' }}>{{ dromMap.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% for dromMap in displayedMaps %}
         <div class="col-12 col-sm-6 col-md-4 mt-2">
-            <div id="{{ map }}" class="border border-3 border-success w-100" style="min-height: 40vh"></div>
+            <div id="{{ dromMap.id }}" class="border border-3 border-success w-100" style="min-height: 40vh"></div>
         </div>
     {% endfor %}
 </div>

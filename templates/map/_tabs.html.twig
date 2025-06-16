@@ -1,7 +1,7 @@
-{% set switchMap = map == 'droms' ? 'metropolis' : 'droms' %}
+{% set switchMap = map == 'metropolis' ? 'droms' : 'metropolis' %}
 <div class="position-absolute top-right z-1k1" style="top: -42px;">
     <a href="{{ path('collective_index', {map: switchMap}) }}" class="btn btn-secondary border border-dark border-3">
-        <i class="fa fa-{{ switchMap == 'droms' ? 'globe' : 'earth-europe' }}"></i>
-        {{ switchMap == 'droms' ? 'ViewDroms'|trans : 'ViewMetropolis'|trans }}
+        <i class="fa fa-{{ switchMap == 'metropolis' ? 'earth-europe' : 'globe' }}"></i>
+        {{ switchMap == 'metropolis' ? 'ViewMetropolis'|trans : 'ViewDroms'|trans }}
     </a>
 </div>

@@ -16,7 +16,7 @@
             {{ include('map/_autocomplete.html.twig', {showDisclaimer: true}) }}
             <div id="map" class="h-100 w-100"></div>
         {% else %}
-            {{ include('map/_droms.html.twig') }}
+            {{ include('map/_droms.html.twig', {map}) }}
         {% endif %}
         {{ include('map/_collective_information.html.twig') }}
     </div>
