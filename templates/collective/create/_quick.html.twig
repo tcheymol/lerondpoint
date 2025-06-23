@@ -1,11 +1,14 @@
 <div {{ stimulus_controller('reveal') }} class="alert alert-secondary mt-2 mb-0 p-2">
     <div {{ stimulus_target('reveal', 'trigger') }}>
         <span>{{ 'YouDontFindYourGroup'|trans }}</span><br/>
-        <button  class="btn btn-secondary mt-2"  type="button" {{ stimulus_action('reveal', 'reveal') }}>
-            {{ 'CreateCollectiveNow'|trans }}
-        </button>
+        {% if app.user %}
+            <button class="btn btn-secondary mt-2" type="button" {{ stimulus_action('reveal', 'reveal') }}>
+                {{ 'CreateCollectiveNow'|trans }}
+            </button>
+        {% else %}
+            <a class="btn btn-warning" href="{{ path('app_sign_up') }}">{{ 'CreateAccountToAddGroup'|trans }}</a>
+        {% endif %}
     </div>
-
     <div
         {{ stimulus_controller('get_form', {path: path('collective_quick_new')})
         |stimulus_target('reveal', 'hidden') }}

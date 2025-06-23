@@ -73,7 +73,10 @@ readonly class TrackPersister
         $trackId = $this->getSession()->get('being-created-track-id');
         $track = !$trackId ? null : $this->trackRepository->find($trackId);
 
-        if (!$this->authorizationChecker->isGranted('EDIT', $track)) {
+        if (
+            $this->authorizationChecker->isGranted('ROLE_USER')
+            && !$this->authorizationChecker->isGranted('EDIT', $track)
+        ) {
             $track = null;
         }
 

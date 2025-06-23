@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-100">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>{% block title %}{{ 'HomeTitle'|trans }}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('jacket.png') }}">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+                  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+                  crossorigin=""/>
+            {% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                    crossorigin=""></script>
+        {% endblock %}
+    </head>
+    {% set _bodyBg = block('bodybg') is defined ? block('bodybg') : '' %}
+    <body
+        data-controller="modal"
+        class="position-relative d-flex flex-column justify-content-center h-100 text-center text-white {{ _bodyBg is not empty ? 'bg-'~_bodyBg : '' }} {% block bodyClasses %}{% endblock %} "
+        style="{{ _bodyBg is not empty ? 'background-image: none;' }}"
+    >
+        {% block alerts %}{{ include('components/_alerts.html.twig') }}{% endblock %}
+        {{ include('components/_fullscreen_loader.html.twig') }}
+        {% block header %}
+            {{ include('components/header/_header.html.twig') }}
+        {% endblock %}
+
+        {% block main %}
+            <main class="vw-100 position-relative" style="padding-top: 42px">
+                <h1 style="visibility: hidden; position: absolute">{{ block('title') }}</h1>
+                <div class="flex-grow-1 d-flex flex-column justify-content-center">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        {% endblock %}
+
+        {% block footer %}
+            {{ include('components/header/_social_desktop.html.twig') }}
+        {% endblock %}
+    </body>
+</html>

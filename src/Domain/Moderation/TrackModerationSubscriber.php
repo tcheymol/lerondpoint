@@ -33,6 +33,11 @@ readonly class TrackModerationSubscriber
                 $this->mailer->validate($track);
             }
         }
+        if ($event->hasChangedField('isDraft')) {
+            if (!$track->isDraft()) {
+                $this->mailer->create($track);
+            }
+        }
     }
 
     public function handleRejection(PreUpdateEventArgs $event, Track $track): void

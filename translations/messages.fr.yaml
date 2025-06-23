@@ -43,6 +43,7 @@ Corse: Corse
 Cover: Couverture
 Create: Créer
 CreateAccount: Pas de compte ? Créez-en un ici
+CreateAccountToAddGroup: Créez un compte pour ajouter votre groupe
 CreateCollective: Ajouter un groupe actif
 CreateCollectiveDisclaimer: Je confirme que mon groupe est informé et souhaite être inscrit sur cette carte et ce site internet
 CreateCollectiveNow: Créez le maintenant
@@ -70,6 +71,7 @@ EmailOrUsername: Email ou nom d'utilisateur·ice
 EmailVerified: Votre email a été validé avec succès
 Enabled: Activé
 EnterUrl: Entrez une URL vers une vidéo Youtube
+Error404: Oops, la page que vous cherchez n'existe pas
 Extension: Extension
 FollowUps: Suites
 FollowUs: Nous suivre (page FB, site internet ou autre...)
