@@ -25,13 +25,12 @@ Captcha: Veuillez confirmer le code ci-dessus
 Category: Catégorie
 CategoryRequired: "* Catégorie"
 CentreValDeLoire: Centre-Val de Loire
-ChooseExistingIcon: Choisissez une icône existante
 Close: Fermer
 Collective: Groupe de GJ
 CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-Complete: Terminer la création
+AddToMap: Ajouter à la carte
 ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
 ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
 ContactUs: Nous contacter (mail ou n°)
@@ -144,7 +143,7 @@ ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les d
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
-QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre groupe est encore actif et que vous souhaitez qu'il apparaisse sur la carte, nous vous invitons à compléter sa création depuis votre espace profil.
+QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre groupe est encore actif et que vous souhaitez qu'il apparaisse sur la carte (dans ET MAINTENANT ?), nous vous invitons à compléter sa création depuis votre espace profil.
 QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
 Region: Région
@@ -210,7 +209,6 @@ UpdateIcon: Changer l'icône
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
-UploadCustomIcon: Téléversez une image
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
@@ -233,6 +231,7 @@ VideoPreviewGenerationFailed: Nous n'avons pas réussi à générer un apercu de
 ViewCollectiveTracks: Voir les traces de ce groupe
 ViewDroms: Voir Droms
 ViewMetropolis: Voir métropole
+ViewTrack: Voir la trace
 WeNeedYou: Ce site est participatif. Il a besoin de vous !
 WeakPassword: ⚠️ Trop faible
 WhoAreWe: qui sommes-nous ?

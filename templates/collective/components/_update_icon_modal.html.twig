@@ -5,43 +5,24 @@
                 <h1 class="modal-title fs-5" id="updateIconModalLabel">{{ 'UpdateIcon'|trans }}</h1>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 col-sm-6">
-                        <div class="row">
-                            <h3>{{ 'ChooseExistingIcon'|trans }}</h3>
+                <div class="row d-flex justify-content-center">
+                    {% for iconPath in get_actions_icon_paths() %}
+                        <div class="col-4 d-flex justify-content-center">
+                            <button class="btn btn-link p-0" style="width: 50px"
+                                    data-bs-dismiss="modal"
+                                    {{
+                                        stimulus_controller('update_collective_icon', {
+                                            iconPath,
+                                            imagePreviewElementId: 'autocompleteIconPreviewImage',
+                                            fieldElementId: 'collective_iconPath',
+                                        })
+                                        |stimulus_action('update_collective_icon', 'updateIcon')
+                                    }}
+                            >
+                                <img style="width: 50px" src="{{ iconPath }}" alt="{{ iconPath }}"/>
+                            </button>
                         </div>
-                        <div class="row border border-0 border-black border-end pe-2">
-                            {% for iconPath in get_actions_icon_paths() %}
-                                <div class="col-3">
-                                    <button class="btn btn-link p-0" style="width: 50px"
-                                            data-bs-dismiss="modal"
-                                            {{
-                                                stimulus_controller('update_collective_icon', {
-                                                    iconPath,
-                                                    imagePreviewElementId: 'autocompleteIconPreviewImage',
-                                                    fieldElementId: 'collective_iconPath',
-                                                })
-                                                |stimulus_action('update_collective_icon', 'updateIcon')
-                                            }}
-                                    >
-                                        <img style="width: 50px" src="{{ iconPath }}" alt="{{ iconPath }}"/>
-                                    </button>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <div class="row">
-                            <h3>{{ 'UploadCustomIcon'|trans }}</h3>
-                        </div>
-                        <div class="row">
-                            <div id="uppyDnd" {{ stimulus_controller('uppy_dnd', {
-                                endpoint: path('collective_upload_image'),
-                                targetInputId: 'collective_iconPath',
-                                previewElementId: 'autocompleteIconPreviewImage',
-                            }) }}></div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="modal-footer">

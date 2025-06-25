@@ -1,46 +1,41 @@
-{% extends 'templates/base.html.twig' %}
+{% extends 'templates/card_page.html.twig' %}
 
-{% block title %}{{ 'Participate'|trans }}{% endblock %}
+{% block title %}{{ 'WeNeedYou'|trans }}{% endblock %}
 
-{% block content %}
-    <div class="px-3 text-dark fw-bold">
-        <div class="text-start bg-white border border-dark border-4 col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 p-4 my-3">
-            <h2 class="fs-3">{{ 'WeNeedYou'|trans }}</h2>
-            <div class="fs-5 grotesk">
-                Vous pouvez participer :
-                <ul>
-                    <li>
-                        En
-                            <a href="{{ path('track_new') }}" class="link-primary">ajoutant une trace</a>
-                        à la mémoire vivante du mouvement des Gilets jaunes
-                    </li>
-                    <li>
-                        En
-                            <a href="{{ path('collective_new_disclaimer') }}" class="link-secondary">ajoutant un groupe actif</a>
-                        sur la carte collaborative
-                            <a href="{{ path('collective_index') }}" class="link-secondary">et maintenant ?</a>
-                    </li>
-                </ul>
-                Nous vous conseillons de
-                    <a href="{{ path('app_sign_up') }}" class="link-dark">créer un compte</a>
-                afin d'avoir accès à tout ce que vous avez déposé sur le site et le modifier comme vous le souhaitez.
-                C'est rapide et facile !
-                Un compte n'est pas nécessaire si vous souhaitez ajouter une <b>trace</b>.
-                Par contre, il est obligatoire pour ajouter un <b>groupe</b> actif sur la carte afin de mettre à jour vos informations
+{% block cardContent %}
+        <div class="fs-6">
+            Vous pouvez participer :
+            <ul>
+                <li>
+                    En
+                        <a href="{{ path('track_new') }}" class="link-primary">ajoutant une trace</a>
+                    à la mémoire vivante du mouvement des Gilets jaunes
+                </li>
+                <li>
+                    En
+                        <a href="{{ path('collective_new_disclaimer') }}" class="link-secondary">ajoutant un groupe actif</a>
+                    sur la carte collaborative
+                        <a href="{{ path('collective_index') }}" class="link-secondary">et maintenant ?</a>
+                </li>
+            </ul>
+            Nous vous conseillons de
+                <a href="{{ path('app_sign_up') }}" class="link-dark">créer un compte</a>
+            afin d'avoir accès à tout ce que vous avez déposé sur le site et le modifier comme vous le souhaitez.
+            C'est rapide et facile !
+            Un compte n'est pas nécessaire si vous souhaitez ajouter une <b>trace</b>.
+            Par contre, il est obligatoire pour ajouter un <b>groupe</b> actif sur la carte afin de mettre à jour vos informations
 
-                <br/><br/>
-                Nous mettons en place une modération sur le site dans un soucis de :
-                <ul>
-                    <li>Veiller à ce que les contenus soient relatifs au mouvement des Gilets jaunes.</li>
-                    <li>Respect des règles et des conditions d'utilisation du site.</li>
-                    <li>Protection des personnes vis à vis d'éventuelles poursuites.</li>
-                    <li>Prévenir tout problème technique ou contenu incomplet.</li>
-                </ul>
+            <br/><br/>
+            Nous mettons en place une modération sur le site dans un soucis de :
+            <ul>
+                <li>Veiller à ce que les contenus soient relatifs au mouvement des Gilets jaunes.</li>
+                <li>Respect des règles et des conditions d'utilisation du site.</li>
+                <li>Protection des personnes vis à vis d'éventuelles poursuites.</li>
+                <li>Prévenir tout problème technique ou contenu incomplet.</li>
+            </ul>
 
-                Retrouvez <a href="{{ path('app_privacy') }}" class="link-dark">ici</a>
-                plus d’informations à propos de la modération, du traitement des données et des conditions d’utilisation du site.
-                Si vous avez déjà un compte, connectez-vous  <a href="{{ path('app_login') }}" class="link-dark">ici</a>.
-            </div>
+            Retrouvez <a href="{{ path('app_privacy') }}" class="link-dark">ici</a>
+            plus d’informations à propos de la modération, du traitement des données et des conditions d’utilisation du site.
+            Si vous avez déjà un compte, connectez-vous  <a href="{{ path('app_login') }}" class="link-dark">ici</a>.
         </div>
-    </div>
 {% endblock %}

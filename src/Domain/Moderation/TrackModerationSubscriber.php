@@ -8,44 +8,36 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Track::class)]
-#[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Track::class)]
 readonly class TrackModerationSubscriber
 {
     public function __construct(private ModerationMailer $mailer)
     {
     }
 
-    public function postPersist(Track $track): void
-    {
-        $this->mailer->create($track);
-    }
-
     public function preUpdate(Track $track, PreUpdateEventArgs $event): void
     {
+        $this->handleCreation($event, $track);
         $this->handleValidation($event, $track);
         $this->handleRejection($event, $track);
     }
 
+    public function handleCreation(PreUpdateEventArgs $event, Track $track): void {
+        if ($event->hasChangedField('isDraft') && !$track->isDraft()) {
+            $this->mailer->create($track);
+        }
+    }
+
     public function handleValidation(PreUpdateEventArgs $event, Track $track): void
     {
-        if ($event->hasChangedField('validated')) {
-            if ($track->isValidated()) {
-                $this->mailer->validate($track);
-            }
-        }
-        if ($event->hasChangedField('isDraft')) {
-            if (!$track->isDraft()) {
-                $this->mailer->create($track);
-            }
+        if ($event->hasChangedField('validated') && $track->isValidated()) {
+            $this->mailer->validate($track);
         }
     }
 
     public function handleRejection(PreUpdateEventArgs $event, Track $track): void
     {
-        if ($event->hasChangedField('rejected')) {
-            if ($track->isRejected()) {
-                $this->mailer->reject($track);
-            }
+        if ($event->hasChangedField('rejected') && $track->isRejected()) {
+            $this->mailer->reject($track);
         }
     }
 }
