@@ -4,11 +4,11 @@ namespace App\Twig\Extension;
 
 use App\Twig\Runtime\FallbackImageExtensionRuntime;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class FallbackImageExtension extends AbstractExtension
 {
+    #[\Override]
     public function getFunctions(): array
     {
         return [

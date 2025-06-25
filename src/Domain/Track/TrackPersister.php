@@ -5,6 +5,7 @@ namespace App\Domain\Track;
 use App\Domain\Security\SessionAwareTrait;
 use App\Entity\RejectionCause;
 use App\Entity\Track;
+use App\Form\TrackType;
 use App\Repository\AttachmentRepository;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -83,9 +84,15 @@ readonly class TrackPersister
         return !$track ? new Track() : $track;
     }
 
-    private function updateSessionTrack(Track $track): void
+    public function updateSessionTrack(Track $track): void
     {
         $this->requestStack->getSession()->set('being-created-track-id', $track->getId());
+    }
+
+    public function markTrackFinished(Track $track): void
+    {
+        $track->setCreationStep(TrackType::STEPS_COUNT + 1);
+        $this->em->flush();
     }
 
     private function clearSessionTrack(): void

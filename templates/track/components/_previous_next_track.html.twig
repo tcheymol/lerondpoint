@@ -16,4 +16,5 @@
                 {{ stimulus_controller('tooltip', {text: 'NextTrack'|trans}) }}
         ><i class="fa fa-arrow-right-long"></i></a>
     {% endif %}
+    {{ include('track/components/_edit_track.html.twig', {track}) }}
 </div>
