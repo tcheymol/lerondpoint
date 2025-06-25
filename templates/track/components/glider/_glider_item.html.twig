@@ -8,6 +8,7 @@
             {{ 'Cover'|trans }}
         </div>
     {% endif %}
+    {{ include('track/components/glider/_moderation_remove_track_attachment.html.twig', {attachment}) }}
     {% if attachment.video %}
         {% if attachment.videoEmbed %}
             <div class="track-preview-iframe-container h-100 w-100" style="min-height: 400px">

@@ -1,6 +1,6 @@
 {% extends 'templates/base.html.twig' %}
 
-{% block title %}Moderation{% endblock %}
+{% block title %}{{ 'Moderation'|trans }}{% endblock %}
 {% block bodybg %}warning{% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
         <div class="p-4">
             <div class="row">
                 <div class="col-12 col-sm-7">
-                    {{ include('track/components/glider/_glider.html.twig', {track}) }}
+                    {{ include('track/components/glider/_glider.html.twig', {track, moderate: true}) }}
                 </div>
                 <div class="col-12 col-sm-5 text-start">
                     {{ include('track/moderation/_moderate_buttons.html.twig', {track}) }}

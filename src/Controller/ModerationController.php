@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Domain\Images\AttachmentHelper;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
+use App\Entity\Attachment;
 use App\Entity\Track;
 use App\Form\Model\RejectTrack;
 use App\Form\RejectTrackType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -54,5 +57,19 @@ class ModerationController extends AbstractController
             'form' => $form->createView(),
             'track' => $track,
         ]);
+    }
+
+    #[Route('/moderation/{id<\d+>}/remove_attachment', name: 'moderate_track_remove_attachment', methods: ['GET'])]
+    public function removeAttachment(Request $request, Attachment $attachment, AttachmentHelper $helper): Response
+    {
+        $track = $attachment->getTrack();
+        if (!$track) {
+            return new RedirectResponse($request->headers->get('referer') ?? 'home');
+        }
+        if ($track->hasMultipleAttachments()) {
+            $helper->delete($attachment);
+        }
+
+        return $this->redirectToRoute('moderate_track', ['id' => $track->getId()]);
     }
 }

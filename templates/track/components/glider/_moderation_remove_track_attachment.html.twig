@@ -1,0 +1,10 @@
+{% if moderate is defined and attachment.track.hasMultipleAttachments%}
+    <a
+        href="{{ path('moderate_track_remove_attachment', {id: attachment.id}) }}"
+        class="position-absolute btn btn-danger border border-dark border-2"
+        style="left: 5%; bottom: 8px;"
+        onClick="return confirm('{{ 'ThisActionIsIrreversible'|trans }}')"
+    >
+        {{ 'RemoveTrackAttachment'|trans }}
+    </a>
+{% endif %}

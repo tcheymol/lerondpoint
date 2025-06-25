@@ -7,6 +7,7 @@ Action: Action
 Actions: Actions
 Actus: Actualités
 AddFiles: Ajout de fichiers
+AddToMap: Ajouter à la carte
 Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
@@ -30,7 +31,6 @@ Collective: Groupe de GJ
 CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-AddToMap: Ajouter à la carte
 ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
 ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
 ContactUs: Nous contacter (mail ou n°)
@@ -151,6 +151,7 @@ RejectTrack: Refuser la trace
 Rejected By: Refusé par
 Rejected: Refusé
 RejectionCause: Raison du refus
+RemoveTrackAttachment: Supprimer ce document de la trace
 RepeatPassword: Confirmez votre mot de passe
 ResetPassword: Réinitialiser votre mot de passe
 ResetPasswordEmailSendFail: L'envoi de l'email de réinitialisation de mot de passe a échoué, veuillez réessayer ultérieurement et nous contacter si le problème persiste.
@@ -212,7 +213,7 @@ UploadAFile: Téléverser un fichier
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
-UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe. Si elle n'a pas de compte, un email lui a été envoyé
+UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe.
 UsernameDisclaimer: Votre email ne sera pas affichée publiquement, vous pouvez renseigner un nom d'utilisateur·ice afin de vous identifier sur le site
 UsernameLabel: Nom d'utilisateur·ice (Optionnel)
 Users: Utilisateurs·ices
@@ -242,3 +243,4 @@ YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouDontFindYourGroup: Vous ne trouvez pas votre groupe ?
 YouHaveBeenInvited: Vous avez été invité·e à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été·e invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org
+ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible

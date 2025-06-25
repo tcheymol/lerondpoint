@@ -111,6 +111,13 @@ readonly class AttachmentHelper
         }
     }
 
+    public function delete(Attachment $attachment): void
+    {
+        $this->deleteObjects($attachment);
+        $this->em->remove($attachment);
+        $this->em->flush();
+    }
+
     public function deleteObjects(Attachment $attachment): void
     {
         foreach ($attachment->getObjectIds() as $objectId) {

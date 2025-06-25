@@ -23,7 +23,7 @@ class CollectiveInvitationController extends AbstractController
             $email = $form->get('email')->getData();
             $persister->inviteUser($collective, $email);
 
-            return $this->redirectToRoute('collective_invite', ['id' => $collective->getId()]);
+            return $this->redirectToRoute('user_account', ['page' => 'collectives']);
         }
 
         return $this->render('collective/invite.html.twig', [
