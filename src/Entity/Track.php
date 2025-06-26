@@ -186,7 +186,7 @@ class Track implements BlameableInterface
     /** @return Collection<int, Attachment> */
     public function getAttachments(): Collection
     {
-        return $this->attachments;
+        return $this->sortAttachments();
     }
 
     public function addAttachment(?Attachment $attachment): static
@@ -462,6 +462,15 @@ class Track implements BlameableInterface
         }
 
         return $this->attachments->first() ?: null;
+    }
+
+    /** @return ArrayCollection<int, ?Attachment> */
+    public function sortAttachments(): ArrayCollection
+    {
+        $cover = $this->getCover();
+        $nonCoverAttachments = $this->attachments->filter(fn (Attachment $attachment) => $attachment !== $cover);
+
+        return new ArrayCollection([$cover, ...$nonCoverAttachments->toArray()]);
     }
 
     public function getCoverAttachment(): ?Attachment
