@@ -55,6 +55,9 @@ class CreateTrackController extends AbstractController
     {
         $persister->updateCover($track, $request->query->getInt('newCoverId'));
 
-        return $this->render('track/new/update_preview.html.twig', ['track' => $track]);
+        return $this->render('track/new/update_preview.html.twig', [
+            'track' => $track,
+            'step' => $request->query->getInt('step', 2),
+        ]);
     }
 }

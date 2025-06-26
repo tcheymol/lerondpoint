@@ -9,7 +9,7 @@
                 {% set thumbUrl = get_thumb_url(attachment) %}
                 {% set isCover = track.cover == attachment %}
                 <div class="col mt-2 d-flex justify-content-center flex-column align-items-center">
-                    <a class="btn btn-link" href="{{ path('track_update_cover', {id: track.id, newCoverId: attachment.id}) }}">
+                    <a class="btn btn-link" href="{{ path('track_update_cover', {id: track.id, newCoverId: attachment.id, step}) }}">
                         <div
                             class="img-thumbnail thumbnail position-relative {{ isCover ? 'border border-4 border-primary' : '' }}"
                             style="background-image: url('{{ thumbUrl }}');"></div>
@@ -18,7 +18,7 @@
             {% endfor %}
         </div>
         <div class="text-end mt-2">
-            <a class="btn btn-primary" href="{{ path('track_new') }}">
+            <a class="btn btn-primary" href="{{ path('track_new', {step}) }}">
                 {{ 'ResumeCreation'|trans }}
             </a>
         </div>

@@ -43,7 +43,7 @@ class Track implements BlameableInterface
         targetEntity: Attachment::class,
         mappedBy: 'track',
         cascade: ['persist', 'remove'],
-        //        orphanRemoval: true,
+        orphanRemoval: true,
     )]
     private Collection $attachments;
 
@@ -394,7 +394,7 @@ class Track implements BlameableInterface
 
     public function bumpCreationStep(?int $creationStep = 0): static
     {
-        if ($this->creationStep === null || $this->creationStep < $creationStep) {
+        if (null === $this->creationStep || $this->creationStep < $creationStep) {
             $this->creationStep = $creationStep;
         }
 

@@ -67,6 +67,7 @@ readonly class TrackPersister
 
     public function remove(Track $track): void
     {
+        $this->attachmentHelper->deleteAttachments($track);
         $this->em->remove($track);
         $this->em->flush();
     }
