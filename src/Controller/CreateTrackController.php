@@ -29,16 +29,16 @@ class CreateTrackController extends AbstractController
 
             return $this->redirectToRoute('track_list');
         } elseif (5 === $step) {
+            $isEditing = !$track->isDraft();
             $persister->publish($track);
 
-            return $this->redirectToRoute('track_list');
+            return $isEditing ? $this->redirectToRoute('track_new', ['step' => 1]) : $this->redirectToRoute('track_list');
         }
 
         $form = $this->createForm(TrackType::class, $track, ['step' => $step])->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $step = $step + ($this->isButtonClicked($form, 'back') ? -1 : 1);
-            $track->setCreationStep($step);
-            $persister->persist($track);
+            $persister->persist($track, $step);
 
             return $this->redirectToRoute('track_new', ['step' => $step]);
         }

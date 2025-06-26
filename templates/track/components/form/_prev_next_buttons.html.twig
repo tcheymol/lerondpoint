@@ -1,7 +1,7 @@
 {% set backButtonClasses = 1 == step ? ' btn-danger ' : ' btn-light bg-white ' %}
 {% set previousStep = step - 1 %}
-
-
+{% set isEditing = not track.draft %}
+{% set isFirstStep = 0 == previousStep %}
 
 <div class="row mt-3">
     <div class="col-12 col-sm-6 ms-auto text-end ">
@@ -10,10 +10,15 @@
                 href="{{ path('track_new', {step: previousStep} ) }}"
                 tabindex="-1"
         >
-            {{ 0 == previousStep
-                ? 'CancelCreation'|trans
-                : 'BackStep'|trans({'%step%': previousStep, '%total%': constant('App\\Form\\TrackType::STEPS_COUNT') })
-            }}
+            {% if isFirstStep %}
+                {% if isEditing %}
+                    {{ 'DeleteTrack'|trans }}
+                {% else %}
+                    {{ 'CancelCreation'|trans }}
+                {% endif %}
+            {% else %}
+                {{  'BackStep'|trans({'%step%': previousStep, '%total%': constant('App\\Form\\TrackType::STEPS_COUNT') }) }}
+            {% endif %}
         </a>
         {{ form_widget(form.next) }}
     </div>

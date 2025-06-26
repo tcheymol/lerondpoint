@@ -392,6 +392,15 @@ class Track implements BlameableInterface
         return $this;
     }
 
+    public function bumpCreationStep(?int $creationStep = 0): static
+    {
+        if ($this->creationStep === null || $this->creationStep < $creationStep) {
+            $this->creationStep = $creationStep;
+        }
+
+        return $this;
+    }
+
     /** @return Collection<int, Year> */
     public function getYears(): Collection
     {

@@ -27,10 +27,11 @@ readonly class TrackPersister
     ) {
     }
 
-    public function persist(Track $track): Track
+    public function persist(Track $track, ?int $creationStep = 1): Track
     {
         $isInSession = null === $track->getId();
 
+        $track->bumpCreationStep($creationStep);
         $this->attachmentHelper->handleAttachments($track);
         $this->videoHelper->handleVideo($track);
         $this->em->persist($track);
@@ -46,6 +47,7 @@ readonly class TrackPersister
     public function publish(Track $track): void
     {
         $this->clearSessionTrack();
+        $track->setCreationStep(TrackType::STEPS_COUNT + 1);
         $track->publish();
         $this->em->flush();
     }

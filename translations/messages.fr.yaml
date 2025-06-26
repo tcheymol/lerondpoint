@@ -55,6 +55,7 @@ Credits_to: Par
 Dashboard: Accueil
 Delete: Supprimer
 DeleteMyAccount: Supprimer mon compte et toutes les données associées
+DeleteTrack: Supprimer la trace
 Deleted At: Supprimé le
 Deleted By: Supprimé par
 Description: Description
@@ -186,6 +187,7 @@ Tags: Sous-catégories
 TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace
 TermsOfUse: Conditions générales d'utilisation (CGU)
 TheyTalkAboutUs: on parle de nous
+ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible
 ThisTrackHasFaces: Des personnes apparaissent sur cette page, le·la contributeur·ice déclare avoir leur accord ou avoir flouté leurs visages.
 Title: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 Track: Trace
@@ -243,4 +245,3 @@ YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouDontFindYourGroup: Vous ne trouvez pas votre groupe ?
 YouHaveBeenInvited: Vous avez été invité·e à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été·e invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org
-ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible

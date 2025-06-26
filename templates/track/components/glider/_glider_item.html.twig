@@ -21,7 +21,7 @@
             </a>
         {% else %}
             <a href="{{ attachment.url }}" target="_blank" class="position-relative h-100 w-100">
-                <img src="{{ asset('images/camera.png') }}" alt="Attachment" class="mw-100 mvh-90 border-4 border-dark border " />
+                <img src="{{ asset('images/fallback_video.png') }}" alt="Attachment" class="mw-100 mvh-90 border-4 border-dark border " />
                 <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
             </a>
         {% endif %}

@@ -30,7 +30,7 @@ readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
         if ($attachment->getImageUrl($size)) {
             return $attachment->getImageUrl($size);
         } elseif ($attachment->isVideo()) {
-            return $this->packages->getUrl('images/camera.png');
+            return $this->packages->getUrl('images/fallback_video.png');
         }
 
         return $this->attachmentHelper->getThumbUrl($attachment, $size);

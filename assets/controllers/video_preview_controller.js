@@ -23,7 +23,7 @@ export default class extends Controller {
                 .querySelector('img')
                 ?.src;
             if (!previewSrc) {
-                this.previewTarget.src = '/images/camera.png';
+                this.previewTarget.src = '/images/fallback_video.png';
                 this.previewFailureDisclaimerTarget.classList.remove('d-none');
             } else {
                 this.previewTarget.src = previewSrc;
