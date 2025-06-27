@@ -3,7 +3,18 @@
 {% block title %}{{ 'Track'|trans }}{% endblock %}
 {% block bodybg %}light{% endblock %}
 
+{% block javascripts %}
+    <script src=" https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.js "></script>
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
+{#    {{ include('track/components/swiper/_swiper.html.twig') }}#}
     <div class="text-dark flex-column h-100 d-flex position-relative">
         <h1>{{ track.name }}</h1>
         <div class="p-4 flex-grow-1">

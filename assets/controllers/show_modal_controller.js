@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { hideAllModals } from "./helper/modalHelper.js";
+import { Modal } from 'bootstrap';
 
 /*
 * The following line makes this controller "lazy": it won't be downloaded until needed
@@ -7,10 +7,11 @@ import { hideAllModals } from "./helper/modalHelper.js";
 */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    connect() {
-        hideAllModals();
-        document.addEventListener("turbo:before-cache", () => {
-            hideAllModals();
-        });
+    static values = {
+         modalId: String,
+    }
+
+    click() {
+        new Modal(`#${this.modalIdValue}`).show();
     };
 }

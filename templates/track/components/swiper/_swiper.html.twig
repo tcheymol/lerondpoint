@@ -1,0 +1,12 @@
+<div class="swiper h-100 w-100" {{ stimulus_controller('swiper') }}>
+    <div class="swiper-wrapper">
+        {% for attachment in track.attachments %}
+            <div class="swiper-slide">
+                {{ include('track/components/preview/_full_preview.html.twig', {attachment}) }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>

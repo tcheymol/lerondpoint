@@ -1,5 +1,9 @@
-<div class="glide h-100" {{ stimulus_controller('glide') }}>
-    <div class="glide__track h-100" data-glide-el="track">
+<div class="glide h-100"
+    {{ stimulus_controller('glide') }}
+>
+    <div class="glide__track h-100" data-glide-el="track"
+    {{ stimulus_controller('show_modal', {modalId: 'swiperModal'})|stimulus_action('show_modal', 'click', 'click') }}
+    >
         <ul class="glide__slides">
             {% for attachment in track.attachments %}
                 <li class="glide__slide">
@@ -24,3 +28,5 @@
         </div>
     {% endif %}
 </div>
+
+{{ include('track/components/swiper/_swiper_modal.html.twig', {track}) }}

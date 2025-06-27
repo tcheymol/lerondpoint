@@ -1,5 +1,3 @@
-{% set thumbUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
-
 <div class="position-relative h-100">
     {% if attachment.isCover and is_granted('EDIT', track)%}
         <div class="position-absolute alert alert-primary mb-0 p-1 rounded-1 ms-2"
@@ -9,28 +7,5 @@
         </div>
     {% endif %}
     {{ include('track/components/glider/_moderation_remove_track_attachment.html.twig', {attachment}) }}
-    {% if attachment.video %}
-        {% if attachment.videoEmbed %}
-            <div class="track-preview-iframe-container h-100 w-100" style="min-height: 400px">
-                {{ attachment.videoEmbed|raw }}
-            </div>
-        {% elseif thumbUrl %}
-            <a href="{{ attachment.url }}" target="_blank" class="position-relative h-100 w-100">
-                <img src="{{ thumbUrl }}" alt="Attachment" class="mw-100 mvh-90 border-4 border-dark border " />
-                <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
-            </a>
-        {% else %}
-            <a href="{{ attachment.url }}" target="_blank" class="position-relative h-100 w-100">
-                <img src="{{ asset('images/fallback_video.png') }}" alt="Attachment" class="mw-100 mvh-90 border-4 border-dark border " />
-                <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
-            </a>
-        {% endif %}
-    {% elseif attachment.pdf %}
-        {% set objectUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
-        <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80">
-            <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
-        </object>
-    {% else %}
-            <img src="{{ thumbUrl }}" alt="Attachment" class="mw-100 mvh-90 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}" />
-    {% endif %}
+    {{ include('track/components/preview/_full_preview.html.twig', {attachment}) }}
 </div>

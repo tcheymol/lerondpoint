@@ -1,0 +1,26 @@
+{% set thumbUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
+
+{% if attachment.video %}
+    {% if attachment.videoEmbed %}
+        <div class="track-preview-iframe-container h-100 w-100" style="min-height: 400px">
+            {{ attachment.videoEmbed|raw }}
+        </div>
+    {% elseif thumbUrl %}
+        <a href="{{ attachment.url }}" target="_blank" class="position-relative h-100 w-100">
+            <img src="{{ thumbUrl }}" alt="Attachment" class="mw-100 mvh-100 border-4 border-dark border " />
+            <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
+        </a>
+    {% else %}
+        <a href="{{ attachment.url }}" target="_blank" class="position-relative h-100 w-100">
+            <img src="{{ asset('images/fallback_video.png') }}" alt="Attachment" class="mw-100 mvh-90 border-4 border-dark border " />
+            <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
+        </a>
+    {% endif %}
+{% elseif attachment.pdf %}
+    {% set objectUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
+    <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80 h-100">
+        <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
+    </object>
+{% else %}
+        <img src="{{ thumbUrl }}" alt="Attachment" class="mw-100 mvh-100 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}" />
+{% endif %}

@@ -470,7 +470,8 @@ class Track implements BlameableInterface
         $cover = $this->getCover();
         $nonCoverAttachments = $this->attachments->filter(fn (Attachment $attachment) => $attachment !== $cover);
 
-        return new ArrayCollection([$cover, ...$nonCoverAttachments->toArray()]);
+        return new ArrayCollection([$cover, ...$nonCoverAttachments->toArray()])
+            ->filter(fn (?Attachment $attachment) => $attachment !== null);
     }
 
     public function getCoverAttachment(): ?Attachment
