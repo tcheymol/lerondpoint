@@ -57,7 +57,7 @@ class CollectiveController extends AbstractController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $isLastStep = $collective->isLastStep($step);
+            $isLastStep = $collective->isLastStep($step) || $request->query->getBoolean('isLastStep');
             $persister->persist($collective, $isLastStep);
 
             return $isLastStep
@@ -75,11 +75,12 @@ class CollectiveController extends AbstractController
     }
 
     #[Route('/collective/{id<\d+>}/complete', name: 'collective_complete', methods: ['GET'])]
-    public function complete(Collective $collective, CollectivePersister $persister): Response
+    public function complete(Request $request, Collective $collective, CollectivePersister $persister): Response
     {
+        $step = $request->query->getInt('step', 1);
         $persister->updateSessionCollective($collective);
 
-        return $this->redirectToRoute('collective_new');
+        return $this->redirectToRoute('collective_new', ['step' => $step, 'isLastStep' => true]);
     }
 
     #[Route('/collective/upload_image', name: 'collective_upload_image', methods: ['POST'])]

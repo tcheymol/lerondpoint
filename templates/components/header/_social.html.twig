@@ -6,7 +6,7 @@
 
 {% set isMobile = isMobile is defined %}
 
-{% set containerClasses = isMobile 
+{% set containerClasses = isMobile
     ? 'bg-light d-flex d-lg-none flex-row justify-content-center align-items-center'
     : 'bottom-left bg-dark d-none d-lg-block'
 %}
