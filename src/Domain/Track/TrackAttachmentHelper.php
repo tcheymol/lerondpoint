@@ -5,7 +5,6 @@ namespace App\Domain\Track;
 use App\Domain\Images\AttachmentHelper;
 use App\Entity\Track;
 use App\Repository\AttachmentRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 readonly class TrackAttachmentHelper
 {

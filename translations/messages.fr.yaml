@@ -33,6 +33,7 @@ Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
 ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
 ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
+ConfirmUnsubscribe: Confirmer la désinscription
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
@@ -94,6 +95,8 @@ ImportFile: Importer un fichier
 Invite: Inviter
 InviteUser: Inviter un·e utilisateur·ice à rejoindre le groupe
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
+Is Confirmed: Confirmé·e
+Is Unsubscribed: Désinscrit·e
 Kind: Catégorie
 Kinds: Catégories
 KnowMore: En savoir plus
@@ -115,6 +118,9 @@ MyCollectives: Mes groupes
 MyTracks: Mes traces
 Name: Nom
 NewPassword: Nouveau mot de passe
+NewsletterRegistration: Inscription à la newsletter
+NewsletterSubscribe: Inscription à la newsletter
+NewsletterUnsubscribe: Désinscrivez vous de la newsletter
 Next: Suivant
 NextTrack: Trace suivante
 No: Non
@@ -148,6 +154,7 @@ QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre
 QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
 Region: Région
+Registration: Je m'inscris
 RejectTrack: Refuser la trace
 Rejected By: Refusé par
 Rejected: Refusé
@@ -182,6 +189,8 @@ Signature: Le collectif Le Rond-point
 Size: Taille
 Step: Étape
 StrongPassword: 🔐 Mot de passe fort
+SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter avec succès
+SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter avec succès
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
 TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace

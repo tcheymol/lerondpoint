@@ -6,6 +6,7 @@ use App\Entity\Action;
 use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Invitation;
+use App\Entity\NewsletterRegistration;
 use App\Entity\Region;
 use App\Entity\Track;
 use App\Entity\TrackKind;
@@ -65,5 +66,6 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Misc');
         yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
+        yield MenuItem::linkToCrud('Newsletter', 'fas fa-envelope-open-text', NewsletterRegistration::class);
     }
 }

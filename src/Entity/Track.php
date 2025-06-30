@@ -464,14 +464,16 @@ class Track implements BlameableInterface
         return $this->attachments->first() ?: null;
     }
 
-    /** @return ArrayCollection<int, ?Attachment> */
-    public function sortAttachments(): ArrayCollection
+    /** @return Collection<int, Attachment> */
+    public function sortAttachments(): Collection
     {
         $cover = $this->getCover();
         $nonCoverAttachments = $this->attachments->filter(fn (Attachment $attachment) => $attachment !== $cover);
+        /** @var Collection<int, Attachment> $attachments */
+        $attachments = new ArrayCollection([$cover, ...$nonCoverAttachments->toArray()])
+            ->filter(fn (?Attachment $attachment) => null !== $attachment);
 
-        return new ArrayCollection([$cover, ...$nonCoverAttachments->toArray()])
-            ->filter(fn (?Attachment $attachment) => $attachment !== null);
+        return $attachments;
     }
 
     public function getCoverAttachment(): ?Attachment

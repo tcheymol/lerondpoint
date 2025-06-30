@@ -1,0 +1,7 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'NewsletterUnsubscribe'|trans }}{% endblock %}
+
+{% block cardContent %}
+    {{ include('newsletter_registration/_form.html.twig', {buttonLabel: 'ConfirmUnsubscribe'|trans}) }}
+{% endblock %}

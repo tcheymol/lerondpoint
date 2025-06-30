@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,6 +21,14 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
         }
 
         return $button->getName() === $formName;
+    }
+
+    #[\Override]
+    protected function getUser(): ?User
+    {
+        $user = parent::getUser();
+
+        return $user instanceof User ? $user : null;
     }
 
     protected function backHome(): RedirectResponse

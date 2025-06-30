@@ -17,7 +17,8 @@ class Action implements BlameableInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    public function __construct(#[ORM\Column(length: 255)]
+    public function __construct(
+        #[ORM\Column(length: 255)]
         private ?string $name = null,
         #[ORM\Column(length: 255, nullable: true)]
         private ?string $iconPath = null,
