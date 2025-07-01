@@ -15,7 +15,7 @@ class RejectionCause
 
     public function __construct(
         #[ORM\Column(length: 255)]
-        private ?string $name,
+        private ?string $name = null,
     ) {
     }
 

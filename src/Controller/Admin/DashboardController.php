@@ -7,7 +7,9 @@ use App\Entity\Attachment;
 use App\Entity\Collective;
 use App\Entity\Invitation;
 use App\Entity\NewsletterRegistration;
+use App\Entity\Page;
 use App\Entity\Region;
+use App\Entity\RejectionCause;
 use App\Entity\Track;
 use App\Entity\TrackKind;
 use App\Entity\TrackTag;
@@ -67,5 +69,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Misc');
         yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
         yield MenuItem::linkToCrud('Newsletter', 'fas fa-envelope-open-text', NewsletterRegistration::class);
+        yield MenuItem::linkToCrud('Pages', 'fas fa-clipboard', Page::class);
+        yield MenuItem::linkToCrud('RejectionCause', 'fas fa-trash', RejectionCause::class);
     }
 }
