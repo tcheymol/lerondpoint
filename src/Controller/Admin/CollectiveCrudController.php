@@ -50,7 +50,6 @@ class CollectiveCrudController extends AbstractCrudController
         yield CollectionField::new('tracks')->hideOnForm();
 
         yield FormField::addColumn(4);
-        yield BooleanField::new('disabled');
         yield BooleanField::new('validated');
         yield BooleanField::new('isCreating');
         yield AssociationField::new('owner');

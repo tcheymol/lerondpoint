@@ -16,6 +16,14 @@ readonly class CollectiveMailer extends AbstractMailer
         parent::__construct($emailHelper);
     }
 
+    public function sendCreationEmail(Collective $collective): void {
+        $creatorEmail = $collective->getCreatedBy()?->getEmail();
+        if ($creatorEmail) {
+            $template = $this->createCreationEmail($collective);
+            $this->sendEmail($template, $creatorEmail);
+        }
+    }
+
     public function sentInviteMail(Invitation $invitation): void
     {
         if (!$invitation->getUnregisteredEmail() || !$invitation->getCollective()) {
@@ -30,6 +38,15 @@ readonly class CollectiveMailer extends AbstractMailer
         return $this->emailHelper->createTemplatedEmail()
             ->subject($this->translator->trans('YouHaveBeenInvited'))
             ->htmlTemplate('collective/email/user_invited_email.html.twig')
+            ->context(['collective' => $collective])
+        ;
+    }
+
+    private function createCreationEmail(Collective $collective): TemplatedEmail
+    {
+        return $this->emailHelper->createTemplatedEmail()
+            ->subject($this->translator->trans('YourGroupHasBeenCreated', ['%groupName%' => $collective->getName()]))
+            ->htmlTemplate('collective/email/group_created_email.html.twig')
             ->context(['collective' => $collective])
         ;
     }

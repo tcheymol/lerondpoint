@@ -23,6 +23,7 @@ class TrackRepository extends ServiceEntityRepository
         $sibling = $this->createQueryBuilder('t')
             ->andWhere(sprintf('t.id %s :currentId', $order->value === Order::Ascending->value ? '>' : '<'))
             ->andWhere('t.validated = 1')
+            ->andWhere('t.rejected = 0')
             ->setParameter('currentId', $track->getId())
             ->orderBy('t.id', $order->value)
             ->setMaxResults(1)

@@ -25,6 +25,5 @@ class ActionCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield DateField::new('createdAt')->hideOnForm();
         yield ImageField::new('iconPublicPath')->setLabel('Icon')->hideOnForm();
-        yield BooleanField::new('disabled');
     }
 }

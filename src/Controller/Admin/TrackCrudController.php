@@ -39,7 +39,6 @@ class TrackCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('name');
-        yield BooleanField::new('disabled');
         yield BooleanField::new('validated');
         yield BooleanField::new('rejected');
         yield AssociationField::new('validatedBy')->hideOnForm();

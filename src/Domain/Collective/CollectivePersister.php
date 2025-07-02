@@ -99,6 +99,7 @@ readonly class CollectivePersister
     {
         $this->clearSessionCollective();
         $collective->finishCreation();
+        $this->mailer->sendCreationEmail($collective);
         $this->em->flush();
     }
 
