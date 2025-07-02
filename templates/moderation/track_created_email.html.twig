@@ -9,7 +9,10 @@
         <row>
             <columns>
                 <center>
-                    <button href="{{ url('track_show', { id: track.id }, true) }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
+                    {% set trackUrl = url('track_show', { id: track.id }, true) %} }}
+                    <button href="{{ trackUrl }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
+                    <a href="{{ trackUrl }}">{{ 'YouCanSeeYourTrackHere'|trans }}</a>
+                    <span>{{ 'YouCantClickButtonOpenThisLinkInYourBrowser'|trans }} : {{ trackUrl }}</span>
                 </center>
             </columns>
         </row>

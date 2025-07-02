@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -9,15 +10,23 @@ use Symfony\Component\Routing\RouterInterface;
 
 readonly class MaintenanceSubscriber implements EventSubscriberInterface
 {
-    public const array WHITELISTED_ROUTES = ['/maintenance', '/login', '/_wdt'];
+    public const array WHITELISTED_ROUTES = ['/maintenance', '/login', '/_wdt', '/_profiler', '/_fragment'];
 
-    public function __construct(private bool $isWebsiteOnline, private RouterInterface $router)
+    public function __construct(
+        private bool $isWebsiteOnline,
+        private RouterInterface $router,
+        private Security $security,
+    )
     {
     }
 
     public function onRequestEvent(RequestEvent $event): void
     {
         if ($this->isWebsiteOnline) {
+            return;
+        }
+        $loggedInUser = $this->security->getUser();
+        if (null !== $loggedInUser) {
             return;
         }
         $path = $event->getRequest()->getPathInfo();

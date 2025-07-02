@@ -37,7 +37,7 @@ readonly class ModerationMailer extends AbstractMailer
     {
         return $this->emailHelper->createTemplatedEmail()
             ->subject($this->translator->trans('TrackCreatedEmailSubject'))
-            ->htmlTemplate('moderation/track_created.html.twig')
+            ->htmlTemplate('moderation/track_created_email.html.twig')
             ->context(['track' => $track])
         ;
     }
@@ -46,7 +46,7 @@ readonly class ModerationMailer extends AbstractMailer
     {
         return $this->emailHelper->createTemplatedEmail()
             ->subject($this->translator->trans('TrackAcceptedEmailSubject'))
-            ->htmlTemplate('moderation/track_accepted.html.twig')
+            ->htmlTemplate('moderation/track_accepted_email.html.twig')
             ->context(['track' => $track])
         ;
     }
@@ -55,7 +55,7 @@ readonly class ModerationMailer extends AbstractMailer
     {
         return $this->emailHelper->createTemplatedEmail()
             ->subject($this->translator->trans('TrackRejectedEmailSubject'))
-            ->htmlTemplate('moderation/track_rejected.html.twig')
+            ->htmlTemplate('moderation/track_rejected_email.html.twig')
             ->context(['track' => $track])
         ;
     }
