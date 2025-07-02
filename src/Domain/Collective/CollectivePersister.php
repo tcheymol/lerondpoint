@@ -98,9 +98,12 @@ readonly class CollectivePersister
     private function finishCreation(Collective $collective): void
     {
         $this->clearSessionCollective();
-        $collective->finishCreation();
-        $this->mailer->sendCreationEmail($collective);
-        $this->em->flush();
+
+        if ($collective->isCreating()) {
+            $collective->finishCreation();
+            $this->mailer->sendCreationEmail($collective);
+            $this->em->flush();
+        }
     }
 
     public function acceptInvitation(Invitation $invitation): void

@@ -57,8 +57,13 @@ class CollectiveController extends AbstractController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $isLastStep = $collective->isLastStep($step) || $request->query->getBoolean('isLastStep');
-            $persister->persist($collective, $isLastStep);
+            $isCreating = $collective->isCreating();
+            $isLastStep = $collective->isLastStep($step);
+            $persister->persist($collective, $isLastStep || $isCreating);
+
+            if (!$isCreating) {
+                return $this->redirectToRoute('user_account', ['page' => 'collectives']);
+            }
 
             return $isLastStep
                 ? $this->redirectToRoute('collective_index')
@@ -80,7 +85,7 @@ class CollectiveController extends AbstractController
         $step = $request->query->getInt('step', 1);
         $persister->updateSessionCollective($collective);
 
-        return $this->redirectToRoute('collective_new', ['step' => $step, 'isLastStep' => true]);
+        return $this->redirectToRoute('collective_new', ['step' => $step]);
     }
 
     #[Route('/collective/upload_image', name: 'collective_upload_image', methods: ['POST'])]
