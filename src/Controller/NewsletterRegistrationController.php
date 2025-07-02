@@ -23,12 +23,16 @@ final class NewsletterRegistrationController extends AbstractController
         if ($form->isSubmitted()) {
             $repository->persist($registration, !$form->isValid());
 
-            $this->addFlash('success', $translator->trans('SuccessfullySubscribedToNewsletter'));
-
-            return $this->redirectToRoute('subscribe_newsletter', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('subscribe_newsletter_success');
         }
 
         return $this->render('newsletter_registration/subscribe.html.twig', ['form' => $form]);
+    }
+
+    #[Route('/subscribe/success', name: 'subscribe_newsletter_success', methods: ['GET'])]
+    public function subscribe_success(): Response
+    {
+        return $this->render('newsletter_registration/subscribe_success.html.twig');
     }
 
     #[Route('/unsubscribe', name: 'unsubscribed_newsletter', methods: ['GET', 'POST'])]

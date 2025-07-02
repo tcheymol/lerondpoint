@@ -3,6 +3,16 @@
 {% block title %}{{ 'Moderation'|trans }}{% endblock %}
 {% block bodybg %}warning{% endblock %}
 
+{% block javascripts %}
+    <script src=" https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.js "></script>
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
     <div class="text-dark h-100 p-2 flex-column">
         <h1>{{ track.name }}</h1>

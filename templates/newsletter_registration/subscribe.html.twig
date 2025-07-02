@@ -3,5 +3,5 @@
 {% block title %}{{ 'NewsletterSubscribe'|trans }}{% endblock %}
 
 {% block cardContent %}
-    {{ include('newsletter_registration/_form.html.twig') }}
+    {{ include('newsletter_registration/_form.html.twig', {form}) }}
 {% endblock %}

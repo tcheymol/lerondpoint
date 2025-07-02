@@ -9,10 +9,12 @@
         <row>
             <columns>
                 <center>
-                    <button href="{{ url('track_show', { id: track.id }, true) }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
+                    {% set trackUrl = url('track_show', { id: track.id }) %}
+                    <button href="{{ trackUrl }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
+                    {{ include('email/_link_text_fallback.html.twig', {path: trackUrl}) }}
                 </center>
             </columns>
         </row>
-        {{ include('moderation/signature.html.twig') }}
+        {{ include('email/_signature.html.twig') }}
     </container>
 {% endapply %}

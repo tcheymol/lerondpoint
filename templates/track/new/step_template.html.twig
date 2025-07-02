@@ -4,6 +4,16 @@
 {% block bodybg %}primary{% endblock %}
 {% set step = block('step') %}
 
+{% block javascripts %}
+    <script src=" https://cdn.jsdelivr.net/npm/swiper@11.2.8/swiper-bundle.min.js "></script>
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    {{ parent() }}
+{% endblock %}
+
 {% block alerts %}{% endblock %}
 
 {% block content %}

@@ -9,10 +9,10 @@
         <row>
             <columns>
                 <center>
-                    <button href="{{ url('app_sign_up', {}, true) }}">{{ 'CreateAccount'|trans }}</button>
+                    <button href="{{ url('app_sign_up') }}">{{ 'CreateAccount'|trans }}</button>
                 </center>
             </columns>
         </row>
-        {{ include('moderation/signature.html.twig') }}
+        {{ include('email/_signature.html.twig') }}
     </container>
 {% endapply %}
