@@ -3,11 +3,13 @@
     <div class="card-body pt-0">
         <div class="d-flex flex-row">
             <div class="mt-2 flex-grow-0">
-                {{ include('track/components/preview/_thumbnail_image.html.twig', {track}) }}
+                {{ include('track/components/preview/_thumbnail_image_static.html.twig', {track}) }}
             </div>
             <div class="flex-grow-1 d-flex flex-column justify-content-between text-end pt-3">
                 <div>{{ include('track/components/_information_rows_partial.html.twig', {track}) }}</div>
-                <div><a class="btn btn-link" href="{{ path('track_show', {id: track.id}) }}">{{ 'ViewTrack'|trans }}</a></div>
+                <div>
+                    <a class="btn btn-link" href="{{ path('track_show', {id: track.id}) }}">{{ 'ViewTrack'|trans }}</a>
+                </div>
             </div>
         </div>
     </div>

@@ -6,10 +6,12 @@
         <div class="text-start">{{ form_label(form.description) }}</div>
         {{ form_widget(form.description) }}
 
-        <div class="mt-2 text-start">
-            {{ 'ConfirmCreationLeaveEmail1'|trans }}
-            {{ form_widget(form.email) }}
-            {{ 'ConfirmCreationLeaveEmail2'|trans }}
-        </div>
+        {% if not is_granted('ROLE_USER') %}
+            <div class="mt-2 text-start">
+                {{ 'ConfirmCreationLeaveEmail1'|trans }}
+                {{ form_widget(form.email) }}
+                {{ 'ConfirmCreationLeaveEmail2'|trans }}
+            </div>
+        {% endif %}
     </div>
 </div>

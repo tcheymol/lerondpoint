@@ -6,6 +6,7 @@
     <h3 class="py-4">{{ 'Track'|trans }} : {{ track.name }}</h3>
 
     {{ form_start(form) }}
+        {{ form_label(form.rejectionCause) }}
         {{ form_widget(form.rejectionCause) }}
         {{ include('components/_button.html.twig') }}
     {{ form_end(form) }}

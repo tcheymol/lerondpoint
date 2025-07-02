@@ -157,7 +157,7 @@ ProfileSuccessfullyDeleted: Votre compte utilisateur·ice ainsi que toutes les d
 ProfileSuccessfullyUpdated: Votre profil a été mis à jour avec succès
 ProvenceAlpesCoteDazur: Provence-Alpes-Côte d'Azur
 PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publication.
-QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès. Si votre groupe est encore actif et que vous souhaitez qu'il apparaisse sur la carte (dans ET MAINTENANT ?), nous vous invitons à compléter sa création depuis votre espace profil.
+QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès.
 QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
 Region: Région
@@ -197,8 +197,8 @@ Size: Taille
 State: Département
 Step: Étape
 StrongPassword: 🔐 Mot de passe fort
-SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter avec succès
-SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter avec succès
+SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter du Rond-point avec succès
+SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter du Rond-point avec succès
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
 TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace
@@ -262,6 +262,7 @@ WhoAreWe: qui sommes-nous ?
 Year: Année
 Years: Années
 Yes: Oui
+YouCanBrowsePlatformNow: Vous pouvez dès à présent parcourir la plateforme et découvrir les traces du mouvement des gilets jaunes
 YouCanSeeYourTrackHere: Vous pouvez voir votre trace ici
 YouCantClickButtonOpenThisLinkInYourBrowser: Vous ne pouvez pas cliquer sur le bouton ? Ouvrez ce lien dans votre navigateur
 YouDontFindYourGroup: Vous ne trouvez pas votre groupe ?

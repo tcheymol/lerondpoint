@@ -16,19 +16,26 @@ class NewsletterRegistrationRepository extends ServiceEntityRepository
         parent::__construct($registry, NewsletterRegistration::class);
     }
 
-    public function persist(NewsletterRegistration $registration, bool $checkExisting = false): void
+    public function findExisting(NewsletterRegistration $registration): ?NewsletterRegistration
     {
-        if (!$checkExisting) {
-            $this->getEntityManager()->persist($registration);
-        } else {
-            $this->findOneBy(['email' => $registration->getEmail()])?->setIsUnsubscribed(false);
-        }
+        return $this->findOneBy(['email' => $registration->getEmail()]);
+    }
+
+    public function subscribeBack(NewsletterRegistration $registration): void
+    {
+        $this->findExisting($registration)?->setIsUnsubscribed(false);
         $this->getEntityManager()->flush();
     }
 
     public function unsubscribe(NewsletterRegistration $registration): void
     {
-        $registration->setIsUnsubscribed(true);
+        $this->findExisting($registration)?->setIsUnsubscribed(true);
+        $this->getEntityManager()->flush();
+    }
+
+    public function persist(NewsletterRegistration $registration): void
+    {
+        $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
     }
 }

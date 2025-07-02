@@ -3,5 +3,7 @@
 {% block title %}{{ 'NewsletterSubscribe'|trans }}{% endblock %}
 
 {% block cardContent %}
-    {{ include('newsletter_registration/_form.html.twig', {form}) }}
+    <div class="alert alert-success m-5">
+        {{ 'SuccessfullySubscribedToNewsletter'|trans }}
+    </div>
 {% endblock %}

@@ -9,7 +9,7 @@
     {% else %}
         {% for track in tracks %}
             <div class="col-6 col-sm-4 col-md-3 p-1 mt-4">
-                {{ include('track/components/preview/_thumbnail_image.html.twig', {track}) }}
+                {{ include('track/components/preview/_thumbnail_image_link.html.twig', {track}) }}
                 {{ include('track/components/preview/_thumbnail_information.html.twig', {track}) }}
             </div>
         {% endfor %}

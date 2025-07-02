@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Domain\Newsletter\NewsletterSubscriber;
 use App\Entity\NewsletterRegistration;
 use App\Form\NewsletterRegistrationForm;
 use App\Repository\NewsletterRegistrationRepository;
@@ -12,27 +13,27 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/newsletter')]
-final class NewsletterRegistrationController extends AbstractController
+final class NewsletterController extends AbstractController
 {
     #[Route('/subscribe', name: 'subscribe_newsletter', methods: ['GET', 'POST'])]
-    public function subscribe(Request $request, NewsletterRegistrationRepository $repository, TranslatorInterface $translator): Response
+    public function subscribe(Request $request, NewsletterSubscriber $subscriber): Response
     {
         $registration = new NewsletterRegistration($this->getUser()?->getEmail());
         $form = $this->createForm(NewsletterRegistrationForm::class, $registration)->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $repository->persist($registration, !$form->isValid());
+            $subscriber->subscribe($registration, !$form->isValid());
 
             return $this->redirectToRoute('subscribe_newsletter_success');
         }
 
-        return $this->render('newsletter_registration/subscribe.html.twig', ['form' => $form]);
+        return $this->render('newsletter/subscribe.html.twig', ['form' => $form]);
     }
 
     #[Route('/subscribe/success', name: 'subscribe_newsletter_success', methods: ['GET'])]
     public function subscribe_success(): Response
     {
-        return $this->render('newsletter_registration/subscribe_success.html.twig');
+        return $this->render('newsletter/subscribe_success.html.twig');
     }
 
     #[Route('/unsubscribe', name: 'unsubscribed_newsletter', methods: ['GET', 'POST'])]
@@ -57,6 +58,6 @@ final class NewsletterRegistrationController extends AbstractController
             return $this->redirectToRoute('unsubscribed_newsletter', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('newsletter_registration/unsubscribe.html.twig', ['form' => $form]);
+        return $this->render('newsletter/unsubscribe.html.twig', ['form' => $form]);
     }
 }

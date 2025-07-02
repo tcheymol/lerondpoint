@@ -17,7 +17,8 @@ class RejectTrackType extends AbstractType
             ->add('rejectionCause', EntityType::class, [
                 'class' => RejectionCause::class,
                 'choice_label' => 'name',
-                'placeholder' => 'RejectionCause',
+                'label' => 'RejectionCause',
+                'attr' => ['placeholder' => 'RejectionCause'],
             ])
         ;
     }

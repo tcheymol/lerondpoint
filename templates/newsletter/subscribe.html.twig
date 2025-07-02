@@ -1,0 +1,7 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'NewsletterSubscribe'|trans }}{% endblock %}
+
+{% block cardContent %}
+    {{ include('newsletter/_form.html.twig', {form}) }}
+{% endblock %}

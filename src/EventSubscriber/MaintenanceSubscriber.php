@@ -16,8 +16,7 @@ readonly class MaintenanceSubscriber implements EventSubscriberInterface
         private bool $isWebsiteOnline,
         private RouterInterface $router,
         private Security $security,
-    )
-    {
+    ) {
     }
 
     public function onRequestEvent(RequestEvent $event): void

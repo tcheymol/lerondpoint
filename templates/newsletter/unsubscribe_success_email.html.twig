@@ -3,15 +3,15 @@
         <row class="header">
             <columns>
                 <spacer size="16"></spacer>
-                <p class="text-center text-lg">{{ 'TrackCreatedSubtitle'|trans({ '%trackName%': track.name }) }}</p>
+                <p class="text-center text-lg">{{ 'SuccessfullyUnsubscribedFromNewsletter'|trans }}</p>
             </columns>
         </row>
         <row>
             <columns>
                 <center>
-                    {% set trackPath = url('track_show', { id: track.id }) %}
-                    <button href="{{ trackPath }}">{{ 'YouCanSeeYourTrackHere'|trans }}</button>
-                    {{ include('email/_link_text_fallback.html.twig', {path: trackPath}) }}
+                    {% set homeUrl = url('home') %}
+                    <button href="{{ homeUrl }}">{{ 'YouCanBrowsePlatformNow'|trans }}</button>
+                    {{ include('email/_link_text_fallback.html.twig', {path: homeUrl}) }}
                 </center>
             </columns>
         </row>
