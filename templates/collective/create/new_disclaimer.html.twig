@@ -12,10 +12,12 @@
         <br/><br/>
         Si vous avez déjà un compte, <a href="{{ path('app_login') }}" class="link-dark">connectez-vous ici</a>.
         <br/><br/>
-        C’est à vous de jouer !
-        <div class="text-center">
-            <a href="{{ path('collective_new') }}" class="btn btn-secondary btn-lg {{ app.user is defined ? '' : 'disabled' }}">{{ 'CreateCollective'|trans }}</a>
-        </div>
+        {% if app.user %}
+            C’est à vous de jouer !
+            <div class="text-center">
+                <a href="{{ path('collective_new') }}" class="btn btn-secondary btn-lg {{ app.user is defined ? '' : 'disabled' }}">{{ 'CreateCollective'|trans }}</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

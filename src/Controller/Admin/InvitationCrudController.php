@@ -6,6 +6,7 @@ use App\Entity\Invitation;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class InvitationCrudController extends AbstractCrudController
 {
@@ -17,11 +18,10 @@ class InvitationCrudController extends AbstractCrudController
     #[\Override]
     public function configureFields(string $pageName): iterable
     {
-        return [
-            yield DateTimeField::new('date'),
-            yield AssociationField::new('collective'),
-            yield AssociationField::new('user'),
-            yield AssociationField::new('invitedBy'),
-        ];
+        yield DateTimeField::new('date');
+        yield AssociationField::new('collective');
+        yield AssociationField::new('user');
+        yield TextField::new('unregisteredEmail');
+        yield AssociationField::new('invitedBy');
     }
 }

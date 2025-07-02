@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 final class UserController extends AbstractController
 {
     #[Route('/user/account/{page<[\w-]+>}', name: 'user_account', methods: ['GET', 'POST'])]

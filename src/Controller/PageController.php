@@ -11,9 +11,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PageController extends AbstractController
 {
     #[Route('/{slug}', name: 'page', methods: ['GET'])]
-    public function page(
-        #[MapEntity(mapping: ['slug' => 'slug'])] Page $page,
-    ): Response {
+    public function page(#[MapEntity(mapping: ['slug' => 'slug'])] Page $page): Response
+    {
         return $this->render('page/index.html.twig', ['page' => $page]);
     }
 }

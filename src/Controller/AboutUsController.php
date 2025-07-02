@@ -9,32 +9,42 @@ use Symfony\Component\Routing\Attribute\Route;
 class AboutUsController extends AbstractController
 {
     #[Route('/about_us', name: 'about_us', methods: ['GET'])]
-    public function aboutUs(): Response
+    public function aboutUs(bool $isWysiwyg): Response
     {
-        return $this->render('about_us/index.html.twig');
+        return $isWysiwyg
+            ? $this->redirectToRoute('page', ['slug' => 'qui-sommes-nous'])
+            : $this->render('about_us/index.html.twig');
     }
 
     #[Route('/support_us', name: 'support_us', methods: ['GET'])]
-    public function supportUs(): Response
+    public function supportUs(bool $isWysiwyg): Response
     {
-        return $this->render('about_us/support_us.html.twig');
+        return $isWysiwyg
+            ? $this->redirectToRoute('page', ['slug' => ' nous-soutenir-nous-contacter'])
+            : $this->render('about_us/support_us.html.twig');
     }
 
     #[Route('/about_lrp', name: 'about_lrp', methods: ['GET'])]
-    public function aboutLRP(): Response
+    public function aboutLRP(bool $isWysiwyg): Response
     {
-        return $this->render('about_us/about_lrp.html.twig');
+        return $isWysiwyg
+            ? $this->redirectToRoute('page', ['slug' => 'autour-du-rond-point'])
+            : $this->render('about_us/about_lrp.html.twig');
     }
 
     #[Route('/they_talk_about_us', name: 'they_talk_about_us', methods: ['GET'])]
-    public function weTalkAboutUs(): Response
+    public function weTalkAboutUs(bool $isWysiwyg): Response
     {
-        return $this->render('about_us/they_talk_about_us.html.twig');
+        return $isWysiwyg
+            ? $this->redirectToRoute('page', ['slug' => 'on-parle-de-nous'])
+            : $this->render('about_us/they_talk_about_us.html.twig');
     }
 
     #[Route('/about_the_movement', name: 'about_the_movement', methods: ['GET'])]
-    public function aboutTheMovement(): Response
+    public function aboutTheMovement(bool $isWysiwyg): Response
     {
-        return $this->render('about_us/about_the_movement.html.twig');
+        return $isWysiwyg
+            ? $this->redirectToRoute('page', ['slug' => 'A-propos-du-mouvement-des-gilets-jaunes'])
+            : $this->render('about_us/about_the_movement.html.twig');
     }
 }

@@ -10,9 +10,11 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CollectiveInvitationController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/collective/invite/{id<\d+>}', name: 'collective_invite', methods: ['GET', 'POST'])]
     public function invite(Request $request, Collective $collective, CollectivePersister $persister): Response
     {

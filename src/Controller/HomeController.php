@@ -15,9 +15,9 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'home', methods: ['GET'])]
-    public function home(): Response
+    public function home(bool $isWebsiteOnline = false): Response
     {
-        if ($this->getUser()) {
+        if ($this->getUser() || $isWebsiteOnline) {
             return $this->render('home/index.html.twig');
         }
 

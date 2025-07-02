@@ -18,11 +18,9 @@ class PageCrudController extends AbstractCrudController
     #[\Override]
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            TextField::new('slug')->hideOnForm(),
-            TextEditorField::new('content'),
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('name');
+        yield TextField::new('slug')->hideOnForm();
+        yield TextEditorField::new('content')->setTrixEditorConfig([]);
     }
 }

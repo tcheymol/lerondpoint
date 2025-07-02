@@ -8,6 +8,8 @@ Actions: Actions
 Actus: Actualités
 AddFiles: Ajout de fichiers
 AddToMap: Ajouter à la carte
+Address Line1: Adresse Ligne 1
+Address Line2: Adresse Ligne 2
 Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
@@ -26,6 +28,7 @@ Captcha: Veuillez confirmer le code ci-dessus
 Category: Catégorie
 CategoryRequired: "* Catégorie"
 CentreValDeLoire: Centre-Val de Loire
+City: Ville
 Close: Fermer
 Collective: Groupe de GJ
 CollectiveName: Nom du groupe
@@ -40,6 +43,7 @@ Coordinates Y: Coordonnées Y
 CopyLink: Copier un lien vidéo
 CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
+Country: Pays
 Cover: Couverture
 Create: Créer
 CreateAccount: Pas de compte ? Créez-en un ici
@@ -66,8 +70,6 @@ Disabled: Désactivé
 Droms: DROMS
 DropFiles: déposer vos documents
 Edit: Modifier
-UpdateLocation: Modifier la localisation
-UpdateInformation: Modifier les informations
 Email: Email
 EmailNotVerified: Votre adresse email n'a pas encore été validée
 EmailOrUsername: Email ou nom d'utilisateur·ice
@@ -96,8 +98,10 @@ IleDeFrance: Île-de-France
 ImportFile: Importer un fichier
 Invite: Inviter
 InviteUser: Inviter un·e utilisateur·ice à rejoindre le groupe
+Invited By: Invité par
 IrreversibleAction: Attention, cette action est irréversible, êtes vous sûr·e de vouloir continuer ?
 Is Confirmed: Confirmé·e
+Is Creating: En cours de création
 Is Unsubscribed: Désinscrit·e
 Kind: Catégorie
 Kinds: Catégories
@@ -141,6 +145,7 @@ Password: Mot de passe
 PastALink: Copier un lien vers une ressource
 Path: Chemin
 PaysDeLaLoire: Pays de la Loire
+Postcode: CP
 Preview: "Ajouter une trace : Aperçu"
 PreviewTrack: Apercu
 PreviewsLoading: Chargement des aperçus...
@@ -189,6 +194,7 @@ SignUpSuccess: Inscription envoyée
 SignUpSuccessSubtitle: Un lien de validation vous a été envoyé à l'adresse %emailAddress%, veuillez cliquer sur ce lien afin pour valider votre inscription
 Signature: Le collectif Le Rond-point
 Size: Taille
+State: Département
 Step: Étape
 StrongPassword: 🔐 Mot de passe fort
 SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter avec succès
@@ -217,12 +223,16 @@ Tracks: Traces
 TracksListSubtitle: Retrouvez ici les traces du mouvement qui ont été déposées par des contributeur·ices
 TracksListTitle: Mémoire vivante du mouvement des gilets jaunes
 TracksSubtitle: Mémoire vivante par les gilets jaunes
+Unregistered Email: Email
 Update: Mettre à jour
 UpdateCover: Choisir l'image de couverture
 UpdateIcon: Changer l'icône
+UpdateInformation: Modifier les informations
+UpdateLocation: Modifier la localisation
 Updated At: MAJ le
 Updated By: MAJ par
 UploadAFile: Téléverser un fichier
+User: Utilisateur·ice
 UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
