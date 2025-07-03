@@ -28,8 +28,13 @@ task('deploy:compile-asset-map', function () {
     run('{{bin/console}} asset-map:compile');
 });
 
+task('deploy:install-public-assets', function () {
+    run('{{bin/console}} assets:install public');
+});
+
 // Hooks
 before('deploy:vendors', 'deploy:set-prod-env');
 before('deploy:symlink', 'database:migrate');
 before('deploy:publish', 'deploy:compile-asset-map');
+before('deploy:publish', 'deploy:install-public-assets');
 after('deploy:failed', 'deploy:unlock');
