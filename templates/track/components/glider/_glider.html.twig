@@ -5,11 +5,21 @@
     {{ stimulus_controller('show_modal', {modalId: 'swiperModal'})|stimulus_action('show_modal', 'click', 'click') }}
     >
         <ul class="glide__slides">
-            {% for attachment in track.attachments %}
+            {% if track.hasAttachments%}
+                {% for attachment in track.attachments %}
+                    <li class="glide__slide">
+                        {{ include('track/components/glider/_glider_item.html.twig', {attachment}) }}
+                    </li>
+                {% endfor %}
+            {% else %}
                 <li class="glide__slide">
-                    {{ include('track/components/glider/_glider_item.html.twig', {attachment}) }}
+                    <img
+                        src="{{ absolute_url(asset(fallback_image(track))) }}"
+                        alt="{{ track.name }}"
+                        class="mh-100 mw-100"
+                    />
                 </li>
-            {% endfor %}
+            {% endif %}
         </ul>
     </div>
     {% if track.attachments|length > 1 %}
