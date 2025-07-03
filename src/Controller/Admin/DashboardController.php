@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Action;
 use App\Entity\Attachment;
 use App\Entity\Collective;
+use App\Entity\FeatureToggle;
 use App\Entity\Invitation;
 use App\Entity\NewsletterRegistration;
 use App\Entity\Page;
@@ -53,6 +54,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Newsletter', 'fas fa-envelope-open-text', NewsletterRegistration::class);
 
         yield MenuItem::section('Collectives');
         yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
@@ -65,11 +67,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', TrackTag::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map', Region::class);
         yield MenuItem::linkToCrud('Years', 'fas fa-calendar-days', Year::class);
+        yield MenuItem::linkToCrud('RejectionCause', 'fas fa-trash', RejectionCause::class);
+        yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
 
         yield MenuItem::section('Misc');
-        yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
-        yield MenuItem::linkToCrud('Newsletter', 'fas fa-envelope-open-text', NewsletterRegistration::class);
         yield MenuItem::linkToCrud('Pages', 'fas fa-clipboard', Page::class);
-        yield MenuItem::linkToCrud('RejectionCause', 'fas fa-trash', RejectionCause::class);
+        yield MenuItem::linkToCrud('FeatureToggles', 'fas fa-toggle-off', FeatureToggle::class);
     }
 }

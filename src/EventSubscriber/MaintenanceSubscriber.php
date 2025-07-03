@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Repository\FeatureToggleRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,7 +14,7 @@ readonly class MaintenanceSubscriber implements EventSubscriberInterface
     public const array WHITELISTED_ROUTES = ['/maintenance', '/login', '/_wdt', '/_profiler', '/_fragment'];
 
     public function __construct(
-        private bool $isWebsiteOnline,
+        private FeatureToggleRepository $repository,
         private RouterInterface $router,
         private Security $security,
     ) {
@@ -21,15 +22,16 @@ readonly class MaintenanceSubscriber implements EventSubscriberInterface
 
     public function onRequestEvent(RequestEvent $event): void
     {
-        if ($this->isWebsiteOnline) {
-            return;
-        }
         $loggedInUser = $this->security->getUser();
         if (null !== $loggedInUser) {
             return;
         }
         $path = $event->getRequest()->getPathInfo();
         if (array_any(self::WHITELISTED_ROUTES, fn ($route) => str_contains($path, $route))) {
+            return;
+        }
+
+        if ($this->repository->findOneBy(['name' => 'website-online'])?->isEnabled()) {
             return;
         }
 

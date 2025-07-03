@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FeatureToggleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,9 +16,9 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'home', methods: ['GET'])]
-    public function home(bool $isWebsiteOnline = false): Response
+    public function home(FeatureToggleRepository $repository): Response
     {
-        if ($this->getUser() || $isWebsiteOnline) {
+        if ($this->getUser() || $repository->findOneBy(['name' => 'website-online'])?->isEnabled()) {
             return $this->render('home/index.html.twig');
         }
 

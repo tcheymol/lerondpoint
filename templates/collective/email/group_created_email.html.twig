@@ -1,0 +1,20 @@
+{% apply inky_to_html|inline_css(source('@styles/foundation-emails.css')) %}
+    <container>
+        <row class="header">
+            <columns>
+                <spacer size="16"></spacer>
+                <p class="text-center text-lg">{{ 'YourGroupHasBeenCreated'|trans({ '%groupName%': collective.name }) }}</p>
+            </columns>
+        </row>
+        <row>
+            <columns>
+                <center>
+                    {% set collectiveTracksPath = url('track_list', { collectives: collective.id }) %}
+                    <button href="{{ collectiveTracksPath }}">{{ 'ViewCollectiveTracks'|trans }}</button>
+                    {{ include('email/_link_text_fallback.html.twig', {path: collectiveTracksPath}) }}
+                </center>
+            </columns>
+        </row>
+        {{ include('email/_signature.html.twig') }}
+    </container>
+{% endapply %}

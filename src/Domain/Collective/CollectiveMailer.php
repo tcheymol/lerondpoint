@@ -16,7 +16,8 @@ readonly class CollectiveMailer extends AbstractMailer
         parent::__construct($emailHelper);
     }
 
-    public function sendCreationEmail(Collective $collective): void {
+    public function sendCreationEmail(Collective $collective): void
+    {
         $creatorEmail = $collective->getCreatedBy()?->getEmail();
         if ($creatorEmail) {
             $template = $this->createCreationEmail($collective);
