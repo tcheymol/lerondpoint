@@ -1,0 +1,18 @@
+{% extends 'templates/base.html.twig' %}
+
+{% block title %}{{ 'Error403'|trans }}{% endblock %}
+{% block bodybg %}light{% endblock %}
+
+{% block content %}
+    <div
+        class="h-100 w-100"
+        style="
+            background-image: url('{{ asset('images/403.png') }}');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            }
+            "
+    >
+    </div>
+{% endblock %}

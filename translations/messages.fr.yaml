@@ -76,7 +76,9 @@ EmailOrUsername: Email ou nom d'utilisateur·ice
 EmailVerified: Votre email a été validé avec succès
 Enabled: Activé
 EnterUrl: Entrez une URL vers une vidéo Youtube
+Error403: Oops, vous n'êtes pas autorisé·e à accéder à cette page
 Error404: Oops, la page que vous cherchez n'existe pas
+Error500: Oops, il y a eu un problème technique, veuillez réessayer ultérieurement
 Extension: Extension
 FeatureToggle: Activation de fonctionnalité
 FeatureToggles: Activation de fonctionnalités
