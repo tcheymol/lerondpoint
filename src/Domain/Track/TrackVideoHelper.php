@@ -9,20 +9,20 @@ use Embed\Extractor;
 
 readonly class TrackVideoHelper
 {
-    public function __construct()
-    {
-    }
-
     public function handleVideo(Track $track): void
     {
-        if (!$track->url || null !== $track->getId()) {
+        if (!$track->url) {
             return;
         }
         $videoData = $this->getVideoData($track);
         $preview = $this->getVideoPreview($videoData) ?? '';
         $embed = $this->getVideoEmbed($videoData) ?? '';
 
-        $attachment = Attachment::fromVideoData($track->url, $preview, $embed);
+        $attachment = ($track->hasAttachments() ? $track->getCover() : Attachment::newVideo())
+            ->setUrl($track->url)
+            ->setPreviewUrl($preview)
+            ->setVideoEmbed($embed);
+
         $track->addAttachment($attachment);
     }
 

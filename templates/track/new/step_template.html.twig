@@ -17,7 +17,7 @@
 {% block alerts %}{% endblock %}
 
 {% block content %}
-    <div class="h-100 text-dark d-flex flex-column" {{ stimulus_controller('video_preview') }}>
+    <div class="h-100 text-dark d-flex flex-column">
         <h3 class="mt-5">{{ 'ShareArchive'|trans }} <span class="d-sm-none">{{ step }}/4</span></h3>
         <h4 class="d-none d-sm-block">{{ step }}/4</h4>
         {{ include('track/components/_breadcrumb.html.twig', {

@@ -17,6 +17,7 @@ export default class extends Controller {
             const url = this.inputTarget.value;
 
             const preview = await embed.image(url, {image: 'mqdefault'});
+            button.classList.remove('disabled');
 
             const previewSrc = (new DOMParser())
                 .parseFromString(preview, 'text/html')

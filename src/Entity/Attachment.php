@@ -80,15 +80,12 @@ class Attachment implements BlameableInterface, \Stringable
             ->setSize($file->getSize());
     }
 
-    public static function fromVideoData(string $url, string $previewUrl, string $videoEmbed): self
+    public static function newVideo(): self
     {
         return new Attachment()
-            ->setUrl($url)
             ->setExtension('mp4')
             ->setKind('video')
-            ->setSize(0)
-            ->setPreviewUrl($previewUrl)
-            ->setVideoEmbed($videoEmbed);
+            ->setSize(0);
     }
 
     /** @return string[] */

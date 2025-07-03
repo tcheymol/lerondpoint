@@ -1,30 +1,32 @@
-{{ include('track/components/_create_disclaimer.html.twig') }}
-{{ form_row(form.attachmentsIds) }}
-<div class="row text-start fs-3">
-    <div class="col-12">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-        <div class="fs-6 mt-3">
-            {{ 'ShareTrackWays'|trans }}
-            <ul>
-                <li>{{ 'ShareTrackWay1'|trans }}</li>
-                <li>{{ 'ShareTrackWay2'|trans }}</li>
-            </ul>
+<div {{ stimulus_controller('video_preview') }}>
+    {{ include('track/components/_create_disclaimer.html.twig') }}
+    {{ form_row(form.attachmentsIds) }}
+    <div class="row text-start fs-3">
+        <div class="col-12">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            <div class="fs-6 mt-3">
+                {{ 'ShareTrackWays'|trans }}
+                <ul>
+                    <li>{{ 'ShareTrackWay1'|trans }}</li>
+                    <li>{{ 'ShareTrackWay2'|trans }}</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row justify-content-end">
-    {% if not track.hasAttachments %}
-        {{ include('track/new/_add_media_widget.html.twig') }}
-    {% endif %}
-    {{ include('track/new/_attachments_widget.html.twig', {track}) }}
-    {{ include('track/new/_video_widget.html.twig', {track}) }}
-
-    <div class="col-12 col-sm-6 mt-3" id="captcha_container">
-        {% if form.captcha is defined %}
-            {{ form_errors(form.captcha) }}
-            {{ form_widget(form.captcha) }}
+    <div class="row justify-content-end">
+        {% if not track.hasAttachments %}
+            {{ include('track/new/_add_media_widget.html.twig') }}
         {% endif %}
+        {{ include('track/new/_attachments_widget.html.twig', {track}) }}
+        {{ include('track/new/_video_widget.html.twig', {track}) }}
+
+        <div class="col-12 col-sm-6 mt-3" id="captcha_container">
+            {% if form.captcha is defined %}
+                {{ form_errors(form.captcha) }}
+                {{ form_widget(form.captcha) }}
+            {% endif %}
+        </div>
     </div>
 </div>
