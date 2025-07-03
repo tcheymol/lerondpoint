@@ -154,7 +154,7 @@ class TrackType extends AbstractType
             ->add('collective', EntityType::class, [
                 'class' => Collective::class,
                 'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('c')
-                        ->andWhere('c.disabled IS FALSE'),
+                        ->andWhere('c.disabled = FALSE'),
                 'attr' => [
                     'data-controller' => 'tomselect',
                     'placeholder' => 'Collective',
