@@ -30,7 +30,7 @@ class AboutUsController extends AbstractController
     public function supportUs(): Response
     {
         return $this->isWysiwygEnabled()
-            ? $this->redirectToRoute('page', ['slug' => ' nous-soutenir-nous-contacter'])
+            ? $this->redirectToRoute('page', ['slug' => 'nous-soutenir-nous-contacter'])
             : $this->render('about_us/support_us.html.twig');
     }
 

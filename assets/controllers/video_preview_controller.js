@@ -31,7 +31,6 @@ export default class extends Controller {
 
             hideImageContainer();
 
-            button.classList.remove('disabled');
         } catch (e) {
             console.log('error generating preview', e);
         }
