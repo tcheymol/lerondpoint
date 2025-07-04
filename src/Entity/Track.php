@@ -43,7 +43,6 @@ class Track implements BlameableInterface
         targetEntity: Attachment::class,
         mappedBy: 'track',
         cascade: ['persist', 'remove'],
-        orphanRemoval: true,
     )]
     private Collection $attachments;
 
@@ -206,6 +205,10 @@ class Track implements BlameableInterface
             if ($attachment->getTrack() === $this) {
                 $attachment->setTrack(null);
             }
+        }
+
+        if ($this->coverAttachment === $attachment) {
+            $this->coverAttachment = $this->getAttachments()->first() ?: null;
         }
 
         return $this;
