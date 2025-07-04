@@ -9,8 +9,8 @@
         <row>
             <columns>
                 <center>
-                    {% set collectiveTracksPath = url('track_list', { collectives: collective.id }) %}
-                    <button href="{{ collectiveTracksPath }}">{{ 'ViewCollectiveTracks'|trans }}</button>
+                    {% set collectiveTracksPath = url('collective_index') %}
+                    <button href="{{ collectiveTracksPath }}">{{ 'ViewCollectiveOnMap'|trans }}</button>
                     {{ include('email/_link_text_fallback.html.twig', {path: collectiveTracksPath}) }}
                 </center>
             </columns>
