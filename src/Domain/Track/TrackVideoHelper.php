@@ -18,8 +18,13 @@ readonly class TrackVideoHelper
         $preview = $this->getVideoPreview($videoData) ?? '';
         $embed = $this->getVideoEmbed($videoData) ?? '';
 
-        $attachment = ($track->hasAttachments() ? $track->getCover() : Attachment::newVideo())
-            ->setUrl($track->url)
+        $attachment = $track->hasAttachments() ? $track->getCover() : Attachment::newVideo();
+
+        if (!$attachment) {
+            return;
+        }
+
+        $attachment->setUrl($track->url)
             ->setPreviewUrl($preview)
             ->setVideoEmbed($embed);
 

@@ -14,14 +14,14 @@ readonly class NewsletterMailer extends AbstractMailer
         parent::__construct($emailHelper);
     }
 
-    public function subscribe(): void
+    public function subscribe(?string $email): void
     {
-        $this->sendEmail($this->createSubscribedEmail());
+        $this->sendEmail($this->createSubscribedEmail(), $email);
     }
 
-    public function unsubscribe(): void
+    public function unsubscribe(?string $email): void
     {
-        $this->sendEmail($this->createUnsubscribedEmail());
+        $this->sendEmail($this->createUnsubscribedEmail(), $email);
     }
 
     private function createSubscribedEmail(): TemplatedEmail

@@ -19,13 +19,13 @@ readonly class NewsletterSubscriber
             $this->repository->subscribeBack($registration);
         }
 
-        $this->mailer->subscribe();
+        $this->mailer->subscribe($registration->getEmail());
     }
 
     public function unsubscribe(NewsletterRegistration $registration): void
     {
         $this->repository->unsubscribe($registration);
 
-        $this->mailer->unsubscribe();
+        $this->mailer->unsubscribe($registration->getEmail());
     }
 }
