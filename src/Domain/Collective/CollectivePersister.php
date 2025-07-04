@@ -85,8 +85,10 @@ readonly class CollectivePersister
     {
         $isInSession = null === $collective->getId();
 
-        $this->em->persist($collective);
-        $this->em->flush();
+        if ($collective->getName() && $collective->getShortDescription()) {
+            $this->em->persist($collective);
+            $this->em->flush();
+        }
 
         if ($isInSession) {
             $this->updateSessionCollective($collective);
