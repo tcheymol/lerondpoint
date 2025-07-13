@@ -78,7 +78,6 @@ readonly class LoadDataCommand
             ['email' => 'jo_vaudey+user@riseup.net', 'role' => 'ROLE_USER'],
             ['email' => 'jo_vaudey+modo@riseup.net', 'role' => 'ROLE_MODERATOR'],
             ['email' => 'sylvestre.meinzer@free.fr', 'role' => 'ROLE_MODERATOR'],
-            ['email' => 'adrienzammit@riseup.net', 'role' => 'ROLE_MODERATOR'],
             ['email' => 'mathilde.fournols@outlook.fr', 'role' => 'ROLE_MODERATOR'],
         ],
         RejectionCause::class => [
