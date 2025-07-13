@@ -171,7 +171,7 @@ readonly class LoadDataCommand
             Action::class => new Action($datum['name'], $datum['iconPath']),
             Region::class => new Region($datum['name']),
             Year::class => new Year((int) $datum['value']),
-            User::class => new User($datum['email'])->validateEmail()->setRoles([$datum['role'] ?? 'ROLE_USER'])->setPassword('$2y$13$U.XY95jLXku4DLy24p.wcOcMh8KVftRrvMRm/vxDSeTH.iBOzmrgW'),
+            User::class => new User($datum['email'])->validateEmail()->setRoles([$datum['role'] ?? 'ROLE_USER'])->setPassword('$2y$13$IEa5nGW/8ksoQJVK2JyDpeQpET2E9566CYzPsAFUOE0AcMDxG7IKW'),
             default => null,
         };
     }
