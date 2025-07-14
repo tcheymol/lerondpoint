@@ -143,13 +143,11 @@ class TrackType extends AbstractType
                 'choices' => ['Yes' => true, 'No' => false],
                 'choice_attr' => fn ($choice, string $key, mixed $value) => ['data-action' => 'checkbox#toggle'],
                 'expanded' => true,
-                'data' => false,
             ])
             ->add('iAppliedRecommendations', CheckboxType::class, [
                 'label' => 'IAppliedRecommendations',
                 'label_attr' => ['class' => 'grotesk'],
                 'mapped' => false,
-                'data' => true,
             ])
             ->add('collective', EntityType::class, [
                 'class' => Collective::class,

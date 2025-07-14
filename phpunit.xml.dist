@@ -20,4 +20,15 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>src/Command</directory>
+            <directory>src/Controller/Admin</directory>
+            <directory>src/Entity</directory>
+        </exclude>
+    </source>
 </phpunit>

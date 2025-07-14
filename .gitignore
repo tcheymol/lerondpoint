@@ -18,6 +18,8 @@
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
+/.phpunit.cache/
+coverage
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
@@ -33,8 +35,3 @@ phpstan.neon
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-/.phpunit.cache/
-###< phpunit/phpunit ###

@@ -157,7 +157,7 @@ class Track implements BlameableInterface
 
     public function getTagsAsString(): string
     {
-        return implode(',', $this->tags->map(fn (TrackTag $tag) => $tag->getName())->toArray());
+        return implode(', ', $this->tags->map(fn (TrackTag $tag) => $tag->getName())->toArray());
     }
 
     /** @return Collection<int, TrackTag> */

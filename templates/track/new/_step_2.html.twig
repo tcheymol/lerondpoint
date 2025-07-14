@@ -20,7 +20,7 @@
                 <div class="flex-grow-1">{{ form_label(form.hasFaces) }}</div>
                 <div class="">{{ form_widget(form.hasFaces) }}</div>
             </div>
-            <div {{ stimulus_target('checkbox', 'yesContent') }} class="hidden card bg-warning p-3">
+            <div {{ stimulus_target('checkbox', 'yesContent') }} class="{{ track.hasFaces ? '' : 'hidden' }} card bg-warning p-3">
                 Si des personnes réalisent une action et sont identifiables :<br/> VOUS DEVEZ FLOUTER LES VISAGES
                 <br/><br/>
                 Si des personnes identifiables apparaissent :<br/>
