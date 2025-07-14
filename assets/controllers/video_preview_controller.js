@@ -12,26 +12,20 @@ export default class extends Controller {
     async preview() {
         try {
             const button = document.getElementById('track_next');
-            button.classList.add('disabled');
+            button.classList.remove('disabled');
             this.previewFailureDisclaimerTarget.classList.add('d-none');
             const url = this.inputTarget.value;
 
-            const preview = await embed.image(url, {image: 'mqdefault'});
-            button.classList.remove('disabled');
+            embed.image(url, {image: 'mqdefault'}, (img, result) => {
+                if (!result.src) {
+                    this.previewTarget.src = '/images/fallback_video.png';
+                    this.previewFailureDisclaimerTarget.classList.remove('d-none');
+                } else {
+                    this.previewTarget.src = result.src;
+                }
 
-            const previewSrc = (new DOMParser())
-                .parseFromString(preview, 'text/html')
-                .querySelector('img')
-                ?.src;
-            if (!previewSrc) {
-                this.previewTarget.src = '/images/fallback_video.png';
-                this.previewFailureDisclaimerTarget.classList.remove('d-none');
-            } else {
-                this.previewTarget.src = previewSrc;
-            }
-
-            hideImageContainer();
-
+                hideImageContainer();
+            });
         } catch (e) {
             console.log('error generating preview', e);
         }
