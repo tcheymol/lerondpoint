@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Entity\Year;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -123,19 +124,29 @@ readonly class LoadDataCommand
     {
     }
 
-    public function __invoke(SymfonyStyle $io): int
+    public function __invoke(SymfonyStyle $io, #[Option] bool $all = false): int
     {
-        $answer = $io->choice('Entité : ', array_keys(self::ENTITIES), 0);
+        if ($all) {
+            $entities = array_keys(self::ENTITIES);
+        } else {
+            $entity = $io->choice('Entité : ', array_keys(self::ENTITIES), 0);
 
-        if (is_string($answer) && in_array($answer, array_keys(self::ENTITIES))) {
-            $this->loadEntityData($answer, $io);
+            if (is_string($entity) && in_array($entity, array_keys(self::ENTITIES))) {
+                $entities = [$entity];
+            } else {
+                $io->error('Entity not found');
 
-            return Command::SUCCESS;
+                return Command::FAILURE;
+            }
         }
 
-        $io->error('Entity not found');
+        foreach ($entities as $entity) {
+            $this->loadEntityData($entity, $io);
+        }
 
-        return Command::FAILURE;
+        $io->success(sprintf('Entities loaded : %s', implode(', ', $entities)));
+
+        return Command::SUCCESS;
     }
 
     private function emptyTable(string $entityName): void

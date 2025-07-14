@@ -27,20 +27,23 @@ class AuthenticatedWebTestCase extends WebTestCase
         return $this->client?->request($method, $uri, $parameters, $files, $server, $content, $changeHistory);
     }
 
-    public function login(string $email): User
+    /** @param list<string> $roles */
+    public function login(string $email, array $roles = []): User
     {
-        $user = $this->findOrCreateUser($email);
+        $user = $this->findOrCreateUser($email, $roles);
         $this->client?->loginUser($user);
 
         return $user;
     }
 
-    public function createTestUser(string $email): User
+    /** @param list<string> $roles */
+    public function createTestUser(string $email, array $roles = []): User
     {
         $em = $this->getEntityManager();
         $user = new User()
             ->setEmail($email)
             ->setPassword('password')
+            ->setRoles($roles)
             ->acceptTerms();
 
         $em->persist($user);
@@ -49,14 +52,15 @@ class AuthenticatedWebTestCase extends WebTestCase
         return $user;
     }
 
-    private function findOrCreateUser(string $email): User
+    /** @param list<string> $roles */
+    private function findOrCreateUser(string $email, array $roles = []): User
     {
         $user = $this->getEntityManager()
             ->getRepository(User::class)
             ->findOneBy(['email' => $email]);
 
         if (!$user) {
-            $user = $this->createTestUser($email);
+            $user = $this->createTestUser($email, $roles);
         }
 
         return $user;

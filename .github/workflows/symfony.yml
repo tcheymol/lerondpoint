@@ -43,6 +43,10 @@ jobs:
       run: php bin/console sass:build
     - name: Migrate Database
       run: php bin/console doctrine:mig:mig -n --env=test
+    - name: Enable app for public
+      run: php bin/console app:enable-app --env=test
+    - name: Load Fixtures
+      run: php bin/console app:load-data --all --env=test
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DATABASE_URL: sqlite:///%kernel.project_dir%/var/data.test.db
