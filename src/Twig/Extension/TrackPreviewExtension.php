@@ -16,6 +16,7 @@ class TrackPreviewExtension extends AbstractExtension
             new TwigFunction('get_thumb_url', [TrackPreviewExtensionRuntime::class, 'getThumbUrl']),
             new TwigFunction('get_previous_track_id', [TrackPreviewExtensionRuntime::class, 'getPreviousTrackId']),
             new TwigFunction('get_next_track_id', [TrackPreviewExtensionRuntime::class, 'getNextTrackId']),
+            new TwigFunction('get_track_number', [TrackPreviewExtensionRuntime::class, 'getTrackNumber']),
         ];
     }
 }

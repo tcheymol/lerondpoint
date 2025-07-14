@@ -45,4 +45,9 @@ readonly class TrackPreviewExtensionRuntime implements RuntimeExtensionInterface
     {
         return $this->repository->findAdjacentValidatedTrackId($track, Order::Ascending);
     }
+
+    public function getTrackNumber(Track $track): ?int
+    {
+        return $this->repository->getNumber($track);
+    }
 }

@@ -62,4 +62,14 @@ class TrackRepository extends ServiceEntityRepository
 
         return $tracks;
     }
+
+    public function getNumber(Track $track): ?int
+    {
+        return (int) $this->createQueryBuilder('t')
+            ->select('COUNT(t.id)')
+            ->andWhere('t.id <= :trackId')
+            ->setParameter('trackId', $track->getId())
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
