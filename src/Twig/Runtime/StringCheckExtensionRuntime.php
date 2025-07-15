@@ -10,13 +10,21 @@ class StringCheckExtensionRuntime implements RuntimeExtensionInterface
     {
     }
 
-    public function isEmail(string $value): bool
+    public function isEmail(?string $value = null): bool
     {
+        if (null === $value || '' === $value) {
+            return false;
+        }
+
         return false !== filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 
-    public function isUrl(string $value): bool
+    public function isUrl(?string $value = null): bool
     {
+        if (null === $value || '' === $value) {
+            return false;
+        }
+
         return
             false !== filter_var($value, FILTER_VALIDATE_URL)
             && false !== filter_var($value, FILTER_VALIDATE_DOMAIN);
