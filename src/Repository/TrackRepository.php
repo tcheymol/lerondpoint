@@ -22,8 +22,7 @@ class TrackRepository extends ServiceEntityRepository
         /** @var Track|null $sibling */
         $sibling = $this->createQueryBuilder('t')
             ->andWhere(sprintf('t.id %s :currentId', $order->value === Order::Ascending->value ? '>' : '<'))
-            ->andWhere('t.validated = 1')
-            ->andWhere('t.rejected = 0')
+            ->andWhere('t.validated = 1 AND t.rejected = 0 AND t.isDraft = 0')
             ->setParameter('currentId', $track->getId())
             ->orderBy('t.id', $order->value)
             ->setMaxResults(1)
@@ -55,8 +54,7 @@ class TrackRepository extends ServiceEntityRepository
         $tracks = $this->createQueryBuilder('t')
             ->addSelect('c')
             ->leftJoin('t.collective', 'c')
-            ->andWhere('t.validated = 0 AND t.rejected = 0')
-            ->andWhere('t.isDraft = 0')
+            ->andWhere('t.validated = 0 AND t.rejected = 0 AND t.isDraft = 0')
             ->getQuery()
             ->getResult();
 
@@ -68,6 +66,7 @@ class TrackRepository extends ServiceEntityRepository
         return (int) $this->createQueryBuilder('t')
             ->select('COUNT(t.id)')
             ->andWhere('t.id <= :trackId')
+            ->andWhere('t.validated = 0 AND t.rejected = 0 AND t.isDraft = 0')
             ->setParameter('trackId', $track->getId())
             ->getQuery()
             ->getSingleScalarResult();
