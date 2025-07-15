@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Domain\Collective\CollectivePersister;
 use App\Domain\Images\UploadFilesHelper;
 use App\Domain\Map\MapDataBuilder;
+use App\Domain\Track\TrackPersister;
 use App\Entity\Collective;
 use App\Form\CollectiveType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,11 +25,15 @@ class CollectiveController extends AbstractController
     }
 
     #[Route('/collective/quick_new', name: 'collective_quick_new', methods: ['GET'])]
-    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator): Response
+    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator, TrackPersister $trackPersister): Response
     {
         $name = $request->query->getString('name');
+        $track = $trackPersister->fetchSessionTrack();
         if (!$name) {
             return $this->render('collective/create/_quick.html.twig');
+        }
+        if (!$track->getId()) {
+            throw $this->createAccessDeniedException();
         }
 
         try {
