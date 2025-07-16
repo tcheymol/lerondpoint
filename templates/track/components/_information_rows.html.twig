@@ -1,4 +1,5 @@
-{% set collectiveUrl = track.collective is null ? null : path('collective_show', { id: track.collective.id }) %}
+{% set collectiveUrl = track.collective is null ? null : path('track_list', { collectives: track.collective.id }) %}
+
 {% set fields = [
     { label: null, value: track.name },
     { label: 'Category'|trans, value: track.kindName },
