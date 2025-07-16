@@ -242,6 +242,7 @@ UserAlreadyInCollective: Cette personne fait déjà partie de ce groupe
 UserAlreadyInvited: Une invitation a déjà été envoyé à cette personne
 UserDisabled: Votre compte a été désactivé, veuillez nous contacter si il s'agit d'une erreur
 UserInvited: Si l'adresse email est correcte, la personne a été invitée à rejoindre le groupe.
+Username: Pseudo
 UsernameDisclaimer: Votre email ne sera pas affichée publiquement, vous pouvez renseigner un nom d'utilisateur·ice afin de vous identifier sur le site
 UsernameLabel: Nom d'utilisateur·ice (Optionnel)
 Users: Utilisateurs·ices
