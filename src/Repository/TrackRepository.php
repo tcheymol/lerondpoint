@@ -66,7 +66,7 @@ class TrackRepository extends ServiceEntityRepository
         return (int) $this->createQueryBuilder('t')
             ->select('COUNT(t.id)')
             ->andWhere('t.id <= :trackId')
-            ->andWhere('t.validated = 0 AND t.rejected = 0 AND t.isDraft = 0')
+            ->andWhere('t.validated = 1 AND t.rejected = 0 AND t.isDraft = 0')
             ->setParameter('trackId', $track->getId())
             ->getQuery()
             ->getSingleScalarResult();
