@@ -4,6 +4,9 @@
             {{ form_label(form.email) }}
             {{ form_widget(form.email) }}
         </div>
+        <div class="col-12 col-sm-4 offset-sm-8 mt-3">
+            {{ form_widget(form.captcha) }}
+        </div>
         <div class="text-end mt-3">
             <button class="btn btn-success">
                 {{ buttonLabel is defined ? buttonLabel : 'Registration'|trans }}

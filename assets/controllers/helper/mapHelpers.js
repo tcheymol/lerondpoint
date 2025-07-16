@@ -53,6 +53,7 @@ function onCollectiveClick(collective, e) {
         updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
         updateElementHtml('collectiveDetailsModalLocation', collective.location);
         updateElementHref('collectiveDetailsModalShowUrl', collective.showUrl);
+        updateElementHref('collectiveDetailsModalTracksUrl', collective.tracksUrl);
         updateElementSrc('collectiveDetailsModalPictureUrl', collective.pictureUrl);
     } catch (e) {
         console.error('Failed to display collective details', e);

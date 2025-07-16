@@ -104,6 +104,8 @@ class TrackType extends AbstractType
 
     private function buildStep2(FormBuilderInterface $builder): void
     {
+        /** @var Track $data */
+        $data = $builder->getData();
         $builder
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,
@@ -143,11 +145,13 @@ class TrackType extends AbstractType
                 'choices' => ['Yes' => true, 'No' => false],
                 'choice_attr' => fn ($choice, string $key, mixed $value) => ['data-action' => 'checkbox#toggle'],
                 'expanded' => true,
+                'data' => $data->hasFaces() ?? false,
             ])
             ->add('iAppliedRecommendations', CheckboxType::class, [
                 'label' => 'IAppliedRecommendations',
                 'label_attr' => ['class' => 'grotesk'],
                 'mapped' => false,
+                'data' => true,
             ])
             ->add('collective', EntityType::class, [
                 'class' => Collective::class,

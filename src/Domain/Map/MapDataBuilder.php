@@ -29,6 +29,7 @@ readonly class MapDataBuilder
                 'location' => $collective->getLocation(),
                 'pictureUrl' => $collective->getIconPath(),
                 'showUrl' => $this->router->generate('collective_show', ['id' => $collective->getId()]),
+                'tracksUrl' => $this->router->generate('track_list', ['collectives' => $collective->getId()]),
                 'actions' => $collective->getActions()->map(
                     fn (Action $action) => ['name' => $action->getName(), 'iconPath' => $action->getIconPublicPath()]
                 )->toArray(),
