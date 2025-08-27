@@ -1,6 +1,9 @@
 <div class="modal fade" id="swiperModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content bg-dark">
+            <div class="w-100 text-end p-2 position-absolute z-1k1">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div class="modal-body p-0">
                 {{ include('track/components/swiper/_swiper.html.twig', {track}) }}
             </div>

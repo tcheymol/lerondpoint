@@ -6,10 +6,6 @@ import { Controller } from '@hotwired/stimulus';
 */
 export default class extends Controller {
     connect() {
-        console.log('Swiper controller connected');
-        console.log(Swiper);
-        console.log('Swiper controller connected');
-
         const swiper = new Swiper(this.element, {
             loop: true,
             navigation: {
