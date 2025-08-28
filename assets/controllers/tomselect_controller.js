@@ -14,7 +14,7 @@ export default class extends Controller {
     }
 
     connect() {
-        new TomSelect(this.element, this.getConfig());
+        this.select = new TomSelect(this.element, this.getConfig());
     }
     getConfig = () => {
         const config = {
@@ -25,6 +25,9 @@ export default class extends Controller {
                     'uncheckedClassNames': ['ts-unchecked'],
                 },
             },
+            onItemAdd:function(){
+                this.setTextboxValue('');
+            }
         }
 
         if (this.hasIconsValue) {
@@ -37,6 +40,7 @@ export default class extends Controller {
     onItemAdd = (index, item) => {
         displayPreviewImage(this.previewImageIdValue, item.children[0].src);
         fillFieldUrl(this.urlFieldIdValue, item.children[0].src);
+        this.select.setTextboxValue('');
     }
 }
 
