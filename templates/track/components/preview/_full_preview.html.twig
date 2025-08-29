@@ -35,9 +35,14 @@
                 <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
             </object>
         </div>
-        <div class="d-sm-none hover-no-rotate">
-            <embed src="{{ objectUrl }}" width="100%" class="mnvh-80 h-100"/>
-        </div>
+        <a class="d-sm-none btn hover-no-rotate" target="_blank" href="{{ objectUrl }}">
+            <img
+                src="{{ thumbUrl }}"
+                alt="Attachment"
+                class="mw-100 mvh-100 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}"
+                onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
+            />
+        </a>
     {% else %}
         <img
             src="{{ asset('images/fallback_text.png') }}"
