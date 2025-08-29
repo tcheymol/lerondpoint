@@ -35,14 +35,21 @@
                 <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
             </object>
         </div>
-        <a class="d-sm-none btn hover-no-rotate" target="_blank" href="{{ objectUrl }}">
+        <div class="d-sm-none">
+            <div class="position-absolute w-100 h-100 bg-dark bg-opacity-25 z-max">
+                <a class="btn hover-no-rotate position-absolute btn-danger rounded text-white border-white border-2 z-max"
+                   style="right: 8px; top: 8px "
+                   target="_blank" href="{{ objectUrl }}">
+                    <i class="fa fa-file-pdf"></i>
+                </a>
+            </div>
             <img
                 src="{{ thumbUrl }}"
                 alt="Attachment"
                 class="mw-100 mvh-100 {{ attachment.isCover ? ' border-4 border-dark border ' : '' }}"
                 onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
             />
-        </a>
+        </div>
     {% else %}
         <img
             src="{{ asset('images/fallback_text.png') }}"
