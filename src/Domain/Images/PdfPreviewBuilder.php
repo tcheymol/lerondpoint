@@ -47,6 +47,11 @@ class PdfPreviewBuilder
                     mkdir(dirname($target), 0777, true);
                 }
 
+                if ($img->getImageAlphaChannel()) {
+                    $img->setImageColorspace($img::COLORSPACE_SRGB);
+                    $img->setImageBackgroundColor('white');
+                    $img = $img->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
+                }
                 $img->setimageformat('jpeg');
 
                 $img->writeimage($target);
