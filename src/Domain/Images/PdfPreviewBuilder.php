@@ -33,11 +33,6 @@ class PdfPreviewBuilder
 
                 $sizR = (int) round($size * (min($imW, $imH) / max($imW, $imH)));
 
-                $img->setImageColorspace($img::COLORSPACE_RGB);
-                $img->setImageBackgroundColor('white');
-                $img = $img->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
-                $img->setimageformat('jpeg');
-
                 if ($imH == $imW) {
                     $img->thumbnailimage($size, $size);
                 }
@@ -51,6 +46,8 @@ class PdfPreviewBuilder
                 if (!is_dir(dirname($target))) {
                     mkdir(dirname($target), 0777, true);
                 }
+
+                $img->setimageformat('jpeg');
 
                 $img->writeimage($target);
                 $img->clear();
