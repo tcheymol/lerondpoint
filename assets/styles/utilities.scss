@@ -1,3 +1,7 @@
+.hover-no-rotate:hover {
+  transform: none !important;
+}
+
 .hover-rotate-10:hover {
   transform: rotate(-10deg);
 }

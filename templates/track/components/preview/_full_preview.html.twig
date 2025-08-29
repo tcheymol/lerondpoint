@@ -27,11 +27,17 @@
         </a>
     {% endif %}
 {% elseif attachment.pdf %}
+    {% set thumbUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
     {% set objectUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
-    {% if objectUrl %}
-        <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80 h-100">
-            <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
-        </object>
+    {% if thumbUrl or objectUrl %}
+        <div class="d-none d-sm-block">
+            <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80 h-100">
+                <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
+            </object>
+        </div>
+        <div class="d-sm-none hover-no-rotate">
+            <embed src="{{ objectUrl }}" width="100%" class="mnvh-80 h-100"/>
+        </div>
     {% else %}
         <img
             src="{{ asset('images/fallback_text.png') }}"
