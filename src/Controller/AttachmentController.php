@@ -29,19 +29,22 @@ class AttachmentController extends AbstractController
     {
         $removedAttachmentId = $attachment->getId();
         $existingAttachmentIds = explode(',', (string) $request->query->get('attachmentIds'));
+        $track = $attachment->getTrack();
+
+        $track?->removeAttachment($attachment);
         $em->remove($attachment);
         $em->flush();
 
-        if ($attachment->getTrack()) {
+        if ($track) {
             $existingAttachmentIds = array_unique([
                 ...$existingAttachmentIds,
-                ...$attachment->getTrack()->getAttachments()->map(
+                ...$track->getAttachments()->map(
                     static fn (Attachment $attachment) => (string) $attachment->getId()
                 )->toArray(),
             ]);
         }
 
-        $remainingAttachmentIds = array_filter($existingAttachmentIds, static fn ($id) => $id !== (string) $removedAttachmentId);
+        $remainingAttachmentIds = array_filter($existingAttachmentIds, static fn ($id) => $id !== (string) $removedAttachmentId && is_numeric($id));
 
         return $this->redirectToRoute('attachments_previews', [
             'ids' => implode(',', $remainingAttachmentIds),

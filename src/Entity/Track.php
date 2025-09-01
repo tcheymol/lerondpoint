@@ -208,7 +208,7 @@ class Track implements BlameableInterface
         }
 
         if ($this->coverAttachment === $attachment) {
-            $this->coverAttachment = $this->getAttachments()->first() ?: null;
+            $this->resetCover();
         }
 
         return $this;
@@ -489,5 +489,10 @@ class Track implements BlameableInterface
         $this->coverAttachment = $coverAttachment;
 
         return $this;
+    }
+
+    public function resetCover(): void
+    {
+        $this->coverAttachment = $this->attachments->first() ?: null;
     }
 }
