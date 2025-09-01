@@ -308,4 +308,7 @@ return [
     '@glidejs/glide' => [
         'version' => '3.7.1',
     ],
+    'lodash/throttle' => [
+        'version' => '4.17.21',
+    ],
 ];

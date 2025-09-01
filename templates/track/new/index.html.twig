@@ -3,7 +3,12 @@
 {% block step %}{{ step }}{% endblock %}
 
 {% block innerContent %}
-    {{ form_start(form, { attr: { class: 'h-100 d-flex flex-column' }}) }}
+    {{ form_start(form, { attr: {
+        class: 'h-100 d-flex flex-column',
+        'data-controller': 'autosubmit',
+        'data-autosubmit-target': 'form',
+        'data-autosubmit-url-value': path('track_new', { step }),
+    } } ) }}
         {{ form_errors(form) }}
         <div class="flex-grow-1">
             {{ include('track/new/_step.html.twig', { form, track, step }) }}

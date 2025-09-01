@@ -109,13 +109,21 @@ class TrackType extends AbstractType
         $builder
             ->add('kind', EntityType::class, [
                 'class' => TrackKind::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'CategoryRequired'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'placeholder' => 'CategoryRequired',
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'placeholder' => 'CategoryRequired',
                 'choice_label' => 'name',
             ])
             ->add('tags', EntityType::class, [
                 'class' => TrackTag::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Tags'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'placeholder' => 'Tags',
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('t')
                     ->orderBy('t.name', 'ASC'),
                 'required' => false,
@@ -124,24 +132,38 @@ class TrackType extends AbstractType
             ])
             ->add('location', TextType::class, [
                 'required' => false,
-                'attr' => ['placeholder' => 'Location'],
+                'attr' => [
+                    'placeholder' => 'Location',
+                    'data-action' => 'autosubmit#submit',
+                ],
             ])
             ->add('regions', EntityType::class, [
                 'class' => Region::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Regions'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'placeholder' => 'Regions',
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'required' => false,
                 'multiple' => true,
                 'choice_label' => 'name',
             ])
             ->add('years', EntityType::class, [
                 'class' => Year::class,
-                'attr' => ['data-controller' => 'tomselect', 'placeholder' => 'Years'],
+                'attr' => [
+                    'data-controller' => 'tomselect',
+                    'placeholder' => 'Years',
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'required' => false,
                 'multiple' => true,
                 'choice_label' => 'value',
             ])
             ->add('hasFaces', ChoiceType::class, [
                 'label' => 'HasFaces',
+                'attr' => [
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'choices' => ['Yes' => true, 'No' => false],
                 'choice_attr' => fn ($choice, string $key, mixed $value) => ['data-action' => 'checkbox#toggle'],
                 'expanded' => true,
@@ -149,6 +171,9 @@ class TrackType extends AbstractType
             ])
             ->add('iAppliedRecommendations', CheckboxType::class, [
                 'label' => 'IAppliedRecommendations',
+                'attr' => [
+                    'data-action' => 'autosubmit#submit',
+                ],
                 'label_attr' => ['class' => 'grotesk'],
                 'mapped' => false,
                 'data' => true,
@@ -160,6 +185,7 @@ class TrackType extends AbstractType
                 'attr' => [
                     'data-controller' => 'tomselect',
                     'placeholder' => 'Collective',
+                    'data-action' => 'autosubmit#submit',
                 ],
                 'choice_label' => 'name',
                 'required' => false,
@@ -172,11 +198,11 @@ class TrackType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'TellUsTheHistoryOfYourTrack',
                 'required' => false,
-                'attr' => ['rows' => 5],
+                'attr' => ['rows' => 5, 'data-action' => 'autosubmit#submit'],
             ])
             ->add('email', EmailType::class, [
                 'required' => false,
-                'attr' => ['placeholder' => 'Email'],
+                'attr' => ['placeholder' => 'Email', 'data-action' => 'autosubmit#submit',],
             ]);
     }
 
