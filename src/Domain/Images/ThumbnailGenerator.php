@@ -2,11 +2,16 @@
 
 namespace App\Domain\Images;
 
+use Reconnect\S3Bundle\Service\PdfService;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ThumbnailGenerator
 {
+    public function __construct(private PdfService $pdfService)
+    {
+    }
+
     public function buildThumbnail(UploadedFile $file, int $size = 255): ?string
     {
         try {
@@ -29,7 +34,11 @@ readonly class ThumbnailGenerator
         $originalFilename = $file instanceof UploadedFile ? $file->getClientOriginalName() : $file->getFilename();
         $thumbnailPath = sprintf('thumbnail-%s.png', $originalFilename);
 
-        return PdfPreviewBuilder::genPdfThumbnail($file->getPathname(), $thumbnailPath, $size);
+        try {
+            return $this->pdfService->generatePdfThumbnail($file->getPathname(), $thumbnailPath, $size) ?: null;
+        } catch (\ImagickException) {
+            return null;
+        }
     }
 
     private function buildImageThumbnail(string $imagePath, int $size = 255): ?string
