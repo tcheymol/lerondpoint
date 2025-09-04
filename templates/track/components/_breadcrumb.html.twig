@@ -3,7 +3,7 @@
         <ol class="breadcrumb">
             {% for index, step in steps %}
                 {% set isCurrent = index == currentStep %}
-                <li class="breadcrumb-item {{ isCurrent ? 'active' : '' }}">
+                <li class="cursor-pointer breadcrumb-item {{ isCurrent ? 'active' : '' }}">
                     {% if index < maxStep and not isCurrent %}
                         <i class="fa fa-check text-success"></i>
                     {% endif %}

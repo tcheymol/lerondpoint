@@ -29,10 +29,9 @@ class CreateTrackController extends AbstractController
 
             return $this->redirectToRoute('track_list');
         } elseif (5 === $step) {
-            $isEditing = !$track->isDraft();
             $persister->publish($track);
 
-            return $isEditing ? $this->redirectToRoute('track_new', ['step' => 1]) : $this->redirectToRoute('track_list');
+            return $this->redirectToRoute('track_list');
         }
 
         $form = $this->createForm(TrackType::class, $track, ['step' => $step])->handleRequest($request);
