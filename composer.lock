@@ -3814,16 +3814,16 @@
         },
         {
             "name": "reconnect/s3bundle",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/re-connect/s3Bundle.git",
-                "reference": "6d0c63964b407d5acc4a20254a3eccab784159ae"
+                "reference": "e8511c3f0c39d391b6ac11a2caf04c8d0b033278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/re-connect/s3Bundle/zipball/6d0c63964b407d5acc4a20254a3eccab784159ae",
-                "reference": "6d0c63964b407d5acc4a20254a3eccab784159ae",
+                "url": "https://api.github.com/repos/re-connect/s3Bundle/zipball/e8511c3f0c39d391b6ac11a2caf04c8d0b033278",
+                "reference": "e8511c3f0c39d391b6ac11a2caf04c8d0b033278",
                 "shasum": ""
             },
             "require": {
@@ -3859,9 +3859,9 @@
             "description": "Symfony S3 Bundle",
             "support": {
                 "issues": "https://github.com/re-connect/s3Bundle/issues",
-                "source": "https://github.com/re-connect/s3Bundle/tree/1.4.0"
+                "source": "https://github.com/re-connect/s3Bundle/tree/1.4.1"
             },
-            "time": "2024-12-11T14:55:27+00:00"
+            "time": "2025-09-04T12:24:16+00:00"
         },
         {
             "name": "symfony/asset",
