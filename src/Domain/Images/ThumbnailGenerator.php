@@ -34,11 +34,7 @@ readonly class ThumbnailGenerator
         $originalFilename = $file instanceof UploadedFile ? $file->getClientOriginalName() : $file->getFilename();
         $thumbnailPath = sprintf('thumbnail-%s.png', $originalFilename);
 
-        try {
-            return $this->pdfService->generatePdfThumbnail($file->getPathname(), $thumbnailPath, $size) ?: null;
-        } catch (\ImagickException) {
-            return null;
-        }
+        return $this->pdfService->generatePdfThumbnail($file->getPathname(), $thumbnailPath, $size) ?: null;
     }
 
     private function buildImageThumbnail(string $imagePath, int $size = 255): ?string

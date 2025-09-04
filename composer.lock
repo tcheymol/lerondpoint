@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "272b47a3ce5c7660c366e9a993615646",
+    "content-hash": "533e656746c7ce6cdcf9d6d0075ad7b7",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3814,16 +3814,16 @@
         },
         {
             "name": "reconnect/s3bundle",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/re-connect/s3Bundle.git",
-                "reference": "e8511c3f0c39d391b6ac11a2caf04c8d0b033278"
+                "reference": "1e104dfd1d48c323fe48dae8c32a20d502fb3c6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/re-connect/s3Bundle/zipball/e8511c3f0c39d391b6ac11a2caf04c8d0b033278",
-                "reference": "e8511c3f0c39d391b6ac11a2caf04c8d0b033278",
+                "url": "https://api.github.com/repos/re-connect/s3Bundle/zipball/1e104dfd1d48c323fe48dae8c32a20d502fb3c6a",
+                "reference": "1e104dfd1d48c323fe48dae8c32a20d502fb3c6a",
                 "shasum": ""
             },
             "require": {
@@ -3859,9 +3859,9 @@
             "description": "Symfony S3 Bundle",
             "support": {
                 "issues": "https://github.com/re-connect/s3Bundle/issues",
-                "source": "https://github.com/re-connect/s3Bundle/tree/1.4.1"
+                "source": "https://github.com/re-connect/s3Bundle/tree/1.5.0"
             },
-            "time": "2025-09-04T12:24:16+00:00"
+            "time": "2025-09-04T12:51:05+00:00"
         },
         {
             "name": "symfony/asset",
