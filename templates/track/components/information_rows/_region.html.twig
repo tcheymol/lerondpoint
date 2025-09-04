@@ -1,0 +1,12 @@
+{% if track.regions is not null and track.regions|length > 0 %}
+    <span style="word-wrap: break-word">
+        <span>{{ 'Region'|trans }} :</span>
+        {% for region in track.regions %}
+            <a href="{{ path('track_list', { regions: region.id }) }}" class="text-dark">
+                <u>{{ region }}</u>
+            </a>
+            {% if not loop.last %}, {% endif %}
+        {% endfor %}
+        <br/>
+    </span>
+{% endif %}

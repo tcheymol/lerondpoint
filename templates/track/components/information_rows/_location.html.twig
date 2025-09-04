@@ -1,0 +1,7 @@
+{% if track.location is not null %}
+    <span style="word-wrap: break-word">
+        <span>{{  'Location'|trans }} :</span>
+        {{ track.location|nl2br }}
+        <br/>
+    </span>
+{% endif %}

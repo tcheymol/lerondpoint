@@ -1,0 +1,9 @@
+{% if track.collective is not null %}
+    <span style="word-wrap: break-word">
+        <span>{{ 'Collective'|trans }} :</span>
+        <a href="{{ path('track_list', { collectives: track.collective.id }) }}" class="text-dark">
+            <u>{{ track.collectiveName }}</u>
+        </a>
+        <br/>
+    </span>
+{% endif %}

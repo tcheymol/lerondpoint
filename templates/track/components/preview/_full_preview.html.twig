@@ -30,7 +30,7 @@
     {% set thumbUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Big) %}
     {% set objectUrl = get_thumb_url(attachment, enum('App\\Domain\\Images\\ThumbSize').Full) %}
     {% if thumbUrl or objectUrl %}
-        <div class="d-none d-sm-block">
+        <div class="d-none d-sm-block w-100">
             <object data="{{ objectUrl }}" type="application/pdf" width="100%" class="mnvh-80 h-100">
                 <p>Unable to display PDF file. <a href="{{ objectUrl }}">Download</a> instead.</p>
             </object>

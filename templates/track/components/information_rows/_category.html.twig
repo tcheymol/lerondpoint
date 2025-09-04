@@ -1,0 +1,9 @@
+{% if track.kind is not null %}
+    <span style="word-wrap: break-word">
+        <span>{{ 'Kind'|trans }} :</span>
+        <a href="{{ path('track_list', { kinds: track.kind.id }) }}" class="text-dark">
+            <u>{{ track.kind }}</u>
+        </a>
+        <br/>
+    </span>
+{% endif %}

@@ -1,0 +1,12 @@
+{% if track.years is not null and track.years|length > 0 %}
+    <span style="word-wrap: break-word">
+        <span>{{ 'Year'|trans }} :</span>
+        {% for year in track.years %}
+            <a href="{{ path('track_list', { years: year.id }) }}" class="text-dark">
+                <u>{{ year }}</u>
+            </a>
+            {% if not loop.last %}, {% endif %}
+        {% endfor %}
+        <br/>
+    </span>
+{% endif %}

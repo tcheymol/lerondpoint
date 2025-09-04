@@ -1,28 +1,12 @@
-{% set collectiveUrl = track.collective is null ? null : path('track_list', { collectives: track.collective.id }) %}
-
-{% set fields = [
-    { label: null, value: track.name },
-    { label: 'Category'|trans, value: track.kindName },
-    { label: 'Tags'|trans, value: track.tagsAsString },
-    { label: 'Region'|trans, value: track.regionsAsString },
-    { label: 'Location'|trans, value: track.location },
-    { label: 'Year'|trans, value: track.yearsAsString },
-    { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
-    { label: 'Description'|trans, value: track.description, notUnderlined: true },
-] %}
-
 <div class="mt-4" style="word-wrap: break-word">
-    {% for field in fields|filter(f => f.value is not null and f.value != '') %}
-        {{ include('track/components/_information_row.html.twig', {
-            label: field.label,
-            value: field.value,
-            url: field.url ?? null,
-            notUnderlined: field.notUnderlined ?? null,
-        }) }}
-    {% endfor %}
-    {% if track.hasFaces %}
-        <div class="card bg-light-subtle mt-4 p-2">
-            {{ include('track/components/_information_row.html.twig', {value: 'ThisTrackHasFaces'|trans, small: true}) }}
-        </div>
-    {% endif %}
+    <span class="fs-4">{{ track.name|nl2br }}</span><br/>
+
+    {{ include('track/components/information_rows/_category.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_tags.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_region.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_location.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_year.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_colletives.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_description.html.twig', { track }) }}
+    {{ include('track/components/information_rows/_has_faces.html.twig', { track }) }}
 </div>

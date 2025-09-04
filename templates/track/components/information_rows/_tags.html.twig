@@ -1,0 +1,12 @@
+{% if track.tags is not null and track.tags|length > 0 %}
+    <span style="word-wrap: break-word">
+        <span>{{ 'Tags'|trans }} :</span>
+        {% for tag in track.tags %}
+            <a href="{{ path('track_list', { tags: tag.id }) }}" class="text-dark">
+                <u>{{ tag }}</u>
+            </a>
+            {% if not loop.last %}, {% endif %}
+        {% endfor %}
+        <br/>
+    </span>
+{% endif %}

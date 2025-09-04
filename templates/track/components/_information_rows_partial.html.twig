@@ -1,17 +1,6 @@
-{% set collectiveUrl = track.collective is null ? null : path('collective_show', { id: track.collective.id }) %}
-{% set fields = [
-    { label: 'Category'|trans, value: track.kindName },
-    { label: 'Tags'|trans, value: track.tagsAsString },
-    { label: 'Region'|trans, value: track.regionsAsString },
-    { label: 'Location'|trans, value: track.location },
-    { label: 'Year'|trans, value: track.yearsAsString },
-    { label: 'Collective'|trans, value: track.collectiveName, url: collectiveUrl },
-] %}
-
-{% for field in fields|filter(f => f.value is not null and f.value != '') %}
-    {{ include('track/components/_information_row.html.twig', {
-        label: field.label,
-        value: field.value,
-        url: field.url ?? null,
-    }) }}
-{% endfor %}
+{{ include('track/components/information_rows/_category.html.twig', { track }) }}
+{{ include('track/components/information_rows/_tags.html.twig', { track }) }}
+{{ include('track/components/information_rows/_region.html.twig', { track }) }}
+{{ include('track/components/information_rows/_location.html.twig', { track }) }}
+{{ include('track/components/information_rows/_year.html.twig', { track }) }}
+{{ include('track/components/information_rows/_colletives.html.twig', { track }) }}
