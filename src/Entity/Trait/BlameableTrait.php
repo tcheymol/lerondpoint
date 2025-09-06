@@ -145,6 +145,11 @@ trait BlameableTrait
         return $this;
     }
 
+    public function isAccepted(): bool
+    {
+        return $this->isValidated() && !$this->isRejected();
+    }
+
     public function getValidatedBy(): ?User
     {
         return $this->validatedBy;
