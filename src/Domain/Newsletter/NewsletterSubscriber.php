@@ -11,12 +11,15 @@ readonly class NewsletterSubscriber
     {
     }
 
-    public function subscribe(NewsletterRegistration $registration, bool $checkExisting = false): void
+    public function subscribe(NewsletterRegistration $registration): void
     {
-        if (!$checkExisting) {
-            $this->repository->persist($registration);
+        $existingRegistration = $this->repository->findExisting($registration);
+        if ($existingRegistration) {
+            if ($existingRegistration->isUnsubscribed()) {
+                $this->repository->subscribeBack($existingRegistration);
+            }
         } else {
-            $this->repository->subscribeBack($registration);
+            $this->repository->persist($registration);
         }
 
         $this->mailer->subscribe($registration->getEmail());

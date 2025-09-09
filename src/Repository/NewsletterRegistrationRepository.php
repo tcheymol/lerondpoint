@@ -23,7 +23,7 @@ class NewsletterRegistrationRepository extends ServiceEntityRepository
 
     public function subscribeBack(NewsletterRegistration $registration): void
     {
-        $this->findExisting($registration)?->setIsUnsubscribed(false);
+        $registration->setIsUnsubscribed(false);
         $this->getEntityManager()->flush();
     }
 

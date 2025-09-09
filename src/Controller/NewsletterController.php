@@ -21,8 +21,8 @@ final class NewsletterController extends AbstractController
         $registration = new NewsletterRegistration($this->getUser()?->getEmail());
         $form = $this->createForm(NewsletterRegistrationForm::class, $registration)->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $subscriber->subscribe($registration, !$form->isValid());
+        if ($form->isSubmitted() && $form->get('captcha')->isValid()) {
+            $subscriber->subscribe($registration);
 
             return $this->redirectToRoute('subscribe_newsletter_success');
         }

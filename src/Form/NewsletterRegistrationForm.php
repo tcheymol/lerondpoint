@@ -20,7 +20,7 @@ class NewsletterRegistrationForm extends AbstractType
                 'as_url' => true,
                 'width' => 100,
                 'height' => 50,
-                'length' => 4,
+                'length' => 3,
                 'attr' => ['placeholder' => 'Captcha', 'class' => 'mt-2'],
             ]);
     }
