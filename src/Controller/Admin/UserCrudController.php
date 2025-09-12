@@ -43,6 +43,7 @@ class UserCrudController extends AbstractCrudController
         yield TextField::new('plainPassword')->onlyOnForms();
         yield ChoiceField::new('roles', 'roles')->setChoices(User::ROLES)->allowMultipleChoices();
         yield BooleanField::new('disabled');
+        yield BooleanField::new('validatedEmail')->setLabel('EmailValidated');
         yield BooleanField::new('hasAcceptedTerms')->onlyOnForms();
         yield DateTimeField::new('createdAt')->hideOnForm();
         yield DateTimeField::new('updatedAt')->onlyOnDetail();
