@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Domain\Images\AttachmentHelper;
+use App\Domain\Track\TrackAttachmentHelper;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -18,7 +18,7 @@ readonly class RegeneratePreviewsCommand
     public function __construct(
         private TrackRepository $repository,
         private EntityManagerInterface $em,
-        private AttachmentHelper $attachmentHelper,
+        private TrackAttachmentHelper $helper,
     ) {
     }
 
@@ -40,13 +40,7 @@ readonly class RegeneratePreviewsCommand
         $io->note(sprintf('%s notes missing at least one preview', count($tracks)));
 
         foreach ($tracks as $track) {
-            foreach ($track->getAttachments() as $attachment) {
-                try {
-                    $this->attachmentHelper->uploadMissingThumbnails($attachment);
-                } catch (\Exception $e) {
-                    $io->error(sprintf('Exception uploading thumbnail, error: %s', $e->getMessage()));
-                }
-            }
+            $this->helper->uploadMissingThumbnails($track);
         }
         $this->em->flush();
     }

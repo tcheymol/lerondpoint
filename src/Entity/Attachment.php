@@ -74,10 +74,19 @@ class Attachment implements BlameableInterface, \Stringable
 
     public static function fromFile(UploadedFile $file): self
     {
-        return new Attachment()
-            ->setExtension((string) $file->guessExtension())
-            ->setKind($file->getMimeType())
-            ->setSize($file->getSize());
+        $attachment = new Attachment()
+            ->setSize($file->getSize())
+            ->setExtension($file->getClientOriginalExtension())
+            ->setKind($file->getClientOriginalExtension());
+
+        try {
+            $attachment
+                ->setExtension((string) $file->guessExtension())
+                ->setKind($file->getMimeType());
+        } catch (\Exception) {
+        }
+
+        return $attachment;
     }
 
     public static function newVideo(): self

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Images\AttachmentHelper;
-use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Attachment;
@@ -28,7 +27,7 @@ class ModerationController extends AbstractController
     }
 
     #[Route('/moderation/{id<\d+>}', name: 'moderate_track', methods: ['GET'])]
-    public function moderate(Track $track, TrackAttachmentHelper $helper): Response
+    public function moderate(Track $track): Response
     {
         return $this->render('track/moderation/moderate.html.twig', ['track' => $track]);
     }

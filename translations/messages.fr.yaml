@@ -166,6 +166,7 @@ PublishDisclaimer: Nous vous enverrons un email pour vous confirmer la publicati
 QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès.
 QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
+RegeneratePreviews: Régénérer les aperçus
 Region: Région
 Registration: Je m'inscris
 RejectTrack: Refuser la trace
@@ -220,6 +221,7 @@ TrackCreatedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été créée, ell
 TrackCreatedSubtitle: Votre trace %trackName% a été créée, elle est actuellement en relecture par nos équipes et sera bientôt publiée publiquement.
 TrackKind: Catégorie de trace
 TrackNumber: Trace N°
+TrackPreviewRegenerated: Les aperçus de la trace ont été régénérés avec succès
 TrackRejectedCauseSubtitle: "Raison du refus : %rejectionCause%"
 TrackRejectedEmailSubject: "[Le Rond-point] 😢 Votre trace n'a pas pu être acceptée"
 TrackRejectedSubtitle: Votre trace %trackName% n'a pas pu être acceptée, veuillez contacter nos équipes à l'adresse contact@le-rondpoint.org si vous désirez obtenir de plus amples informations sur les raisons qui justifient ce refus

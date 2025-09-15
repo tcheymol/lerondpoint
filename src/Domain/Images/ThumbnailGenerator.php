@@ -2,27 +2,29 @@
 
 namespace App\Domain\Images;
 
+use Psr\Log\LoggerInterface;
 use Reconnect\S3Bundle\Service\PdfService;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 readonly class ThumbnailGenerator
 {
-    public function __construct(private PdfService $pdfService)
+    public function __construct(private PdfService $pdfService, private LoggerInterface $logger)
     {
     }
 
     public function buildThumbnail(UploadedFile $file, int $size = 255): ?string
     {
+        $mime = 'image/jpeg';
         try {
-            $extension = $file->getMimeType();
-        } catch (\Exception) {
-            return null;
+            $mime = $file->getMimeType();
+        } catch (\Exception $e) {
+            $this->logger->error(sprintf('Error while guessing mime type: %s', $e->getMessage()));
         }
 
-        if ('application/pdf' === $extension) {
+        if ('application/pdf' === $mime) {
             return $this->buildPdfThumbnail($file, $size);
-        } elseif (getimagesize($file->getPathname())) {
+        } elseif ($mime && str_contains($mime, 'image/')) {
             return $this->buildImageThumbnail($file->getRealPath(), $size);
         } else {
             return null;
@@ -40,13 +42,17 @@ readonly class ThumbnailGenerator
     private function buildImageThumbnail(string $imagePath, int $size = 255): ?string
     {
         try {
-            $thumbnailPath = $imagePath.'-thumbnail.png';
+            $thumbnailPath = $imagePath.'-thumbnail.jpg';
+
             $imagick = new \Imagick(realpath($imagePath));
             $imagick->thumbnailImage($size, 0);
             $imagick->writeImage($thumbnailPath);
+            $imagick->setImageFormat('jpeg');
 
             return $thumbnailPath;
-        } catch (\Exception) {
+        } catch (\Exception $e) {
+            $this->logger->error(sprintf('Error while generating image thumbnail: %s', $e->getMessage()));
+
             return null;
         }
     }

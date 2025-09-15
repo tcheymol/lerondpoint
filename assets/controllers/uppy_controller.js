@@ -49,7 +49,10 @@ export default class extends Controller {
     };
 
     connect() {
-        const uppy  = new Uppy({ locale: French })
+        const uppy  = new Uppy({
+            locale: French,
+            allowedFileTypes: ['image/*', '.heic',  '.heif'],
+        })
         .use(Dashboard, { inline: true, target: '#uppy-dashboard' })
             .use(XHR, {
                 endpoint: this.endpointValue,

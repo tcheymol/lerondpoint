@@ -18,7 +18,7 @@ rector:
 	@$(RECTOR) process --clear-cache
 
 fixer:
-	PHP_CS_FIXER_IGNORE_ENV=true php ./vendor/bin/php-cs-fixer fix src --allow-risky=yes --using-cache=no
+	php ./vendor/bin/php-cs-fixer fix src --allow-risky=yes --using-cache=no --allow-unsupported-php-version=yes
 
 deploy:
 	@$(DEPLOYER) deploy

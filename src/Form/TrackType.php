@@ -202,7 +202,7 @@ class TrackType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'required' => false,
-                'attr' => ['placeholder' => 'Email', 'data-action' => 'autosubmit#submit',],
+                'attr' => ['placeholder' => 'Email', 'data-action' => 'autosubmit#submit'],
             ]);
     }
 

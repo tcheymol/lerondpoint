@@ -31,7 +31,13 @@ class TrackCrudController extends AbstractCrudController
     #[\Override]
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_DETAIL,
+                Action::new('regeneratePreviews', 'RegeneratePreviews', 'fa fa-images')
+                ->addCssClass('btn btn-warning')
+                ->linkToRoute('track_regenerate_previews', fn (Track $track) => ['id' => $track->getId()])
+            );
     }
 
     #[\Override]

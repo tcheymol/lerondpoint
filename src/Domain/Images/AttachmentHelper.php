@@ -27,7 +27,6 @@ readonly class AttachmentHelper
         }
         try {
             $attachment = Attachment::fromFile($file);
-
             $this->uploadFile($file, $attachment);
             $this->uploadThumbnails($file, $attachment);
             $this->storeFileInfo($file, $attachment);
@@ -85,6 +84,10 @@ readonly class AttachmentHelper
         if (!$attachment->getBigThumbnailObjectId()) {
             $attachment->setBigThumbnailObjectId($this->uploadThumbnail($originalFile, 1024));
         }
+
+        unlink($tempFilePath);
+
+        $this->em->flush();
     }
 
     /** @throws \Exception */
