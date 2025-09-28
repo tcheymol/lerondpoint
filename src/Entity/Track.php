@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Domain\Location\RegionEnum as EnumRegion;
 use App\Entity\Interface\BlameableInterface;
 use App\Entity\Trait\BlameableTrait;
+use App\Form\Model\RejectTrack;
 use App\Repository\TrackRepository;
 use App\Validator\AttachmentOrUrl;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,7 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[AttachmentOrUrl]
 class Track implements BlameableInterface
 {
-    use BlameableTrait;
+    use BlameableTrait {
+        reject as protected traitReject;
+    }
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -95,6 +98,9 @@ class Track implements BlameableInterface
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Attachment $coverAttachment = null;
+
+    #[ORM\Column(length: 4095, nullable: true)]
+    private ?string $rejectionMessage = null;
 
     public function __construct()
     {
@@ -494,5 +500,28 @@ class Track implements BlameableInterface
     public function resetCover(): void
     {
         $this->coverAttachment = $this->attachments->first() ?: null;
+    }
+
+    public function getRejectionMessage(): ?string
+    {
+        return $this->rejectionMessage;
+    }
+
+    public function setRejectionMessage(?string $rejectionMessage): static
+    {
+        $this->rejectionMessage = $rejectionMessage;
+
+        return $this;
+    }
+
+    public function reject(?RejectTrack $rejectTrack = null): self
+    {
+        if ($rejectTrack) {
+            $this->setRejectionCause($rejectTrack->rejectionCause);
+            $this->setRejectionMessage($rejectTrack->rejectionMessage);
+        }
+        $this->traitReject();
+
+        return $this;
     }
 }

@@ -121,6 +121,7 @@ MainInformations: Informations principales
 MediumPassword: Mot de passe moyen
 Memory: Traces
 Menu: Menu
+Message: Contenu du message
 Metropolis: Métropole
 Misc: Divers
 Moderation: Modération
@@ -173,6 +174,7 @@ RejectTrack: Refuser la trace
 Rejected By: Refusé par
 Rejected: Refusé
 RejectionCause: Raison du refus
+RejectionMessageLabel: Vous pouvez ajouter un message personnalisé à destination du·de la contributeur·ice afin d'expliciter la raison du refus de cette trace
 RemoveTrackAttachment: Supprimer ce document de la trace
 RepeatPassword: Confirmez votre mot de passe
 ResetPassword: Réinitialiser votre mot de passe

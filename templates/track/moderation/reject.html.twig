@@ -8,6 +8,8 @@
     {{ form_start(form) }}
         {{ form_label(form.rejectionCause) }}
         {{ form_widget(form.rejectionCause) }}
+        {{ form_label(form.rejectionMessage) }}
+        {{ form_widget(form.rejectionMessage) }}
         {{ include('components/_button.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}

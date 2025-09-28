@@ -47,7 +47,7 @@ class ModerationController extends AbstractController
         $form = $this->createForm(RejectTrackType::class, $rejectTrack)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $persister->reject($track, $rejectTrack->rejectionCause);
+            $persister->reject($track, $rejectTrack);
 
             return $this->redirectToRoute('moderation_index');
         }

@@ -3,6 +3,7 @@
 namespace App\Entity\Trait;
 
 use App\Entity\User;
+use App\Form\Model\RejectTrack;
 use Doctrine\ORM\Mapping as ORM;
 
 trait BlameableTrait
@@ -175,7 +176,7 @@ trait BlameableTrait
         return $this->rejectedBy;
     }
 
-    public function reject(): self
+    public function reject(?RejectTrack $rejectTrack = null): self
     {
         $this->setRejected(true);
         $this->setValidated(false);

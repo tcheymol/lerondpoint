@@ -9,6 +9,11 @@
                         {{ 'TrackRejectedCauseSubtitle'|trans({ '%rejectionCause%': track.rejectionCause.name }) }}
                     </p>
                 {% endif %}
+                {% if track.rejectionMessage %}
+                    <p class="text-center text-lg">
+                        {{ track.rejectionMessage }}
+                    </p>
+                {% endif %}
             </columns>
         </row>
         {{ include('email/_signature.html.twig') }}

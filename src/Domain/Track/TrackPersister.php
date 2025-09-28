@@ -3,8 +3,8 @@
 namespace App\Domain\Track;
 
 use App\Domain\Security\SessionAwareTrait;
-use App\Entity\RejectionCause;
 use App\Entity\Track;
+use App\Form\Model\RejectTrack;
 use App\Form\TrackType;
 use App\Repository\AttachmentRepository;
 use App\Repository\TrackRepository;
@@ -58,10 +58,9 @@ readonly class TrackPersister
         $this->em->flush();
     }
 
-    public function reject(Track $track, ?RejectionCause $rejectionCause): void
+    public function reject(Track $track, RejectTrack $rejectTrack): void
     {
-        $track->setRejectionCause($rejectionCause);
-        $track->reject();
+        $track->reject($rejectTrack);
         $this->em->flush();
     }
 
