@@ -311,4 +311,7 @@ return [
     'lodash/throttle' => [
         'version' => '4.17.21',
     ],
+    'stimulus-use' => [
+        'version' => '0.52.3',
+    ],
 ];

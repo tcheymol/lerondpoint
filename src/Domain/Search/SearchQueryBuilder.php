@@ -2,20 +2,29 @@
 
 namespace App\Domain\Search;
 
+use App\Entity\Collective;
+use App\Entity\Interface\PersistedEntityInterface;
+use App\Entity\Region;
+use App\Entity\Track;
+use App\Entity\TrackKind;
+use App\Entity\TrackTag;
+use App\Entity\Year;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\QueryBuilder;
 
 class SearchQueryBuilder
 {
+    public const int NUMBER_PER_PAGE = 16;
     private QueryBuilder $qb;
 
-    public function __construct(private readonly TrackRepository $trackRepository)
+    public function __construct(private readonly TrackRepository $trackRepository, private readonly SeenTracksManager $seenTracksManager)
     {
     }
 
     public function init(): self
     {
         $this->qb = $this->trackRepository->createQueryBuilder('t')
+            ->select('DISTINCT t')
             ->leftJoin('t.kind', 'k')
             ->leftJoin('t.collective', 'c')
             ->leftJoin('t.createdBy', 'u')
@@ -26,11 +35,6 @@ class SearchQueryBuilder
         return $this;
     }
 
-    public function getQueryBuilder(): QueryBuilder
-    {
-        return $this->qb;
-    }
-
     public function search(Search $search): self
     {
         return $this->searchText($search)
@@ -39,7 +43,35 @@ class SearchQueryBuilder
             ->searchYear($search)
             ->searchLocations($search)
             ->searchTags($search)
-            ->searchCollectives($search);
+            ->searchCollectives($search)
+            ->excludeIds($search->loadMore);
+    }
+
+    public function selectRandoms(): self
+    {
+        $this->qb
+            ->addSelect('RANDOM() as HIDDEN random')
+            ->orderBy('random()')
+            ->addGroupBy('t.id')
+        ;
+
+        return $this;
+    }
+
+    public function limit(): self
+    {
+        $this->qb->setMaxResults(self::NUMBER_PER_PAGE);
+
+        return $this;
+    }
+
+    /** @return Track[] */
+    public function getResults(): array
+    {
+        /** @var Track[] $results */
+        $results = $this->qb->getQuery()->getResult();
+
+        return $results;
     }
 
     private function searchText(Search $search): self
@@ -65,7 +97,7 @@ class SearchQueryBuilder
 
     private function searchKinds(Search $search): self
     {
-        $kinds = $search->kinds;
+        $kinds = $search->kinds->filter(fn (?PersistedEntityInterface $kind) => null !== $kind);
         if ($kinds->count() > 0) {
             $this->qb->andWhere('t.kind IN (:kinds)')
                 ->setParameter('kinds', $kinds);
@@ -76,7 +108,7 @@ class SearchQueryBuilder
 
     private function searchRegions(Search $search): self
     {
-        $regions = $search->regions;
+        $regions = $search->regions->filter(fn (?PersistedEntityInterface $region) => null !== $region);
         if ($regions->count() > 0) {
             $this->qb->andWhere('r.id IN (:regions)')
                 ->setParameter('regions', $regions);
@@ -87,7 +119,7 @@ class SearchQueryBuilder
 
     private function searchYear(Search $search): self
     {
-        $years = $search->years;
+        $years = $search->years->filter(fn (?PersistedEntityInterface $year) => null !== $year);
         if ($years->count() > 0) {
             $this->qb->andWhere('y.id IN (:years)')
                 ->setParameter('years', $years);
@@ -109,7 +141,7 @@ class SearchQueryBuilder
 
     private function searchTags(Search $search): self
     {
-        $tags = $search->tags;
+        $tags = $search->tags->filter(fn (?PersistedEntityInterface $tag) => null !== $tag);
         if ($tags->count() > 0) {
             $this->qb->andWhere('tg.id IN (:tags)')
                 ->setParameter('tags', $tags);
@@ -120,11 +152,24 @@ class SearchQueryBuilder
 
     private function searchCollectives(Search $search): self
     {
-        $collectives = $search->collectives;
+        $collectives = $search->collectives->filter(fn (?PersistedEntityInterface $collectives) => null !== $collectives);
         if ($collectives->count() > 0) {
             $this->qb->andWhere('t.collective IN (:collectives)')
                 ->setParameter('collectives', $collectives);
         }
+
+        return $this;
+    }
+
+    private function excludeIds(?bool $loadMore = false): self
+    {
+        $seenTracksIds = $this->seenTracksManager->get();
+        if (!$seenTracksIds || !$loadMore) {
+            return $this;
+        }
+
+        $this->qb->andWhere('t.id NOT IN (:excludeIds)')
+            ->setParameter('excludeIds', $seenTracksIds);
 
         return $this;
     }

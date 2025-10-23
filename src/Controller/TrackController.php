@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Domain\Search\SearchFactory;
+use App\Domain\Search\SearchQueryBuilder;
 use App\Domain\Search\SearchType;
+use App\Domain\Search\SeenTracksManager;
 use App\Domain\Track\TrackAttachmentHelper;
 use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
@@ -17,11 +19,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class TrackController extends AbstractController
 {
     #[Route('/track', name: 'track_list', methods: ['GET', 'POST'])]
-    public function index(Request $request, TrackProvider $provider, SearchFactory $factory): Response
+    public function index(Request $request, TrackProvider $provider, SearchFactory $factory, SeenTracksManager $seenTracksManager): Response
     {
         $search = $factory->create($request->query->all());
+        $seenTracksManager->reset();
         $form = $this->createForm(SearchType::class, $search, [
-            'action' => $this->generateUrl('track_async_search'),
+            'action' => $this->generateUrl('track_search'),
         ])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -29,22 +32,29 @@ class TrackController extends AbstractController
         }
 
         $tracks = $provider->provide($search);
-        shuffle($tracks);
 
         return $this->render('track/index.html.twig', ['tracks' => $tracks,  'form' => $form]);
     }
 
-    #[Route('/track/search', name: 'track_async_search', methods: ['POST'])]
-    public function asyncSearch(Request $request, TrackProvider $provider, SearchFactory $factory): Response
+    #[Route('/track/search', name: 'track_search', methods: ['POST'])]
+    public function trackSearch(Request $request, TrackProvider $provider, SearchFactory $factory, SeenTracksManager $seenTracksManager): Response
     {
-        $search = $factory->create($request->query->all());
-        $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
+        $loadMore = $request->query->getBoolean('loadMore');
+        if (!$loadMore) {
+            $seenTracksManager->reset();
+        }
+        $search = $factory->create($request->query->all(), loadMore: $loadMore);
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('track_list', $search->toParamsArray());
+        }
+        $this->createForm(SearchType::class, $search)->handleRequest($request);
 
-        $tracks = $form->isSubmitted() && $form->isValid() ? $provider->provide($search) : [];
+        $tracks = $provider->provide($search);
 
         return $this->json([
             'html' => $this->renderView('track/components/_list.html.twig', ['tracks' => $tracks]),
             'queryParams' => $search->toParamsArray(),
+            'hasNoMoreResults' => count($tracks) < SearchQueryBuilder::NUMBER_PER_PAGE,
         ]);
     }
 
