@@ -5,7 +5,6 @@ import { Controller } from '@hotwired/stimulus';
 * See https://symfony.com/bundles/StimulusBundle/current/index.html#lazy-stimulus-controllers
 */
 
-/* stimulusFetch: 'lazy' */
 export default class extends Controller {
     static values = {
         url: String,

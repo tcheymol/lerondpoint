@@ -1,4 +1,6 @@
 export const updateQueryParams = (queryParams) => {
+    if (!queryParams) return;
+
     const url = new URL(window.location);
 
     url.search = '';
