@@ -18,7 +18,7 @@ readonly class SearchPerformer
             ->init()
             ->search($search)
             ->getQueryBuilder()
-            ->setMaxResults(50);
+            ->setMaxResults(200);
 
         return $this->getResult($qb);
     }
