@@ -12,14 +12,21 @@ trait SessionAwareTrait
 
     public function addFlash(string $type, string $content): void
     {
-        $session = $this->getSession();
-        if ($session instanceof Session) {
-            $session->getFlashBag()->add($type, $content);
-        }
+        $this->getSession()->getFlashBag()->add($type, $content);
     }
 
     public function getSession(): SessionInterface
     {
         return $this->requestStack->getSession();
+    }
+
+    public function getItem(string $key, mixed $default = null): mixed
+    {
+        return $this->getSession()->get($key, $default);
+    }
+
+    public function setItem(string $key, mixed $value): void
+    {
+        $this->getSession()->set($key, $value);
     }
 }

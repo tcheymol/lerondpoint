@@ -9,12 +9,11 @@ import '../styles/glide.theme.css'
 * See https://symfony.com/bundles/StimulusBundle/current/index.html#lazy-stimulus-controllers
 */
 
-/* stimulusFetch: 'lazy' */
 export default class extends Controller {
 
 
     connect() {
-        var glide = new Glide(this.element, {
+        const glide = new Glide(this.element, {
             type: 'slider',
             perView: 1,
             focusAt: 'center',

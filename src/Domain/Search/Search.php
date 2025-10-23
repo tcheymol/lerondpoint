@@ -32,6 +32,7 @@ class Search
     private array $params = [];
 
     public function __construct(
+        public ?bool $loadMore = false,
         public ?string $text = null,
         public ?string $location = null,
     ) {

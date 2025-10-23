@@ -37,9 +37,9 @@ readonly class SearchFactory
     }
 
     /** @param array<string, array<string, mixed>|bool|float|int|string> $params */
-    public function create(array $params): Search
+    public function create(array $params, ?bool $loadMore = false): Search
     {
-        $search = new Search();
+        $search = new Search($loadMore);
 
         foreach ($params as $key => $value) {
             if (in_array($key, ['tags', 'kinds', 'collectives', 'regions', 'years']) && is_string($value)) {

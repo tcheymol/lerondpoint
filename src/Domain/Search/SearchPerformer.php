@@ -3,10 +3,11 @@
 namespace App\Domain\Search;
 
 use App\Entity\Track;
-use Doctrine\ORM\QueryBuilder;
 
 readonly class SearchPerformer
 {
+    public const int NUMBER_PER_PAGE = 50;
+
     public function __construct(private SearchQueryBuilder $queryBuilder)
     {
     }
@@ -14,21 +15,14 @@ readonly class SearchPerformer
     /** @return Track[] */
     public function search(Search $search): array
     {
-        $qb = $this->queryBuilder
+        return $this->queryBuilder
             ->init()
             ->search($search)
             ->getQueryBuilder()
-            ->setMaxResults(200);
-
-        return $this->getResult($qb);
-    }
-
-    /** @return Track[] */
-    private function getResult(QueryBuilder $qb): array
-    {
-        /** @var Track[] $tracks */
-        $tracks = $qb->getQuery()->getResult();
-
-        return $tracks;
+            ->addSelect('RANDOM() as HIDDEN random')
+            ->orderBy('random()')
+            ->setMaxResults(self::NUMBER_PER_PAGE)
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -1,58 +1,22 @@
 import { Controller } from '@hotwired/stimulus';
-import axios from 'axios';
 import debounce from 'lodash/debounce';
-import { showElement, hideElement } from './helper/domManipulationHelper.js';
-import { updateQueryParams } from './helper/browserHelpers.js';
+import {postForm} from "./helper/postForm.js";
 
-/*
-* The following line makes this controller "lazy": it won't be downloaded until needed
-* See https://github.com/symfony/stimulus-bridge#lazy-controllers
-*/
 export default class extends Controller {
-    static targets = ['container', 'loader']
-    static values = {
-        url: String,
-    }
+    static targets = ['container', 'loader', 'form']
 
     initialize(){
         this.search = debounce(this.search, 500).bind(this)
     }
 
-    search(event) {
-        try {
-            const input = event.target;
-            const form = input.form;
-            const params = new FormData(form);
-            this.showLoader();
-
-            axios({
-                method: "post",
-                url: this.urlValue,
-                data: params,
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-                .then((response) => {
-                    this.containerTarget.innerHTML = response.data.html;
-                    updateQueryParams(response.data.queryParams);
-                    this.hideLoader()
-                })
-                .catch(() => {
-                    this.hideLoader()
-                });
-        } catch (error) {
-            this.hideLoader()
-        }
+    async search() {
+        this.containerTarget.innerHTML = await postForm(this.formTarget, this.getLoaderTarget());
     };
 
-    hideLoader() {
-        hideElement(this.getLoaderTarget());
+    async loadMore() {
+        const newHtml = await postForm(this.formTarget, this.getLoaderTarget(), this.formTarget.action + '?loadMore=1');
+        this.containerTarget.innerHTML = this.containerTarget.innerHTML + newHtml;
     }
 
-    showLoader() {
-        showElement(this.getLoaderTarget());
-    }
-
-    getLoaderTarget() {
-        return this.hasLoaderTarget ? this.loaderTarget : null;
-    }
+    getLoaderTarget = () => this.hasLoaderTarget ? this.loaderTarget : null;
 }
