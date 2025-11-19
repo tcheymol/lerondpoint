@@ -1,58 +1,73 @@
 import { Controller } from '@hotwired/stimulus';
-import axios from 'axios';
 import debounce from 'lodash/debounce';
-import { showElement, hideElement } from './helper/domManipulationHelper.js';
-import { updateQueryParams } from './helper/browserHelpers.js';
+import {updateQueryParams} from "./helper/browserHelpers.js";
+import axios from "axios";
+import {hideElement, showElement} from "./helper/domManipulationHelper.js";
+import {hideLoader, showLoader} from "./helper/loaderHelper.js";
 
-/*
-* The following line makes this controller "lazy": it won't be downloaded until needed
-* See https://github.com/symfony/stimulus-bridge#lazy-controllers
-*/
 export default class extends Controller {
-    static targets = ['container', 'loader']
-    static values = {
-        url: String,
-    }
+    static targets = ['container', 'loader', 'form', 'loadMore']
 
     initialize(){
         this.search = debounce(this.search, 500).bind(this)
+        this.observe();
     }
 
-    search(event) {
-        try {
-            const input = event.target;
-            const form = input.form;
-            const params = new FormData(form);
+    async postForm(action) {
+        const form = this.formTarget;
+        try{
             this.showLoader();
+            const response = await axios({
+                method: 'POST',
+                url: action,
+                data: new FormData(form),
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+            });
+            const data = response.data;
+            updateQueryParams(data.queryParams);
+            if (data.hasNoMoreResults) this.hideLoader();
 
-            axios({
-                method: "post",
-                url: this.urlValue,
-                data: params,
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-                .then((response) => {
-                    this.containerTarget.innerHTML = response.data.html;
-                    updateQueryParams(response.data.queryParams);
-                    this.hideLoader()
-                })
-                .catch(() => {
-                    this.hideLoader()
-                });
+            return data.html;
         } catch (error) {
-            this.hideLoader()
+            hideLoader()
+
+            return '';
         }
+    }
+
+    async search() {
+        this.containerTarget.innerHTML = await this.postForm(this.formTarget.action);
     };
 
-    hideLoader() {
-        hideElement(this.getLoaderTarget());
+    async loadMore() {
+        setTimeout(async() => {
+            const newHtml = await this.postForm(this.formTarget.action + '?loadMore=1');
+            this.containerTarget.innerHTML = this.containerTarget.innerHTML + newHtml;
+        }, 500);
+    }
+
+    getLoaderTarget = () => this.hasLoaderTarget ? this.loaderTarget : null;
+
+    observe() {
+        if (!this.hasLoadMoreTarget) return;
+        const observer = new IntersectionObserver((entries) =>
+            entries.forEach(entry => {
+                if (entry.isIntersecting) this.loadMore()
+            })
+        );
+        observer.observe(this.loadMoreTarget);
     }
 
     showLoader() {
-        showElement(this.getLoaderTarget());
+        const loader = this.getLoaderTarget();
+        showElement(loader);
     }
 
-    getLoaderTarget() {
-        return this.hasLoaderTarget ? this.loaderTarget : null;
+    hideLoader() {
+        const loader = this.getLoaderTarget();
+        hideElement(loader);
     }
 }

@@ -2,7 +2,7 @@
     <div class="bg-primary p-2 p-sm-3 p-md-4"
          style="background: url({{ asset('images/tracks-bg.jpg') }}) no-repeat center center; background-size: contain;"
     >
-        {{ form_start(form) }}
+        {{ form_start(form, {attr: {'data-async-search-target': 'form'}}) }}
         <div class="row d-flex align-items-center">
             <div class="col-12 position-relative" style="padding-right: 48px">
                 {{ form_widget(form.text)}}
