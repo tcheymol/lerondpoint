@@ -2,7 +2,9 @@
     {{ stimulus_controller('glide') }}
 >
     <div class="glide__track h-100" data-glide-el="track"
-    {{ stimulus_controller('show_modal', {modalId: 'swiperModal'})|stimulus_action('show_modal', 'click', 'click') }}
+         {% if not track.isVideo %}
+            {{ stimulus_controller('show_modal', {modalId: 'swiperModal'})|stimulus_action('show_modal', 'click', 'click') }}
+        {% endif %}
     >
         <ul class="glide__slides">
             {% if track.hasAttachments%}
