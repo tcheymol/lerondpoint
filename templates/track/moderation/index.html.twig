@@ -7,7 +7,11 @@
     <div class="row h-100">
         <h1 class="col-12 text-center text-dark mt-3">{{ 'ModerationTitle'|trans }}</h1>
         <div class="col-12 col-md-10 offset-md-1 h-100">
-            {{include('track/components/_list.html.twig', {tracks}) }}
+            <div class="col-12 col-md-10 offset-md-1">
+                <div class="row px-3">
+                    {{include('track/components/_list.html.twig', {tracks}) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
