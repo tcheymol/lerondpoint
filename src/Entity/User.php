@@ -185,12 +185,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
-    #[\Override]
-    public function eraseCredentials(): void
-    {
-        $this->plainPassword = null;
-    }
-
     /** @return Collection<int, Collective> */
     public function getCollectivesOwned(): Collection
     {
