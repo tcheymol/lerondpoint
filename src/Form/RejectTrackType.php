@@ -23,6 +23,7 @@ class RejectTrackType extends AbstractType
             ])
             ->add('rejectionMessage', TextareaType::class, [
                 'label' => 'RejectionMessageLabel',
+                'required' => false,
                 'attr' => ['placeholder' => 'Message'],
             ])
         ;
