@@ -47,4 +47,11 @@ class FeatureToggle
 
         return $this;
     }
+
+    public function enable(): static
+    {
+        $this->enabled = true;
+
+        return $this;
+    }
 }

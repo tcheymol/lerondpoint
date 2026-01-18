@@ -3,5 +3,7 @@
 {% block title %}{{ page.name }}{% endblock %}
 
 {% block cardContent %}
-    {{ page.content|raw }}
+    <div style="overflow-x: auto;">
+        {{ page.content|raw }}
+    </div>
 {% endblock %}
