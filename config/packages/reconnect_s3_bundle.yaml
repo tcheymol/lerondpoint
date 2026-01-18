@@ -1,4 +1,4 @@
-reconnect_s3_bundle:
+reconnect_s3:
     bucketHost: '%env(BUCKET_HOST)%'
     bucketName: '%env(BUCKET_NAME)%'
     bucketKey: '%env(BUCKET_KEY)%'
