@@ -2,7 +2,8 @@
     <div class="p-1 mt-4 flex-grow-1" style="">
         <div class="d-flex mx-2 h-100" style="box-shadow: 5px 5px 15px #b2aca5;">
             <div class="d-flex align-items-center">
-                <div>{{ include('track/components/preview/_thumbnail_image_link.html.twig', {track}) }}</div>
+                <div style="max-width: 40vw;">
+                    {{ include('track/components/preview/_thumbnail_image_link.html.twig', {track}) }}</div>
                 <div style="max-width: 200px;">{{ include('track/components/preview/_thumbnail_information.html.twig', {track}) }}</div>
             </div>
         </div>
