@@ -1,5 +1,5 @@
-<div class="col-12 col-md-10 offset-md-1">
-    <div class="row px-3"  {{ stimulus_target('async_search', 'container') }}>
+<div class="col-12">
+    <div class="d-flex flex-wrap justify-content-start px-3" {{ stimulus_target('async_search', 'container') }}>
         {{ include('track/components/_list.html.twig', {tracks}) }}
     </div>
 </div>
