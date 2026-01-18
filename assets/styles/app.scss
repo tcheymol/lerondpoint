@@ -55,8 +55,9 @@ iframe {
     border-radius: 0;
 }
 
-.mw-md-60 {
-    @include media-breakpoint-up(xs) {
-        max-width: 60%;
+.mw-sm-60 {
+    max-width: 60%;
+    @include media-breakpoint-up(sm) {
+        max-width: 100%;
     }
 }
