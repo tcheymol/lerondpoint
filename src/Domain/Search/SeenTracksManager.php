@@ -30,9 +30,8 @@ readonly class SeenTracksManager
         /** @var int[] $seenTracksIds */
         $seenTracksIds = $this->getItem('seen_tracks', []);
         $cleanedSeenTracksIds = array_filter(
-            array_map(fn (mixed $id) => intval($id), $seenTracksIds),
+            array_map(intval(...), $seenTracksIds),
             fn (?int $id) => 0 !== $id,
-
         );
         $nonNullIds = array_filter($ids, fn (?int $id) => null !== $id);
 

@@ -27,7 +27,7 @@ readonly class MaintenanceSubscriber implements EventSubscriberInterface
             return;
         }
         $path = $event->getRequest()->getPathInfo();
-        if (array_any(self::WHITELISTED_ROUTES, fn ($route) => str_contains($path, $route))) {
+        if (array_any(self::WHITELISTED_ROUTES, fn ($route) => str_contains($path, (string) $route))) {
             return;
         }
 

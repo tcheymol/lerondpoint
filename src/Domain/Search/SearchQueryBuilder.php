@@ -2,13 +2,8 @@
 
 namespace App\Domain\Search;
 
-use App\Entity\Collective;
 use App\Entity\Interface\PersistedEntityInterface;
-use App\Entity\Region;
 use App\Entity\Track;
-use App\Entity\TrackKind;
-use App\Entity\TrackTag;
-use App\Entity\Year;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\QueryBuilder;
 
