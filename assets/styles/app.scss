@@ -57,7 +57,7 @@ iframe {
 
 .mw-sm-60 {
     max-width: 60%;
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-down(sm) {
         max-width: 100%;
     }
 }
