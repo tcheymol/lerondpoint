@@ -1,21 +1,18 @@
-<p class="fs-xs text-dark text-start line-height-1">
-    <span class="fs-5 word-break">{{ track.name }}</span>
-    {% if track.kind is not null %}
-        <span><br/>{{ 'Category'|trans }} : {{ track.kind.name }}</span>
-    {% endif %}
+<p class="fs-xs text-dark text-start line-height-1 p-2">
+    <b class="word-break fs-6">{{ track.name }}</b>
     {% if track.tags is not null and track.tags.count > 0 %}
-        <span><br/>{{ 'Tags'|trans }} : {% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</span>
+        <span><br/>{% for tag in track.tags %}{{ tag.name }}{{ not loop.last ? ', ' : '' }}{% endfor %}</span>
     {% endif %}
     {% if track.regions|length > 0 %}
-        <span><br/>{{ 'Region'|trans }} : {{ track.regionsAsString }}</span>
+        <span><br/>{{ track.regionsAsString }}</span>
     {% endif %}
     {% if track.location is not null %}
-        <span><br/>{{ 'Location'|trans }} : {{ track.location }}</span>
+        <span><br/>{{ track.location }}</span>
     {% endif %}
     {% if track.years|length > 0 %}
-        <span><br/>{{ 'Year'|trans }} : {{ track.yearsAsString }}</span>
+        <span><br/>{{ track.yearsAsString }}</span>
     {% endif %}
     {% if track.collective is not empty and track.collective is not null and track.collective.id is defined %}
-        <span><br/>{{ 'Collective'|trans }} : {{ track.collective.name }}</span>
+        <span><br/>{{ track.collective.name }}</span>
     {% endif %}
 </p>

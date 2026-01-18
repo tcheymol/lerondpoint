@@ -1,10 +1,9 @@
-{% set borderClasses = not track.pdf ? 'border border-dark border-4' : '' %}
 {% set thumbUrl = get_track_thumb_url(track) %}
 
 <img
     src="{{ thumbUrl }}"
     alt="{{ track.name }}"
-    class="mh-100 mw-100 {{ borderClasses }}"
+    class="mh-100 mw-10"
     onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
 />
 {% if track.video %}
