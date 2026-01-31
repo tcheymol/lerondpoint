@@ -13,6 +13,9 @@ Ce site internet met en lumière une mémoire vivante du mouvement des Gilets ja
 * Symfony Cli installed globally on the machine [https://symfony.com/download](https://symfony.com/download)
 * Nothing else (SGBD is sqlite)
 
+=======
+## Setup
+
 ```bash
 git clone git@github.com:tcheymol/lerondpoint.git
 cd lerondpoint
@@ -27,7 +30,12 @@ symfony console app:enable-app
 symfony console app:load-data --all
 ```
 
-// Now start the app
+## Create the bucket
+* browse [https://localhost:9000](https://localhost:9000)
+* login as minioadmin/minioadmin
+* create a bucket named lerondpoint
+
+## Now start the app
 ```bash
 symfony server:start -d
 symfony console sass:build --watch
