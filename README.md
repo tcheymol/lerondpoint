@@ -35,6 +35,11 @@ symfony console app:load-data --all
 * login as minioadmin/minioadmin
 * create a bucket named lerondpoint
 
+If wou want you can create an admin user
+```bash
+symfony console app:create-user user@mail.com password --admin
+```
+
 ## Now start the app
 ```bash
 symfony server:start -d
