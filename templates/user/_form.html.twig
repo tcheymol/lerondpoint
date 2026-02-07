@@ -22,11 +22,19 @@
     {{ form_widget(form.plainPassword.second) }}
     {{ form_errors(form.plainPassword.second) }}
 
-     {% if form.captcha is defined %}
-         <div class="col-12 col-sm-6 offset-sm-6 mt-3">
-             {{ form_row(form.captcha) }}
-         </div>
-     {% endif %}
+     <div class="row">
+         {% if form.hasAcceptedNewsletter is defined %}
+             <div class="col-12 col-sm-6 mt-3 d-flex align-items-start">
+                {{ form_row(form.hasAcceptedNewsletter) }}
+             </div>
+         {% endif %}
+
+         {% if form.captcha is defined %}
+             <div class="col-12 col-sm-6 mt-3 {{ form.hasAcceptedNewsletter is defined ? '' : ' offset-sm-6  ' }}">
+                 {{ form_row(form.captcha) }}
+             </div>
+         {% endif %}
+     </div>
 
     <div class="text-end">
         <button class="btn btn-lg btn-success mt-3 disabled" type="submit" id="passwordFormButton" disabled>

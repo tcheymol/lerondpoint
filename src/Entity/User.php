@@ -79,6 +79,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\Column]
     private bool $hasAcceptedTerms = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $hasAcceptedNewsletter = null;
+
     public function __construct(
         #[ORM\Column(length: 180)]
         private ?string $email = null,
@@ -378,5 +381,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function acceptTerms(): static
     {
         return $this->setHasAcceptedTerms(true);
+    }
+
+    public function hasAcceptedNewsletter(): ?bool
+    {
+        return $this->hasAcceptedNewsletter;
+    }
+
+    public function setHasAcceptedNewsletter(?bool $hasAcceptedNewsletter): static
+    {
+        $this->hasAcceptedNewsletter = $hasAcceptedNewsletter;
+
+        return $this;
     }
 }

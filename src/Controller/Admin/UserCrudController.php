@@ -45,6 +45,7 @@ class UserCrudController extends AbstractCrudController
         yield BooleanField::new('disabled');
         yield BooleanField::new('validatedEmail')->setLabel('EmailValidated');
         yield BooleanField::new('hasAcceptedTerms')->onlyOnForms();
+        yield BooleanField::new('hasAcceptedNewsletter')->setLabel('Newsletter');
         yield DateTimeField::new('createdAt')->hideOnForm();
         yield DateTimeField::new('updatedAt')->onlyOnDetail();
     }
