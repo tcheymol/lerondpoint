@@ -213,7 +213,9 @@ SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter 
 SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter du Rond-point avec succès
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
-TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace. Pourquoi voulez-vous la partager ? Quelle est son histoire ? Avez-vous des anecdotes ?
+TagsRequired: "* Sous-catégories"
+TellUsTheHistoryOfYourTrack: Racontez-nous cette trace
+TellUsTheHistoryOfYourTrackHelp: Pourquoi voulez-vous la partager ? Quelle est son histoire ? Avez-vous des anecdotes ?
 TermsOfUse: Conditions générales d'utilisation (CGU)
 TheyTalkAboutUs: on parle de nous
 ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible

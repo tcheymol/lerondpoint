@@ -121,7 +121,7 @@ class TrackType extends AbstractType
                 'class' => TrackTag::class,
                 'attr' => [
                     'data-controller' => 'tomselect',
-                    'placeholder' => 'Tags',
+                    'placeholder' => 'TagsRequired',
                     'data-action' => 'autosubmit#submit',
                 ],
                 'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('t')
@@ -197,6 +197,7 @@ class TrackType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'TellUsTheHistoryOfYourTrack',
                 'attr' => ['rows' => 5, 'data-action' => 'autosubmit#submit'],
+                'help' => 'TellUsTheHistoryOfYourTrackHelp',
             ])
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'Email', 'data-action' => 'autosubmit#submit'],
