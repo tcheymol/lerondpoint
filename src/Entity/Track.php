@@ -358,7 +358,7 @@ class Track implements BlameableInterface
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->email ?? $this->createdBy?->getEmail();
     }
 
     public function setEmail(?string $email): static

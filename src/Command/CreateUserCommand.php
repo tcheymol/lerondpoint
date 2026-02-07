@@ -27,7 +27,7 @@ readonly class CreateUserCommand
         #[Option] bool $admin = false,
     ): int {
         $io->note(sprintf('Creating a user: %s', $email));
-        $user = new User($email)->setPlainPassword($password);
+        $user = new User($email)->setPlainPassword($password)->validateEmail();
 
         if ($admin) {
             $io->note('Promoting the user to admin');

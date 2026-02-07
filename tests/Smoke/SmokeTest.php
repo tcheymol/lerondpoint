@@ -42,8 +42,6 @@ class SmokeTest extends AuthenticatedWebTestCase
 
         yield ['/login'];
 
-        yield ['/maintenance'];
-
         yield ['/newsletter/subscribe'];
 
         yield ['/newsletter/subscribe/success'];

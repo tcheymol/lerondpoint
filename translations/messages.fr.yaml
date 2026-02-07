@@ -14,6 +14,7 @@ Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
 AndNowHint: Des groupes continuent aujourd'hui de se mobiliser, avec ou sans gilet. Retrouvez-les sur la carte pour découvrir leurs actions
+AnonymousUser: Utilisateur anonyme
 Attachment: Document
 Attachments: Documents
 AutresTerritoiresDoutreMer: Autres territoires d'outre-mer
@@ -34,13 +35,12 @@ Collective: Groupe de GJ
 CollectiveName: Nom du groupe
 Collectives: Groupes
 CollectivesSubtitles: Les groupes mobilisés près de chez toi
-ConfirmCreationLeaveEmail1: 'Pour être tenu·e informé·e de la publication de la trace, laissez-nous votre email (facultatif) :'
-ConfirmCreationLeaveEmail2: Sans votre email et en cas de non publication (voir conditions de modération), nous ne pourrons pas vous en informer.
+ConfirmCreationLeaveEmail: Pour être tenu·e informé·e de la publication de la trace et au cas où nous ayons besoin de vous contacter, laissez-nous votre adresse email. Elle ne sera pas partagée publiquement.
 ConfirmUnsubscribe: Confirmer la désinscription
 ContactUs: Nous contacter (mail ou n°)
 Coordinates X: Coordonnées X
 Coordinates Y: Coordonnées Y
-CopyLink: Copier un lien vidéo
+CopyLink: Video ou audio
 CopyResourceLink: copier un lien vers une ressource
 Corse: Corse
 Country: Pays
@@ -101,7 +101,7 @@ IRedAndAccept: J'ai lu et j'accepte ces termes
 IUnderstand: Je comprends
 Icon: Icône
 IleDeFrance: Île-de-France
-ImportFile: Importer un fichier
+ImportFile: Image ou PDF
 Invite: Inviter
 InviteUser: Inviter un·e utilisateur·ice à rejoindre le groupe
 Invited By: Invité par
@@ -211,7 +211,7 @@ SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter 
 SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter du Rond-point avec succès
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
-TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace
+TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace. Pourquoi voulez-vous la partager ? Quelle est son histoire ? Avez-vous des anecdotes ?
 TermsOfUse: Conditions générales d'utilisation (CGU)
 TheyTalkAboutUs: on parle de nous
 ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible
@@ -220,6 +220,7 @@ Title: La plateforme collaborative qui recueille les traces du movement des gile
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
 TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
+TrackCreatedBy: Trace déposée par
 TrackCreatedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été créée, elle sera bientôt publiée"
 TrackCreatedSubtitle: Votre trace %trackName% a été créée, elle est actuellement en relecture par nos équipes et sera bientôt publiée publiquement.
 TrackKind: Catégorie de trace
