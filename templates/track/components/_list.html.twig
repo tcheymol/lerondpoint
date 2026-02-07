@@ -1,13 +1,13 @@
 {% for track in tracks %}
     <div class="p-md-1 mt-4 flex-grow-1 mw-sm-60 position-relative">
-        <div class="d-flex mx-2 h-100" style="box-shadow: 5px 5px 15px #b2aca5;">
+        <div class="d-flex mx-2 h-100" style="box-shadow: 5px 5px 15px #b2aca5; background-color: rgba(255, 255, 255, 0.5);">
             <div class="d-flex align-items-center">
                 <div style="max-width: 40vw;">
                     {{ include('track/components/preview/_thumbnail_image_link.html.twig', {track}) }}</div>
                 <div style="max-width: 200px;">{{ include('track/components/preview/_thumbnail_information.html.twig', {track}) }}</div>
             </div>
         </div>
-        <a class="position-absolute w-100 h-100 top-0 left-0"
+        <a class="w-100 h-100 top-left"
             href="{{ track.needsModeration ? path('moderate_track', {id: track.id}) : path('track_show', {id: track.id}) }}"
         ></a>
     </div>

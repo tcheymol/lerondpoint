@@ -47,3 +47,12 @@ symfony console sass:build --watch
 ```
 
 you can now browse the app at [https://localhost:8000/home](https://localhost:8000/home)
+
+## Deploy
+for the deploy script to work, you need to create a `~/.ssh/config` file with a host named `rp`
+
+```bash
+Host rp
+    HostName {server ip}
+    User www-data
+```

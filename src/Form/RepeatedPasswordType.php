@@ -29,8 +29,8 @@ class RepeatedPasswordType extends AbstractType
                 'constraints' => [
                     new Length(
                         min: 8,
-                        minMessage: 'Veuillez entrer au moins {{ limit }} caractères',
                         max: 4096,
+                        minMessage: 'Veuillez entrer au moins {{ limit }} caractères',
                     ),
                     new PasswordStrength(),
                     new NotCompromisedPassword(),

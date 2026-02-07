@@ -14,6 +14,7 @@ Admin: Admin
 AlreadyHaveAccount: Déjà un compte ? Connectez-vous ici
 AndNow: Et maintenant ?
 AndNowHint: Des groupes continuent aujourd'hui de se mobiliser, avec ou sans gilet. Retrouvez-les sur la carte pour découvrir leurs actions
+AnonymousUser: Utilisateur anonyme
 Attachment: Document
 Attachments: Documents
 AutresTerritoiresDoutreMer: Autres territoires d'outre-mer
@@ -219,6 +220,7 @@ Title: La plateforme collaborative qui recueille les traces du movement des gile
 Track: Trace
 TrackAcceptedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été acceptée, merci infiniment pour votre contribution"
 TrackAcceptedSubtitle: Votre trace %trackName% a été acceptée, merci infiniment pour votre contribution
+TrackCreatedBy: Trace déposée par
 TrackCreatedEmailSubject: "[Le Rond-point] 🙏 Votre trace a été créée, elle sera bientôt publiée"
 TrackCreatedSubtitle: Votre trace %trackName% a été créée, elle est actuellement en relecture par nos équipes et sera bientôt publiée publiquement.
 TrackKind: Catégorie de trace

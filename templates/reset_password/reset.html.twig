@@ -4,8 +4,8 @@
 
 {% block cardContent %}
     {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword.first) }}
-        {{ form_row(resetForm.plainPassword.second) }}
+        {{ form_row(resetForm.first) }}
+        {{ form_row(resetForm.second) }}
         <button class="btn btn-primary">{{ 'ResetPassword'|trans }}</button>
     {{ form_end(resetForm) }}
 {% endblock %}
