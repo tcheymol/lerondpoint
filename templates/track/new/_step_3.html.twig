@@ -8,9 +8,8 @@
 
         {% if not is_granted('ROLE_USER') %}
             <div class="mt-2 text-start">
-                {{ 'ConfirmCreationLeaveEmail1'|trans }}
+                {{ 'ConfirmCreationLeaveEmail'|trans }}
                 {{ form_widget(form.email) }}
-                {{ 'ConfirmCreationLeaveEmail2'|trans }}
             </div>
         {% endif %}
     </div>
