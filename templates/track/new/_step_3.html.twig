@@ -2,8 +2,9 @@
     <div class="col-12 col-sm-6 d-none d-sm-flex flex-column justify-content-center">
         {{ include('track/new/_step_preview.html.twig', {track, step: 3}) }}
     </div>
-    <div class="col-12 col-sm-6">
-        <div class="text-start">{{ form_label(form.description) }}</div>
+    <div class="col-12 col-sm-6 pt-5">
+        <div class="text-start fs-4">{{ form_label(form.description) }}</div>
+        <div class="text-start fs-4 plaine">{{ form_help(form.description) }}</div>
         {{ form_widget(form.description) }}
 
         {% if not is_granted('ROLE_USER') %}

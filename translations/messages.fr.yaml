@@ -1,3 +1,4 @@
+
 AboutLRP: Autour du rond-point
 AboutTheMovement: À propos du mouvement des gilets jaunes
 AboutUs: À propos
@@ -96,6 +97,7 @@ Home: Accueil
 HomeSubtitle: La plateforme collaborative qui recueille les traces du movement des gilets jaunes
 HomeTitle: Le-rondpoint.org
 HomeTitleMultiline: LE ROND-POINT
+IAcceptNewsletter: J'accepte de recevoir la newsletter du Rond-point
 IAppliedRecommendations: J'ai appliqué les recommandations
 IRedAndAccept: J'ai lu et j'accepte ces termes
 IUnderstand: Je comprends
@@ -211,7 +213,9 @@ SuccessfullySubscribedToNewsletter: Vous avez été inscrit·e à la newsletter 
 SuccessfullyUnsubscribedFromNewsletter: Vous avez désinscrit·e de la newsletter du Rond-point avec succès
 SupportUs: nous soutenir / nous contacter
 Tags: Sous-catégories
-TellUsTheHistoryOfYourTrack: Racontez-nous l'histoire autours de votre trace. Pourquoi voulez-vous la partager ? Quelle est son histoire ? Avez-vous des anecdotes ?
+TagsRequired: "* Sous-catégories"
+TellUsTheHistoryOfYourTrack: Racontez-nous cette trace
+TellUsTheHistoryOfYourTrackHelp: Pourquoi voulez-vous la partager ? Quelle est son histoire ? Avez-vous des anecdotes ?
 TermsOfUse: Conditions générales d'utilisation (CGU)
 TheyTalkAboutUs: on parle de nous
 ThisActionIsIrreversible: Êtes-vous sûr·e de vouloir continuer ? Cette action est irréversible
