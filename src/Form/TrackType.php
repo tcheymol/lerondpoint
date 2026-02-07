@@ -126,7 +126,6 @@ class TrackType extends AbstractType
                 ],
                 'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('t')
                     ->orderBy('t.name', 'ASC'),
-                'required' => false,
                 'multiple' => true,
                 'choice_label' => 'name',
             ])
@@ -197,11 +196,9 @@ class TrackType extends AbstractType
         $builder
             ->add('description', TextareaType::class, [
                 'label' => 'TellUsTheHistoryOfYourTrack',
-                'required' => false,
                 'attr' => ['rows' => 5, 'data-action' => 'autosubmit#submit'],
             ])
             ->add('email', EmailType::class, [
-                'required' => false,
                 'attr' => ['placeholder' => 'Email', 'data-action' => 'autosubmit#submit'],
             ]);
     }
