@@ -12,6 +12,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CreateTrackController extends AbstractController
 {
+    #[Route('/track/new/disclaimer', name: 'track_new_disclaimer', methods: ['GET'])]
+    public function disclaimer(): Response {
+        return $this->render('track/new/disclaimer.html.twig');
+    }
+
     #[Route('/track/new/{step<\d+>}', name: 'track_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrackPersister $persister, CollectiveRepository $repository, ?int $step = null): Response
     {

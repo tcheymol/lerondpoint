@@ -1,7 +1,7 @@
 {% set tracks = app.user.tracks %}
 
 <div class="text-end">
-    <a href="{{ path('track_new') }}" class="btn btn-primary">{{ 'CreateTrack'|trans }}</a>
+    <a href="{{ path('track_new_disclaimer') }}" class="btn btn-primary">{{ 'CreateTrack'|trans }}</a>
 </div>
 
 {% if tracks|length > 0 %}

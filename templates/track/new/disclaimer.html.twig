@@ -1,0 +1,34 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'DropNewTrack'|trans }}{% endblock %}
+
+{% block cardContent %}
+    <div>
+        <div class="border-1 p-3">
+            <p class="lead">
+            Les traces sont la mémoire vivante du mouvement des Gilets jaunes. Venez les découvrir
+                <a target="_blank" href="{{ path('track_new') }}">ici !</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="p-3">
+        <p>Vous avez deux options :</p>
+        <p>
+            > Soyez autonomes et allez-y ! Nous vous conseillons de créer un compte, c’est rapide et
+            facile, et cela vous permettra d’accéder à vos traces et de les modifier si besoin.
+            Pour créer un compte ou vous connecter, c’est
+            <a target="_blank" href="{{ path('app_login') }}">ici !</a>
+        </p>
+        <p>
+            > <a target="_blank" href="{{ path('support_us') }}">Contactez-nous</a>
+            si vous
+            préférez être accompagné.e dans cette démarche.
+        </p>
+        <br/>
+        <p>C’est à vous de jouer !</p>
+    </div>
+    <div class="p-3 text-center">
+        <a href="{{ path('track_new') }}" class="btn-lg btn btn-primary">{{ 'LetsGo'|trans }}</a>
+    </div>
+{% endblock %}
