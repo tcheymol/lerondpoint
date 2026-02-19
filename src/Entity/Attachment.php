@@ -197,6 +197,11 @@ class Attachment implements BlameableInterface, \Stringable
         return 'application/pdf' === $this->getKind();
     }
 
+    public function isImage(): bool
+    {
+        return str_contains($this->getKind(), 'image/');
+    }
+
     public function isVideo(): bool
     {
         return null !== $this->videoEmbed;

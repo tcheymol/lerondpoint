@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Domain\Images\AttachmentHelper;
 use App\Entity\Attachment;
 use App\Repository\AttachmentRepository;
+use App\Security\Voter\Constants;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AttachmentController extends AbstractController
 {
@@ -24,6 +27,14 @@ class AttachmentController extends AbstractController
         return $this->json(['id' => $attachment?->getId()]);
     }
 
+    #[IsGranted(attribute: Constants::EDIT, subject: 'attachment')]
+    #[Route('/attachments/{id<\d+>}/rotate', name: 'rotate_attachment', methods: ['GET'])]
+    public function rotate(Request $request, Attachment $attachment, AttachmentHelper $helper): JsonResponse
+    {
+        return new JsonResponse(['success' => $helper->rotate($attachment) !== null]);
+    }
+
+    #[IsGranted(attribute: Constants::EDIT, subject: 'attachment')]
     #[Route('/attachments/{id<\d+>}/delete', name: 'delete_attachment', methods: ['GET'])]
     public function delete(Request $request, Attachment $attachment, EntityManagerInterface $em): RedirectResponse
     {

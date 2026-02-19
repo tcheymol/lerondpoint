@@ -3,7 +3,7 @@ import debounce from 'lodash/debounce';
 import {updateQueryParams} from "./helper/browserHelpers.js";
 import axios from "axios";
 import {hideElement, showElement} from "./helper/domManipulationHelper.js";
-import {hideLoader, showLoader} from "./helper/loaderHelper.js";
+import {hideLoader} from "./helper/loaderHelper.js";
 
 export default class extends Controller {
     static targets = ['container', 'loader', 'form', 'loadMore']

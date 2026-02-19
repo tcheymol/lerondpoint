@@ -1,4 +1,5 @@
-<div class="position-relative h-100">
+{{ include('track/components/glider/_rotate_image_button.html.twig', {attachment}) }}
+<div class="position-relative h-100" {{ stimulus_target('rotate_image', 'image') }}>
     {% if attachment.isCover and is_granted('EDIT', track)%}
         <div class="position-absolute alert alert-primary mb-0 p-1 rounded-1 ms-2"
              style="left: calc(50% - 50px); bottom: 8px;"

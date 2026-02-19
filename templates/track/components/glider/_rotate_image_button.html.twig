@@ -1,0 +1,6 @@
+{% if is_granted('EDIT', attachment) and attachment.isImage() %}
+    <a class="btn btn-primary border-dark border-3 top-left z-1" {{ stimulus_action
+        ('rotate_image', 'rotate') }}>
+        <i class="fa fa-rotate-right"></i>
+    </a>
+{% endif %}
