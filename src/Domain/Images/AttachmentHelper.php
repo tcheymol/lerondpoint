@@ -16,9 +16,34 @@ readonly class AttachmentHelper
         private EntityManagerInterface $em,
         private FlysystemS3Client $s3Adapter,
         private ThumbnailGenerator $thumbnailGenerator,
+        private ImageManipulator $imageManipulator,
         private LoggerInterface $logger,
     ) {
     }
+
+    public function rotate(Attachment $attachment): Attachment {
+        $tempFilePath = sys_get_temp_dir() . '/' . UuidV4::v4()->toString();
+        $this->s3Adapter->downloadFile($attachment->getObjectId(), $tempFilePath);
+        $imagick = new \Imagick($tempFilePath);
+
+        $this->imageManipulator->rotateImage($imagick, $tempFilePath);
+
+        return $this->reuploadFile($attachment, $tempFilePath);
+    }
+
+    public function reuploadFile(Attachment $attachment, string $tempFilePath): ?Attachment {
+        $file = new UploadedFile($tempFilePath, $attachment->getObjectId());
+        $this->deleteObjects($attachment);
+        $this->uploadFile($file, $attachment);
+        $this->uploadThumbnails($file, $attachment);
+
+        unlink($tempFilePath);
+
+        $this->em->flush();
+
+        return $attachment;
+    }
+
 
     public function createAttachment(?UploadedFile $file): ?Attachment
     {

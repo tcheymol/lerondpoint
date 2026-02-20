@@ -1,5 +1,5 @@
 workers:
-#    sass:
-#        cmd: ['symfony', 'console', 'sass:build', '--watch']
+    sass:
+        cmd: ['symfony', 'console', 'sass:build', '--watch']
     minio:
         cmd: ['minio', 'server', 'data']

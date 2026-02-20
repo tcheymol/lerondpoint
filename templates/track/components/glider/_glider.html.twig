@@ -9,7 +9,7 @@
         <ul class="glide__slides">
             {% if track.hasAttachments%}
                 {% for attachment in track.attachments %}
-                    <li class="glide__slide">
+                    <li class="glide__slide position-relative" {{ stimulus_controller('rotate_image', {url: path('rotate_attachment', {id: attachment.id})}) }}>
                         {{ include('track/components/glider/_glider_item.html.twig', {attachment}) }}
                     </li>
                 {% endfor %}
@@ -26,10 +26,10 @@
     </div>
     {% if track.attachments|length > 1 %}
         <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow--left btn btn-primary border border-dark border-2" data-glide-dir="<" type="button">
+            <button class="glide__arrow--left btn btn-primary border-dark border-2" data-glide-dir="<" type="button">
                 <i class="fa fa-angle-double-left"></i>
             </button>
-            <button class="glide__arrow--right btn btn-primary border border-dark border-2" data-glide-dir=">" type="button">
+            <button class="glide__arrow--right btn btn-primary border-dark border-2" data-glide-dir=">" type="button">
                 <i class="fa fa-angle-double-right"></i>
             </button>
         </div>
