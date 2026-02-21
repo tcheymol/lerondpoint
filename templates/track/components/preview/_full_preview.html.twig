@@ -10,7 +10,7 @@
             <img
                 src="{{ thumbUrl }}"
                 alt="Attachment"
-                class="mw-100 mvh-100 border-4 border-dark"
+                class="mw-100 mvh-100 border border-4 border-dark"
                 onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
             />
             <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
@@ -20,7 +20,7 @@
             <img
                 src="{{ asset('images/fallback_video.png') }}"
                 alt="Attachment"
-                class="mw-100 mvh-90 border-4 border-dark"
+                class="mw-100 mvh-90 border border-4 border-dark"
                 onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
             />
             <i class="fa fa-play-circle fs-1 position-absolute" style="top: calc(50% - 20px); left: calc(50% - 20px)"></i>
@@ -46,7 +46,7 @@
             <img
                 src="{{ thumbUrl }}"
                 alt="Attachment"
-                class="mw-100 mvh-100 {{ attachment.isCover ? ' border-4 border-dark ' : '' }}"
+                class="mw-100 mvh-100 {{ attachment.isCover ? ' border border-4 border-dark ' : '' }}"
                 onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
             />
         </div>
@@ -54,7 +54,7 @@
         <img
             src="{{ asset('images/fallback_text.png') }}"
             alt="Attachment"
-            class="mw-100 mvh-90 border-4 border-dark"
+            class="mw-100 mvh-90 border border-4 border-dark"
             onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
         />
     {% endif %}
@@ -62,7 +62,7 @@
         <img
             src="{{ thumbUrl }}"
             alt="Attachment"
-            class="mw-100 mvh-100 {{ attachment.isCover ? ' border-4 border-dark  ' : '' }}"
+            class="mw-100 mvh-100 {{ attachment.isCover ? ' border border-4 border-dark  ' : '' }}"
             onerror="this.src='{{ absolute_url(asset(fallback_image(track))) }}';"
         />
 {% endif %}
