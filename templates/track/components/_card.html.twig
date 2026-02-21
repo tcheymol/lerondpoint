@@ -1,0 +1,20 @@
+<div class="p-md-1 mt-4 grow mw-sm-60 position-relative">
+    {% if track.hasMultipleAttachments() %}
+        <span class="position-absolute top-right badge rounded-pill bg-primary border-dark-subtle border text-dark">
+            {{ track.countAttachments() }}
+            <i class="fa fa-image"></i>
+            <span class="visually-hidden">attachments count</span>
+    {% endif %}
+  </span>
+    <div class="d-flex mx-2 h-100" style="box-shadow: 5px 5px 15px #b2aca5; background-color: rgba(255, 255, 255, 0.5);">
+        <div class="d-flex align-items-center">
+            <div style="max-width: 40vw;">
+                {{ include('track/components/preview/_thumbnail_image_link.html.twig', {track}) }}</div>
+            <div style="max-width: 200px;">{{ include('track/components/preview/_thumbnail_information.html.twig', {track}) }}</div>
+        </div>
+    </div>
+    <a class="w-100 h-100 top-left"
+        href="{{ track.needsModeration ? path('moderate_track', {id: track.id}) : path('track_show', {id: track.id}) }}"
+    ></a>
+</div>
+
