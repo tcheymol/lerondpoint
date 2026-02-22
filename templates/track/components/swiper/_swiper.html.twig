@@ -2,7 +2,9 @@
     <div class="swiper-wrapper">
         {% for attachment in track.attachments %}
             <div class="swiper-slide d-flex justify-content-center align-items-center">
-                {{ include('track/components/preview/_full_preview.html.twig', {attachment}) }}
+                <div class="swiper-zoom-container">
+                    {{ include('track/components/preview/_full_preview.html.twig', {attachment}) }}
+                </div>
             </div>
         {% endfor %}
     </div>
