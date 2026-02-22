@@ -1,7 +1,7 @@
 {% if track.description is not null %}
     <br/>
     <span style="word-wrap: break-word">
-        <span>{{ track.description|nl2br }}</span>
+        <span>{{ track.description|autolink }}</span>
     </span>
     <br/>
 {% endif %}
