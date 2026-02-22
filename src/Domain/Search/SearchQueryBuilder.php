@@ -127,7 +127,7 @@ class SearchQueryBuilder
     {
         $location = $search->location;
         if ($location) {
-            $this->qb->andWhere('l.id LIKE :location')
+            $this->qb->andWhere('t.location LIKE :location')
                 ->setParameter('location', "%$location%");
         }
 
