@@ -18,6 +18,11 @@ export default class extends Controller {
     }
     getConfig = () => {
         const config = {
+            render:{
+                no_results:function(data,escape){
+                    return '<div class="no-results">Aucun résultat trouvé pour "'+escape(data.input)+'"</div>';
+                },
+            },
             plugins: {
                 remove_button: {},
                 checkbox_options: {
@@ -31,7 +36,7 @@ export default class extends Controller {
         }
 
         if (this.hasIconsValue) {
-            config.render = { option: renderItemWithIcon, item: renderItemWithIcon };
+            config.render = { ...config.render, option: renderItemWithIcon, item: renderItemWithIcon };
             config.onItemAdd = this.onItemAdd;
         }
 
