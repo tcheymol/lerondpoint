@@ -3,13 +3,13 @@ import debounce from 'lodash/debounce';
 import {updateQueryParams} from "./helper/browserHelpers.js";
 import axios from "axios";
 import {hideElement, showElement} from "./helper/domManipulationHelper.js";
-import {hideLoader} from "./helper/loaderHelper.js";
 
 export default class extends Controller {
     static targets = ['container', 'loader', 'form', 'loadMore']
 
     initialize(){
         this.search = debounce(this.search, 500).bind(this)
+        this.isLoadingMore = false;
         this.observe();
     }
 
@@ -28,11 +28,14 @@ export default class extends Controller {
             });
             const data = response.data;
             updateQueryParams(data.queryParams);
-            if (data.hasNoMoreResults) this.hideLoader();
+            this.hideLoader();
+            if (data.hasNoMoreResults && this.hasLoadMoreTarget) {
+                hideElement(this.loadMoreTarget);
+            }
 
             return data.html;
         } catch (error) {
-            hideLoader()
+            this.hideLoader()
 
             return '';
         }
@@ -40,25 +43,28 @@ export default class extends Controller {
 
     async search() {
         this.containerTarget.innerHTML = await this.postForm(this.formTarget.action);
+        this.observe();
     };
 
     async loadMore() {
-        setTimeout(async() => {
-            const newHtml = await this.postForm(this.formTarget.action + '?loadMore=1');
-            this.containerTarget.innerHTML = this.containerTarget.innerHTML + newHtml;
-        }, 500);
+        if (this.isLoadingMore) return;
+        this.isLoadingMore = true;
+        const newHtml = await this.postForm(this.formTarget.action + '?loadMore=1');
+        this.containerTarget.insertAdjacentHTML('beforeend', newHtml);
+        this.isLoadingMore = false;
     }
 
     getLoaderTarget = () => this.hasLoaderTarget ? this.loaderTarget : null;
 
     observe() {
         if (!this.hasLoadMoreTarget) return;
-        const observer = new IntersectionObserver((entries) =>
+        if (this.observer) this.observer.disconnect();
+        this.observer = new IntersectionObserver((entries) =>
             entries.forEach(entry => {
                 if (entry.isIntersecting) this.loadMore()
             })
         );
-        observer.observe(this.loadMoreTarget);
+        this.observer.observe(this.loadMoreTarget);
     }
 
     showLoader() {
