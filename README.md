@@ -28,10 +28,18 @@ touch var/data.db
 symfony console doctrine:migrations:migrate
 symfony console app:enable-app
 symfony console app:load-data --all
+symfony server:ca:install
+symfony server:start -d
+```
+
+First App start
+```
+symfony server:ca:install
+symfony server:start -d
 ```
 
 ## Create the bucket
-* browse [https://localhost:9000](https://localhost:9000)
+* browse [http://localhost:9000](http://localhost:9000)
 * login as minioadmin/minioadmin
 * create a bucket named lerondpoint
 
