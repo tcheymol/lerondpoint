@@ -21,29 +21,47 @@ readonly class AttachmentHelper
     ) {
     }
 
-    public function rotate(Attachment $attachment): Attachment {
-        $tempFilePath = sys_get_temp_dir() . '/' . UuidV4::v4()->toString();
-        $this->s3Adapter->downloadFile($attachment->getObjectId(), $tempFilePath);
-        $imagick = new \Imagick($tempFilePath);
+    public function rotate(Attachment $attachment): ?Attachment
+    {
+        try {
+            $tempFilePath = sys_get_temp_dir().'/'.UuidV4::v4()->toString();
+            if (!$attachment->getObjectId()) {
+                return null;
+            }
+            $this->s3Adapter->downloadFile($attachment->getObjectId(), $tempFilePath);
+            $imagick = new \Imagick($tempFilePath);
 
-        $this->imageManipulator->rotateImage($imagick, $tempFilePath);
+            $this->imageManipulator->rotateImage($imagick, $tempFilePath);
 
-        return $this->reuploadFile($attachment, $tempFilePath);
+            return $this->reuploadFile($attachment, $tempFilePath);
+        } catch (\Exception) {
+            return null;
+        }
     }
 
-    public function reuploadFile(Attachment $attachment, string $tempFilePath): ?Attachment {
-        $file = new UploadedFile($tempFilePath, $attachment->getObjectId());
-        $this->deleteObjects($attachment);
-        $this->uploadFile($file, $attachment);
-        $this->uploadThumbnails($file, $attachment);
+    /**
+     * @throws \Exception
+     */
+    public function reuploadFile(Attachment $attachment, string $tempFilePath): ?Attachment
+    {
+        try {
+            if (!$attachment->getObjectId()) {
+                return null;
+            }
+            $file = new UploadedFile($tempFilePath, $attachment->getObjectId());
+            $this->deleteObjects($attachment);
+            $this->uploadFile($file, $attachment);
+            $this->uploadThumbnails($file, $attachment);
 
-        unlink($tempFilePath);
+            unlink($tempFilePath);
 
-        $this->em->flush();
+            $this->em->flush();
 
-        return $attachment;
+            return $attachment;
+        } catch (\Exception) {
+            return null;
+        }
     }
-
 
     public function createAttachment(?UploadedFile $file): ?Attachment
     {

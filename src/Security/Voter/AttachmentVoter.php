@@ -4,15 +4,15 @@ namespace App\Security\Voter;
 
 use App\Entity\Attachment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /** @extends Voter<string, mixed> */
 final class AttachmentVoter extends Voter
 {
-    public function __construct(private AuthorizationCheckerInterface $authorizationChecker) {
+    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     #[\Override]
@@ -25,6 +25,9 @@ final class AttachmentVoter extends Voter
     #[\Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
     {
-        return $this->authorizationChecker->isGranted($attribute, $subject->getTrack());
+        /** @var Attachment $attachment */
+        $attachment = $subject;
+
+        return $this->authorizationChecker->isGranted($attribute, $attachment);
     }
 }
