@@ -1,7 +1,8 @@
 {% set showInformation = showInformation is defined ? showInformation : true %}
 {% if track.attachments|length > 1 %}
-    <div class="p-2">
+    <div class="p-2 d-flex gap-2 flex-wrap justify-content-center">
         <a class="btn btn-light" href="{{ path('track_update_cover', {id: track.id, step}) }}">{{ 'UpdateCover'|trans }}</a>
+        <a class="btn btn-light" href="{{ path('track_reorder_attachments', {id: track.id, step}) }}">{{ 'ReorderAttachments'|trans }}</a>
     </div>
 {% endif %}
 {{ include('track/components/glider/_glider.html.twig', {track}) }}
