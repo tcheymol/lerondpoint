@@ -202,7 +202,7 @@ class Attachment implements BlameableInterface, \Stringable
 
     public function isImage(): bool
     {
-        return str_contains($this->getKind(), 'image/');
+        return str_contains((string) $this->getKind(), 'image/');
     }
 
     public function isVideo(): bool

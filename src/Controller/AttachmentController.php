@@ -8,8 +8,8 @@ use App\Repository\AttachmentRepository;
 use App\Security\Voter\Constants;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,9 +29,9 @@ class AttachmentController extends AbstractController
 
     #[IsGranted(attribute: Constants::EDIT, subject: 'attachment')]
     #[Route('/attachments/{id<\d+>}/rotate', name: 'rotate_attachment', methods: ['GET'])]
-    public function rotate(Request $request, Attachment $attachment, AttachmentHelper $helper): JsonResponse
+    public function rotate(Attachment $attachment, AttachmentHelper $helper): JsonResponse
     {
-        return new JsonResponse(['success' => $helper->rotate($attachment) !== null]);
+        return new JsonResponse(['success' => null !== $helper->rotate($attachment)]);
     }
 
     #[IsGranted(attribute: Constants::EDIT, subject: 'attachment')]
