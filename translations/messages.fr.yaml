@@ -173,6 +173,8 @@ QuickGroupCreated: Le groupe "%groupName%" a été créé avec succès.
 QuickGroupFailure: Le groupe "%groupName%" n'a pas été créé, veuillez vérifier qu'un groupe avec ce nom n'existe pas déjà
 Refuse: Refuser
 RegeneratePreviews: Régénérer les aperçus
+ReorderAttachments: Changer l'ordre des images
+SaveOrder: Enregistrer l'ordre
 Region: Région
 Registration: Je m'inscris
 RejectTrack: Refuser la trace

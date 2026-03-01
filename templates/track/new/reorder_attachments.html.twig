@@ -1,0 +1,46 @@
+{% extends 'templates/card_page.html.twig' %}
+
+{% block title %}{{ 'ReorderAttachments'|trans }}{% endblock %}
+{% block bodybg %}primary{% endblock %}
+
+{% block cardContent %}
+    <form method="POST" action="{{ path('track_save_attachment_order', {id: track.id}) }}"
+          {{ stimulus_controller('sort-attachments') }}>
+        <input type="hidden" name="step" value="{{ step }}">
+        <input type="hidden" name="positions" data-sort-attachments-target="positions">
+
+        <div class="row g-2" data-sort-attachments-target="container">
+            {% for attachment in track.attachments %}
+                {% set thumbUrl = get_thumb_url(attachment) %}
+                {% set isCover = track.cover == attachment %}
+                <div class="col-6 col-md-4"
+                     draggable="true"
+                     data-sort-attachments-target="item"
+                     data-attachment-id="{{ attachment.id }}"
+                     data-action="dragstart->sort-attachments#dragstart dragend->sort-attachments#dragend dragover->sort-attachments#dragover drop->sort-attachments#drop"
+                     style="cursor: grab;">
+                    <div class="img-thumbnail thumbnail position-relative {{ isCover ? 'border border-4 border-primary' : '' }}"
+                         style="background-image: url('{{ thumbUrl }}'); pointer-events: none;">
+                        {% if isCover %}
+                            <div class="alert alert-primary bottom-left w-100 mb-0 p-1 rounded-1">
+                                {{ 'Cover'|trans }}
+                            </div>
+                        {% endif %}
+                        <div class="position-absolute top-50 start-50 translate-middle text-white opacity-75">
+                            <i class="fa-solid fa-grip-dots-vertical fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <a class="btn btn-light" href="{{ path('track_new', {step}) }}">
+                {{ 'Back'|trans }}
+            </a>
+            <button type="submit" class="btn btn-primary">
+                {{ 'SaveOrder'|trans }}
+            </button>
+        </div>
+    </form>
+{% endblock %}

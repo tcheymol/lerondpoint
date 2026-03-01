@@ -8,12 +8,14 @@ use App\Domain\Map\MapDataBuilder;
 use App\Domain\Track\TrackPersister;
 use App\Entity\Collective;
 use App\Form\CollectiveType;
+use App\Security\Voter\Constants;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CollectiveController extends AbstractController
@@ -102,6 +104,7 @@ class CollectiveController extends AbstractController
         return $this->json(['publicImagePath' => $fileThumbnailPath], $responseStatus);
     }
 
+    #[IsGranted(attribute: Constants::EDIT, subject: 'collective')]
     #[Route('/collective/{id<\d+>}', name: 'collective_delete', methods: ['POST'])]
     public function delete(Request $request, Collective $collective, EntityManagerInterface $entityManager): Response
     {

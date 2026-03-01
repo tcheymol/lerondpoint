@@ -114,4 +114,17 @@ readonly class TrackPersister
             $this->em->flush();
         }
     }
+
+    /** @param string[] $orderedIds */
+    public function reorderAttachments(Track $track, array $orderedIds): void
+    {
+        $attachments = $track->getAttachments();
+        foreach ($orderedIds as $position => $id) {
+            $attachment = $attachments->filter(fn ($a) => (string) $a->getId() === $id)->first();
+            if ($attachment) {
+                $attachment->setPosition($position);
+            }
+        }
+        $this->em->flush();
+    }
 }

@@ -6,14 +6,17 @@ use App\Domain\Track\TrackPersister;
 use App\Entity\Track;
 use App\Form\TrackType;
 use App\Repository\CollectiveRepository;
+use App\Security\Voter\Constants;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CreateTrackController extends AbstractController
 {
     #[Route('/track/new/disclaimer', name: 'track_new_disclaimer', methods: ['GET'])]
-    public function disclaimer(): Response {
+    public function disclaimer(): Response
+    {
         return $this->render('track/new/disclaimer.html.twig');
     }
 
@@ -56,6 +59,7 @@ class CreateTrackController extends AbstractController
         ]);
     }
 
+    #[IsGranted(attribute: Constants::EDIT, subject: 'track')]
     #[Route('/track/{id<\d+>}/update_cover', name: 'track_update_cover', methods: ['GET'])]
     public function updateCover(Request $request, Track $track, TrackPersister $persister): Response
     {
@@ -65,5 +69,25 @@ class CreateTrackController extends AbstractController
             'track' => $track,
             'step' => $request->query->getInt('step', 2),
         ]);
+    }
+
+    #[IsGranted(attribute: Constants::EDIT, subject: 'track')]
+    #[Route('/track/{id<\d+>}/reorder_attachments', name: 'track_reorder_attachments', methods: ['GET'])]
+    public function reorderAttachments(Request $request, Track $track): Response
+    {
+        return $this->render('track/new/reorder_attachments.html.twig', [
+            'track' => $track,
+            'step' => $request->query->getInt('step', 2),
+        ]);
+    }
+
+    #[IsGranted(attribute: Constants::EDIT, subject: 'track')]
+    #[Route('/track/{id<\d+>}/reorder_attachments', name: 'track_save_attachment_order', methods: ['POST'])]
+    public function saveAttachmentOrder(Request $request, Track $track, TrackPersister $persister): Response
+    {
+        $positions = $request->request->getString('positions');
+        $persister->reorderAttachments($track, array_filter(explode(',', $positions), 'is_numeric'));
+
+        return $this->redirectToRoute('track_new', ['step' => $request->request->getInt('step', 2)]);
     }
 }

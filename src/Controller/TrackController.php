@@ -74,6 +74,7 @@ class TrackController extends AbstractController
         return $this->redirectToRoute('track_new', ['step' => 1]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/track/{id<\d+>}/regenerate_previews', name: 'track_regenerate_previews', methods: ['GET'])]
     public function regeneratePreviews(Request $request, Track $track, TrackAttachmentHelper $helper): Response
     {

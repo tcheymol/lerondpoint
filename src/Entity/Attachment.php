@@ -67,6 +67,9 @@ class Attachment implements BlameableInterface, \Stringable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $videoEmbed = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $position = null;
+
     public function __toString(): string
     {
         return $this->objectId ?? '';
@@ -345,6 +348,18 @@ class Attachment implements BlameableInterface, \Stringable
     public function setVideoEmbed(?string $videoEmbed): static
     {
         $this->videoEmbed = $videoEmbed;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): static
+    {
+        $this->position = $position;
 
         return $this;
     }
