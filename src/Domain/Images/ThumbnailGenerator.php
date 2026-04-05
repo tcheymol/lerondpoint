@@ -26,9 +26,9 @@ readonly class ThumbnailGenerator
             return $this->buildPdfThumbnail($file, $size);
         } elseif ($mime && str_contains($mime, 'image/')) {
             return $this->buildImageThumbnail($file->getRealPath(), $size);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     private function buildPdfThumbnail(File $file, int $size = 256): ?string

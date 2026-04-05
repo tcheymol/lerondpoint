@@ -478,10 +478,9 @@ class Track implements BlameableInterface
     {
         $attachments = $this->attachments->toArray();
 
-        $hasExplicitOrder = count(array_filter($attachments, fn (Attachment $a) => $a->getPosition() !== null)) > 0;
+        $hasExplicitOrder = count(array_filter($attachments, fn (Attachment $a) => null !== $a->getPosition())) > 0;
         if ($hasExplicitOrder) {
-            usort($attachments, fn (Attachment $a, Attachment $b) =>
-                ($a->getPosition() ?? PHP_INT_MAX) <=> ($b->getPosition() ?? PHP_INT_MAX)
+            usort($attachments, fn (Attachment $a, Attachment $b) => ($a->getPosition() ?? PHP_INT_MAX) <=> ($b->getPosition() ?? PHP_INT_MAX)
             );
 
             return new ArrayCollection($attachments);

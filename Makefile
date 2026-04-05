@@ -12,7 +12,7 @@ PHP_UNIT      = $(BIN)/phpunit
 cs: rector fixer stan
 
 stan:
-	@$(PHPSTAN) analyse -c phpstan.dist.neon
+	@$(PHPSTAN) analyse -c phpstan.dist.neon --memory-limit=-1
 
 rector:
 	@$(RECTOR) process --clear-cache

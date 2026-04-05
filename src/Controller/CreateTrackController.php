@@ -86,7 +86,7 @@ class CreateTrackController extends AbstractController
     public function saveAttachmentOrder(Request $request, Track $track, TrackPersister $persister): Response
     {
         $positions = $request->request->getString('positions');
-        $persister->reorderAttachments($track, array_filter(explode(',', $positions), 'is_numeric'));
+        $persister->reorderAttachments($track, array_filter(explode(',', $positions), is_numeric(...)));
 
         return $this->redirectToRoute('track_new', ['step' => $request->request->getInt('step', 2)]);
     }

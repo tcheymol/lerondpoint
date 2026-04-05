@@ -2,20 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Action;
-use App\Entity\Attachment;
-use App\Entity\Collective;
-use App\Entity\FeatureToggle;
-use App\Entity\Invitation;
-use App\Entity\NewsletterRegistration;
-use App\Entity\Page;
-use App\Entity\Region;
-use App\Entity\RejectionCause;
-use App\Entity\Track;
-use App\Entity\TrackKind;
-use App\Entity\TrackTag;
-use App\Entity\User;
-use App\Entity\Year;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -53,25 +39,25 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Admin', 'fa fa-gears');
 
         yield MenuItem::section('Users');
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Newsletter', 'fas fa-envelope-open-text', NewsletterRegistration::class);
+        yield MenuItem::linkTo(UserCrudController::class, 'Users', 'fas fa-user');
+        yield MenuItem::linkTo(NewsletterRegistrationCrudController::class, 'Newsletter', 'fas fa-envelope-open-text');
 
         yield MenuItem::section('Collectives');
-        yield MenuItem::linkToCrud('Collectives', 'fas fa-people-arrows', Collective::class);
-        yield MenuItem::linkToCrud('Actions', 'fas fa-location-crosshairs', Action::class);
-        yield MenuItem::linkToCrud('Invitations', 'fas fa-envelope', Invitation::class);
+        yield MenuItem::linkTo(CollectiveCrudController::class, 'Collectives', 'fas fa-people-arrows');
+        yield MenuItem::linkTo(ActionCrudController::class, 'Actions', 'fas fa-location-crosshairs');
+        yield MenuItem::linkTo(InvitationCrudController::class, 'Invitations', 'fas fa-envelope');
 
         yield MenuItem::section('Tracks');
-        yield MenuItem::linkToCrud('Tracks', 'fas fa-clipboard', Track::class);
-        yield MenuItem::linkToCrud('Kinds', 'fas fa-layer-group', TrackKind::class);
-        yield MenuItem::linkToCrud('Tags', 'fas fa-tag', TrackTag::class);
-        yield MenuItem::linkToCrud('Regions', 'fas fa-map', Region::class);
-        yield MenuItem::linkToCrud('Years', 'fas fa-calendar-days', Year::class);
-        yield MenuItem::linkToCrud('RejectionCause', 'fas fa-trash', RejectionCause::class);
-        yield MenuItem::linkToCrud('Attachments', 'fas fa-link', Attachment::class);
+        yield MenuItem::linkTo(TrackCrudController::class, 'Tracks', 'fas fa-clipboard');
+        yield MenuItem::linkTo(TrackKindCrudController::class, 'Kinds', 'fas fa-layer-group');
+        yield MenuItem::linkTo(TrackTagCrudController::class, 'Tags', 'fas fa-tag');
+        yield MenuItem::linkTo(RegionCrudController::class, 'Regions', 'fas fa-map');
+        yield MenuItem::linkTo(YearCrudController::class, 'Years', 'fas fa-calendar-days');
+        yield MenuItem::linkTo(RejectionCauseCrudController::class, 'RejectionCause', 'fas fa-trash');
+        yield MenuItem::linkTo(AttachmentCrudController::class, 'Attachments', 'fas fa-link');
 
         yield MenuItem::section('Misc');
-        yield MenuItem::linkToCrud('Pages', 'fas fa-clipboard', Page::class);
-        yield MenuItem::linkToCrud('FeatureToggles', 'fas fa-toggle-off', FeatureToggle::class);
+        yield MenuItem::linkTo(PageCrudController::class, 'Pages', 'fas fa-clipboard');
+        yield MenuItem::linkTo(FeatureToggleCrudController::class, 'FeatureToggles', 'fas fa-toggle-off');
     }
 }

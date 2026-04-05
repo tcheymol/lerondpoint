@@ -56,6 +56,19 @@ symfony console sass:build --watch
 
 you can now browse the app at [https://localhost:8000/home](https://localhost:8000/home)
 
+## Tests
+
+Créer la base de données de test et appliquer les migrations :
+```bash
+touch var/data.test.db
+APP_ENV=test symfony console doctrine:migrations:migrate --no-interaction
+```
+
+Lancer les tests :
+```bash
+make test
+```
+
 ## Deploy
 for the deploy script to work, you need to create a `~/.ssh/config` file with a host named `rp`
 
