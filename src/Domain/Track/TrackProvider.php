@@ -28,25 +28,13 @@ readonly class TrackProvider
 
         $this->setSeenTracksIds($tracks);
 
-        return $this->sortTracks($tracks);
+        return $tracks;
     }
 
     /** @return Track[] */
     public function provideToModerate(): array
     {
         return $this->trackRepository->findToModerate();
-    }
-
-    /**
-     * @param Track[] $tracks
-     *
-     * @return Track[]
-     */
-    public function sortTracks(array $tracks): array
-    {
-        shuffle($tracks);
-
-        return $tracks;
     }
 
     /** @param Track[] $tracks */

@@ -42,13 +42,13 @@ class SearchQueryBuilder
             ->excludeIds($search->loadMore);
     }
 
-    public function selectRandoms(): self
+    public function applySortOrder(string $sortBy): self
     {
-        $this->qb
-            ->addSelect('RANDOM() as HIDDEN random')
-            ->orderBy('random()')
-            ->addGroupBy('t.id')
-        ;
+        match ($sortBy) {
+            'newest' => $this->selectByDate('DESC'),
+            'oldest' => $this->selectByDate('ASC'),
+            default  => $this->selectRandoms(),
+        };
 
         return $this;
     }
@@ -67,6 +67,21 @@ class SearchQueryBuilder
         $results = $this->qb->getQuery()->getResult();
 
         return $results;
+    }
+
+    private function selectRandoms(): void
+    {
+        $this->qb
+            ->addSelect('RANDOM() as HIDDEN random')
+            ->orderBy('random()')
+            ->addGroupBy('t.id');
+    }
+
+    private function selectByDate(string $direction): void
+    {
+        $this->qb
+            ->orderBy('t.createdAt', $direction)
+            ->addGroupBy('t.id');
     }
 
     private function searchText(Search $search): self

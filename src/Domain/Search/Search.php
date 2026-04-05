@@ -28,13 +28,11 @@ class Search
     /** @var Collection<int, Region|PersistedEntityInterface> */
     public Collection $regions;
 
-    /** @var array<string, string> */
-    private array $params = [];
-
     public function __construct(
         public ?bool $loadMore = false,
         public ?string $text = null,
         public ?string $location = null,
+        public string $sortBy = 'random',
     ) {
         $this->tags = new ArrayCollection();
         $this->kinds = new ArrayCollection();
@@ -46,73 +44,26 @@ class Search
     /** @return array<string, string> */
     public function toParamsArray(): array
     {
-        return $this
-            ->addTextParam()
-            ->addKindParam()
-            ->addRegionParam()
-            ->addYearParam()
-            ->addLocationParam()
-            ->addTagsParam()
-            ->addCollectiveParam()
-            ->params;
-    }
+        $params = array_filter([
+            'q'        => $this->text,
+            'location' => $this->location,
+        ]);
 
-    private function addTextParam(): self
-    {
-        if ($this->text) {
-            $this->params['q'] = $this->text;
+        $params['sortBy'] = $this->sortBy;
+
+        foreach (['kinds', 'tags', 'regions', 'years', 'collectives'] as $field) {
+            $ids = self::collectionToIdsString($this->$field);
+            if ('' !== $ids) {
+                $params[$field] = $ids;
+            }
         }
 
-        return $this;
+        return $params;
     }
 
     public function setQ(?string $q): self
     {
         $this->text = $q;
-
-        return $this;
-    }
-
-    private function addKindParam(): self
-    {
-        $this->params['kinds'] = self::collectionToIdsString($this->kinds);
-
-        return $this;
-    }
-
-    private function addRegionParam(): self
-    {
-        $this->params['regions'] = self::collectionToIdsString($this->regions);
-
-        return $this;
-    }
-
-    private function addYearParam(): self
-    {
-        $this->params['years'] = self::collectionToIdsString($this->years);
-
-        return $this;
-    }
-
-    private function addLocationParam(): self
-    {
-        if ($this->location) {
-            $this->params['location'] = $this->location;
-        }
-
-        return $this;
-    }
-
-    private function addTagsParam(): self
-    {
-        $this->params['tags'] = self::collectionToIdsString($this->tags);
-
-        return $this;
-    }
-
-    private function addCollectiveParam(): self
-    {
-        $this->params['collectives'] = self::collectionToIdsString($this->collectives);
 
         return $this;
     }
