@@ -1,3 +1,15 @@
+.filter-chevron {
+    transition: transform 0.2s ease;
+}
+
+[data-bs-toggle="collapse"][aria-expanded="true"] .filter-chevron {
+    transform: rotate(180deg);
+}
+
+.sort-btn {
+    border-radius: 0 !important;
+}
+
 #trackPreviewIframeContainer {
   iframe {
     width: 100%;

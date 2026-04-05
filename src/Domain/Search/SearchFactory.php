@@ -43,14 +43,7 @@ readonly class SearchFactory
 
         foreach ($params as $key => $value) {
             if (in_array($key, ['tags', 'kinds', 'collectives', 'regions', 'years']) && is_string($value)) {
-                $entities = $this->idsStringToEntityCollection($key, $value);
-                match ($key) {
-                    'tags' => $search->tags = $entities,
-                    'kinds' => $search->kinds = $entities,
-                    'collectives' => $search->collectives = $entities,
-                    'regions' => $search->regions = $entities,
-                    'years' => $search->years = $entities,
-                };
+                $search->$key = $this->idsStringToEntityCollection($key, $value);
             } elseif (!is_array($value)) {
                 $this->propertyAccessor->setValue($search, $key, (string) $value);
             }

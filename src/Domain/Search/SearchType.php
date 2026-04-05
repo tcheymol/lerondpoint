@@ -10,6 +10,7 @@ use App\Entity\Year;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -90,6 +91,17 @@ class SearchType extends AbstractType
                     'data-action' => 'async-search#search',
                 ],
                 'required' => false,
+            ])
+            ->add('sortBy', ChoiceType::class, [
+                'choices' => [
+                    'Aléatoire' => 'random',
+                    'Plus récentes' => 'newest',
+                    'Plus anciennes' => 'oldest',
+                ],
+                'attr' => [
+                    'data-action' => 'async-search#search',
+                ],
+                'required' => true,
             ])
         ;
     }

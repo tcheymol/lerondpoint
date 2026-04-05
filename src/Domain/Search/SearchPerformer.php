@@ -16,7 +16,7 @@ readonly class SearchPerformer
         return $this->queryBuilder
             ->init()
             ->search($search)
-            ->selectRandoms()
+            ->applySortOrder($search->sortBy)
             ->limit()
             ->getResults();
     }

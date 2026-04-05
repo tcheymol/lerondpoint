@@ -1,22 +1,63 @@
+{% set currentSort = form.sortBy.vars.value ?? 'random' %}
+
 <div class="row px-3 text-dark">
     <div class="bg-primary p-2 p-sm-3 p-md-4"
          style="background: url({{ asset('images/tracks-bg.jpg') }}) no-repeat center center; background-size: contain;"
     >
         {{ form_start(form, {attr: {'data-async-search-target': 'form', 'data-action': 'submit->async-search#search:prevent'}}) }}
+
         <div class="row d-flex align-items-center">
+
             <div class="col-12 position-relative" style="padding-right: 48px">
-                {{ form_widget(form.text)}}
-                <button class="btn btn-dark rounded-0 position-absolute btn-sm" style="top: 2px; right: 8px; height:
-                36px;">
+                {{ form_widget(form.text) }}
+                <button class="btn btn-dark rounded-0 position-absolute btn-sm" style="top: 2px; right: 8px; height: 36px;">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.kinds)}}</div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.tags)}}</div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.regions)}}</div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.years)}}</div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.location)}}</div>
-            <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.collectives)}}</div>
+
+            <div class="col-12 mt-2 d-flex align-items-center justify-content-end">
+                <button type="button"
+                        class="btn btn-dark btn-sm me-2 flex-grow-1 flex-md-grow-0"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#search-filters"
+                        aria-expanded="false"
+                        aria-controls="search-filters">
+                    <i class="fa fa-sliders me-1"></i> Filtres
+                    <i class="fa fa-chevron-down ms-1 filter-chevron"></i>
+                </button>
+
+                <div class="d-flex">
+                    {{ form_widget(form.sortBy, {attr: {hidden: 'hidden'}}) }}
+                    <button type="button"
+                            class="btn btn-sm sort-btn hover-no-rotate me-2 {{ currentSort == 'random' ? 'btn-dark' : 'btn-outline-dark' }}"
+                            data-sort-value="random"
+                            data-action="click->async-search#selectSort"
+                            data-async-search-target="sortBtn"
+                            title="Ordre aléatoire">
+                        <i class="fa fa-shuffle"></i>
+                    </button>
+                    <button type="button"
+                            class="btn btn-sm sort-btn hover-no-rotate  {{ currentSort != 'random' ? 'btn-dark' : 'btn-outline-dark' }}"
+                            data-sort-value="date"
+                            data-action="click->async-search#selectSort"
+                            data-async-search-target="sortBtn"
+                            title="Trier par date">
+                        <i class="fa fa-arrow-{{ currentSort == 'oldest' ? 'up' : 'down' }}-wide-short"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="collapse col-12" id="search-filters">
+                <div class="row mt-1">
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.kinds) }}</div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.tags) }}</div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.regions) }}</div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.years) }}</div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.location) }}</div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-1 mt-sm-3">{{ form_widget(form.collectives) }}</div>
+                </div>
+            </div>
+
         </div>
         {{ form_end(form) }}
     </div>
