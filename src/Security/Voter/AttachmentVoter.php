@@ -4,15 +4,15 @@ namespace App\Security\Voter;
 
 use App\Entity\Attachment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/** @extends Voter<string, mixed> */
+/** @extends Voter<string, Attachment> */
 final class AttachmentVoter extends Voter
 {
-    public function __construct(private AuthorizationCheckerInterface $authorizationChecker) {
+    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     #[\Override]

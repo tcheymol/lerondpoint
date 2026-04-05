@@ -31,11 +31,12 @@ readonly class MaintenanceSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($this->repository->findOneBy(['name' => 'website-online'])?->isEnabled()) {
+        $toggle = $this->repository->findOneBy(['name' => 'website-online']);
+        if (!$toggle || $toggle->isEnabled()) {
             return;
         }
 
-        $event->setResponse(new RedirectResponse($this->router->generate('maintenance')));
+        $event->setResponse(new RedirectResponse($this->router->generate('home_maintenance')));
     }
 
     public static function getSubscribedEvents(): array

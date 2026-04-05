@@ -21,9 +21,11 @@ readonly class AttachmentHelper
     ) {
     }
 
-    public function rotate(Attachment $attachment): Attachment {
-        $tempFilePath = sys_get_temp_dir() . '/' . UuidV4::v4()->toString();
-        $this->s3Adapter->downloadFile($attachment->getObjectId(), $tempFilePath);
+    public function rotate(Attachment $attachment): Attachment
+    {
+        $objectId = $attachment->getObjectId() ?? throw new \InvalidArgumentException('Attachment has no objectId');
+        $tempFilePath = sys_get_temp_dir().'/'.UuidV4::v4()->toString();
+        $this->s3Adapter->downloadFile($objectId, $tempFilePath);
         $imagick = new \Imagick($tempFilePath);
 
         $this->imageManipulator->rotateImage($imagick, $tempFilePath);
@@ -31,8 +33,9 @@ readonly class AttachmentHelper
         return $this->reuploadFile($attachment, $tempFilePath);
     }
 
-    public function reuploadFile(Attachment $attachment, string $tempFilePath): ?Attachment {
-        $file = new UploadedFile($tempFilePath, $attachment->getObjectId());
+    public function reuploadFile(Attachment $attachment, string $tempFilePath): Attachment
+    {
+        $file = new UploadedFile($tempFilePath, $attachment->getObjectId() ?? '');
         $this->deleteObjects($attachment);
         $this->uploadFile($file, $attachment);
         $this->uploadThumbnails($file, $attachment);
@@ -43,7 +46,6 @@ readonly class AttachmentHelper
 
         return $attachment;
     }
-
 
     public function createAttachment(?UploadedFile $file): ?Attachment
     {
