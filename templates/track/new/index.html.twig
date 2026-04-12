@@ -5,7 +5,7 @@
 {% block innerContent %}
     {{ form_start(form, { attr: {
         class: 'h-100 d-flex flex-column',
-        'data-controller': 'autosubmit',
+        'data-controller': 'autosubmit' ~ (form.captcha is defined ? ' captcha-reveal' : ''),
         'data-autosubmit-target': 'form',
         'data-autosubmit-url-value': path('track_new', { step }),
     } } ) }}

@@ -33,7 +33,8 @@
                             data-sort-value="random"
                             data-action="click->async-search#selectSort"
                             data-async-search-target="sortBtn"
-                            title="Ordre aléatoire">
+                            data-controller="tooltip"
+                            data-tooltip-text-value="Ordre aléatoire">
                         <i class="fa fa-shuffle"></i>
                     </button>
                     <button type="button"
@@ -41,7 +42,8 @@
                             data-sort-value="date"
                             data-action="click->async-search#selectSort"
                             data-async-search-target="sortBtn"
-                            title="Trier par date">
+                            data-controller="tooltip"
+                            data-tooltip-text-value="Trier par date">
                         <i class="fa fa-arrow-{{ currentSort == 'oldest' ? 'up' : 'down' }}-wide-short"></i>
                     </button>
                 </div>

@@ -291,3 +291,6 @@ YouDontFindYourGroup: Vous ne trouvez pas votre groupe ?
 YouHaveBeenInvited: Vous avez été invité·e à rejoindre un groupe
 YouHaveBeenInvitedToJoinCollective: Vous avez été·e invité à rejoindre le groupe %collectiveName% sur la plateforme le-rondpoint.org
 YourGroupHasBeenCreated: Votre groupe %groupName% a été créé avec succès
+Cancel: Annuler
+Continue: Continuer
+TabSwitchWarning: "Attention, une trace ne peut pas contenir des images ET une URL. Si vous continuez, vous perdrez ce que vous venez d'ajouter."

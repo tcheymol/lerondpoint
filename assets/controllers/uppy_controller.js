@@ -26,6 +26,7 @@ function updateAttachmentsIdsInput(attachmentId) {
     const attachmentsIdsInput = document.getElementById('track_attachmentsIds');
     if (attachmentsIdsInput) {
         attachmentsIdsInput.value = !attachmentsIdsInput.value ? attachmentId : `${attachmentsIdsInput.value},${attachmentId}`;
+        attachmentsIdsInput.dispatchEvent(new Event('change', { bubbles: true }));
     }
 }
 

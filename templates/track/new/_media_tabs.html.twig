@@ -1,0 +1,32 @@
+{% set isEditing = track.video is not empty or track.hasAttachments %}
+{% set activeTab = track.video is not empty ? 'url' : (track.hasAttachments ? 'files' : app.request.query.get('tab', 'files')) %}
+
+<div class="bg-light-subtle px-0 shadow create-track-media-tabs">
+    {% if not isEditing %}
+    <ul class="nav nav-pills nav-justified p-3" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link border-0 {{ activeTab == 'files' ? 'active' : '' }}"
+               href="?tab=files"
+               role="tab"
+               data-action="captcha-reveal#warnSwitch">
+                {{ 'ImportFile'|trans }}
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link border-0 {{ activeTab == 'url' ? 'active' : '' }}"
+               href="?tab=url"
+               role="tab"
+               data-action="captcha-reveal#warnSwitch">
+                {{ 'CopyLink'|trans }}
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+    <div class="p-4">
+        {% if activeTab == 'url' %}
+            {{ include('track/new/_video_widget.html.twig', { form, track }) }}
+        {% else %}
+            {{ include('components/upload/_uppy_widget.html.twig', { track }) }}
+        {% endif %}
+    </div>
+</div>
