@@ -9,7 +9,13 @@
     {{ form_widget(form.username) }}
     {{ form_errors(form.username) }}
     {{ form_label(form.plainPassword.first) }}
-    {{ form_widget(form.plainPassword.first) }}
+    <div class="input-group" {{ stimulus_controller('password-toggle') }}>
+        {{ form_widget(form.plainPassword.first, {attr: {'data-password-toggle-target': 'input'}}) }}
+        <button type="button" class="btn btn-outline-secondary" tabindex="-1"
+                {{ stimulus_action('password-toggle', 'toggle') }}>
+            <i class="fa fa-eye" {{ stimulus_target('password-toggle', 'icon') }}></i>
+        </button>
+    </div>
      <div class="progress rounded-0">
          <div class="progress-bar progress-bar-striped bg-danger" id="passwordStrengthProgress" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="0">
             <span class="d-none" id="weakPasswordText">{{ 'WeakPassword'|trans }}</span>
@@ -19,7 +25,13 @@
      </div>
     {{ form_errors(form.plainPassword.first) }}
     {{ form_label(form.plainPassword.second) }}
-    {{ form_widget(form.plainPassword.second) }}
+    <div class="input-group" {{ stimulus_controller('password-toggle') }}>
+        {{ form_widget(form.plainPassword.second, {attr: {'data-password-toggle-target': 'input'}}) }}
+        <button type="button" class="btn btn-outline-secondary" tabindex="-1"
+                {{ stimulus_action('password-toggle', 'toggle') }}>
+            <i class="fa fa-eye" {{ stimulus_target('password-toggle', 'icon') }}></i>
+        </button>
+    </div>
     {{ form_errors(form.plainPassword.second) }}
 
      <div class="row">
