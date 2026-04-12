@@ -4,8 +4,26 @@
 
 {% block cardContent %}
     {{ form_start(resetForm) }}
-        {{ form_row(resetForm.first) }}
-        {{ form_row(resetForm.second) }}
-        <button class="btn btn-primary">{{ 'ResetPassword'|trans }}</button>
+        {{ form_label(resetForm.first) }}
+        <div class="input-group" {{ stimulus_controller('password-toggle') }}>
+            {{ form_widget(resetForm.first, {attr: {'data-password-toggle-target': 'input'}}) }}
+            <button type="button" class="btn btn-outline-secondary" tabindex="-1"
+                    {{ stimulus_action('password-toggle', 'toggle') }}>
+                <i class="fa fa-eye" {{ stimulus_target('password-toggle', 'icon') }}></i>
+            </button>
+        </div>
+        {{ form_errors(resetForm.first) }}
+
+        {{ form_label(resetForm.second) }}
+        <div class="input-group" {{ stimulus_controller('password-toggle') }}>
+            {{ form_widget(resetForm.second, {attr: {'data-password-toggle-target': 'input'}}) }}
+            <button type="button" class="btn btn-outline-secondary" tabindex="-1"
+                    {{ stimulus_action('password-toggle', 'toggle') }}>
+                <i class="fa fa-eye" {{ stimulus_target('password-toggle', 'icon') }}></i>
+            </button>
+        </div>
+        {{ form_errors(resetForm.second) }}
+
+        <button class="btn btn-primary mt-3">{{ 'ResetPassword'|trans }}</button>
     {{ form_end(resetForm) }}
 {% endblock %}

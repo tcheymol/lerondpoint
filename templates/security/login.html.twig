@@ -10,7 +10,14 @@
         <label for="username" class="form-label">{{ 'EmailOrUsername'|trans }}</label>
         <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
         <label for="password" class="form-label">{{ 'Password'|trans }}</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+        <div class="input-group" {{ stimulus_controller('password-toggle') }}>
+            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required
+                   {{ stimulus_target('password-toggle', 'input') }}>
+            <button type="button" class="btn btn-outline-secondary" tabindex="-1"
+                    {{ stimulus_action('password-toggle', 'toggle') }}>
+                <i class="fa fa-eye" {{ stimulus_target('password-toggle', 'icon') }}></i>
+            </button>
+        </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="text-end">
             <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'Login'|trans }}</button>
