@@ -20,6 +20,22 @@
                 {{  'BackStep'|trans({'%step%': previousStep, '%total%': constant('App\\Form\\TrackType::STEPS_COUNT') }) }}
             {% endif %}
         </a>
-        {{ form_widget(form.next) }}
+        {% if form.captcha is defined %}
+            {% set captchaHasErrors = form.captcha.vars.errors | length > 0 %}
+            {% set nextStep = step + 1 %}
+            {% set total = constant('App\\Form\\TrackType::STEPS_COUNT') %}
+            <button type="button"
+                    class="btn btn-light bg-white hoverable-light btn-lg mt-3 {{ captchaHasErrors ? 'd-none' : '' }}"
+                    data-captcha-reveal-target="trigger"
+                    data-action="captcha-reveal#reveal">
+                {{ 'ValidateStep'|trans({'%step%': nextStep, '%total%': total}) }}
+            </button>
+            <span class="{{ captchaHasErrors ? '' : 'd-none' }}"
+                  data-captcha-reveal-target="submit">
+                {{ form_widget(form.next) }}
+            </span>
+        {% else %}
+            {{ form_widget(form.next) }}
+        {% endif %}
     </div>
 </div>

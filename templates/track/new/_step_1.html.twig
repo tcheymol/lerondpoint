@@ -1,10 +1,13 @@
-<div {{ stimulus_controller('video_preview') }}>
+<div {{ stimulus_controller('video_preview') }}  class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 mt-4 px-0">
     {{ include('track/components/_create_disclaimer.html.twig') }}
-    {{ form_row(form.attachmentsIds) }}
+    {{ form_row(form.attachmentsIds, {attr: {'data-captcha-reveal-target': 'attachments'}}) }}
     <div class="row text-start fs-3">
-        <div class="col-12">
+        <div>
             {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
+            {{ form_widget(form.name, {attr: {
+                'data-captcha-reveal-target': 'title',
+                'data-action': 'captcha-reveal#validate',
+            }}) }}
             <div class="fs-6 mt-3">
                 {{ 'ShareTrackWays'|trans }}
                 <ul>
@@ -15,18 +18,13 @@
         </div>
     </div>
 
-    <div class="row justify-content-end">
-        {% if not track.hasAttachments %}
-            {{ include('track/new/_add_media_widget.html.twig') }}
-        {% endif %}
-        {{ include('track/new/_attachments_widget.html.twig', {track}) }}
-        {{ include('track/new/_video_widget.html.twig', {track}) }}
-
-        <div class="col-12 col-sm-6 mt-3" id="captcha_container">
-            {% if form.captcha is defined %}
-                {{ form_errors(form.captcha) }}
-                {{ form_widget(form.captcha) }}
-            {% endif %}
+    <div class="row" data-captcha-reveal-target="tabs">
+        {{ include('track/new/_media_tabs.html.twig', { form, track }) }}
+    </div>
+    <div class="row">
+        <div class="card bg-light-subtle p-4 px-0 shadow d-none" data-captcha-reveal-target="captcha">
+            {{ include('track/new/_captcha.html.twig', { form }) }}
         </div>
     </div>
+    {{ include('track/new/_tab_switch_warn_modal.html.twig', { form }) }}
 </div>
