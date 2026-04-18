@@ -11,13 +11,16 @@ export const generateDiv = () => {
     return item;
 }
 
-export const generateImg = (action) => {
-    const img = document.createElement('img');
-    img.src = action.iconPath;
-    img.alt = action.name;
-    img.style.width = '32px';
+export const generateList = (elements) => {
+    const list = document.createElement('ul');
 
-    return img;
+    elements.forEach(element => {
+        const item = document.createElement('li');
+        item.textContent = element;
+        list.appendChild(item);
+    })
+
+    return list;
 }
 
 export const generateText = (action) => {
@@ -25,11 +28,6 @@ export const generateText = (action) => {
     text.textContent = action.name;
 
     return text;
-}
-
-export const appendImg = (action, item) => {
-    const img = generateImg(action);
-    item.appendChild(img);
 }
 
 export const appendText = (action, item) => {

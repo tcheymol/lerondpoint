@@ -45,11 +45,15 @@ readonly class BlameableEntitySecurityChecker
             return true;
         }
 
+        if ($this->authorizationChecker->isGranted('ROLE_MODERATOR')) {
+            return true;
+        }
+
         if (!$this->canView($entity)) {
             return false;
         }
 
-        return $this->authorizationChecker->isGranted('ROLE_MODERATOR');
+        return false;
     }
 
     private function isOwnedBy(BlameableInterface $entity, User $user): bool

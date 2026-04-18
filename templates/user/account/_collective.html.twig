@@ -13,11 +13,19 @@
             <div class="col">
                 <span> {{ collective.shortDescription }} </span>
             </div>
-            {% if collective.iconPath %}
-                <div class="col align-items-end d-flex">
-                    <img style="width: 50px" class="ms-auto" src="{{ collective.iconPath }}"  alt="{{ 'Collective'|trans }}"/>
-                </div>
-            {% endif %}
+            <div class="col align-items-end d-flex">
+                {% if(collective.logoPath or collective.iconPath) and collective.iconPath != 'icone' %}
+                    <img style="width: 50px" class="ms-auto" src="{{ collective.logoPath ?? collective.iconPath }}" alt="{{ 'Collective'|trans }}"/>
+                {% elseif is_granted('EDIT', collective) %}
+                    <a class="btn btn-outline-secondary btn-sm ms-auto" href="{{ path('collective_complete', {id: collective.id, step: 1}) }}">
+                        <i class="bi bi-image"></i> {{ 'AddIcon'|trans }}
+                    </a>
+                {% else %}
+                    <div class="ms-auto d-flex align-items-center justify-content-center bg-light border rounded" style="width: 50px; height: 50px;">
+                        <i class="bi bi-image text-muted"></i>
+                    </div>
+                {% endif %}
+            </div>
         </div>
         <div class="row d-flex justify-content-between mt-3">
             <div class="col">

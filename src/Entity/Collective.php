@@ -63,6 +63,9 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $iconPath = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logoPath = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -114,6 +117,11 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
     public function isQuick(): bool
     {
         return null === $this->getLat() || null === $this->getLon();
+    }
+
+    public function isVisibleOnMap(): bool
+    {
+        return !$this->isCreating() && !$this->isDisabled() && null !== $this->lat && null !== $this->lon;
     }
 
     public function __toString(): string
@@ -308,6 +316,18 @@ class Collective implements OwnableInterface, BlameableInterface, \Stringable, P
     public function setIconPath(?string $iconPath): static
     {
         $this->iconPath = $iconPath;
+
+        return $this;
+    }
+
+    public function getLogoPath(): ?string
+    {
+        return $this->logoPath;
+    }
+
+    public function setLogoPath(?string $logoPath): static
+    {
+        $this->logoPath = $logoPath;
 
         return $this;
     }

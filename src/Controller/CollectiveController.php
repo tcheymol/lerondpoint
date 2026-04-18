@@ -27,7 +27,7 @@ class CollectiveController extends AbstractController
     }
 
     #[Route('/collective/quick_new', name: 'collective_quick_new', methods: ['GET'])]
-    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator, TrackPersister $trackPersister): Response
+    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator, TrackPersister $trackPersister, EntityManagerInterface $em): Response
     {
         $name = $request->query->getString('name');
         $track = $trackPersister->fetchSessionTrack();
@@ -40,14 +40,14 @@ class CollectiveController extends AbstractController
 
         try {
             $collective = $persister->createQuick($name);
+            $track->setCollective($collective);
+            $em->flush();
             $this->addFlash('success', $translator->trans('QuickGroupCreated', ['%groupName%' => $name]));
-
-            return $this->redirectToRoute('track_new', ['createdCollectiveId' => $collective->getId()]);
         } catch (\Exception) {
             $this->addFlash('danger', $translator->trans('QuickGroupFailure', ['%groupName%' => $name]));
-
-            return $this->redirectToRoute('track_new');
         }
+
+        return $this->redirectToRoute('track_new', ['step' => 2]);
     }
 
     #[Route('/collective/new/disclaimer', name: 'collective_new_disclaimer', methods: ['GET'])]
@@ -59,6 +59,9 @@ class CollectiveController extends AbstractController
     #[Route('/collective/new/{step<\d+>}', name: 'collective_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CollectivePersister $persister, int $step = 1): Response
     {
+        if (1 === $step && $request->isMethod('GET') && !$persister->hasPersistedSessionCollective()) {
+            $persister->clearSessionCollective();
+        }
         $collective = $persister->fetchSessionCollective();
         $form = $this->createForm(CollectiveType::class, $collective, ['step' => $step])
             ->handleRequest($request);

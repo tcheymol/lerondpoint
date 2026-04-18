@@ -45,12 +45,12 @@ class TrackCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('name');
+        yield TextField::new('email')->hideOnForm();
         yield BooleanField::new('validated');
         yield BooleanField::new('rejected');
         yield AssociationField::new('validatedBy')->hideOnForm();
         yield AssociationField::new('rejectedBy')->hideOnForm();
-        yield CollectionField::new('attachments')->hideOnForm()
-            ->formatValue(fn ($value, $track) => $this->formatAttachments($value, $track));
+        yield CollectionField::new('attachments')->hideOnForm();
     }
 
     private function formatAttachments(Collection $value, Track $track): string
@@ -58,16 +58,5 @@ class TrackCrudController extends AbstractCrudController
         return implode('<br/>', $track->getAttachments()
             ->map(fn (Attachment $attachment) => $this->formatAttachment($attachment))
             ->toArray());
-    }
-
-    private function formatAttachment(Attachment $attachment): string
-    {
-        $attachmentAdminUrl = $this->adminUrlGenerator
-            ->setController(AttachmentCrudController::class)
-            ->setAction('detail')
-            ->setEntityId($attachment->getId())
-            ->generateUrl();
-
-        return sprintf('<a href="%s">%s</a>', $attachmentAdminUrl, $attachment->getObjectId());
     }
 }

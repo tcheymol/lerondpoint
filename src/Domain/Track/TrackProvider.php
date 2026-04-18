@@ -6,6 +6,7 @@ use App\Domain\Search\Search;
 use App\Domain\Search\SearchPerformer;
 use App\Domain\Search\SeenTracksManager;
 use App\Entity\Track;
+use App\Entity\User;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -32,9 +33,15 @@ readonly class TrackProvider
     }
 
     /** @return Track[] */
-    public function provideToModerate(): array
+    public function provideToModerate(?User $assignee = null, bool $unassigned = false): array
     {
-        return $this->trackRepository->findToModerate();
+        return $this->trackRepository->findToModerate($assignee, $unassigned);
+    }
+
+    /** @return Track[] */
+    public function provideRejected(): array
+    {
+        return $this->trackRepository->findRejected();
     }
 
     /** @param Track[] $tracks */

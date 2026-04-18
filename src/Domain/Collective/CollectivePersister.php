@@ -48,7 +48,12 @@ readonly class CollectivePersister
         $this->requestStack->getSession()->set('being-created-collective-id', $collective->getId());
     }
 
-    private function clearSessionCollective(): void
+    public function hasPersistedSessionCollective(): bool
+    {
+        return null !== $this->requestStack->getSession()->get('being-created-collective-id');
+    }
+
+    public function clearSessionCollective(): void
     {
         $this->requestStack->getSession()->remove('being-created-collective-id');
     }
