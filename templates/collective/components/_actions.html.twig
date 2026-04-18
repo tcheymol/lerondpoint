@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-center mt-4">
     <span class="fs-5 plaine me-4">{{ 'Actions'|trans }}</span>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-stretch flex-wrap">
         {% for action in collective.actions %}
             {{ include('collective/components/_action.html.twig', {action}) }}
         {% endfor %}

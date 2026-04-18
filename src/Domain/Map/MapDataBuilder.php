@@ -27,12 +27,10 @@ readonly class MapDataBuilder
                 'iconPath' => $collective->getIconPath(),
                 'shortDescription' => $collective->getShortDescription(),
                 'location' => $collective->getLocation(),
-                'pictureUrl' => $collective->getIconPath(),
+                'pictureUrl' => $collective->getLogoPath(),
                 'showUrl' => $this->router->generate('collective_show', ['id' => $collective->getId()]),
                 'tracksUrl' => $this->router->generate('track_list', ['collectives' => $collective->getId()]),
-                'actions' => $collective->getActions()->map(
-                    fn (Action $action) => ['name' => $action->getName(), 'iconPath' => $action->getIconPublicPath()]
-                )->toArray(),
+                'actions' => $collective->getActions()->map(fn (Action $action) => $action->getName())->toArray(),
             ],
             $this->collectiveRepository->findBy(['isCreating' => false, 'disabled' => false])
         );

@@ -4,11 +4,13 @@ namespace App\Domain\Track;
 
 use App\Domain\Security\SessionAwareTrait;
 use App\Entity\Track;
+use App\Entity\User;
 use App\Form\Model\RejectTrack;
 use App\Form\TrackType;
 use App\Repository\AttachmentRepository;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -24,6 +26,7 @@ readonly class TrackPersister
         private TrackRepository $trackRepository,
         private AuthorizationCheckerInterface $authorizationChecker,
         private AttachmentRepository $attachmentRepository,
+        private Security $security,
     ) {
     }
 
@@ -55,12 +58,25 @@ readonly class TrackPersister
     public function accept(Track $track): void
     {
         $track->accept();
+        /** @var User $user */
+        $user = $this->security->getUser();
+        $track->setValidatedBy($user);
         $this->em->flush();
     }
 
     public function reject(Track $track, RejectTrack $rejectTrack): void
     {
         $track->reject($rejectTrack);
+        /** @var User $user */
+        $user = $this->security->getUser();
+        $track->setRejectedBy($user);
+        $this->em->flush();
+    }
+
+    public function assign(Track $track, ?User $assignee): void
+    {
+        $track->setAssignedTo($assignee);
+        $track->setAssignedAt($assignee ? new \DateTimeImmutable() : null);
         $this->em->flush();
     }
 

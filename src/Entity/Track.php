@@ -102,6 +102,13 @@ class Track implements BlameableInterface
     #[ORM\Column(length: 4095, nullable: true)]
     private ?string $rejectionMessage = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+    private ?User $assignedTo = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $assignedAt = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -523,6 +530,30 @@ class Track implements BlameableInterface
     public function setRejectionMessage(?string $rejectionMessage): static
     {
         $this->rejectionMessage = $rejectionMessage;
+
+        return $this;
+    }
+
+    public function getAssignedTo(): ?User
+    {
+        return $this->assignedTo;
+    }
+
+    public function setAssignedTo(?User $assignedTo): static
+    {
+        $this->assignedTo = $assignedTo;
+
+        return $this;
+    }
+
+    public function getAssignedAt(): ?\DateTimeImmutable
+    {
+        return $this->assignedAt;
+    }
+
+    public function setAssignedAt(?\DateTimeImmutable $assignedAt): static
+    {
+        $this->assignedAt = $assignedAt;
 
         return $this;
     }

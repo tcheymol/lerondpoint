@@ -7,8 +7,10 @@ use App\Domain\Track\TrackPersister;
 use App\Domain\Track\TrackProvider;
 use App\Entity\Attachment;
 use App\Entity\Track;
+use App\Entity\User;
 use App\Form\Model\RejectTrack;
 use App\Form\RejectTrackType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +21,63 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class ModerationController extends AbstractController
 {
     #[Route('/moderation', name: 'moderation_index', methods: ['GET'])]
-    public function index(TrackProvider $provider): Response
+    public function index(Request $request, TrackProvider $provider, UserRepository $userRepository): Response
     {
+        $filter = $request->query->get('filter', 'all');
+
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+
+        $assignee = null;
+        $unassigned = false;
+
+        if ('me' === $filter) {
+            $assignee = $currentUser;
+        } elseif ('unassigned' === $filter) {
+            $unassigned = true;
+        }
+
         return $this->render('track/moderation/index.html.twig', [
-            'tracks' => $provider->provideToModerate(),
+            'tracks' => $provider->provideToModerate($assignee, $unassigned),
+            'moderators' => $userRepository->findModerators(),
+            'filter' => $filter,
+        ]);
+    }
+
+    #[Route('/moderation/{id<\d+>}/assign', name: 'moderate_track_assign', methods: ['POST'])]
+    public function assign(Request $request, Track $track, TrackPersister $persister, UserRepository $userRepository): Response
+    {
+        $assignedToId = $request->request->get('assigned_to_id');
+
+        if (null === $assignedToId || '' === $assignedToId) {
+            $persister->assign($track, null);
+        } else {
+            $assignee = $userRepository->find((int) $assignedToId);
+
+            if (!$assignee) {
+                throw $this->createNotFoundException();
+            }
+
+            /** @var User $currentUser */
+            $currentUser = $this->getUser();
+
+            if (!$this->isGranted('ROLE_ADMIN') && $assignee->getId() !== $currentUser->getId()) {
+                throw $this->createAccessDeniedException();
+            }
+
+            $persister->assign($track, $assignee);
+        }
+
+        $this->addFlash('success', 'TrackAssigned');
+
+        return $this->redirectToRoute('moderation_index', ['filter' => $request->request->get('filter', 'all')]);
+    }
+
+    #[Route('/moderation/rejected', name: 'moderation_rejected', methods: ['GET'])]
+    public function rejected(TrackProvider $provider): Response
+    {
+        return $this->render('track/moderation/rejected.html.twig', [
+            'tracks' => $provider->provideRejected(),
         ]);
     }
 

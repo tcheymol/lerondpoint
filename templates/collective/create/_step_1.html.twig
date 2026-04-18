@@ -1,6 +1,28 @@
-{{ include('collective/components/_update_icon.html.twig', {collective}) }}
-
 {{ form_start(form) }}
+    <div class="d-flex justify-content-center mb-3"
+         data-controller="upload-logo"
+         data-upload-logo-endpoint-value="{{ path('collective_upload_image') }}">
+        {% if collective is null or not collective.logoPath %}
+            <div data-upload-logo-target="icon">
+                {{ include('collective/components/_update_icon.html.twig', {collective}) }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.logoPath, {'attr': {'data-upload-logo-target': 'field'}}) }}
+        <div>
+            <div data-upload-logo-target="wrapper" class="{{ collective is not null and collective.logoPath ? '' : 'd-none' }} d-flex justify-content-center mb-2">
+                <img data-upload-logo-target="preview"
+                     src="{{ collective is not null and collective.logoPath ? collective.logoPath : '' }}"
+                     style="width: 150px; border-radius: 8px;"
+                     alt="logo" />
+            </div>
+            <label class="btn btn-outline-secondary btn-sm">
+                {{ 'UploadLogo'|trans }}
+                <input type="file" accept="image/*" class="d-none"
+                       data-upload-logo-target="input"
+                       data-action="change->upload-logo#upload" />
+            </label>
+        </div>
+    </div>
     <div class="row text-start">
         <div class="col-12 col-sm-6">
             {{ form_label(form.name) }}

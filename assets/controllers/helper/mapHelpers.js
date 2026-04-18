@@ -1,6 +1,6 @@
 import { Modal } from 'bootstrap';
 import {
-    appendImg,
+    generateList,
     appendText,
     generateDiv,
     updateElementHref,
@@ -30,31 +30,23 @@ const getDromLocations = () => [
 
 const createIcon = (iconUrl) => L.icon({ iconUrl,  iconSize: [35, 35] });
 
-const generateActionsDom = (collective) => {
-    const container = generateDiv();
-
-    collective.actions.forEach(action => {
-        const item = generateDiv();
-        appendImg(action, item);
-        appendText(action, item);
-
-        container.appendChild(item);
-    });
-
-    return container.innerHTML;
-}
-
 function onCollectiveClick(collective, e) {
     (new Modal(document.getElementById('collectiveDetailsModal'))).show();
 
     try {
         updateElementHtml('collectiveDetailsModalTitle', `${collective.id} - ${collective.name}`);
-        updateElementHtml('collectiveDetailsModalActions', generateActionsDom(collective));
+        updateElementHtml('collectiveDetailsModalActions', generateList(collective.actions).outerHTML);
         updateElementHtml('collectiveDetailsModalShortDescription', collective.shortDescription);
         updateElementHtml('collectiveDetailsModalLocation', collective.location);
         updateElementHref('collectiveDetailsModalShowUrl', collective.showUrl);
         updateElementHref('collectiveDetailsModalTracksUrl', collective.tracksUrl);
-        updateElementSrc('collectiveDetailsModalPictureUrl', collective.pictureUrl);
+        const logoWrapper = document.getElementById('collectiveDetailsModalLogoWrapper');
+        if (collective.pictureUrl) {
+            updateElementSrc('collectiveDetailsModalPictureUrl', collective.pictureUrl);
+            logoWrapper.classList.remove('d-none');
+        } else {
+            logoWrapper.classList.add('d-none');
+        }
     } catch (e) {
         console.error('Failed to display collective details', e);
     }
@@ -64,7 +56,7 @@ function onCollectiveClick(collective, e) {
 export const addCollectives = (map, collectives) => collectives.forEach(collective => addCollective(map, collective));
 
 const addCollective = (map, collective) => {
-    const iconPath = collective.iconPath ?? '/hut.png';
+    const iconPath = collective.pictureUrl ?? collective.iconPath ?? '/hut.png';
     if (collective.lat && collective.lon) {
         L.marker([collective.lat, collective.lon], {icon: createIcon(iconPath)})
             .addTo(map)

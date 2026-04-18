@@ -42,6 +42,7 @@ class CollectiveType extends AbstractType
         $builder
             ->add('name', null, ['label' => 'CollectiveName'])
             ->add('iconPath', HiddenType::class)
+            ->add('logoPath', HiddenType::class, ['required' => false])
             ->add('shortDescription', TextType::class, ['label' => 'ShortDescription'])
             ->add('followUs', TextType::class, ['label' => 'FollowUs'])
             ->add('contactUs', TextType::class, ['label' => 'ContactUs'])

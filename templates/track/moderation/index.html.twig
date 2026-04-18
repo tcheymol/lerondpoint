@@ -6,10 +6,38 @@
 {% block content %}
     <div class="row h-100">
         <h1 class="col-12 text-center text-dark mt-3">{{ 'ModerationTitle'|trans }}</h1>
+        <div class="col-12 text-center mb-3">
+            <a class="btn btn-danger border-dark hover-underline" href="{{ path('moderation_rejected') }}">
+                {{ 'ModerationShowRejected'|trans }}
+            </a>
+        </div>
+
+        <div class="col-12 text-center mb-3">
+            <div class="btn-group" role="group">
+                <a href="{{ path('moderation_index', {filter: 'all'}) }}"
+                   class="btn border-dark {{ filter == 'all' ? 'btn-dark text-white' : 'btn-light' }}">
+                    {{ 'ModerationFilterAll'|trans }}
+                </a>
+                <a href="{{ path('moderation_index', {filter: 'me'}) }}"
+                   class="btn border-dark {{ filter == 'me' ? 'btn-dark text-white' : 'btn-light' }}">
+                    {{ 'ModerationFilterMe'|trans }}
+                </a>
+                <a href="{{ path('moderation_index', {filter: 'unassigned'}) }}"
+                   class="btn border-dark {{ filter == 'unassigned' ? 'btn-dark text-white' : 'btn-light' }}">
+                    {{ 'ModerationFilterUnassigned'|trans }}
+                </a>
+            </div>
+        </div>
+
         <div class="col-12 col-md-10 offset-md-1 h-100">
             <div class="col-12 col-md-10 offset-md-1">
                 <div class="row px-3">
-                    {{include('track/components/_list.html.twig', {tracks}) }}
+                    {% for track in tracks %}
+                        <div>
+                            {{ include('track/components/_card.html.twig', {track}) }}
+                            {{ include('track/moderation/_assign_dropdown.html.twig', {track, moderators, filter}) }}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

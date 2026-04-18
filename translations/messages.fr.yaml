@@ -9,6 +9,7 @@ Actions: Actions
 Actus: Actualités
 AddFiles: Ajout de fichiers
 AddToMap: Ajouter à la carte
+AddIcon: Ajouter une icône
 Address Line1: Adresse Ligne 1
 Address Line2: Adresse Ligne 2
 Admin: Admin
@@ -131,6 +132,16 @@ Metropolis: Métropole
 Misc: Divers
 Moderation: Modération
 ModerationTitle: Traces en attente de modération
+ModerationShowRejected: Voir les traces refusées
+ModerationRejectedTitle: Traces refusées
+ModerationBackToPending: Retour aux traces en attente
+ModerationFilterAll: Toutes
+ModerationFilterMe: À moi
+ModerationFilterUnassigned: Non assignées
+ModerationAssignTo: Affecter à
+ModerationUnassign: Désaffecter
+ModerationAssignMe: M'affecter
+TrackAssigned: Trace affectée
 MyAccount: Mon compte
 MyCollectives: Mes groupes
 MyTracks: Mes traces
@@ -294,3 +305,6 @@ YourGroupHasBeenCreated: Votre groupe %groupName% a été créé avec succès
 Cancel: Annuler
 Continue: Continuer
 TabSwitchWarning: "Attention, une trace ne peut pas contenir des images ET une URL. Si vous continuez, vous perdrez ce que vous venez d'ajouter."
+UploadLogo: Ajouter un logo
+VisibleOnMap: Visible sur la carte
+

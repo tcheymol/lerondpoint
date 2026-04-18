@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Track;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
@@ -48,15 +49,37 @@ class TrackRepository extends ServiceEntityRepository
     }
 
     /** @return Track[] */
-    public function findToModerate(): array
+    public function findRejected(): array
     {
         /** @var Track[] $tracks */
         $tracks = $this->createQueryBuilder('t')
             ->addSelect('c')
             ->leftJoin('t.collective', 'c')
-            ->andWhere('t.validated = 0 AND t.rejected = 0 AND t.isDraft = 0')
+            ->andWhere('t.rejected = 1')
+            ->orderBy('t.id', 'DESC')
             ->getQuery()
             ->getResult();
+
+        return $tracks;
+    }
+
+    /** @return Track[] */
+    public function findToModerate(?User $assignee = null, bool $unassigned = false): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->addSelect('c')
+            ->leftJoin('t.collective', 'c')
+            ->andWhere('t.validated = 0 AND t.rejected = 0 AND t.isDraft = 0');
+
+        if ($unassigned) {
+            $qb->andWhere('t.assignedTo IS NULL');
+        } elseif (null !== $assignee) {
+            $qb->andWhere('t.assignedTo = :assignee')
+                ->setParameter('assignee', $assignee);
+        }
+
+        /** @var Track[] $tracks */
+        $tracks = $qb->getQuery()->getResult();
 
         return $tracks;
     }
