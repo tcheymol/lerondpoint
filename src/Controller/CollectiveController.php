@@ -27,7 +27,7 @@ class CollectiveController extends AbstractController
     }
 
     #[Route('/collective/quick_new', name: 'collective_quick_new', methods: ['GET'])]
-    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator, TrackPersister $trackPersister): Response
+    public function quickNew(Request $request, CollectivePersister $persister, TranslatorInterface $translator, TrackPersister $trackPersister, EntityManagerInterface $em): Response
     {
         $name = $request->query->getString('name');
         $track = $trackPersister->fetchSessionTrack();
@@ -40,9 +40,11 @@ class CollectiveController extends AbstractController
 
         try {
             $collective = $persister->createQuick($name);
+            $track->setCollective($collective);
+            $em->flush();
             $this->addFlash('success', $translator->trans('QuickGroupCreated', ['%groupName%' => $name]));
 
-            return $this->redirectToRoute('track_new', ['createdCollectiveId' => $collective->getId()]);
+            return $this->redirectToRoute('track_new');
         } catch (\Exception) {
             $this->addFlash('danger', $translator->trans('QuickGroupFailure', ['%groupName%' => $name]));
 
